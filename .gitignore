@@ -13,6 +13,16 @@ dist-ssr
 *.local
 old-project/
 .codex/
+.claude/
+.claude/settings.local.json
+data/**/*.apkg
+CLAUDE.md
+codex.md
+VISION.md
+prd.md
+ASSET-SOURCING-GUIDE.md
+VIBE-CODING-GUIDE.md
+DentSim_Pitch_Deck_En.pdf
 
 # Editor directories and files
 .vscode/*
