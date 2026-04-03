@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 old-project/
+.codex/
 
 # Editor directories and files
 .vscode/*
