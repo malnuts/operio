@@ -1,0 +1,4 @@
+interface:
+  display_name: "Operio Implement Task"
+  short_description: "Implement a task from the repo task list."
+  default_prompt: "Implement an Operio task from .claude/tasks/tasks.md following project conventions."

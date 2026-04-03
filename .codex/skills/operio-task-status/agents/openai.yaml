@@ -1,0 +1,4 @@
+interface:
+  display_name: "Operio Task Status"
+  short_description: "Summarize task progress from tasks.md."
+  default_prompt: "Summarize Operio task progress from .claude/tasks/tasks.md in a compact status report."

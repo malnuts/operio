@@ -1,0 +1,4 @@
+interface:
+  display_name: "Operio Validate Project"
+  short_description: "Run the Operio validation workflow."
+  default_prompt: "Validate the Operio project using the repo rules and report failures clearly."
