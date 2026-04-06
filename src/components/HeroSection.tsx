@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Zap } from "lucide-react";
+import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-dental-ai.jpg";
 
 const HeroSection = () => {
@@ -56,13 +57,13 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="flex flex-wrap gap-4"
             >
-              <a
-                href="#contact"
+              <Link
+                to="/app"
                 className="group flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition-all hover:shadow-[0_0_30px_hsl(175_80%_50%/0.4)]"
               >
-                Explore learner routes
+                Open the app
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-              </a>
+              </Link>
               <a
                 href="#route-map"
                 className="flex items-center gap-2 rounded-lg border border-border px-6 py-3 font-semibold text-foreground transition-all hover:border-primary/50 hover:bg-secondary"

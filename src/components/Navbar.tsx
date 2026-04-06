@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const navLinks = [
   { label: "Procedures", href: "#platform" },
@@ -39,12 +40,12 @@ const Navbar = () => {
               {link.label}
             </a>
           ))}
-          <a
-            href="#contact"
+          <Link
+            to="/app"
             className="rounded-lg bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-all hover:shadow-[0_0_20px_hsl(175_80%_50%/0.3)]"
           >
-            Explore Operio
-          </a>
+            Open app
+          </Link>
         </div>
 
         <button
@@ -72,12 +73,12 @@ const Navbar = () => {
                 {link.label}
               </a>
             ))}
-            <a
-              href="#contact"
+            <Link
+              to="/app"
               className="rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-semibold text-primary-foreground"
             >
-              Explore Operio
-            </a>
+              Open app
+            </Link>
           </div>
         </motion.div>
       )}
