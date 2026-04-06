@@ -1,0 +1,214 @@
+{
+  "id": "cavity-filling",
+  "type": "simulation",
+  "title": "Cavity Filling",
+  "description": "Diagnose and restore a Class II carious lesion on a mandibular first molar using composite resin with total-etch adhesive bonding.",
+  "difficulty": "Beginner",
+  "modelPath": "/models/shared/tooth-cross-section.glb",
+  "cameraAngle": 270,
+  "steps": [
+    {
+      "id": "cf-step-1",
+      "narration": "Review the patient's bitewing radiograph and clinical examination. The mandibular first molar (#30) presents with a mesial radiolucency extending into dentin. Caries are always smaller radiographically than clinically, and 30–40% mineral loss is needed before caries are detectable on radiograph. The patient reports sensitivity to cold and sweets. GV Black Class II classification refers to caries on proximal surfaces of posterior teeth. Once cavitation occurs, the lesion becomes irreversible and operative intervention is indicated.",
+      "actionDescription": "Review bitewing radiograph and diagnose Class II carious lesion",
+      "isDecisionPoint": true,
+      "questionId": "cf-q1",
+      "modelState": {
+        "highlight": ["Enamel"]
+      },
+      "referenceContent": {
+        "anatomy": "Enamel is composed of keyhole-shaped prisms/rods. The tail of the enamel rod has the least mineral content, making it most susceptible to decay. The critical pH for enamel demineralization is 5.5, while dentin demineralizes at pH 6.5. Caries is the result of the interaction between biofilm, sugar, and the host over time (modified Keyes-Jordan diagram).",
+        "technique": "Bitewing radiographs are standard for posterior caries detection. Transillumination can also detect interproximal caries. Incipient lesions (ICDAS 1) partially disappear by wetting, while hypocalcifications do not. Teeth should be dried for visual caries detection. Streptococcus mutans is most responsible for enamel caries; Lactobacillus for dentinal caries."
+      }
+    },
+    {
+      "id": "cf-step-2",
+      "narration": "Administer local anesthesia. For the mandibular first molar, an inferior alveolar nerve block (IANB) is the standard approach. Aspirate before injecting to confirm you are not in a blood vessel. A positive aspiration indicates the needle tip is within a vessel — reposition the needle slightly and re-aspirate before proceeding. The patient should report numbness of the lower lip and tongue on the affected side within 3–5 minutes.",
+      "instrumentId": "dental-syringe",
+      "actionDescription": "Administer inferior alveolar nerve block",
+      "isDecisionPoint": true,
+      "questionId": "cf-q2",
+      "modelState": {
+        "highlight": ["Gums.001"]
+      },
+      "referenceContent": {
+        "instrument": {
+          "name": "Dental Syringe",
+          "description": "Aspirating syringe with a 27-gauge long needle for IANB delivery. Always aspirate before injecting to prevent intravascular delivery.",
+          "imageId": "dental-syringe"
+        },
+        "anatomy": "The inferior alveolar nerve enters the mandibular foramen on the medial surface of the ramus. The injection target is the pterygomandibular space, approximately 1 cm above the occlusal plane of the mandibular molars at the height of the coronoid notch.",
+        "technique": "Insert the needle at the height of the coronoid notch. Always aspirate before injecting. If positive aspiration occurs, reposition the needle slightly and re-aspirate; if negative, inject slowly. Intravascular injection risks systemic toxicity including CNS excitation followed by depression."
+      },
+      "instrumentTrayOptions": ["dental-syringe", "dental-explorer", "spoon-excavator", "curing-light"]
+    },
+    {
+      "id": "cf-step-3",
+      "narration": "Place a rubber dam to isolate the tooth. This provides moisture control, improves visibility, and protects the patient's airway. Clamp tooth #30 and stretch the dam over adjacent teeth for stability. Test the clamp on the tooth before applying the rubber dam to ensure four-point contact.",
+      "instrumentId": "rubber-dam-clamp",
+      "actionDescription": "Place rubber dam isolation",
+      "modelState": {
+        "highlight": ["Enamel", "Dentin"]
+      },
+      "referenceContent": {
+        "instrument": {
+          "name": "Rubber Dam Clamp",
+          "description": "Wingless clamp (W8A or 14A) for molar isolation. Must provide four-point contact on the tooth below the height of contour on sound tooth structure.",
+          "imageId": "rubber-dam-clamp"
+        },
+        "anatomy": "The gingival fibers connect the gingiva to the tooth and alveolar bone. Proper isolation requires the clamp jaws to engage below the height of contour of the tooth, resting on sound tooth structure.",
+        "technique": "Test the clamp on the tooth before applying the rubber dam. Ensure stability with four-point contact. Tie floss to the clamp bow as a safety retrieval line. Rubber dam isolation is essential for adhesive restorations to prevent moisture contamination."
+      }
+    },
+    {
+      "id": "cf-step-4",
+      "narration": "Begin the cavity preparation following GV Black's 4 steps: outline form, primary resistance form, primary retention form, and convenience form. Use a #245 pear-shaped carbide bur at high speed with water spray to enter through the marginal ridge and establish outline form. The preparation should extend 0.2mm into dentin and the gingival floor should extend 0.5mm around caries. For composite, create slightly divergent walls — composite restorations rely on micromechanical retention through adhesive bonding rather than mechanical locks.",
+      "instrumentId": "dental-bur-pear",
+      "actionDescription": "Create initial access and outline form with pear-shaped bur",
+      "isDecisionPoint": true,
+      "questionId": "cf-q3",
+      "modelState": {
+        "highlight": ["Enamel"],
+        "colors": { "Dentin": "#8B7355" }
+      },
+      "referenceContent": {
+        "instrument": {
+          "name": "Pear-Shaped Carbide Bur (#245)",
+          "description": "Used for initial cavity preparation. Carbide burs are better for end-cutting. Creates slightly divergent walls ideal for composite. Use high-speed handpiece (> 200,000 rpm) with water coolant.",
+          "imageId": "dental-bur-pear"
+        },
+        "anatomy": "The cavosurface margin is where the cavity preparation meets the original tooth surface. The junction of 2 walls is a line angle; the junction of 3 walls is a point angle. Caries spreads laterally along the DEJ, making the lesion wider in dentin than in enamel. Pit and fissure caries are inverted V-shape; smooth surface caries are V-shape.",
+        "technique": "Primary resistance form prevents tooth or restoration fracture — requires rounded internal line angles. For composite, cavity walls should be slightly divergent (not convergent as with amalgam). Dentin without enamel underneath is termed unsupported enamel. Convenience form improves access and visibility."
+      },
+      "instrumentTrayOptions": ["dental-bur-pear", "dental-bur-round", "dental-explorer", "spoon-excavator"]
+    },
+    {
+      "id": "cf-step-5",
+      "narration": "Remove carious dentin using a spoon excavator or large round bur on a low-speed handpiece. Infected dentin is wet, soft, mushy, and necrotic — it must be removed. Affected dentin is dry, leathery, demineralized but not invaded by bacteria — it is OK to leave when close to the pulp. Near the pulp, use hand instruments for better control. The best instrument to remove affected dentin in proximity to the pulp is a large round bur on low-speed handpiece.",
+      "instrumentId": "spoon-excavator",
+      "actionDescription": "Excavate carious dentin — remove infected, preserve affected",
+      "isDecisionPoint": true,
+      "questionId": "cf-q4",
+      "modelState": {
+        "highlight": ["Dentin"]
+      },
+      "referenceContent": {
+        "instrument": {
+          "name": "Spoon Excavator",
+          "description": "Most useful hand instrument for removing infected dentin. Provides tactile control near the pulp. Excavators are used to remove dentin; chisels are used to remove enamel.",
+          "imageId": "spoon-excavator"
+        },
+        "anatomy": "Infected dentin is demineralized with bacteria present and has no bonding potential — must be removed. Affected dentin is demineralized but not bacterially invaded and can be remineralized — OK to leave near the pulp. Dentin demineralization occurs before enamel cavitation.",
+        "technique": "If deep caries excavation is close to the pulp, indirect pulp capping may be indicated. Direct pulp cap is indicated for < 1mm pulp exposure in a preoperatively asymptomatic patient. Pulp exposure > 1mm in a symptomatic patient requires root canal therapy. The 2 most commonly used liner materials are CaOH and RMGI."
+      },
+      "instrumentTrayOptions": ["spoon-excavator", "dental-bur-round", "composite-instrument", "dental-explorer"]
+    },
+    {
+      "id": "cf-step-6",
+      "narration": "Assess the preparation with a dental explorer. The tactile feedback of caries feels like a stick (softness). Verify that all cavity walls are in sound dentin or enamel. If the preparation is very deep, consider a liner (CaOH or RMGI) for pulp protection. GLUMA desensitizer works by occluding dentinal tubules through cross-linking of tubular proteins — its two main ingredients are glutaraldehyde and HEMA.",
+      "instrumentId": "dental-explorer",
+      "actionDescription": "Assess preparation and check for remaining caries",
+      "modelState": {
+        "highlight": ["Dentin"]
+      },
+      "referenceContent": {
+        "instrument": {
+          "name": "Dental Explorer",
+          "description": "Sharp-tipped instrument for detecting caries, checking margins, and assessing surface texture. Tactile feedback of caries = a stick (softness). There is debate over explorer use as it may make reversible lesions irreversible.",
+          "imageId": "dental-explorer"
+        },
+        "anatomy": "Hydrodynamic theory postulates that pain results from dentinal fluid movement that stimulates mechanoreceptors near the predentin. The remaining dentin thickness between the preparation floor and the pulp determines whether a liner or base is needed. RMGI is the most commonly used base material for thermal protection under metal restorations.",
+        "technique": "Drag the explorer across cavity walls. Sound dentin resists penetration. For composites, use a coarse diamond bur to create rough walls for better adhesion. When making an amalgam preparation, a carbide bur is preferred to smooth cavity walls. The ideal cavosurface angle for amalgam is 90 degrees."
+      }
+    },
+    {
+      "id": "cf-step-7",
+      "narration": "Apply phosphoric acid etchant using the total-etch (etch-and-rinse) technique — one of the two main families of enamel-dentin bonding systems (the other being self-etch). Etch enamel margins first (more resistant), then extend to dentin. Rinse thoroughly. Keep dentin visibly moist — never over-dry dentin as this collapses the collagen fibril network and reduces bond strength.",
+      "actionDescription": "Acid etch enamel and dentin (total-etch technique)",
+      "isDecisionPoint": true,
+      "questionId": "cf-q5",
+      "modelState": {
+        "highlight": ["Enamel", "Dentin"]
+      },
+      "referenceContent": {
+        "anatomy": "Enamel is 96% hydroxyapatite by weight (Ca10(PO4)6(OH)2). Etching creates microporosities in the enamel rods for micromechanical retention. Acid etching of dentin removes the smear layer and opens dentinal tubules, exposing a collagen fibril network. If this network dries, collagen collapses, preventing resin infiltration.",
+        "technique": "The two main bonding system families are etch-and-rinse and self-etch. In a 2-step self-etch system, bottle 1 = acid + primer, bottle 2 = adhesive. In a 1-step self-etch, one bottle = acid + primer + adhesive. For total-etch: etch enamel first (longer), then dentin (shorter time). Keep dentin moist after rinsing for proper hybrid layer formation."
+      }
+    },
+    {
+      "id": "cf-step-8",
+      "narration": "Apply the bonding agent to all prepared surfaces. The role of bond is to adhere to the primer and overlying composite. Actively scrub the adhesive into the dentin for 10–15 seconds. The hybrid layer forms where adhesive resin and primer infiltrate the collagen matrix, with resin tags extending into dentinal tubules. Light-cure for 20 seconds — camphorquinone is the most common photoinitiator in light-cure composites.",
+      "actionDescription": "Apply bonding agent and light cure",
+      "instrumentId": "curing-light",
+      "modelState": {
+        "highlight": ["Enamel", "Dentin"]
+      },
+      "referenceContent": {
+        "instrument": {
+          "name": "Curing Light",
+          "description": "LED light unit for polymerizing light-cured dental materials. Camphorquinone is the most common photoinitiator. Not all lights provide the right wavelengths for all photoinitiators.",
+          "imageId": "curing-light"
+        },
+        "anatomy": "The bonding interface consists of (from surface to deep): composite resin, adhesive layer, hybrid layer (mix of adhesive resin and primer in the collagen matrix), resin tags, and dentin. The hybrid layer is the foundation of the dentin bond. Composite relies on micromechanical retention from friction between resin tags and the dental surface.",
+        "technique": "Active application (scrubbing) of the bonding agent drives monomers into the collagen network. Air-thin gently to evaporate solvent without displacing adhesive. Do not pool adhesive in line angles. Silane is the coupling agent that promotes adhesion between resin matrix and filler particles in composite."
+      }
+    },
+    {
+      "id": "cf-step-9",
+      "narration": "Place a sectional matrix band and ring to reconstruct the proximal wall. The matrix establishes proper contour and contact point. Wedge the matrix at the gingival margin to prevent a ledge and to provide separation for a tight contact point.",
+      "actionDescription": "Place matrix band and wedge",
+      "modelState": {
+        "highlight": ["Enamel"]
+      },
+      "referenceContent": {
+        "anatomy": "The contact point between adjacent teeth is critical for preventing food impaction and maintaining periodontal health. It should be located in the upper third of the proximal surface.",
+        "technique": "Use a pre-contoured sectional matrix for posterior composites. The separating ring provides separation for a tight contact. Verify the matrix extends below the gingival margin of the preparation."
+      }
+    },
+    {
+      "id": "cf-step-10",
+      "narration": "Place composite resin in 2mm incremental layers. Most composites contain Bis-GMA resin matrix with quartz/silica filler particles. Composites undergo approximately 2–3% polymerization shrinkage. The C-factor (ratio of bonded to unbonded surfaces) determines shrinkage stress — high C-factors lead to greater microleakage. Use oblique layering so each increment contacts no more than two walls. Cure each layer for 20 seconds.",
+      "instrumentId": "composite-instrument",
+      "actionDescription": "Place composite in 2mm incremental layers to minimize C-factor",
+      "isDecisionPoint": true,
+      "questionId": "cf-q6",
+      "modelState": {
+        "colors": { "Dentin": "#F5F5DC" }
+      },
+      "referenceContent": {
+        "instrument": {
+          "name": "Composite Placement Instrument",
+          "description": "Non-stick instrument for placing and shaping composite resin. The flat blade and ball end allow precise placement of 2mm increments.",
+          "imageId": "composite-instrument"
+        },
+        "anatomy": "The C-factor is the ratio of bonded to not-bonded surfaces. As the composite polymerizes it pulls on the sides of the preparation — if polymerization force exceeds the bond strength, microleakage occurs. Filler particles confer radiopacity to composite. Larger filler particles result in greater mechanical properties; more filler leads to less water absorption.",
+        "technique": "Each layer should be no more than 2mm to counter polymerization shrinkage. Oblique layering reduces C-factor. Nano-fill composites have the best optical qualities and greatest polishability. Benzoyl peroxide is the initiator in self-cure composites; camphorquinone is the photoinitiator in light-cure composites."
+      },
+      "instrumentTrayOptions": ["composite-instrument", "spoon-excavator", "dental-explorer", "dental-bur-pear"]
+    },
+    {
+      "id": "cf-step-11",
+      "narration": "Remove the matrix band and ring. Check the occlusion with articulating paper. Identify premature contacts (dark marks) and adjust with a fine finishing bur. The restoration should have even, simultaneous contact with the opposing tooth in centric occlusion.",
+      "actionDescription": "Check and adjust occlusion",
+      "modelState": {
+        "highlight": ["Enamel"]
+      },
+      "referenceContent": {
+        "anatomy": "Premature occlusal contacts on a new restoration cause discomfort and can lead to fracture of the restoration or the tooth. Centric occlusion contacts should be distributed across multiple teeth.",
+        "technique": "Have the patient tap teeth together on articulating paper. Dark marks on the restoration indicate high spots. Reduce cautiously with a fine-grit finishing bur. Recheck until contacts are even."
+      }
+    },
+    {
+      "id": "cf-step-12",
+      "narration": "Finish and polish the restoration. Use aluminum oxide discs or silicone polishing points to smooth the surface. A well-polished composite resists staining, reduces plaque accumulation, and improves longevity. Nano-fill composites have the best optical qualities and greatest polishability. Remove the rubber dam and perform a final check.",
+      "actionDescription": "Finish and polish the restoration",
+      "modelState": {
+        "colors": { "Enamel": "#F5F5DC", "Dentin": "#F5F5DC" }
+      },
+      "referenceContent": {
+        "anatomy": "Surface roughness of a restoration directly correlates with plaque retention and secondary caries risk. Secondary caries occur at the junction of the tooth and a restoration. A smooth surface improves patient comfort and aesthetics.",
+        "technique": "Progress from coarse to fine polishing instruments. Use light, intermittent pressure to avoid generating heat. Finish proximal surfaces with polishing strips. An amalgam with a marginal gap or ditch > 0.5mm is judged carious or caries-prone."
+      }
+    }
+  ]
+}

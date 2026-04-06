@@ -1,0 +1,47 @@
+{
+  "procedureId": "video-PROCEDURE-NAME",
+  "questions": [
+    {
+      "id": "vq-1",
+      "stem": "INBDE-style question: What is the most appropriate next step?",
+      "options": [
+        { "label": "A", "text": "First option text", "isCorrect": false },
+        { "label": "B", "text": "Second option (correct answer)", "isCorrect": true },
+        { "label": "C", "text": "Third option text", "isCorrect": false },
+        { "label": "D", "text": "Fourth option text", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Explanation of why B is correct.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Why A is wrong." },
+          { "label": "C", "reasoning": "Why C is wrong." },
+          { "label": "D", "reasoning": "Why D is wrong." }
+        ],
+        "clinicalPrinciple": "The underlying clinical principle being tested.",
+        "boardTip": "INBDE tip for students."
+      }
+    },
+    {
+      "id": "vq-2",
+      "stem": "Doctor-authored question with correctOptionId format: Which instrument should be used?",
+      "correctOptionId": "b",
+      "options": [
+        { "id": "a", "text": "Spoon excavator" },
+        { "id": "b", "text": "Dental explorer" },
+        { "id": "c", "text": "Composite instrument" }
+      ],
+      "explanation": {
+        "correctReasoning": "Simple explanation — full breakdown fields are optional."
+      }
+    },
+    {
+      "id": "vq-3",
+      "stem": "Minimal question with no explanation — doctors can provide as little or as much detail as they want.",
+      "correctOptionId": "a",
+      "options": [
+        { "id": "a", "text": "Correct answer" },
+        { "id": "b", "text": "Wrong answer" }
+      ]
+    }
+  ]
+}

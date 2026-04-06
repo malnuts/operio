@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Platform", href: "#platform" },
+  { label: "Procedures", href: "#platform" },
+  { label: "Route Map", href: "#route-map" },
+  { label: "Terminology", href: "#terminology" },
   { label: "Technology", href: "#technology" },
-  { label: "Impact", href: "#impact" },
-  { label: "About", href: "#about" },
 ];
 
 const Navbar = () => {
@@ -21,11 +21,11 @@ const Navbar = () => {
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-6">
         <a href="#" className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-            <span className="font-mono text-sm font-bold text-primary-foreground">D</span>
+          <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg bg-primary/10 ring-1 ring-primary/20">
+            <img src="/favicon.svg" alt="Operio brand mark" className="h-6 w-6" />
           </div>
           <span className="font-display text-xl font-bold tracking-tight text-foreground">
-            Dentsim
+            Operio
           </span>
         </a>
 
@@ -43,7 +43,7 @@ const Navbar = () => {
             href="#contact"
             className="rounded-lg bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-all hover:shadow-[0_0_20px_hsl(175_80%_50%/0.3)]"
           >
-            Request Demo
+            Explore Operio
           </a>
         </div>
 
@@ -76,7 +76,7 @@ const Navbar = () => {
               href="#contact"
               className="rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-semibold text-primary-foreground"
             >
-              Request Demo
+              Explore Operio
             </a>
           </div>
         </motion.div>

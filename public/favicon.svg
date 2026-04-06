@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="18" fill="#090B10" />
+  <path
+    d="M32 12C43.046 12 52 20.954 52 32C52 43.046 43.046 52 32 52C20.954 52 12 43.046 12 32C12 20.954 20.954 12 32 12Z"
+    stroke="url(#ring)"
+    stroke-width="8"
+  />
+  <path
+    d="M41.5 24.5L29 39.5C27.9 40.82 25.89 40.962 24.616 39.81L20.5 36.083"
+    stroke="url(#spark)"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="6"
+  />
+  <defs>
+    <linearGradient id="ring" x1="12" x2="52" y1="12" y2="52" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#32E6C7" />
+      <stop offset="1" stop-color="#55C8FF" />
+    </linearGradient>
+    <linearGradient id="spark" x1="20.5" x2="41.5" y1="24.5" y2="39.5" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E8FFFB" />
+      <stop offset="1" stop-color="#32E6C7" />
+    </linearGradient>
+  </defs>
+</svg>

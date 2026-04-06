@@ -1,0 +1,214 @@
+{
+  "id": "cavity-filling",
+  "type": "simulation",
+  "title": "Kariyes plombalash",
+  "description": "Pastki birinchi oziq tishda (molar) II sinf kariyes shikastlanishini tashxislash va kompozit qatron bilan to'liq kislotalash adgeziv bog'lash usulida tiklash.",
+  "difficulty": "Boshlang'ich",
+  "modelPath": "/models/shared/tooth-cross-section.glb",
+  "cameraAngle": 270,
+  "steps": [
+    {
+      "id": "cf-step-1",
+      "narration": "Bemorning bitewing rentgenogrammasini va klinik tekshiruv natijalarini ko'rib chiqing. Pastki birinchi oziq tish (#30) mezial tomondan dentinga kirib borgan radiolucent soha ko'rsatmoqda. Kariyes rentgenogrammada har doim klinik ko'rinishidan kichikroq bo'ladi va rentgenogrammada aniqlanishi uchun 30-40% mineral yo'qotilishi kerak. Bemor sovuq va shirin narsalarga sezuvchanlikni qayd etmoqda. GV Black II sinf tasnifi orqa tishlarning proksimal yuzalaridagi kariyesga tegishli. Kavitatsiya yuz bergandan so'ng, shikastlanish qaytarilmas bo'ladi va operativ aralashuv ko'rsatiladi.",
+      "actionDescription": "Bitewing rentgenogrammasini ko'rib chiqish va II sinf kariyes shikastlanishini tashxislash",
+      "isDecisionPoint": true,
+      "questionId": "cf-q1",
+      "modelState": {
+        "highlight": ["Enamel"]
+      },
+      "referenceContent": {
+        "anatomy": "Emal kalit teshigi shaklidagi prizmalar/tayoqchalardan iborat. Emal tayoqchasining dumi eng kam mineral tarkibiga ega bo'lib, uni chirish uchun eng sezgir qiladi. Emal demineralizatsiyasi uchun kritik pH 5,5, dentin demineralizatsiyasi uchun esa pH 6,5. Kariyes bioplyonka, shakar va organizmning vaqt davomidagi o'zaro ta'siri natijasidir (modifikatsiyalangan Keyes-Jordan diagrammasi).",
+        "technique": "Bitewing rentgenogrammalari orqa tishlar kariyesini aniqlash uchun standart hisoblanadi. Transilluminatsiya ham interproksimal kariyesni aniqlashi mumkin. Boshlang'ich shikastlanishlar (ICDAS 1) namlaganda qisman yo'qoladi, gipokaltsifikatsiyalar esa yo'qolmaydi. Kariyesni ko'zga ko'rinadigan darajada aniqlash uchun tishlarni quritish kerak. Streptococcus mutans emal kariyesi uchun eng mas'ul; Lactobacillus dentin kariyesi uchun."
+      }
+    },
+    {
+      "id": "cf-step-2",
+      "narration": "Mahalliy og'riqsizlantirish o'tkazing. Pastki birinchi oziq tish uchun pastki alveolyar nerv blokadasi (IANB) standart usul hisoblanadi. In'ektsiyadan oldin aspiratsiya qilib, igna qon tomiriga kirmagan bo'lishini tasdiqlang. Ijobiy aspiratsiya igna uchi qon tomiri ichida ekanligini ko'rsatadi — ignani biroz joyini o'zgartiring va yuborishdan oldin qayta aspiratsiya qiling. Bemor 3-5 daqiqa ichida shikastlangan tomondagi pastki lab va tilning uvishishini sezishi kerak.",
+      "instrumentId": "dental-syringe",
+      "actionDescription": "Pastki alveolyar nerv blokadasi o'tkazish",
+      "isDecisionPoint": true,
+      "questionId": "cf-q2",
+      "modelState": {
+        "highlight": ["Gums.001"]
+      },
+      "referenceContent": {
+        "instrument": {
+          "name": "Stomatologik shprits",
+          "description": "IANB o'tkazish uchun 27-o'lchamli uzun ignali aspiratsion shprits. Qon tomir ichiga yuborilishining oldini olish uchun har doim in'ektsiyadan oldin aspiratsiya qiling.",
+          "imageId": "dental-syringe"
+        },
+        "anatomy": "Pastki alveolyar nerv pastki jag' shoxining ichki (medial) yuzasidagi mandibular teshik orqali kiradi. In'ektsiya nishoni — pterigomandibular bo'shliq, pastki oziq tishlar chaynash tekisligidan taxminan 1 sm yuqorida, koronoid o'ymasi balandligida.",
+        "technique": "Ignani koronoid o'ymasi balandligida kiriting. Har doim in'ektsiyadan oldin aspiratsiya qiling. Agar ijobiy aspiratsiya bo'lsa, ignani biroz joyini o'zgartiring va qayta aspiratsiya qiling; agar manfiy bo'lsa, sekin yuborish mumkin. Qon tomir ichiga in'ektsiya markaziy nerv tizimi qo'zg'alishi, so'ngra depressiya kabi tizimli toksiklik xavfini tug'diradi."
+      },
+      "instrumentTrayOptions": ["dental-syringe", "dental-explorer", "spoon-excavator", "curing-light"]
+    },
+    {
+      "id": "cf-step-3",
+      "narration": "Tishni izolyatsiya qilish uchun kofferdam (rubber dam) o'rnating. Bu namlikni nazorat qiladi, ko'rinishni yaxshilaydi va bemorning nafas yo'llarini himoya qiladi. #30 tishga qisqich o'rnating va barqarorlik uchun dammni qo'shni tishlarga ham torting. Kofferdamni o'rnatishdan oldin to'rt nuqtali kontaktni ta'minlash uchun qisqichni tishda sinab ko'ring.",
+      "instrumentId": "rubber-dam-clamp",
+      "actionDescription": "Kofferdam izolyatsiyasini o'rnatish",
+      "modelState": {
+        "highlight": ["Enamel", "Dentin"]
+      },
+      "referenceContent": {
+        "instrument": {
+          "name": "Kofferdam qisqichi",
+          "description": "Oziq tishlarni izolyatsiya qilish uchun qanotirsiz qisqich (W8A yoki 14A). Sog'lom tish tuzilmasida, tishning eng keng qismidan pastda to'rt nuqtali kontaktni ta'minlashi kerak.",
+          "imageId": "rubber-dam-clamp"
+        },
+        "anatomy": "Milkli tolalar milkni tish va alveolyar suyakka bog'laydi. To'g'ri izolyatsiya uchun qisqich jag'lari tishning eng keng qismidan (height of contour) pastda, sog'lom tish tuzilmasiga o'tirishi kerak.",
+        "technique": "Kofferdamni o'rnatishdan oldin qisqichni tishda sinab ko'ring. To'rt nuqtali kontakt bilan barqarorligini ta'minlang. Xavfsizlik uchun qisqich kamoniga ip bog'lang. Kofferdam izolyatsiyasi adgeziv restavratsiyalar uchun namlik ifloslanishining oldini olish maqsadida juda muhimdir."
+      }
+    },
+    {
+      "id": "cf-step-4",
+      "narration": "GV Blackning 4 bosqichiga amal qilib bo'shliq tayyorlovini boshlang: kontur shakli, birlamchi qarshilik shakli, birlamchi retentsiya shakli va qulaylik shakli. Yuqori tezlikda suv bilan sovutish ostida #245 nok shaklidagi karbid bor yordamida marjinal tizma orqali kiring va kontur shaklini yarating. Tayyorlov dentinga 0,2 mm chuqurlikda bo'lishi va milkli tubi kariyes atrofida 0,5 mm uzayishi kerak. Kompozit uchun biroz divergent (tarqaluvchi) devorlar yarating — kompozit restavratsiyalar mexanik qulflar emas, adgeziv bog'lanish orqali mikromexanik retentsiyaga tayanadi.",
+      "instrumentId": "dental-bur-pear",
+      "actionDescription": "Nok shaklidagi bor bilan dastlabki kirish va kontur shaklini yaratish",
+      "isDecisionPoint": true,
+      "questionId": "cf-q3",
+      "modelState": {
+        "highlight": ["Enamel"],
+        "colors": { "Dentin": "#8B7355" }
+      },
+      "referenceContent": {
+        "instrument": {
+          "name": "Nok shaklidagi karbid bor (#245)",
+          "description": "Dastlabki bo'shliq tayyorlovi uchun ishlatiladi. Karbid borlar uchli kesish uchun yaxshiroq. Kompozit uchun ideal bo'lgan biroz divergent devorlarni yaratadi. Suv bilan sovutish tizimiga ega yuqori tezlikdagi nakonechnikdan (> 200 000 ayl/min) foydalaning.",
+          "imageId": "dental-bur-pear"
+        },
+        "anatomy": "Kavosurface chegarasi — bo'shliq tayyorlovi asl tish yuzasi bilan uchrashgan joy. 2 ta devorning birlashuvi chiziq burchak; 3 ta devorning birlashuvi nuqta burchak. Kariyes DEJ (dentinoenamel chegarasi) bo'ylab yonga tarqaladi, shuning uchun shikastlanish dentinda emalda ko'ringandan kengroq bo'ladi. Chuqurcha va tirqish kariyesi teskari V-shaklida; silliq yuza kariyesi V-shaklida.",
+        "technique": "Birlamchi qarshilik shakli tish yoki restavratsiya sinishining oldini oladi — yumaloq ichki chiziq burchaklarni talab qiladi. Kompozit uchun bo'shliq devorlari biroz divergent bo'lishi kerak (amalgamdagi kabi konvergent emas). Tagida emali bo'lmagan dentin tayanchsiz emal deb ataladi. Qulaylik shakli kirish va ko'rinishni yaxshilaydi."
+      },
+      "instrumentTrayOptions": ["dental-bur-pear", "dental-bur-round", "dental-explorer", "spoon-excavator"]
+    },
+    {
+      "id": "cf-step-5",
+      "narration": "Qoshiq ekskavator yoki past tezlikdagi nakonechnikdagi yirik yumaloq bor yordamida kariyes dentinni olib tashlang. Infektsiyalangan dentin ho'l, yumshoq, bo'tqa holatida va nekrotik — uni olib tashlash shart. Ta'sirlangan dentin quruq, charm holatida, demineralizatsiyalangan, lekin bakteriyalar kirib bormagan — pulpaga yaqin joylarda qoldirish mumkin. Pulpa yaqinida yaxshiroq nazorat uchun qo'l asboblaridan foydalaning. Pulpaga yaqin ta'sirlangan dentinni olib tashlash uchun eng yaxshi asbob past tezlikdagi nakonechnikdagi yirik yumaloq bor.",
+      "instrumentId": "spoon-excavator",
+      "actionDescription": "Kariyes dentinni olib tashlash — infektsiyalanganini olib tashlash, ta'sirlanganini saqlash",
+      "isDecisionPoint": true,
+      "questionId": "cf-q4",
+      "modelState": {
+        "highlight": ["Dentin"]
+      },
+      "referenceContent": {
+        "instrument": {
+          "name": "Qoshiq ekskavator",
+          "description": "Infektsiyalangan dentinni olib tashlash uchun eng foydali qo'l asbobi. Pulpa yaqinida taktil nazoratni ta'minlaydi. Ekskavatorlar dentinni olib tashlash uchun; keskichlar (chisel) emalni olib tashlash uchun ishlatiladi.",
+          "imageId": "spoon-excavator"
+        },
+        "anatomy": "Infektsiyalangan dentin demineralizatsiyalangan, bakteriyalar mavjud va bog'lanish qobiliyati yo'q — olib tashlanishi shart. Ta'sirlangan dentin demineralizatsiyalangan, lekin bakteriyalar kirib bormagan va remineralizatsiya qilinishi mumkin — pulpa yaqinida qoldirish mumkin. Dentin demineralizatsiyasi emal kavitatsiyasidan oldin sodir bo'ladi.",
+        "technique": "Agar chuqur kariyes kavitatsiyasi pulpaga yaqin bo'lsa, bilvosita pulpa qoplash ko'rsatilishi mumkin. To'g'ridan-to'g'ri pulpa qoplash operatsiyadan oldin asimptomatik bemorda < 1 mm pulpa ochilishi uchun ko'rsatiladi. Simptomatik bemorda > 1 mm pulpa ochilishi ildiz kanali davolashini talab qiladi. Eng ko'p ishlatiladigan 2 ta qoplama materiali CaOH va RMGI."
+      },
+      "instrumentTrayOptions": ["spoon-excavator", "dental-bur-round", "composite-instrument", "dental-explorer"]
+    },
+    {
+      "id": "cf-step-6",
+      "narration": "Tayyorlovni stomatologik zond (eksplorer) bilan baholang. Kariyesning taktil sezgisi yopishqoqlik (yumshoqlik) hisoblanadi. Barcha bo'shliq devorlari sog'lom dentin yoki emalda ekanligini tekshiring. Agar tayyorlov juda chuqur bo'lsa, pulpani himoya qilish uchun qoplama (CaOH yoki RMGI) qo'yishni ko'rib chiqing. GLUMA desensitayzeri tubulyar oqsillarni o'zaro bog'lash orqali dentin naychalarini berkitish yo'li bilan ishlaydi — uning ikkita asosiy tarkibiy qismi glutaraldegid va HEMA.",
+      "instrumentId": "dental-explorer",
+      "actionDescription": "Tayyorlovni baholash va qolgan kariyesni tekshirish",
+      "modelState": {
+        "highlight": ["Dentin"]
+      },
+      "referenceContent": {
+        "instrument": {
+          "name": "Stomatologik zond (eksplorer)",
+          "description": "Kariyesni aniqlash, chegaralarni tekshirish va sirt teksturasini baholash uchun o'tkir uchli asbob. Kariyesning taktil sezgisi = yopishqoqlik (yumshoqlik). Zond ishlatilishi bo'yicha bahslar mavjud, chunki u qaytariladigan shikastlanishlarni qaytarilmas qilishi mumkin.",
+          "imageId": "dental-explorer"
+        },
+        "anatomy": "Gidrodinamik nazariya og'riq dentin suyuqligi harakatidan kelib chiqib, predentin yaqinidagi mexanoreseptorlarni rag'batlantirishini ta'kidlaydi. Tayyorlov tubi va pulpa orasidagi qolgan dentin qalinligi qoplama yoki asos kerakligini belgilaydi. RMGI metall restavratsiyalar ostida issiqlikdan himoya qilish uchun eng ko'p ishlatiladigan asos material hisoblanadi.",
+        "technique": "Zondni bo'shliq devorlari bo'ylab surting. Sog'lom dentin kirishga qarshilik ko'rsatadi. Kompozitlar uchun yaxshiroq adgeziya uchun dag'al olmos bor bilan devorlarni g'adir-budur qiling. Amalgam tayyorlashda devorlarni silliqlash uchun karbid bor afzal. Amalgam uchun ideal kavosurface burchagi 90 daraja."
+      }
+    },
+    {
+      "id": "cf-step-7",
+      "narration": "To'liq kislotalash (etch-and-rinse) usuli — emal-dentin bog'lash tizimlarining ikkita asosiy oilasidan biri (ikkinchisi self-etch) yordamida fosfor kislotasi kislotalovchisini qo'llang. Avval emal chegaralarini kislotalang (chidamliroq), keyin dentinga kengaytiring. Yaxshilab chayqang. Dentinni ko'zga ko'rinadigan darajada nam saqlang — dentinni hech qachon ortiqcha quritmang, chunki bu kollagen tolalar tarmog'ini yiqitadi va bog'lanish kuchini kamaytiradi.",
+      "actionDescription": "Emal va dentinni kislotalash (to'liq kislotalash usuli)",
+      "isDecisionPoint": true,
+      "questionId": "cf-q5",
+      "modelState": {
+        "highlight": ["Enamel", "Dentin"]
+      },
+      "referenceContent": {
+        "anatomy": "Emal og'irlik bo'yicha 96% gidroksiapatitdan (Ca10(PO4)6(OH)2) iborat. Kislotalash emal tayoqchalarida mikromexanik retentsiya uchun mikrog'ovakliklarni yaratadi. Dentin kislotalashi smear qatlamini olib tashlaydi va dentin naychalarini ochadi, kollagen tolalar tarmog'ini fosh qiladi. Agar bu tarmog' qurib qolsa, kollagen yiqiladi va smola infiltratsiyasiga to'sqinlik qiladi.",
+        "technique": "Bog'lash tizimlarining ikkita asosiy oilasi — etch-and-rinse va self-etch. 2 bosqichli self-etch tizimida 1-shisha = kislota + praymer, 2-shisha = adgeziv. 1 bosqichli self-etchda bitta shisha = kislota + praymer + adgeziv. To'liq kislotalash uchun: avval emalni kislotalang (uzoqroq), keyin dentinni (qisqaroq vaqt). To'g'ri gibrid qatlam hosil bo'lishi uchun yuvgandan keyin dentinni nam saqlang."
+      }
+    },
+    {
+      "id": "cf-step-8",
+      "narration": "Barcha tayyorlangan yuzalarga bog'lovchi agent qo'llang. Bog'lovchi moddaning vazifasi praymer va ustki kompozitga yopishish. Adgezivni 10-15 soniya davomida dentinga faol ishqalang. Gibrid qatlam adgeziv smola va praymer kollagen matritsasiga singanganda hosil bo'ladi, smola yorliqlari dentin naychalariga cho'ziladi. 20 soniya davomida yorug'lik bilan qotiring — kamforxinon (camphorquinone) yorug'lik bilan qotiriladigan kompozitlarda eng keng tarqalgan fotoinitsiator.",
+      "actionDescription": "Bog'lovchi agent qo'llash va yorug'lik bilan qotirish",
+      "instrumentId": "curing-light",
+      "modelState": {
+        "highlight": ["Enamel", "Dentin"]
+      },
+      "referenceContent": {
+        "instrument": {
+          "name": "Fotopolimerizatsiya chiroq",
+          "description": "Yorug'lik bilan qotiriladigan stomatologik materiallarni polimerizatsiya qilish uchun LED chiroq. Kamforxinon (camphorquinone) eng keng tarqalgan fotoinitsiator. Barcha fotoinitsiatorlar uchun ham barcha chiroqlar to'g'ri to'lqin uzunligini ta'minlamaydi.",
+          "imageId": "curing-light"
+        },
+        "anatomy": "Bog'lanish interfeysi (yuzadan chuqurga): kompozit smola, adgeziv qatlam, gibrid qatlam (kollagen matritsadagi adgeziv smola va praymer aralashmasi), smola yorliqlari va dentin. Gibrid qatlam dentin bog'lanishining asosini tashkil etadi. Kompozit smola yorliqlari va tish yuzasi orasidagi ishqalanishdan mikromexanik retentsiyaga tayanadi.",
+        "technique": "Bog'lovchi agentni faol qo'llash (ishqalash) monomerlarni kollagen tarmog'iga kiritadi. Erituvchini bug'latish uchun ehtiyotkorlik bilan havo bilan yupqalating, lekin adgezivni siljitmang. Adgezivni chiziq burchaklarida yig'ilishiga yo'l qo'ymang. Silan (silane) — kompozitdagi smola matritsasi va to'ldiruvchi zarrachalar orasidagi adgeziyani ta'minlaydigan bog'lovchi agent."
+      }
+    },
+    {
+      "id": "cf-step-9",
+      "narration": "Proksimal devorni qayta tiklash uchun seksional matritsali lenta va halqani o'rnating. Matritsa to'g'ri kontur va kontakt nuqtasini ta'minlaydi. Matritsani milkli chegarada ponalab mahkamlang — bu zinapoya hosil bo'lishini oldini oladi va zich kontakt nuqtasi uchun ajratish ta'minlaydi.",
+      "actionDescription": "Matritsali lenta va ponani o'rnatish",
+      "modelState": {
+        "highlight": ["Enamel"]
+      },
+      "referenceContent": {
+        "anatomy": "Qo'shni tishlar orasidagi kontakt nuqtasi oziq-ovqat tiqilib qolishini oldini olish va parodont salomatligini saqlash uchun muhimdir. U proksimal yuzaning yuqori uchdan bir qismida joylashishi kerak.",
+        "technique": "Orqa tishlardagi kompozitlar uchun oldindan konturlangan seksional matritsadan foydalaning. Ajratish halqasi zich kontakt uchun tishlar orasida ajratish ta'minlaydi. Matritsa tayyorlovning milkli chegarasidan pastga cho'zilganini tekshiring."
+      }
+    },
+    {
+      "id": "cf-step-10",
+      "narration": "Kompozit qatronni 2 mm li bosqichma-bosqich qatlamlar bilan joylashtiring. Ko'pchilik kompozitlar kvarts/silika to'ldiruvchi zarrachalari bilan Bis-GMA smola matritsasidan iborat. Kompozitlar taxminan 2-3% polimerizatsiya qisqarishiga uchraydi. C-faktor (bog'langan va bog'lanmagan yuzalar nisbati) qisqarish stressini belgilaydi — yuqori C-faktorlar kattaroq mikrosizishga olib keladi. Qiya qatlamlash usulidan foydalaning, shunda har bir qatlam ikkitadan ortiq devorga tegmasin. Har bir qatlamni 20 soniya davomida yorug'lik bilan qotiring.",
+      "instrumentId": "composite-instrument",
+      "actionDescription": "C-faktorni minimallashtirish uchun kompozitni 2 mm li bosqichma-bosqich qatlamlar bilan joylashtirish",
+      "isDecisionPoint": true,
+      "questionId": "cf-q6",
+      "modelState": {
+        "colors": { "Dentin": "#F5F5DC" }
+      },
+      "referenceContent": {
+        "instrument": {
+          "name": "Kompozit joylashtirish asbobi",
+          "description": "Kompozit qatronni joylashtirish va shakllantirish uchun yopishmaydigan asbob. Yassi tigali va sharsimon uchi 2 mm li qatlamlarni aniq joylashtirishga imkon beradi.",
+          "imageId": "composite-instrument"
+        },
+        "anatomy": "C-faktor bog'langan va bog'lanmagan yuzalar nisbatidir. Kompozit polimerizatsiya qilganda tayyorlov tomonlariga tortiladi — agar polimerizatsiya kuchi bog'lanish kuchidan oshsa, mikrosizish sodir bo'ladi. To'ldiruvchi zarrachalar kompozitga rentgenokontrastlik beradi. Kattaroq to'ldiruvchi zarrachalar mexanik xususiyatlarni oshiradi; ko'proq to'ldiruvchi suv singdirishni kamaytiradi.",
+        "technique": "Polimerizatsiya qisqarishiga qarshi turish uchun har bir qatlam 2 mm dan oshmasligi kerak. Qiya qatlamlash C-faktorni kamaytiradi. Nano to'ldiruvchili kompozitlar eng yaxshi optik sifatlarga va eng yuqori sayqallanish qobiliyatiga ega. Benzoil peroksid o'z-o'zidan qotiriladigan kompozitlarda initsiator; kamforxinon yorug'lik bilan qotiriladigan kompozitlarda fotoinitsiator."
+      },
+      "instrumentTrayOptions": ["composite-instrument", "spoon-excavator", "dental-explorer", "dental-bur-pear"]
+    },
+    {
+      "id": "cf-step-11",
+      "narration": "Matritsali lenta va halqani olib tashlang. Artikulyatsion qog'oz bilan okkluziyani tekshiring. Erta kontaktlarni (to'q belgilar) aniqlang va nozik pardozlash bori bilan moslang. Tiklash markaziy okkluziyada qarama-qarshi tish bilan tekis, bir vaqtda kontaktga ega bo'lishi kerak.",
+      "actionDescription": "Okkluziyani tekshirish va moslashtirish",
+      "modelState": {
+        "highlight": ["Enamel"]
+      },
+      "referenceContent": {
+        "anatomy": "Yangi tiklash ustidagi erta okkluzal kontaktlar noqulaylikka olib keladi va tiklanish yoki tishning sinishiga sabab bo'lishi mumkin. Markaziy okkluziya kontaktlari bir necha tish bo'ylab taqsimlanishi kerak.",
+        "technique": "Bemorga artikulyatsion qog'oz ustida tishlarni bir-biriga tegishini so'rang. Tiklash ustidagi to'q belgilar baland joylarni ko'rsatadi. Nozik pardozlash bori bilan ehtiyotkorlik bilan kamaytiring. Kontaktlar tekis bo'lguncha qayta tekshiring."
+      }
+    },
+    {
+      "id": "cf-step-12",
+      "narration": "Tiklanishni pardozlash va sayqallash. Sirtni silliqlash uchun alyuminiy oksid disklari yoki silikon sayqallash uchlaridan foydalaning. Yaxshi sayqallangan kompozit dog'lanishga chidamli bo'ladi, plak to'planishini kamaytiradi va xizmat muddatini uzaytiradi. Nano to'ldiruvchili kompozitlar eng yaxshi optik sifatlarga va eng yuqori sayqallanish qobiliyatiga ega. Kofferdamni olib tashlang va oxirgi tekshiruvni o'tkazing.",
+      "actionDescription": "Tiklanishni pardozlash va sayqallash",
+      "modelState": {
+        "colors": { "Enamel": "#F5F5DC", "Dentin": "#F5F5DC" }
+      },
+      "referenceContent": {
+        "anatomy": "Tiklanish sirtining g'adir-budurligi to'g'ridan-to'g'ri plak yig'ilishi va ikkilamchi kariyes xavfi bilan bog'liq. Ikkilamchi kariyes tish va tiklanish birlashuvi joyida sodir bo'ladi. Silliq sirt shuningdek bemorning qulayligi va estetikasini yaxshilaydi.",
+        "technique": "Qo'pol dan nozik sayqallash asboblariga bosqichma-bosqich o'ting. Issiqlik hosil qilmaslik uchun yengil, uzuq-uzuq bosim ishlating. Proksimal yuzalarni sayqallash lentalari bilan pardozlang. Chekka bo'shlig'i yoki ariqi > 0,5 mm bo'lgan amalgam kariyes yoki kariyesga moyil deb baholanadi."
+      }
+    }
+  ]
+}

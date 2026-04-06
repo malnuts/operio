@@ -1,0 +1,125 @@
+{
+  "procedureId": "root-canal",
+  "questions": [
+    {
+      "id": "rc-q1",
+      "stem": "A patient reports spontaneous, throbbing pain in a mandibular molar that intensifies with heat and is partially relieved by cold. The pain wakes the patient at night. Cold testing produces lingering pain lasting over 30 seconds after stimulus removal. Percussion is positive. What is the most likely pulp diagnosis?",
+      "options": [
+        { "label": "A", "text": "Reversible pulpitis", "isCorrect": false },
+        { "label": "B", "text": "Symptomatic irreversible pulpitis", "isCorrect": true },
+        { "label": "C", "text": "Pulp necrosis", "isCorrect": false },
+        { "label": "D", "text": "Normal pulp with symptomatic apical periodontitis", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Pulpitis is the clinical term for inflammation of the dental pulp. This presentation — spontaneous pain, lingering response to thermal stimuli (> 10 seconds), nocturnal pain, and pain exacerbated by heat — is classic for symptomatic irreversible pulpitis. The positive percussion test indicates PDL inflammation from extension of pulpal disease. The pulp inflammation has progressed beyond recovery.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Reversible pulpitis causes sharp, brief pain only in response to a stimulus that resolves within seconds (< 10 seconds). It does not cause spontaneous or nocturnal pain. Reversible pulpitis is clinically described as a pulp that can heal if the irritant is removed." },
+          { "label": "C", "reasoning": "A necrotic pulp does not respond to thermal or electric pulp testing. This patient has a lingering positive response to cold, indicating the pulp is still vital but irreversibly inflamed." },
+          { "label": "D", "reasoning": "A normal pulp responds briefly to cold with no lingering pain. Spontaneous nocturnal pain is pathologic and inconsistent with a normal pulp. Percussion sensitivity here is secondary to pulpal disease extending into the PDL." }
+        ],
+        "clinicalPrinciple": "Pain characterization requires evaluating: localization, commencement/onset, intensity, provocation and attenuation, and duration. Reversible pulpitis = brief, stimulus-dependent pain (< 10s). Irreversible pulpitis = spontaneous, lingering (> 10s), nocturnal. Tooth mobility increases with increasing PDL inflammation.",
+        "boardTip": "Lingering pain (> 10s) + spontaneous + nocturnal = irreversible pulpitis. Brief, sharp, stimulus-dependent = reversible. No response to vitality testing = necrosis."
+      }
+    },
+    {
+      "id": "rc-q2",
+      "stem": "A patient with symptomatic irreversible pulpitis of a mandibular molar does not achieve adequate pulpal anesthesia after a standard IANB. The patient's lip is numb, but the tooth is still sensitive. Which supplemental technique is most appropriate?",
+      "options": [
+        { "label": "A", "text": "Repeat the inferior alveolar nerve block with the same technique", "isCorrect": false },
+        { "label": "B", "text": "Administer a buccal infiltration with 4% articaine", "isCorrect": true },
+        { "label": "C", "text": "Apply topical anesthetic directly to the tooth surface", "isCorrect": false },
+        { "label": "D", "text": "Proceed without additional anesthesia since the lip is numb", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Lip numbness confirms the IANB was administered correctly — the failure is at the tooth level. Inflamed pulps have lowered pH from inflammatory mediators, reducing the proportion of local anesthetic in its active free-base form. Articaine's thiophene ring allows superior bone and tissue diffusion, making buccal infiltration with 4% articaine highly effective as supplemental mandibular anesthesia.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Repeating the same block technique is unlikely to succeed since lip numbness confirms correct needle placement. The failure is due to lowered tissue pH at the inflamed pulp, not injection technique." },
+          { "label": "C", "reasoning": "Topical anesthetics only penetrate 2–3mm of soft tissue. They cannot reach the dental pulp and are inadequate for operative anesthesia." },
+          { "label": "D", "reasoning": "Lip numbness confirms the IAN block reached the nerve trunk, but a 'hot tooth' with irreversible pulpitis requires supplemental anesthesia for the pulp. Proceeding without adequate pulpal anesthesia is inappropriate." }
+        ],
+        "clinicalPrinciple": "Inflammatory mediators (prostaglandins, bradykinin) lower tissue pH in inflamed pulps, reducing the amount of free-base local anesthetic available to cross the nerve membrane. Articaine has superior diffusion through bone compared to lidocaine due to its thiophene ring structure.",
+        "boardTip": "Hot tooth + failed IANB (lip numb but tooth sensitive) = lowered pH at pulp. Supplement with articaine buccal infiltration. Last resort = intrapulpal injection once access is achieved."
+      }
+    },
+    {
+      "id": "rc-q3",
+      "stem": "During endodontic access of a mandibular first molar, how many root canals should the operator expect to locate in the typical case?",
+      "options": [
+        { "label": "A", "text": "Two — one mesial canal and one distal canal", "isCorrect": false },
+        { "label": "B", "text": "Three — mesiobuccal, mesiolingual, and distal canals", "isCorrect": true },
+        { "label": "C", "text": "Four — mesiobuccal, mesiolingual, distobuccal, and distolingual canals", "isCorrect": false },
+        { "label": "D", "text": "One — a single large canal in a fused root", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "The mandibular first molar most commonly has 2 roots and 3 canals: two mesial (mesiobuccal and mesiolingual) in the mesial root and one distal canal. The mesial root almost always contains two canals. Missing the second mesial canal is a leading cause of endodontic failure.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "While the mandibular first molar has two roots, the mesial root almost always contains two canals (MB and ML). Treating it as having only one mesial canal leaves an infected canal untreated — the most common cause of endodontic failure." },
+          { "label": "C", "reasoning": "Four canals (with a second distal canal) occurs in a significant minority of cases but is not the most common configuration. Three canals is the typical anatomy." },
+          { "label": "D", "reasoning": "A single canal is extremely rare in mandibular first molars and is more typical of single-rooted teeth like mandibular incisors or premolars." }
+        ],
+        "clinicalPrinciple": "Knowledge of the most common canal configuration is essential for endodontic success. A missed canal harboring bacteria is the most common cause of endodontic treatment failure. The pulp chamber floor is darker than the surrounding dentin walls — use this color contrast to identify orifices.",
+        "boardTip": "Mandibular first molar = 2 roots, 3 canals (MB, ML, D). Always look for the second mesial canal. Missing it = #1 cause of endo failure."
+      }
+    },
+    {
+      "id": "rc-q4",
+      "stem": "When determining working length, the electronic apex locator reads the file at the apical constriction. A radiograph shows the file tip approximately 1mm short of the radiographic apex. What is the appropriate action?",
+      "options": [
+        { "label": "A", "text": "Advance the file to the radiographic apex — the radiograph is more accurate", "isCorrect": false },
+        { "label": "B", "text": "Accept the electronic apex locator reading as the working length", "isCorrect": true },
+        { "label": "C", "text": "Average the two measurements and use that as working length", "isCorrect": false },
+        { "label": "D", "text": "Repeat both measurements since the results are contradictory", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "The electronic apex locator measures the apical constriction — the narrowest point of the canal and the ideal termination point for instrumentation and obturation. The radiographic apex is the anatomic tip of the root, typically 0.5–1.0mm beyond the constriction. A file appearing 0.5–1mm short of the radiographic apex is normal and expected — the two landmarks are different.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Advancing to the radiographic apex would extend instrumentation beyond the apical constriction into the periapical tissues, causing tissue damage and overfilling." },
+          { "label": "C", "reasoning": "Averaging two different anatomical landmarks (constriction vs. root tip) is not clinically valid. They measure different structures." },
+          { "label": "D", "reasoning": "The measurements are not contradictory — the EAL measures the constriction and the radiograph shows the root tip. The 0.5–1.0mm discrepancy is normal and expected." }
+        ],
+        "clinicalPrinciple": "The apical constriction (not the radiographic apex) is the ideal working length endpoint. Electronic apex locators have 90–96% accuracy in detecting the constriction. The apical constriction is 0.5–1.0mm from the radiographic apex — these are two different anatomical landmarks.",
+        "boardTip": "Working length = apical constriction (0.5–1mm short of radiographic apex). EAL measures constriction; radiograph shows root tip. Both are correct — they measure different things."
+      }
+    },
+    {
+      "id": "rc-q5",
+      "stem": "During root canal treatment, the operator irrigates with 5.25% sodium hypochlorite (NaOCl) between each file. What is the primary purpose of NaOCl irrigation?",
+      "options": [
+        { "label": "A", "text": "To lubricate the canal for easier file insertion", "isCorrect": false },
+        { "label": "B", "text": "To dissolve organic tissue and kill bacteria within the canal system", "isCorrect": true },
+        { "label": "C", "text": "To remove the smear layer from instrumented canal walls", "isCorrect": false },
+        { "label": "D", "text": "To chelate calcium and demineralize dentin for better sealer penetration", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Sodium hypochlorite is the gold standard endodontic irrigant because of its dual action: it dissolves organic tissue (necrotic and vital pulp remnants, collagen) and is a potent antimicrobial that kills bacteria including those in biofilms. No other single irrigant provides both organic dissolution and broad antimicrobial activity.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "While NaOCl provides some lubrication, this is not its primary purpose. EDTA or lubricant gels are specifically designed for canal lubrication during instrumentation." },
+          { "label": "C", "reasoning": "NaOCl removes only the organic component of the smear layer. The inorganic component requires EDTA (17%) for chelation. Both irrigants together, used sequentially, are needed for complete smear layer removal." },
+          { "label": "D", "reasoning": "EDTA chelates calcium and demineralizes dentin. NaOCl does not demineralize dentin — it dissolves organic material. NaOCl and EDTA neutralize each other if used simultaneously." }
+        ],
+        "clinicalPrinciple": "Effective endodontic debridement requires both mechanical instrumentation and chemical irrigation. NaOCl dissolves organic tissue and kills bacteria. EDTA chelates calcium to remove the smear layer's inorganic component. Use both sequentially — they neutralize each other if mixed.",
+        "boardTip": "NaOCl = dissolves organic + kills bacteria (gold standard irrigant). EDTA = removes inorganic smear layer (chelates calcium). Use both but never simultaneously — they neutralize each other."
+      }
+    },
+    {
+      "id": "rc-q6",
+      "stem": "When fitting a master gutta-percha cone for obturation, the operator inserts the cone to working length and feels slight resistance when pulling it back. What does this 'tug-back' indicate?",
+      "options": [
+        { "label": "A", "text": "The cone is too large and is binding in the coronal third of the canal", "isCorrect": false },
+        { "label": "B", "text": "The cone fits snugly at the apical constriction and resists displacement", "isCorrect": true },
+        { "label": "C", "text": "The cone has passed beyond the apex and is engaging periapical tissue", "isCorrect": false },
+        { "label": "D", "text": "The canal has been over-instrumented and the constriction is destroyed", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Tug-back is the slight resistance felt when a properly sized gutta-percha cone is seated at the apical constriction and gently pulled. It confirms three things: the cone reaches working length, the cone matches the apical preparation size, and the apical constriction is intact (not over-instrumented). This ensures a proper apical seal.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Binding in the coronal third would prevent the cone from reaching working length. Tug-back specifically occurs at the apical constriction, not the coronal portion of the canal." },
+          { "label": "C", "reasoning": "If the cone passes beyond the apex, it will not have tug-back — it will feel loose with no resistance. Overextension requires trimming the cone or selecting a larger size." },
+          { "label": "D", "reasoning": "Over-instrumentation enlarges or destroys the constriction, resulting in no tug-back (the cone passes through without resistance). Tug-back confirms the constriction is intact." }
+        ],
+        "clinicalPrinciple": "Gutta-percha is a thermoplastic material and the standard for root canal obturation. Tug-back at the apical constriction confirms proper cone fit and an intact constriction. Overfilling beyond the apex causes persistent pain and delayed healing; underfilling leaves dead space for bacterial growth.",
+        "boardTip": "Tug-back = cone fits at apical constriction = good apical seal. No tug-back = cone too small or constriction destroyed. Overextension = no tug-back + cone passes through."
+      }
+    }
+  ]
+}

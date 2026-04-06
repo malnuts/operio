@@ -1,0 +1,43 @@
+{
+  "procedures": [
+    {
+      "id": "cavity-filling",
+      "type": "simulation",
+      "titleKey": "procedure.cavityFilling",
+      "descKey": "procedure.cavityFilling.desc",
+      "difficultyKey": "difficulty.beginner"
+    },
+    {
+      "id": "simple-extraction",
+      "type": "simulation",
+      "titleKey": "procedure.simpleExtraction",
+      "descKey": "procedure.simpleExtraction.desc",
+      "difficultyKey": "difficulty.intermediate"
+    },
+    {
+      "id": "root-canal",
+      "type": "simulation",
+      "titleKey": "procedure.rootCanal",
+      "descKey": "procedure.rootCanal.desc",
+      "difficultyKey": "difficulty.advanced"
+    },
+    {
+      "id": "video-cavity-filling-demo",
+      "type": "video",
+      "titleKey": "procedure.videoCavityFilling",
+      "descKey": "procedure.videoCavityFilling.desc",
+      "difficultyKey": "difficulty.intermediate",
+      "duration": 90,
+      "thumbnailUrl": "/videos/thumbnails/cavity-filling-demo.jpg",
+      "author": {
+        "id": "dr-javier-tapia",
+        "name": "Dr. Javier Tapia Guadix",
+        "institution": "GC America",
+        "specialty": "Restorative Dentistry",
+        "photoUrl": null,
+        "procedureCount": 1,
+        "rating": 4.5
+      }
+    }
+  ]
+}

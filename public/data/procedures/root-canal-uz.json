@@ -1,0 +1,192 @@
+{
+  "id": "root-canal",
+  "type": "simulation",
+  "title": "Ildiz kanali davolash",
+  "description": "Pastki birinchi oziq tishda simptomatik qaytmas pulpitni tashxislang va to'liq endodontik davolashni bajaring: kirish, instrumentatsiya, irrigatsiya va obturatsiya.",
+  "difficulty": "Murakkab",
+  "modelPath": "/models/shared/tooth-cross-section.glb",
+  "cameraAngle": 270,
+  "steps": [
+    {
+      "id": "rc-step-1",
+      "narration": "Periapikal rentgen surati va klinik topilmalarni ko'rib chiqing. Pastki birinchi oziq tish (#19) pulpaga yaqinlashgan katta kariyes shikastlanishiga ega. Bemor issiqqa o'z-o'zidan paydo bo'ladigan, uzoq davom etadigan og'riqni va kechasi uyg'otadigan og'riqni qayd etmoqda, sovuqqa stimul olib tashlanganidan keyin 30 soniyadan ortiq davom etadigan og'riq kuzatilmoqda. Pulpit — tish pulpasining yallig'lanishini bildiruvchi klinik atama. Termal stimullarga cho'zilgan javob (> 10 soniya) va o'z-o'zidan paydo bo'ladigan og'riq simptomatik qaytmas pulpitni ko'rsatadi. Perkussiyaga sezgirlik pulpa kasalligi kengayishidan kelib chiqqan periodontal ligament yallig'lanishini bildiradi.",
+      "actionDescription": "Qaytmas pulpitni tashxislash va ildiz kanali davolash ko'rsatmasini tasdiqlash",
+      "isDecisionPoint": true,
+      "questionId": "rc-q1",
+      "modelState": {
+        "highlight": ["Enamel", "Dentin"]
+      },
+      "referenceContent": {
+        "anatomy": "Tish pulpasi nervlar, qon tomirlari, odontoblastlar va biriktiruvchi to'qimani o'z ichiga oladi. Pulpit klinik jihatdan qaytariladigan yoki qaytmas, gistologik jihatdan o'tkir, surunkali yoki giperplastik deb tavsiflanadi. Ijobiy perkussiya sinovi periodontal ligament yallig'lanishini ko'rsatadi. Periodontal ligament yallig'lanishi ortishi bilan tish harakatchanligi ortadi.",
+        "technique": "Og'riqni tavsiflash quyidagilarni baholashni talab qiladi: lokalizatsiya, boshlanish/paydo bo'lish, intensivlik, provokatsiya va yengillashtirish, va davomiylik. Qaytariladigan pulpit = stimulga o'tkir, qisqa og'riq, soniyalar ichida (< 10 soniya) bartaraf bo'ladi. Qaytmas pulpit = o'z-o'zidan paydo bo'ladigan, cho'zilgan og'riq (> 10 soniya), ko'pincha kechasi kuchayadi. Nekrotik pulpa = hayotiylik sinoviga javob yo'q. Izolyatsiyalangan chuqurlashgan zondlash pulpa infektsiyasi yoki vertikal ildiz sinishini ko'rsatishi mumkin."
+      }
+    },
+    {
+      "id": "rc-step-2",
+      "narration": "Pastki birinchi oziq tish uchun pastki alveolyar nerv blokadasi o'tkazing. Yallig'langan pulpalarni anesteziya qilish qiyin, chunki yallig'lanish mediatorlari to'qima pH ni pasaytiradi va mahalliy anestetikni aktiv erkin-asosli shaklda bo'lish ulushini kamaytiradi. Agar standart pastki alveolyar nerv blokadasi muvaffaqiyatsiz bo'lsa (lab uvushgan lekin tish hali sezgir), 4% artikain bilan buccal infiltratsiya bilan to'ldiring — artikain tiofen halqasi tufayli suyak orqali ustun diffuziya qiladi.",
+      "instrumentId": "dental-syringe",
+      "actionDescription": "Mahalliy og'riqsizlantirish o'tkazish (pastki alveolyar nerv blokadasi + qo'shimcha)",
+      "isDecisionPoint": true,
+      "questionId": "rc-q2",
+      "referenceContent": {
+        "instrument": {
+          "name": "Stomatologik shprits",
+          "description": "Aspiratsion shprits. Qaytmas pulpitli qizigan tishlar uchun ko'pincha qo'shimcha anesteziya talab etiladi. Variantlarga artikain buccal infiltratsiyasi, intraosseal in'ektsiya yoki intrapulpal in'ektsiya kiradi.",
+          "imageId": "dental-syringe"
+        },
+        "anatomy": "Yallig'langan pulpa to'qimasining pH darajasi yallig'lanish mediatorlari (prostaglandinlar, bradikinin) tufayli past bo'lib, bu nerv membranasi orqali o'tadigan erkin asosli mahalliy anestetik miqdorini kamaytiradi. Shuning uchun 'qizigan tishlar' muvaffaqiyatli nerv blokadasi bo'lsa ham anesteziya qilish qiyin.",
+        "technique": "Agar pastki alveolyar nerv blokadasi lab uvushishiga erishgan lekin tish sezgir bo'lib qolsa, blokada texnikasi to'g'ri bajarilgan, ammo pulpa anesteziyasi yetarli emas. 4% artikain buccal infiltratsiyasi bilan to'ldiring — artikainning tiofen halqasi lidokainga qaraganda to'qima va suyak orqali ustun diffuziya qilishga imkon beradi. Kirish yaratilganidan so'ng oxirgi chora sifatida intrapulpal in'ektsiya ishlatilishi mumkin."
+      },
+      "instrumentTrayOptions": ["dental-syringe", "k-file", "gates-glidden", "dental-explorer"]
+    },
+    {
+      "id": "rc-step-3",
+      "narration": "Kofferdam izolyatsiyasini o'rnating. Bu endodontik davolash uchun majburiydir — u asboblar va irrigatsion eritmalarning aspiratsiyasini oldini oladi, quruq maydonni ta'minlaydi va ildiz kanali tizimining og'iz bo'shlig'i bakteriyalari bilan ifloslanishini oldini oladi. Kofferdamsiz natriy gipoxlorit yutilishi/aspiratsiyasi va asbob aspiratsiyasi xavfi ortadi. Davolanayotgan tishga qisqich o'rnating.",
+      "instrumentId": "rubber-dam-clamp",
+      "actionDescription": "Kofferdam izolyatsiyasini o'rnatish (ildiz kanali davolash uchun majburiy)",
+      "referenceContent": {
+        "instrument": {
+          "name": "Kofferdam qisqichi",
+          "description": "To'rt nuqtali kontaktni ta'minlaydigan qisqich tanlang. Kuchli buzilgan tishlar uchun qisqichni qo'shni tishga qo'yish yoki avval tiklash kerak bo'lishi mumkin.",
+          "imageId": "rubber-dam-clamp"
+        },
+        "anatomy": "Kofferdam izolyatsiyasi endodontik davolash uchun standart amaliyotdir. Natriy gipoxlorit (NaOCl) sitotoksikdir va og'iz bo'shlig'i yumshoq to'qimalariga tegmasligi yoki aspiratsiya qilinmasligi kerak. Endodontik fayllar kofferdamsiz aspiratsiya qilinishi yoki yutib yuborilishi mumkin bo'lgan darajada kichik.",
+        "technique": "Agar toj qisqichni ushlab turish uchun haddan tashqari buzilgan bo'lsa, qisqich o'rnatishdan oldin tishni vaqtinchalik material bilan tiklang. Hech qachon kofferdamsiz endodontik davolash o'tkazmang."
+      }
+    },
+    {
+      "id": "rc-step-4",
+      "narration": "Endodontik kirish teshigini yarating. Yuqori tezlikda yumaloq bor yordamida emal va dentin orqali teshib o'ting, keyin past tezlikda kirishni takomillashtiring. Pastki birinchi oziq tish odatda 2 ildiz va 3 kanalga ega: meziobukkal (MB), meziolingual (ML) va distal (D). Ikkinchi distal kanal mavjud bo'lishi mumkin. Pulpa kamerasi tubi atrofdagi dentin devorlaridan quyuqroq ko'rinadi. Barcha kanal og'izlarini toping — o'tkazilgan kanal endodontik muvaffaqiyatsizlikning eng keng tarqalgan sababi.",
+      "instrumentId": "dental-bur-round",
+      "actionDescription": "Kirish teshigi yaratish va kanal og'izlarini topish",
+      "isDecisionPoint": true,
+      "questionId": "rc-q3",
+      "modelState": {
+        "highlight": ["Enamel", "Dentin"],
+        "colors": { "Enamel": "#E8E0D0" }
+      },
+      "referenceContent": {
+        "instrument": {
+          "name": "Yumaloq bor (#2 / #4)",
+          "description": "Emal orqali dastlabki kirish (yuqori tezlik) va pulpa kamerasi tomini ochish (past tezlik) uchun ishlatiladi. Yumaloq shakli zinapoya hosil bo'lishini oldini oladi.",
+          "imageId": "dental-bur-round"
+        },
+        "anatomy": "Pastki birinchi oziq tish eng ko'p uchraydigan holda 3 kanalga ega: meziobukkal (MB), meziolingual (ML) va distal (D). Mezial ildiz deyarli doimo 2 kanalni o'z ichiga oladi. Ikkinchi distal kanal holatlarning sezilarli ozchiligida mavjud. Ikkinchi mezial kanalni o'tkazib yuborish endodontik muvaffaqiyatsizlikning asosiy sababi.",
+        "technique": "Pulpa kamerasi tomini to'liq olib tashlang. Barcha kanal og'izlari ko'zguni qiyshay tirmasdan ko'rinishi kerak. Pulpa kamerasi tubi dentin devorlaridan quyuqroq — bu rang farqidan tubni aniqlash uchun foydalaning. Kalsifikatsiyalangan og'izlarni topish uchun DG16 endodontik zonddan foydalaning."
+      },
+      "instrumentTrayOptions": ["dental-bur-round", "dental-bur-pear", "k-file", "spoon-excavator"]
+    },
+    {
+      "id": "rc-step-5",
+      "narration": "Har bir kanal uchun ish uzunligini aniqlang. Elektron apeks lokator apikal torayishni — ildiz kanalining eng tor nuqtasini, odatda rentgenografik apeksdan 0,5–1,0 mm masofada joylashgan — ko'rsatguncha har bir kanalga #10 yoki #15 K-fayl kiriting. Periapikal rentgen surati bilan tasdiqlang. Apikal torayish tozalash, shakllantirish va obturatsiya uchun ideal tugatish nuqtasidir. Bu nuqtadan tashqariga ishlash periapial to'qimalarni shikastlaydi.",
+      "instrumentId": "k-file",
+      "actionDescription": "Apeks lokator va rentgen surati bilan ish uzunligini aniqlash",
+      "isDecisionPoint": true,
+      "questionId": "rc-q4",
+      "modelState": {
+        "highlight": ["Dentin"]
+      },
+      "referenceContent": {
+        "instrument": {
+          "name": "K-fayl (#10, #15)",
+          "description": "Dastlabki kanal navigatsiyasi va ish uzunligini aniqlash uchun ishlatiladigan kichik po'lat qo'l fayllari. Kanallarni soat o'rash harakati bilan navigatsiya qiling.",
+          "imageId": "k-file"
+        },
+        "anatomy": "Apikal torayish — ildiz kanalining eng tor nuqtasi bo'lib, rentgenografik apeksdan 0,5–1,0 mm masofada joylashgan. Bu instrumentatsiya va obturatsiya uchun ideal tugatish nuqtasidir. Rentgenografik apeks ildiz uchining anatomik nuqtasi bo'lib — torayishdan farqli belgi.",
+        "technique": "Elektron apeks lokatorlar apikal torayishni aniqlashda 90–96% aniqlikka ega. Rentgen suratida fayl uchi rentgenografik apeksdan 0,5–1 mm qisqa ko'rinishi normal va kutilgan — apeks lokator torayishni o'lchaydi, rentgen surati esa ildiz uchini ko'rsatadi. Bular ikki turli anatomik belgilar."
+      },
+      "instrumentTrayOptions": ["k-file", "gates-glidden", "gutta-percha", "dental-explorer"]
+    },
+    {
+      "id": "rc-step-6",
+      "narration": "Har bir kanalning koronal uchdan bir qismida Gates-Glidden burgilar (#2 va #3) bilan koronal kengaytirishni boshlang. Bu cheklovchi dentinni olib tashlaydi, apikal uchdan bir qismga to'g'ri chiziqli kirish yaratadi va irrigatsion eritmalarning yaxshiroq kirishiga imkon beradi. Tojdan pastga ketma-ketlikdan foydalaning va stripping perforatsiyasini oldini olish uchun burgini furkatsiyadan uzoqqa lateral tomonga suring.",
+      "instrumentId": "gates-glidden",
+      "actionDescription": "Gates-Glidden burgilar bilan koronal kengaytirish",
+      "referenceContent": {
+        "instrument": {
+          "name": "Gates-Glidden burgisi",
+          "description": "Ildiz kanallarini koronal kengaytirish uchun past tezlikda ishlatiladigan olov shaklidagi aylanma bor. Kesmaydiigan uchi perforatsiya xavfini kamaytiradi. #1–6 o'lchamlarda mavjud.",
+          "imageId": "gates-glidden"
+        },
+        "anatomy": "Ildiz kanallarining koronal uchdan bir qismi ko'pincha asbob kirishi va irrigant oqimini apikal hududga cheklaydigan cheklovchi dentinga ega. Ildizlar orasidagi furkatsiya hududi xavfli zona — furkatsiya tomonga haddan tashqari dentin olib tashlash stripping perforatsiyasi xavfini tug'diradi.",
+        "technique": "Gates-Glidden burgilarni tojdan pastga ketma-ketlikda (#3 keyin #2) ishlating. Cho'tkalaydigan harakatda qo'llang, burgini furkatsiyadan uzoqqa lateral tomonga suring. Burgini hech qachon apikal tomonga majburlamang. Apikal instrumentatsiyadan oldin koronal kengaytirish bog'lanishni kamaytiradi va irrigantning yaxshiroq yetkazilishiga imkon beradi."
+      }
+    },
+    {
+      "id": "rc-step-7",
+      "narration": "Tojdan pastga usulida aylanuvchi NiTi fayllar bilan kanallarni tozalang va shakllang. NiTi fayllar superelastik xususiyatlarga ega bo'lib, egri kanallarga kamroq transportatsiya xavfi bilan ergashishga imkon beradi. Har bir fayldan keyin natriy gipoxlorit (NaOCl) bilan mo'l irrigatsiya qiling — NaOCl organik to'qimani (nekrotik pulpa, kollagen) eritadi va bakteriyalarni o'ldiradi. Apikal o'tkazuvchanlikni saqlash va tiqilishning oldini olish uchun aylanma fayllar orasida #10 qo'l fayl bilan rekapitulyatsiya qiling.",
+      "instrumentId": "k-file",
+      "actionDescription": "Aylanuvchi NiTi fayllar va NaOCl irrigatsiyasi bilan kanallarni tozalash va shakllash",
+      "isDecisionPoint": true,
+      "questionId": "rc-q5",
+      "modelState": {
+        "highlight": ["Dentin"],
+        "colors": { "Dentin": "#C4B59A" }
+      },
+      "referenceContent": {
+        "instrument": {
+          "name": "Aylanuvchi NiTi fayllar",
+          "description": "Superelastik xususiyatlarga ega dvigatel bilan boshqariladigan nikel-titanium fayllar. Egri kanallarga kamroq transportatsiya xavfi bilan ergashadi. Yengil choqish harakati bilan ishlating — faylning passiv ravishda ilgarilashiga ruxsat bering.",
+          "imageId": "k-file"
+        },
+        "anatomy": "Pastki jag' oziq tishlarining mezial kanallari odatda tor va egri. Distal kanal odatda kengroq va to'g'riroq. Kanal anatomiyasi sezilarli darajada farq qiladi — yordamchi kanallar, lateral kanallar va istmus bog'lanishlari mavjud bo'lishi mumkin, ayniqsa mezial kanallar orasida.",
+        "technique": "NaOCl endodontik irrigatsiyaning oltin standarti: u organik to'qimani eritadi va biofilm shaklida tashkil topgan bakteriyalarni ham o'ldiradi. NaOCl smear qatlamining faqat organik komponentini olib tashlaydi — anorganik komponent uchun EDTA kerak. NaOCl va EDTA ni ketma-ket ishlating, hech qachon bir vaqtda emas (ular bir-birini neytrallashtiradi). Apikal tiqilishning oldini olish uchun aylanma asboblar orasida kichik fayl bilan rekapitulyatsiya qiling."
+      },
+      "instrumentTrayOptions": ["k-file", "gates-glidden", "irrigating-syringe", "gutta-percha"]
+    },
+    {
+      "id": "rc-step-8",
+      "narration": "Yakuniy irrigatsiya protokolini bajaring. Har bir kanalni qolgan organik to'qimani eritish uchun NaOCl bilan chayqang, keyin smear qatlamining anorganik komponentini kalsiyni xelatsiya qilish orqali olib tashlash uchun 1 daqiqa davomida 17% EDTA, keyin NaOCl bilan yakuniy chayqash. Smear qatlami instrumentatsiya paytida hosil bo'ladi va dentin naychalarini berkitib, bakteriyalarni saqlashi mumkin. Apikal ekstruziyaning oldini olish uchun ish uzunligidan 2 mm qisqa joylashtirilgan yon teshikli ignadan foydalaning.",
+      "instrumentId": "irrigating-syringe",
+      "actionDescription": "Yakuniy irrigatsiya protokoli (NaOCl + EDTA + NaOCl)",
+      "referenceContent": {
+        "instrument": {
+          "name": "Irrigatsion shprits",
+          "description": "Yon teshikli ignali (27 yoki 30 o'lcham) Luer-lock shpritsi. Yon teshik oqimni lateral yo'naltirib, irrigantning apikal ekstruziyasini oldini oladi, bu esa og'ir to'qima shikastlanishiga sabab bo'lishi mumkin.",
+          "imageId": "irrigating-syringe"
+        },
+        "anatomy": "Smear qatlami kanal instrumentatsiyasi paytida hosil bo'lib, organik va anorganik chiqindilardan iborat. U dentin naychalarini berkitadi va bakteriyalarni saqlashi mumkin. NaOCl organik komponentni eritadi; EDTA anorganik komponentni olib tashlash uchun kalsiyni xelatsiya qiladi. To'liq smear qatlamini olib tashlash uchun ikkala irrigant ham kerak.",
+        "technique": "Irrigatsion ignani hech qachon kanalda tiqilib qolishiga yo'l qo'ymang — uni erkin va ish uzunligidan 2 mm qisqa ushlang. NaOCl sitotoksikdir — apeksdan tashqariga ekstruziya og'ir og'riq, shish va to'qima nekroziga sabab bo'ladi. EDTA va NaOCl bir-birini neytrallashtiradi — ularni ketma-ket ishlating, bir vaqtda emas. Irrigantni ultratovush aktivatsiyasi tozalashni yaxshilaydi."
+      }
+    },
+    {
+      "id": "rc-step-9",
+      "narration": "Kanallarni qog'oz uchlar bilan quriting. Yakuniy apikal fayl o'lchamiga mos master gutta-percha konuslarini tanlang. Gutta-percha — termoplastik plomba materiali bo'lib, ildiz kanali obturatsiyasi uchun standart hisoblanadi. Moslikni rentgenografik jihatdan tasdiqlang — har bir konus apikal torayishda tortish-qaytish (tug-back) qarshiligi bilan ish uzunligiga yetishi kerak. Tortish-qaytish konus torayishda zich joylashganini ko'rsatadi.",
+      "instrumentId": "gutta-percha",
+      "actionDescription": "Master gutta-percha konuslarini moslashtirish va tekshirish",
+      "isDecisionPoint": true,
+      "questionId": "rc-q6",
+      "referenceContent": {
+        "instrument": {
+          "name": "Gutta-percha konuslari",
+          "description": "Ildiz kanali obturatsiyasi uchun standart bo'lgan termoplastik plomba materiali. Fayl diametrlariga mos standartlashtirilgan o'lchamlarda va standartlashtirilmagan yordamchi konuslarda mavjud.",
+          "imageId": "gutta-percha"
+        },
+        "anatomy": "Apikal torayish obturatsiya uchun ideal tugatish nuqtasidir. Ortiqcha to'ldirish (apeksdan tashqariga chiqish) doimiy og'riq va kechikkan bitishga sabab bo'lishi mumkin. Kam to'ldirish bakteriyalar o'sishi uchun bo'sh joy qoldiradi. Apikal germetiklik uzoq muddatli muvaffaqiyat uchun hal qiluvchi ahamiyatga ega.",
+        "technique": "Tortish-qaytish (tug-back) — to'g'ri o'lchamdagi gutta-percha konusi apikal torayishga joylashtirilganda va sekin tortib ko'rilganda sezilgan biroz qarshilik. U uchta narsani tasdiqlaydi: konus ish uzunligiga yetadi, konus apikal tayyorlash o'lchamiga mos keladi va apikal torayish saqlanib qolgan. Tortish-qaytish yo'q = konus juda kichik yoki torayish buzilgan (haddan tashqari instrumentatsiya)."
+      },
+      "instrumentTrayOptions": ["gutta-percha", "k-file", "irrigating-syringe", "dental-explorer"]
+    },
+    {
+      "id": "rc-step-10",
+      "narration": "Issiq vertikal siqish usuli bilan kanallarni obturatsiya qiling. Kanal devorlariga endodontik siler qo'llang, master gutta-percha konusini joylashtiring, keyin qizdirilgan plagger yordamida gutta-perchani yumshatib apikal tomonga siqing. Koronal qismni in'ektsion issiq gutta-percha bilan qayta to'ldiring. Issiq usullar lateral kanallarni, apikal tarmoqlanishlarni va istmus bog'lanishlarini sovuq lateral siqishdan yaxshiroq to'ldiradi. Obturatsiya sifatini rentgen surati bilan tekshiring.",
+      "actionDescription": "Issiq vertikal siqish bilan kanallarni obturatsiya qilish",
+      "modelState": {
+        "colors": { "Dentin": "#F5E6CC" }
+      },
+      "referenceContent": {
+        "anatomy": "Ildiz kanali tizimi asosiy kanallar, lateral kanallar, apikal tarmoqlanishlar va istmus bog'lanishlarini (ayniqsa pastki jag' oziq tishlarining mezial kanallari orasida) o'z ichiga oladi. Issiq gutta-percha usullari bu notekisliklarni sovuq usullardan yaxshiroq to'ldiradi. To'ldirilmagan kanal bo'shliqlarida qolgan bakteriyalar davolash muvaffaqiyatsizligiga sabab bo'ladi.",
+        "technique": "Kanal devorlariga yupqa siler qatlami qo'llang. Qizdirilgan plagger gutta-perchani yumshatadi, keyin kuchli bosim bilan apikal tomonga siqiladi. In'ektsion issiq gutta-percha bilan bo'limlar bo'yicha qayta to'ldiring. Obturatsiya rentgen suratida zich va bir xil ko'rinishi kerak, ish uzunligida tugashi kerak."
+      }
+    },
+    {
+      "id": "rc-step-11",
+      "narration": "Koronal germetik yopish qo'ying. Obturatsiyani rentgenografik jihatdan tasdiqlaganingizdan so'ng, kanal og'izlari ustiga bog'langan kompozit yoki shisha ionomer yadroli tiklash qo'ying. Koronal germetik yopish hal qiluvchi ahamiyatga ega — so'lak bakteriyalari bilan koronal oqish mukammal obturatsiyada ham endodontik muvaffaqiyatsizlikning asosiy sababidir. Sinishning oldini olish uchun tishga to'liq qoplovchi toj kerak bo'ladi.",
+      "actionDescription": "Koronal germetik yopish va yadroli tiklash qo'yish",
+      "referenceContent": {
+        "anatomy": "Pulpa kamerasi tubi va kanal og'izlari og'iz bo'shlig'i muhitini obturatsiya qilingan kanal tizimiga bog'laydi. Yetarli koronal germetik yopishsiz, so'lak bakteriyalari mikrooqish orqali kanal tizimini qayta ifloslaydi va obturatsiya sifatidan qat'i nazar davolash muvaffaqiyatsizligiga olib keladi.",
+        "technique": "Pulpa kamerasini og'izlar ustidagi barcha siler va gutta-percha chiqindilardan tozalang. Yaxshi germetik qilingan kompozit yoki shisha ionomer tiklash qo'ying. Endodontik jihatdan davolangan tishlar kirish tayyorlashidan struktural yaxlitligi kamaygan va sinish xavfi yuqoriroq — bemorni to'liq qoplovchi toj uchun yozib qo'ying."
+      }
+    }
+  ]
+}

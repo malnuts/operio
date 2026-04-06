@@ -1,0 +1,125 @@
+{
+  "procedureId": "cavity-filling",
+  "questions": [
+    {
+      "id": "cf-q1",
+      "stem": "A patient presents with sensitivity to cold on the mandibular first molar. A bitewing radiograph reveals a radiolucent area on the mesial surface extending into the middle third of dentin. What is the most appropriate treatment?",
+      "options": [
+        { "label": "A", "text": "Apply fluoride varnish and monitor — the lesion is incipient and can be remineralized", "isCorrect": false },
+        { "label": "B", "text": "Prepare and restore the tooth with a direct composite restoration", "isCorrect": true },
+        { "label": "C", "text": "Place a pit and fissure sealant over the affected area", "isCorrect": false },
+        { "label": "D", "text": "Perform indirect pulp capping and place a temporary restoration", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "A radiolucency extending into the middle third of dentin indicates cavitated caries requiring operative intervention. Once cavitation occurs, the lesion becomes irreversible. Incipient smooth-surface lesions (ICDAS 1) should be treated with remineralization, but this lesion has progressed well beyond that stage. A direct composite is the standard of care for a Class II lesion.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Fluoride remineralization is only appropriate for incipient lesions with an intact surface. To allow remineralization, the surface must be intact. This lesion extends into dentin and is cavitated." },
+          { "label": "C", "reasoning": "Sealants are indicated for caries-prone pits and fissures, not for existing proximal caries extending into dentin." },
+          { "label": "D", "reasoning": "Indirect pulp capping is reserved for deep carious lesions approaching the pulp, not for middle-third dentin caries." }
+        ],
+        "clinicalPrinciple": "Caries are always smaller radiographically than clinically, and 30–40% mineral loss is needed for radiographic detection. A lesion visible on radiograph extending into dentin indicates significant clinical involvement requiring operative treatment.",
+        "boardTip": "ICDAS 1 (incipient) = remineralize. ICDAS 3+ (cavitated into dentin) = restore. Once cavitation occurs, the lesion is irreversible."
+      }
+    },
+    {
+      "id": "cf-q2",
+      "stem": "During administration of an inferior alveolar nerve block, the dentist aspirates and obtains a positive aspiration (blood in the cartridge). What is the most appropriate next step?",
+      "options": [
+        { "label": "A", "text": "Withdraw the needle completely and apply pressure to the injection site", "isCorrect": false },
+        { "label": "B", "text": "Reposition the needle slightly and re-aspirate; if negative, inject slowly", "isCorrect": true },
+        { "label": "C", "text": "Proceed with the injection at a slower rate to reduce toxicity risk", "isCorrect": false },
+        { "label": "D", "text": "Switch to infiltration anesthesia for the mandibular molar", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "A positive aspiration indicates the needle tip is within a blood vessel. Repositioning slightly and re-aspirating ensures the anesthetic is deposited in tissue, not intravascularly. If the second aspiration is negative, proceed with slow injection.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Withdrawing completely and abandoning the injection leaves the patient without adequate anesthesia. Repositioning is sufficient." },
+          { "label": "C", "reasoning": "Injecting into a blood vessel, even slowly, risks systemic toxicity, including CNS excitation followed by depression, and cardiovascular compromise." },
+          { "label": "D", "reasoning": "Infiltration alone is generally insufficient for mandibular molar anesthesia in adults due to the thickness of the buccal cortical plate." }
+        ],
+        "clinicalPrinciple": "Aspiration before injection prevents intravascular delivery of local anesthetic, which can cause systemic toxicity including CNS excitation followed by depression, and cardiovascular compromise.",
+        "boardTip": "Positive aspiration → reposition → re-aspirate → inject if negative. Never inject into a blood vessel."
+      }
+    },
+    {
+      "id": "cf-q3",
+      "stem": "When preparing a Class II cavity for a composite restoration, which bur is most appropriate for establishing the initial outline form, and why?",
+      "options": [
+        { "label": "A", "text": "#1/4 round bur — small size provides precise caries detection", "isCorrect": false },
+        { "label": "B", "text": "#245 pear-shaped carbide bur — creates slightly divergent walls for adhesive retention", "isCorrect": true },
+        { "label": "C", "text": "#57 straight fissure bur — creates convergent walls for mechanical retention", "isCorrect": false },
+        { "label": "D", "text": "#330 round carbide bur — scoops out carious dentin efficiently", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "The #245 pear-shaped bur creates slightly divergent cavity walls needed for composite. Composite restorations rely on micromechanical retention through adhesive bonding, not mechanical retention. Carbide burs are better for end-cutting, making them ideal for establishing outline form. Primary resistance form requires rounded internal line angles, which the pear shape naturally produces.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "The #1/4 round bur is too small for establishing outline form. It may be used for initial enamel penetration or caries detection." },
+          { "label": "C", "reasoning": "Convergent walls are used for amalgam retention (non-retentive materials prevent occlusal displacement with convergent walls). Composite needs divergent walls for light access and micromechanical bonding." },
+          { "label": "D", "reasoning": "The #330 round bur and spoon excavators are used for caries excavation (removing infected dentin), not for establishing outline form." }
+        ],
+        "clinicalPrinciple": "GV Black's 4 steps of initial tooth preparation: 1) Outline form, 2) Primary resistance form, 3) Primary retention form, 4) Convenience form. For composite, retention is adhesive (micromechanical), not mechanical. Preparation should extend 0.2mm into dentin with gingival floor 0.5mm around caries.",
+        "boardTip": "Pear-shaped bur = composite prep (divergent walls, micromechanical retention). Straight fissure = amalgam prep (convergent walls, mechanical retention). Carbide = end-cutting; Diamond = side-cutting."
+      }
+    },
+    {
+      "id": "cf-q4",
+      "stem": "During caries excavation near the pulp, the operator encounters firm, leathery, discolored dentin that resists removal with a spoon excavator. The area is not soft or mushy. What is the most appropriate action?",
+      "options": [
+        { "label": "A", "text": "Continue excavation until the dentin appears uniformly light yellow", "isCorrect": false },
+        { "label": "B", "text": "Leave the firm, discolored dentin in place — it is affected dentin that can be remineralized", "isCorrect": true },
+        { "label": "C", "text": "Apply caries-detecting dye and remove all stained dentin", "isCorrect": false },
+        { "label": "D", "text": "Perform a direct pulp cap with calcium hydroxide and place a temporary", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "This describes affected dentin — dry, leathery, demineralized but not invaded by bacteria. Affected dentin is OK to leave when close to the pulp, as it can be remineralized. Only infected dentin (wet, soft, mushy, necrotic) must be removed. Infected dentin is demineralized with bacteria and has no bonding potential.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Removing all discolored dentin risks unnecessary pulp exposure. Dentin demineralization occurs before enamel cavitation — not all discolored dentin is infected." },
+          { "label": "C", "reasoning": "Caries-detecting dyes stain both infected and affected dentin and may lead to over-excavation and pulp exposure." },
+          { "label": "D", "reasoning": "Direct pulp cap is indicated for < 1mm pulp exposure in a preoperatively asymptomatic patient. There is no exposure here — the dentin is firm." }
+        ],
+        "clinicalPrinciple": "Infected dentin = wet, soft, mushy, necrotic, bacteria present, no bonding potential → must remove. Affected dentin = dry, leathery, demineralized, no bacteria → OK to leave. If deep caries excavation is close to the pulp, indirect pulp cap may be indicated. Pulp exposure > 1mm in symptomatic patient → root canal therapy.",
+        "boardTip": "Infected = wet/soft/mushy → remove. Affected = dry/leathery/firm → leave. Direct pulp cap = < 1mm exposure + asymptomatic. > 1mm exposure + symptomatic = RCT."
+      }
+    },
+    {
+      "id": "cf-q5",
+      "stem": "When using a total-etch (etch-and-rinse) adhesive system, which of the following best explains why dentin must be kept visibly moist after rinsing the phosphoric acid?",
+      "options": [
+        { "label": "A", "text": "Moisture prevents bacterial contamination of the exposed tubules", "isCorrect": false },
+        { "label": "B", "text": "Water maintains the collagen fibril network in an expanded state for resin infiltration and hybrid layer formation", "isCorrect": true },
+        { "label": "C", "text": "Wet dentin is needed to initiate the self-etch acid component within the bonding agent", "isCorrect": false },
+        { "label": "D", "text": "Moisture increases the working time of the bonding agent by slowing solvent evaporation", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Acid etching removes the smear layer and opens dentinal tubules, exposing a collagen fibril network. If this network dries, collagen collapses, preventing resin monomer infiltration. The hybrid layer — the mix of adhesive resin and primer in the collagen matrix — is the foundation of the dentin bond. Resin tags extending into tubules provide micromechanical retention.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "While moisture control is important, the rubber dam handles contamination prevention. The wet-bonding technique specifically maintains collagen architecture." },
+          { "label": "C", "reasoning": "Total-etch and self-etch are two separate bonding families. In total-etch, the acid is applied and rinsed separately — there is no self-etch component in the bonding agent." },
+          { "label": "D", "reasoning": "Surface moisture does not meaningfully affect bonding agent working time. Camphorquinone photoinitiator and light activation control polymerization, not moisture." }
+        ],
+        "clinicalPrinciple": "The two main families of bonding systems are etch-and-rinse and self-etch. In total-etch, collapsed collagen = no resin infiltration = weak bond. The hybrid layer (resin + primer in collagen matrix) with resin tags provides the foundation for dentin adhesion through micromechanical retention.",
+        "boardTip": "Total-etch = keep dentin moist (wet bonding). Self-etch = no separate acid step. Hybrid layer = adhesive resin + primer in collagen matrix = foundation of dentin bond."
+      }
+    },
+    {
+      "id": "cf-q6",
+      "stem": "When placing posterior composite resin, the dentist uses an incremental layering technique with 2mm layers. Which of the following best explains the rationale for this approach?",
+      "options": [
+        { "label": "A", "text": "Thinner layers allow better color matching between composite and natural tooth structure", "isCorrect": false },
+        { "label": "B", "text": "Incremental placement reduces the C-factor and polymerization shrinkage stress, decreasing microleakage risk", "isCorrect": true },
+        { "label": "C", "text": "Light cannot adequately penetrate composite deeper than 2mm due to filler particle opacity", "isCorrect": false },
+        { "label": "D", "text": "Thinner layers prevent incorporation of benzoyl peroxide which would inhibit light-curing", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Composites undergo approximately 2–3% polymerization shrinkage. The C-factor (ratio of bonded to unbonded surfaces) determines shrinkage stress — high C-factors lead to greater microleakage. As the composite polymerizes it pulls on the sides of the preparation; if polymerization force exceeds bond strength, microleakage occurs. Each layer should be no more than 2mm to limit shrinkage volume and C-factor.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "While layering can contribute to aesthetics, the primary rationale in posterior composites is managing C-factor and polymerization shrinkage stress, not color matching." },
+          { "label": "C", "reasoning": "Filler particles confer radiopacity, not opacity to curing light. Depth of cure varies by shade and is not the primary reason for incremental placement." },
+          { "label": "D", "reasoning": "Benzoyl peroxide is the initiator in self-cure composites; camphorquinone is the photoinitiator in light-cure composites. They are different curing systems — benzoyl peroxide does not inhibit light curing." }
+        ],
+        "clinicalPrinciple": "The C-factor is the ratio of bonded to not-bonded surfaces. High C-factor = greater microleakage from polymerization shrinkage stress. Oblique layering reduces C-factor by ensuring each increment contacts no more than two walls. Most composites contain Bis-GMA resin matrix with quartz/silica filler particles coupled by silane.",
+        "boardTip": "C-factor = bonded / unbonded surfaces. High C-factor = more shrinkage stress = more microleakage. 2mm increments + oblique layering = lower C-factor. Composites shrink 2–3%."
+      }
+    }
+  ]
+}

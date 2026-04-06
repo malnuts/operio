@@ -1,0 +1,88 @@
+{
+  "questions": [
+    {
+      "id": "vcf-q1",
+      "stem": "Bo\u2018shliq tayyorlangan va kofferdam izolyatsiyasi o\u2018rnatilgan. Shifokor tish sirtiga ko\u2018k gel qo\u2018ymoqchi. Bu qanday material va uning maqsadi nima?",
+      "options": [
+        {
+          "id": "a",
+          "text": "37% fosfor kislotasi \u2014 bog\u2018lash uchun mikro-g\u2018ovaklar hosil qilish maqsadida emal va dentinni ishlov beradi"
+        },
+        {
+          "id": "b",
+          "text": "Sezgirlikni kamaytiradigan vosita \u2014 tiklashdan oldin operatsiyadan keyingi sezgirlikni kamaytiradi"
+        },
+        {
+          "id": "c",
+          "text": "Bo\u2018shliq qoplamasi (kalsiy gidroksid) \u2014 pulpani kimyoviy ta\u2019sirdan himoya qiladi"
+        },
+        {
+          "id": "d",
+          "text": "Gemostatik vosita \u2014 milkli chetidan qon ketishni nazorat qiladi"
+        }
+      ],
+      "correctOptionId": "a",
+      "category": "clinical-reasoning",
+      "explanation": {
+        "correctReasoning": "Ko\u2018k gel 37% fosfor kislotasi. To\u2018liq ishlov berish texnikasida u emalga (15-30 soniya) va dentinga (10-15 soniya) qo\u2018llaniladi — sirtni demineralizatsiya qiladi va mikro-g\u2018ovaklar hosil qiladi. Bu yopishuvchi qatronga kirib borish va mexanik bog\u2018lanish hosil qilish imkonini beradi (dentinda gibrid qatlam, emalda qatron tiqlari).",
+        "distractorAnalysis": {
+          "b": "Sezgirlikni kamaytiradigan vositalar ba\u2019zan ishlatiladi, lekin ular odatda ishlov berishdan oldin qo\u2018llaniladigan shaffof eritmalar bo\u2018lib, bo\u2018shliq tayyorlashdan keyin qo\u2018llaniladigan ko\u2018k gellar emas.",
+          "c": "Kalsiy gidroksid qoplamalari faqat pulpa ochilishiga yaqin joylarda qo\u2018llaniladigan oq pasta bo\u2018lib, butun tayyorgarlik ustiga emas. Ular ishlov berishdan oldin, bu bosqichda emas qo\u2018yiladi.",
+          "d": "Gemostatik vositalar milkdan qon ketganda ishlatiladi, lekin ular odatda yumshoq to\u2018qimaga, bo\u2018shliq sirtiga emas qo\u2018llaniladi."
+        },
+        "clinicalPrinciple": "To\u2018liq ishlov berish (ishlov berish va yuvish) texnikasi emalga eng yuqori bog\u2018lanish kuchini ta\u2019minlaydi. Chuqur dentin uchun ortiqcha ishlov berishdan ehtiyot bo\u2018ling \u2014 kollagen arxitekturasini saqlash uchun dentin faqat 10-15 soniya ishlov berilishi kerak."
+      }
+    },
+    {
+      "id": "vcf-q2",
+      "stem": "Shifokor matritsali lenta va pona o\u2018rnatdi va kompozit qo\u2018yishni boshlayapti. Nima uchun kompozit bir yaxlit emas, balki bir nechta yupqa qatlamda qo\u2018yiladi?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Har bir qatlam yaxshiroq estetika uchun boshqa rangda bo\u2018lishi uchun"
+        },
+        {
+          "id": "b",
+          "text": "Polimerizatsiya qisqarish stressini kamaytirish va har bir qatlam orqali to\u2018liq nurlanishni ta\u2019minlash uchun"
+        },
+        {
+          "id": "c",
+          "text": "Shifokorga har bir qatlam orasida tishlashni tekshirish imkonini berish uchun"
+        },
+        {
+          "id": "d",
+          "text": "Chunki kompozit qatron qotgandan keyin o\u2018ziga bog\u2018lana olmaydi"
+        }
+      ],
+      "correctOptionId": "b",
+      "category": "technique",
+      "explanation": {
+        "correctReasoning": "Bosqichma-bosqich qatlam (har bir qatlam 2mm yoki kamroq) ikki maqsadga xizmat qiladi: (1) C-faktorni (bog\u2018langan va bog\u2018lanmagan sirtlar nisbati) kamaytiradi, bu bo\u2018shliq hosil bo\u2018lishi, operatsiyadan keyingi sezgirlik yoki bo\u2018rtma egilishiga olib kelishi mumkin bo\u2018lgan polimerizatsiya qisqarish stressini kamaytiradi; (2) nur kompozitning faqat ~2mm chuqurligiga kirib boradi, shuning uchun qalinroq qatlamlar chuqurlikda yetarli darajada qotmasligi mumkin.",
+        "clinicalPrinciple": "C-faktor katta tiklanishlarda muhim. Qiyshiq qatlam (ponali qatlamlarni joylashtirish) har bir qatlam uchun bog\u2018langan devorlar sonini kamaytiradi, tish-kompozit interfeysida qisqarish stressini pasaytiradi."
+      }
+    },
+    {
+      "id": "vcf-q3",
+      "stem": "Shifokor oxirgi kompozit qatlamida bo\u2018rtmalar va yoriqlarni ehtiyotkorlik bilan shakllantirmoqda. Aniq okluzal anatomiyani qayta yaratishning eng muhim sababi nima?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Faqat estetik \u2014 bemorlar tabiiy ko\u2018rinishdagi tiklashlarni afzal ko\u2018radi"
+        },
+        {
+          "id": "b",
+          "text": "To\u2018g\u2018ri okluzal kontaktlar chaynash kuchlarini taqsimlaydi va pastki jag\u2018 bo\u2018g\u2018imi buzilishi, qarama-qarshi tish ortiqcha o\u2018sishi va muddatidan oldingi yeyilishning oldini oladi"
+        },
+        {
+          "id": "c",
+          "text": "Sug\u2018urta anatomik jihatdan to\u2018g\u2018ri tiklashlarni to\u2018lov uchun talab qiladi"
+        }
+      ],
+      "correctOptionId": "b",
+      "category": "clinical-reasoning",
+      "explanation": {
+        "correctReasoning": "Aniq okluzal anatomiya tishlash kuchlarini tiklash va atrofdagi tish tuzilmasi bo\u2018ylab to\u2018g\u2018ri taqsimlanishini ta\u2019minlaydi. Muddatidan oldingi yoki noto\u2018g\u2018ri kontaktlar og\u2018riq, kompozit yoki qarama-qarshi tishning tezlashgan yeyilishiga olib kelishi va pastki jag\u2018 bo\u2018g\u2018imi muammolariga hissa qo\u2018shishi mumkin. Bo\u2018rtma uchlari, marginal tizimlar va chuqurlik tabiiy okluziyaga mos kelishi kerak."
+      }
+    }
+  ]
+}

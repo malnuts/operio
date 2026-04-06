@@ -1,0 +1,137 @@
+{
+  "id": "simple-extraction",
+  "type": "simulation",
+  "title": "Simple Extraction",
+  "description": "Perform a simple (closed) extraction of a maxillary first premolar using non-surgical technique with forceps and elevator.",
+  "difficulty": "Intermediate",
+  "modelPath": "/models/shared/full-mouth.glb",
+  "steps": [
+    {
+      "id": "se-step-1",
+      "narration": "Review the periapical radiograph. The maxillary first premolar (#5) shows extensive coronal destruction with no periapical pathology. Assess root morphology: the maxillary first premolar typically has two roots (buccal and palatal) or a single bifurcated root. Evaluate for factors that complicate extraction: dilacerated roots, hypercementosis (excess cementum that bulges the root), ankylosis, and surrounding sclerotic bone all increase resistance to extraction and may indicate the need for a surgical approach.",
+      "actionDescription": "Review radiograph and assess extraction difficulty",
+      "isDecisionPoint": true,
+      "questionId": "se-q1",
+      "referenceContent": {
+        "anatomy": "The maxillary first premolar typically has two roots (buccal and palatal) or a single bifurcated root. Root morphology is the primary predictor of extraction difficulty. A widened periodontal ligament space suggests chronic inflammation or hypermobility, which actually makes extraction easier. Sclerotic bone is dense and resists expansion.",
+        "technique": "Pre-operative radiographic assessment must evaluate: root number, curvature, length, dilaceration, hypercementosis, ankylosis, surrounding bone density, and proximity to vital structures (maxillary sinus, inferior alveolar nerve). A simple (closed) extraction uses forceps and elevators without a surgical flap. A surgical extraction requires a mucoperiosteal flap, bone removal, and/or tooth sectioning."
+      }
+    },
+    {
+      "id": "se-step-2",
+      "narration": "Administer local anesthesia. For the maxillary first premolar, use buccal infiltration targeting the middle superior alveolar (MSA) nerve for pulpal and buccal anesthesia, plus a greater palatine nerve block for palatal soft tissue anesthesia. The greater palatine nerve exits the greater palatine foramen and innervates the hard palate from premolars to the posterior molars. Aspirate before each injection.",
+      "instrumentId": "dental-syringe",
+      "actionDescription": "Administer buccal infiltration and greater palatine block",
+      "isDecisionPoint": true,
+      "questionId": "se-q2",
+      "referenceContent": {
+        "instrument": {
+          "name": "Dental Syringe",
+          "description": "Aspirating syringe with a 27-gauge short needle for infiltration anesthesia. Always aspirate before injecting.",
+          "imageId": "dental-syringe"
+        },
+        "anatomy": "The middle superior alveolar (MSA) nerve innervates the premolars and the mesiobuccal root of the first molar. The greater palatine nerve exits the greater palatine foramen and innervates the palatal mucosa from premolars to molars. The nasopalatine nerve exits the incisive foramen and innervates the palatal mucosa of the anterior teeth (canine to canine). The long buccal nerve is a branch of V3 innervating buccal mucosa of mandibular molars.",
+        "technique": "Maxillary extractions require dual anesthesia: buccal infiltration for the tooth and buccal periodontium, and palatal injection for the palatal soft tissue. For premolars, the greater palatine nerve must be blocked (not the nasopalatine, which only covers anteriors). Deposit approximately 1 cartridge buccally at the apex."
+      },
+      "instrumentTrayOptions": ["dental-syringe", "forceps-150", "elevator-straight", "dental-explorer"]
+    },
+    {
+      "id": "se-step-3",
+      "narration": "Once adequate anesthesia is confirmed, use a periosteal elevator (Molt #9) to reflect the soft tissue attachment around the cervical area of the tooth. The periosteal elevator has a pointed end for initial tissue penetration and a broad end for elevation. Work circumferentially, separating the gingival fibers from the cementum. This provides access for forceps placement and reduces soft tissue tearing during extraction.",
+      "instrumentId": "periosteal-elevator",
+      "actionDescription": "Reflect soft tissue with periosteal elevator",
+      "referenceContent": {
+        "instrument": {
+          "name": "Periosteal Elevator (Molt #9)",
+          "description": "Double-ended instrument: pointed end for initial tissue penetration into the gingival sulcus, broad end for reflecting mucoperiosteal tissue from bone.",
+          "imageId": "periosteal-elevator"
+        },
+        "anatomy": "The gingival fibers (dentogingival, alveologingival, circular) connect the gingiva to the tooth and alveolar bone. The junctional epithelium forms the biologic width. The periosteal elevator separates these attachments to allow forceps access to the root surface.",
+        "technique": "Insert the pointed end into the gingival sulcus and work apically, following the root surface. Use controlled, firm pressure. Reflect tissue only as far as needed for forceps placement. Excessive tissue reflection in a simple extraction is unnecessary and increases post-operative swelling."
+      },
+      "instrumentTrayOptions": ["periosteal-elevator", "dental-explorer", "spoon-excavator", "elevator-straight"]
+    },
+    {
+      "id": "se-step-4",
+      "narration": "Apply a straight elevator (#301) to the mesial aspect of the tooth. Insert the tip into the periodontal ligament space between the tooth and alveolar bone. The concave surface of the elevator faces the tooth being extracted; the convex surface acts against the alveolar bone as a fulcrum. Apply controlled rotational force to begin luxating the tooth — expanding the socket and severing PDL fibers.",
+      "instrumentId": "elevator-straight",
+      "actionDescription": "Luxate tooth with straight elevator",
+      "isDecisionPoint": true,
+      "questionId": "se-q3",
+      "referenceContent": {
+        "instrument": {
+          "name": "Straight Elevator (#301)",
+          "description": "Used as a lever to luxate teeth by expanding alveolar bone and severing periodontal ligament fibers. The concave surface faces the tooth being extracted; the convex surface faces bone (fulcrum).",
+          "imageId": "elevator-straight"
+        },
+        "anatomy": "The periodontal ligament (PDL) is 0.15–0.38mm wide and contains Sharpey's fibers embedded in both cementum and alveolar bone. The PDL must be severed circumferentially for extraction. The elevator works by the wheel-and-axle principle — the handle provides mechanical advantage.",
+        "technique": "Place the elevator tip into the PDL space with the concave surface toward the tooth. Apply apical pressure first, then controlled rotation. The convex surface uses adjacent bone as a fulcrum. Use an adjacent tooth as fulcrum with caution — protect with a finger to prevent inadvertent luxation of the wrong tooth."
+      },
+      "instrumentTrayOptions": ["elevator-straight", "forceps-150", "periosteal-elevator", "dental-syringe"]
+    },
+    {
+      "id": "se-step-5",
+      "narration": "Once the tooth shows initial mobility, grasp the crown with #150 universal extraction forceps. Place the beaks as far apically as possible, engaging the root surface below the height of contour. Ensure both beaks are seated symmetrically. Begin slow, controlled buccal-palatal rocking movements. The buccal cortical plate over maxillary premolars is thinner than the palatal bone — initiate the first movement toward the buccal (path of least resistance).",
+      "instrumentId": "forceps-150",
+      "actionDescription": "Apply #150 forceps and begin buccal-palatal rocking",
+      "isDecisionPoint": true,
+      "questionId": "se-q4",
+      "referenceContent": {
+        "instrument": {
+          "name": "Forceps #150 (Universal Upper)",
+          "description": "Universal extraction forceps for maxillary teeth. Both beaks are identical with smooth, concave surfaces that adapt to premolar roots. Seat beaks as apically as possible.",
+          "imageId": "forceps-150"
+        },
+        "anatomy": "The buccal cortical plate over maxillary teeth is significantly thinner than the palatal bone. This makes the buccal plate more amenable to elastic expansion during extraction. In extraction biomechanics, the initial force should be directed toward the path of least resistance — the thinner cortical plate.",
+        "technique": "Seat forceps beaks as apically as possible with firm apical pressure. Use slow, steady buccal-palatal rocking — buccal first (thinner bone). Avoid rapid or jerky movements. Maintain continuous apical pressure during rocking to prevent the beaks from slipping coronally and fracturing the crown."
+      },
+      "instrumentTrayOptions": ["forceps-150", "elevator-straight", "periosteal-elevator", "rubber-dam-clamp"]
+    },
+    {
+      "id": "se-step-6",
+      "narration": "Deliver the tooth using progressively wider buccal-palatal rocking with firm apical pressure. As the alveolar bone expands elastically with each cycle, the socket widens. The buccal plate expands more easily (thinner) while the palatal bone provides a fulcrum. When the tooth is sufficiently mobile, apply rotational force and deliver in the buccal direction. Do not use excessive force — if the tooth does not move, reassess and consider additional luxation.",
+      "instrumentId": "forceps-150",
+      "actionDescription": "Deliver the tooth with rocking and rotational movements",
+      "referenceContent": {
+        "instrument": {
+          "name": "Forceps #150",
+          "description": "Maintain continuous apical pressure during delivery to prevent the beaks from slipping and fracturing the crown.",
+          "imageId": "forceps-150"
+        },
+        "anatomy": "As the tooth is rocked, the alveolar bone undergoes elastic expansion. The buccal cortical plate is thinner and expands more readily. With each rocking cycle, the PDL fibers progressively tear and the socket dimensions increase.",
+        "technique": "Use slow, deliberate movements. Each rocking cycle should expand the socket slightly more than the last. Final delivery is in the buccal direction. If the tooth does not move after several cycles, do not force — reassess for ankylosis, hypercementosis, divergent roots, or consider a surgical approach."
+      }
+    },
+    {
+      "id": "se-step-7",
+      "narration": "Inspect the extracted tooth to confirm it is intact — both roots (or the single bifurcated root) should be complete with no fractured apices. Compare to the pre-operative radiograph. A retained root tip must be evaluated: small fragments (< 3mm) in healthy bone with no associated pathology can be monitored; larger fragments or those with pathology should be retrieved.",
+      "actionDescription": "Inspect extracted tooth for completeness",
+      "isDecisionPoint": true,
+      "questionId": "se-q5",
+      "referenceContent": {
+        "anatomy": "Retained root tips can lead to infection, pain, or interfere with future prosthetic treatment. Very small apical fragments (< 3mm) in healthy bone may be left and monitored if retrieval would cause excessive bone loss or risk pushing the fragment into the maxillary sinus.",
+        "technique": "Examine the root apex under good lighting. Compare to the pre-operative radiograph. If fracture is suspected, take a post-operative radiograph to confirm. Attempting to retrieve a small 2mm root tip blindly risks pushing it into the maxillary sinus (for maxillary premolars) and causes unnecessary bone loss."
+      }
+    },
+    {
+      "id": "se-step-8",
+      "narration": "Gently curette the socket to remove any granulation tissue. Inspect the socket walls for bony defects. Compress the buccal and lingual plates with firm finger pressure to re-approximate the expanded bone and reduce socket volume. Place a folded gauze pad over the socket and have the patient bite firmly for 30 minutes to promote blood clot formation.",
+      "actionDescription": "Debride socket, compress bone, achieve hemostasis",
+      "referenceContent": {
+        "anatomy": "The extraction socket heals by secondary intention. A blood clot forms within the socket, which is gradually replaced by granulation tissue, then woven bone, then mature lamellar bone over 4–6 months. The blood clot is the critical foundation for normal healing.",
+        "technique": "Avoid aggressive curettage — gentle debridement removes granulation tissue without damaging the bony walls. Compress socket walls with finger pressure to reduce dimensions. Firm pressure on gauze promotes clot formation. The clot must remain undisturbed for healing to proceed normally."
+      }
+    },
+    {
+      "id": "se-step-9",
+      "narration": "Provide post-operative instructions. Advise the patient to maintain pressure on the gauze for 30 minutes, avoid spitting, using straws, or smoking for 24 hours (negative pressure dislodges the clot), eat soft foods, and take prescribed analgesics. NSAIDs are the first-line analgesic. Warn about alveolar osteitis (dry socket): severe, radiating pain starting 2–4 days post-extraction with an empty socket and exposed bone.",
+      "actionDescription": "Deliver post-operative instructions",
+      "isDecisionPoint": true,
+      "questionId": "se-q6",
+      "referenceContent": {
+        "anatomy": "Alveolar osteitis (dry socket) occurs when the blood clot is dislodged or dissolved before healing is established, exposing underlying bone to bacteria, food debris, and saliva. It occurs in 2–5% of routine extractions, more commonly in the mandible. Risk factors include smoking, oral contraceptives, difficult extraction, and poor oral hygiene.",
+        "technique": "Post-operative instructions should be written and verbal. NSAIDs are the first-line analgesic. Dry socket treatment involves gentle irrigation and placement of a medicated dressing (eugenol-based) — not antibiotics, as dry socket is not primarily an infection. Schedule follow-up in 1 week or sooner if complications arise."
+      }
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "procedureId": "root-canal",
+  "questions": [
+    {
+      "id": "rc-q1",
+      "stem": "Bemor pastki jag' oziq tishida o'z-o'zidan paydo bo'ladigan, urib turuvchi og'riqni, u issiqda kuchayib, sovuqda qisman yengilashishini aytadi. Og'riq bemorni kechasi uyg'otadi. Sovuqqa sinov stimul olib tashlanganidan keyin 30 soniyadan ortiq davom etadigan cho'zilgan og'riqni ko'rsatadi. Perkussiya ijobiy. Eng ehtimoliy pulpa tashxisi qanday?",
+      "options": [
+        { "label": "A", "text": "Qaytariladigan pulpit (reversible pulpitis)", "isCorrect": false },
+        { "label": "B", "text": "Simptomatik qaytmas pulpit (symptomatic irreversible pulpitis)", "isCorrect": true },
+        { "label": "C", "text": "Pulpa nekrozi (pulp necrosis)", "isCorrect": false },
+        { "label": "D", "text": "Simptomatik apikal periodontitli normal pulpa", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Pulpit — tish pulpasining yallig'lanishini bildiruvchi klinik atama. Bu ko'rinish — o'z-o'zidan paydo bo'ladigan og'riq, termal stimullarga cho'zilgan javob (> 10 soniya), kechasi og'riq va issiqda kuchayuvchi og'riq — simptomatik qaytmas pulpitning xarakterli belgilari. Ijobiy perkussiya sinovi pulpa kasalligi kengayishidan kelib chiqqan periodontal ligament yallig'lanishini ko'rsatadi. Pulpa yallig'lanishi tiklanish nuqtasidan o'tgan.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Qaytariladigan pulpit faqat stimulga javob sifatida o'tkir, qisqa og'riq chaqiradi, u soniyalar ichida (< 10 soniya) bartaraf bo'ladi. U o'z-o'zidan paydo bo'ladigan yoki kechasi og'riq chaqirmaydi. Qaytariladigan pulpit klinik jihatdan qo'zg'atuvchi olib tashlansa bitishi mumkin bo'lgan pulpa sifatida tavsiflanadi." },
+          { "label": "C", "reasoning": "Nekrotik pulpa termal yoki elektr pulpa testiga javob bermaydi. Bu bemorning sovuqqa cho'zilgan ijobiy javobi pulpaning hali tirik, lekin qaytmas darajada yallig'langanini ko'rsatadi." },
+          { "label": "D", "reasoning": "Normal pulpa sovuqqa qisqa javob beradi, cho'zilgan og'riq bo'lmaydi. O'z-o'zidan paydo bo'ladigan tungi og'riq patologik bo'lib, normal pulpa bilan mos kelmaydi. Bu yerdagi perkussiyaga sezgirlik pulpa kasalligining periodontal ligamentga kengayishidan ikkilamchi." }
+        ],
+        "clinicalPrinciple": "Og'riqni tavsiflash quyidagilarni baholashni talab qiladi: lokalizatsiya, boshlanish/paydo bo'lish, intensivlik, provokatsiya va yengillashtirish, va davomiylik. Qaytariladigan pulpit = qisqa, stimulga bog'liq og'riq (< 10 soniya). Qaytmas pulpit = o'z-o'zidan, cho'zilgan (> 10 soniya), kechasi. Periodontal ligament yallig'lanishi ortishi bilan tish harakatchanligi ortadi.",
+        "boardTip": "Cho'zilgan og'riq (> 10 soniya) + o'z-o'zidan + kechasi = qaytmas pulpit. Qisqa, o'tkir, stimulga bog'liq = qaytariladigan. Hayotiylik sinoviga javob yo'q = nekroz."
+      }
+    },
+    {
+      "id": "rc-q2",
+      "stem": "Pastki jag' oziq tishida simptomatik qaytmas pulpitli bemorga standart pastki alveolyar nerv blokadasi yetarli pulpa anesteziyasini bermadi. Bemorning labi uvushgan, lekin tish hali sezgir. Qaysi qo'shimcha texnika eng mos?",
+      "options": [
+        { "label": "A", "text": "Xuddi shu texnika bilan pastki alveolyar nerv blokadani takrorlash", "isCorrect": false },
+        { "label": "B", "text": "4% artikain bilan buccal infiltratsiyani qo'llash", "isCorrect": true },
+        { "label": "C", "text": "To'g'ridan-to'g'ri tish yuzasiga mahalliy anestetik surish", "isCorrect": false },
+        { "label": "D", "text": "Lab uvushganligi sababli qo'shimcha anesteziyasiz davom etish", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Lab uvushligi pastki alveolyar nerv blokadasi to'g'ri qo'yilganligini tasdiqlaydi — muvaffaqiyatsizlik tish darajasida. Yallig'langan pulpalarning pH darajasi yallig'lanish mediatorlari tufayli past bo'lib, mahalliy anestetikni aktiv erkin-asosli shaklda bo'lish ulushini kamaytiradi. Artikainning tiofen halqasi suyak va to'qima orqali ustun diffuziya qilishga imkon beradi, bu 4% artikain bilan buccal infiltratsiyani pastki jag'da qo'shimcha anesteziya sifatida yuqori samarali qiladi.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Lab uvushishi to'g'ri igna joylashuvini tasdiqlaydi, shuning uchun xuddi shu blokada texnikasini takrorlash muvaffaqiyatsiz bo'lishi ehtimoli katta. Muvaffaqiyatsizlik in'ektsiya texnikasida emas, yallig'langan pulpada pasaygan to'qima pH tufayli." },
+          { "label": "C", "reasoning": "Mahalliy anestetiklar faqat 2–3 mm yumshoq to'qimaga kirib boradi. Ular tish pulpasiga yetib bora olmaydi va operativ anesteziya uchun yetarli emas." },
+          { "label": "D", "reasoning": "Lab uvushligi pastki alveolyar nerv blokadasi nerv tomiriga yetganini tasdiqlaydi, lekin qaytmas pulpitli 'qizigan tish' pulpa uchun qo'shimcha anesteziya talab qiladi. Yetarli pulpa anesteziyasisiz davom etish noto'g'ri." }
+        ],
+        "clinicalPrinciple": "Yallig'lanish mediatorlari (prostaglandinlar, bradikinin) yallig'langan pulpalarda to'qima pH ni pasaytiradi, nerv membranasi orqali o'tish uchun mavjud erkin-asosli mahalliy anestetik miqdorini kamaytiradi. Artikain tiofen halqasi strukturasi tufayli lidokainga qaraganda suyak orqali ustun diffuziya qiladi.",
+        "boardTip": "Qizigan tish + muvaffaqiyatsiz pastki alveolyar nerv blokadasi (lab uvushgan lekin tish sezgir) = pulpada pasaygan pH. Artikain buccal infiltratsiyasi bilan to'ldiring. Oxirgi chora = kirish yaratilganidan so'ng intrapulpal in'ektsiya."
+      }
+    },
+    {
+      "id": "rc-q3",
+      "stem": "Pastki birinchi oziq tishda endodontik kirish paytida operator odatiy holatda nechta ildiz kanalini topishi kerak?",
+      "options": [
+        { "label": "A", "text": "Ikkita — bitta mezial kanal va bitta distal kanal", "isCorrect": false },
+        { "label": "B", "text": "Uchta — meziobukkal, meziolingual va distal kanallar", "isCorrect": true },
+        { "label": "C", "text": "To'rtta — meziobukkal, meziolingual, distobukkal va distolingual kanallar", "isCorrect": false },
+        { "label": "D", "text": "Bitta — birlashgan ildizda yagona katta kanal", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Pastki birinchi oziq tish eng ko'p uchraydigan holda 2 ildiz va 3 kanalga ega: mezial ildizda ikkita mezial (meziobukkal va meziolingual) va bitta distal kanal. Mezial ildiz deyarli doimo ikkita kanalni o'z ichiga oladi. Ikkinchi mezial kanalni o'tkazib yuborish endodontik muvaffaqiyatsizlikning asosiy sababi.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Pastki birinchi oziq tishda ikkita ildiz bo'lsa-da, mezial ildiz deyarli doimo ikkita kanalni (MB va ML) o'z ichiga oladi. Uni faqat bitta mezial kanalga ega deb davolash infektsiyalangan kanalni davolanmagan holda qoldiradi — endodontik muvaffaqiyatsizlikning eng keng tarqalgan sababi." },
+          { "label": "C", "reasoning": "To'rtta kanal (ikkinchi distal kanal bilan) holatlarning sezilarli ozchiligida uchraydi, lekin eng ko'p uchraydigan konfiguratsiya emas. Uchta kanal odatiy anatomiya." },
+          { "label": "D", "reasoning": "Bitta kanal pastki birinchi oziq tishlarida juda kam uchraydi va bir ildizli tishlar, masalan pastki jag' kesuvchi tishlari yoki premolarlar uchun ko'proq xos." }
+        ],
+        "clinicalPrinciple": "Eng ko'p uchraydigan kanal konfiguratsiyasini bilish endodontik muvaffaqiyat uchun muhim. Bakteriyalarni saqlab qolgan o'tkazilgan kanal endodontik davolash muvaffaqiyatsizligining eng keng tarqalgan sababi. Pulpa kamerasi tubi atrofdagi dentin devorlaridan quyuqroq — og'izlarni aniqlash uchun bu rang kontrastidan foydalaning.",
+        "boardTip": "Pastki birinchi oziq tish = 2 ildiz, 3 kanal (MB, ML, D). Doimo ikkinchi mezial kanalni qidiring. Uni o'tkazib yuborish = endodontik muvaffaqiyatsizlikning №1 sababi."
+      }
+    },
+    {
+      "id": "rc-q4",
+      "stem": "Ish uzunligini aniqlashda elektron apeks lokator fayl apikal torayishda ekanligini ko'rsatadi. Rentgen surati fayl uchini rentgenografik apeksdan taxminan 1 mm qisqa ko'rsatadi. Mos harakat qanday?",
+      "options": [
+        { "label": "A", "text": "Rentgen surati aniqroq bo'lgani uchun faylni rentgenografik apeksgacha olg'a surish", "isCorrect": false },
+        { "label": "B", "text": "Elektron apeks lokator ko'rsatkichini ish uzunligi sifatida qabul qilish", "isCorrect": true },
+        { "label": "C", "text": "Ikkita o'lchov o'rtachasini olish va uni ish uzunligi sifatida ishlatish", "isCorrect": false },
+        { "label": "D", "text": "Natijalar qarama-qarshi bo'lgani uchun ikkala o'lchovni takrorlash", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Elektron apeks lokator apikal torayishni — kanalning eng tor nuqtasi va instrumentatsiya hamda obturatsiya uchun ideal tugatish nuqtasini o'lchaydi. Rentgenografik apeks ildiz uchining anatomik nuqtasi bo'lib, odatda torayishdan 0,5–1,0 mm nariga joylashgan. Fayl rentgenografik apeksdan 0,5–1 mm qisqa ko'rinishi normal va kutilgan — bu ikki turli belgilar.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Rentgenografik apeksgacha olg'a surish instrumentatsiyani apikal torayishdan tashqariga periapial to'qimalarga kengaytiradi va to'qima shikastlanishi hamda ortiqcha plomba qo'yish xavfini tug'diradi." },
+          { "label": "C", "reasoning": "Ikki turli anatomik belgilarni (torayish va ildiz uchi) o'rtachasini olish klinik jihatdan to'g'ri emas. Ular turli strukturalarni o'lchaydi." },
+          { "label": "D", "reasoning": "O'lchovlar qarama-qarshi emas — apeks lokator torayishni o'lchaydi, rentgen surati esa ildiz uchini ko'rsatadi. 0,5–1,0 mm farq normal va kutilgan." }
+        ],
+        "clinicalPrinciple": "Apikal torayish (rentgenografik apeks emas) ideal ish uzunligi tugash nuqtasi. Elektron apeks lokatorlar torayishni aniqlashda 90–96% aniqlikka ega. Apikal torayish rentgenografik apeksdan 0,5–1,0 mm masofada — bular ikki turli anatomik belgilar.",
+        "boardTip": "Ish uzunligi = apikal torayish (rentgenografik apeksdan 0,5–1 mm qisqa). Apeks lokator torayishni o'lchaydi; rentgen surati ildiz uchini ko'rsatadi. Ikkalasi ham to'g'ri — ular turli narsalarni o'lchaydi."
+      }
+    },
+    {
+      "id": "rc-q5",
+      "stem": "Ildiz kanali davolashida operator har bir fayldan keyin 5,25% natriy gipoxlorit (NaOCl) bilan irrigatsiya qiladi. NaOCl irrigatsiyasining asosiy maqsadi nima?",
+      "options": [
+        { "label": "A", "text": "Faylni oson kiritish uchun kanalni moylash", "isCorrect": false },
+        { "label": "B", "text": "Organik to'qimani eritish va kanal tizimi ichidagi bakteriyalarni o'ldirish", "isCorrect": true },
+        { "label": "C", "text": "Instrumentatsiya qilingan kanal devorlaridan smear qatlamini olib tashlash", "isCorrect": false },
+        { "label": "D", "text": "Siler yaxshiroq kirib borishi uchun kalsiyni xelatsiya qilib dentinni demineralizatsiya qilish", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Natriy gipoxlorit endodontik irrigatsiyaning oltin standarti, chunki u noyob ikki tomonlama ta'sirga ega: u organik to'qimani (nekrotik va tirik pulpa qoldiqlari, kollagen) eritadi va biofilm shaklida tashkil topgan bakteriyalarni ham o'ldiradigan kuchli antimikrobial vosita. Boshqa hech bir yagona irrigant organik eritish va keng antimikrobial faollikning ikkalasini ham ta'minlamaydi.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "NaOCl biroz moylash ta'minlasa-da, bu uning asosiy maqsadi emas. EDTA yoki moylash gellari maxsus instrumentatsiya paytida kanal moylashi uchun mo'ljallangan." },
+          { "label": "C", "reasoning": "NaOCl smear qatlamining faqat organik komponentini olib tashlaydi. Anorganik komponent uchun 17% EDTA xelatsiya talab etiladi. To'liq smear qatlamini olib tashlash uchun ikkala irrigant ketma-ket ishlatilishi kerak." },
+          { "label": "D", "reasoning": "EDTA kalsiyni xelatsiya qilib dentinni demineralizatsiya qiladi. NaOCl dentinni demineralizatsiya qilmaydi — u organik materialni eritadi. NaOCl va EDTA bir vaqtda ishlatilsa bir-birini neytrallashtiradi." }
+        ],
+        "clinicalPrinciple": "Samarali endodontik tozalash ham mexanik instrumentatsiya, ham kimyoviy irrigatsiyani talab qiladi. NaOCl organik to'qimani eritadi va bakteriyalarni o'ldiradi. EDTA smear qatlamining anorganik komponentini olib tashlash uchun kalsiyni xelatsiya qiladi. Ikkalasini ketma-ket ishlating — aralashtirilsa bir-birini neytrallashtiradi.",
+        "boardTip": "NaOCl = organikni eritadi + bakteriyalarni o'ldiradi (oltin standart irrigant). EDTA = anorganik smear qatlamini olib tashlaydi (kalsiyni xelatsiya qiladi). Ikkalasini ishlating lekin hech qachon bir vaqtda emas — ular bir-birini neytrallashtiradi."
+      }
+    },
+    {
+      "id": "rc-q6",
+      "stem": "Obturatsiya uchun master gutta-percha konusini moslashtirishda operator konusni ish uzunligiga kiritadi va uni tortib ko'rganda biroz qarshilik sezadi. Bu 'tortish-qaytish' (tug-back) nimani ko'rsatadi?",
+      "options": [
+        { "label": "A", "text": "Konus juda katta va kanalning koronal uchdan bir qismida tiqilib qolmoqda", "isCorrect": false },
+        { "label": "B", "text": "Konus apikal torayishda zich joylashgan va siljishga qarshilik ko'rsatadi", "isCorrect": true },
+        { "label": "C", "text": "Konus apeksdan o'tib ketgan va periapial to'qimaga tegmoqda", "isCorrect": false },
+        { "label": "D", "text": "Kanal haddan tashqari instrumentatsiya qilingan va torayish buzilgan", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Tortish-qaytish (tug-back) — to'g'ri o'lchamdagi gutta-percha konusi apikal torayishga joylashtirilganda va sekin tortilganda sezilgan biroz qarshilik. U uchta narsani tasdiqlaydi: konus ish uzunligiga yetadi, konus apikal tayyorlash o'lchamiga mos keladi va apikal torayish saqlanib qolgan (haddan tashqari instrumentatsiya qilinmagan). Bu to'g'ri apikal germetiklikni ta'minlaydi.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Koronal uchdan bir qismida tiqilish konusning ish uzunligiga yetishiga to'sqinlik qiladi. Tortish-qaytish maxsus apikal torayishda sodir bo'ladi, kanalning koronal qismida emas." },
+          { "label": "C", "reasoning": "Agar konus apeksdan o'tib ketsa, tortish-qaytish bo'lmaydi — u qarshiliksiz bo'sh seziladi. Ortiqcha cho'zilish konusni kesish yoki kattaroq o'lcham tanlashni talab qiladi." },
+          { "label": "D", "reasoning": "Haddan tashqari instrumentatsiya torayishni kengaytiradi yoki buzadi, natijada tortish-qaytish bo'lmaydi (konus qarshiliksiz o'tib ketadi). Tortish-qaytish torayish saqlanib qolganini tasdiqlaydi." }
+        ],
+        "clinicalPrinciple": "Gutta-percha — termoplastik material bo'lib, ildiz kanali obturatsiyasi uchun standart hisoblanadi. Apikal torayishda tortish-qaytish to'g'ri konus mosligini va saqlanib qolgan torayishni tasdiqlaydi. Apeksdan tashqariga ortiqcha plomba qo'yish doimiy og'riq va kechikkan bitishga sabab bo'ladi; kam to'ldirish bakteriyalar o'sishi uchun bo'sh joy qoldiradi.",
+        "boardTip": "Tortish-qaytish = konus apikal torayishga mos = yaxshi apikal germetiklik. Tortish-qaytish yo'q = konus juda kichik yoki torayish buzilgan. Ortiqcha cho'zilish = tortish-qaytish yo'q + konus o'tib ketadi."
+      }
+    }
+  ]
+}

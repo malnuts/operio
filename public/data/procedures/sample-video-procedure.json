@@ -1,0 +1,72 @@
+{
+  "id": "video-PROCEDURE-NAME",
+  "type": "video",
+  "title": "Procedure Title — Dr. Name",
+  "description": "Brief description of what the video covers and the technique shown.",
+  "difficulty": "Beginner",
+  "author": {
+    "name": "Dr. First Last, DDS",
+    "institution": "University Name or Practice"
+  },
+  "videoUrl": "/videos/procedures/FILENAME.mp4",
+  "thumbnailUrl": "/videos/thumbnails/FILENAME.jpg",
+  "duration": 612,
+  "category": "Restorative",
+  "tags": ["composite", "filling", "posterior"],
+  "decisionPoints": [
+    {
+      "timestamp": 45.0,
+      "questionId": "vq-1",
+      "stepDescription": "Brief description of what is happening at this point in the video"
+    },
+    {
+      "timestamp": 180.0,
+      "questionId": "vq-2",
+      "stepDescription": "The doctor is about to select an instrument"
+    },
+    {
+      "timestamp": 350.0,
+      "questionId": "vq-3",
+      "stepDescription": "A critical clinical decision is being made"
+    }
+  ],
+  "chapters": [
+    {
+      "timestamp": 0,
+      "title": "Introduction & Assessment",
+      "referenceContent": {
+        "instrument": {
+          "name": "Instrument Name",
+          "description": "Brief description of the instrument visible in this section."
+        },
+        "technique": "Key technique notes for this section of the procedure."
+      }
+    },
+    {
+      "timestamp": 60,
+      "title": "Preparation",
+      "referenceContent": {
+        "instrument": {
+          "name": "Another Instrument",
+          "description": "Description of instrument used in this chapter."
+        },
+        "anatomy": "Anatomical notes relevant to this section.",
+        "technique": "Technique notes for this chapter."
+      }
+    },
+    {
+      "timestamp": 200,
+      "title": "Main Procedure",
+      "referenceContent": {
+        "technique": "Reference content fields are all optional. You can include any combination of instrument, anatomy, and technique."
+      }
+    },
+    {
+      "timestamp": 400,
+      "title": "Finishing & Review",
+      "referenceContent": {
+        "technique": "Final technique notes."
+      }
+    }
+  ]
+}

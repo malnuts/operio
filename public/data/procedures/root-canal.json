@@ -1,0 +1,192 @@
+{
+  "id": "root-canal",
+  "type": "simulation",
+  "title": "Root Canal",
+  "description": "Diagnose symptomatic irreversible pulpitis and perform complete endodontic treatment on a mandibular first molar: access, instrumentation, irrigation, and obturation.",
+  "difficulty": "Advanced",
+  "modelPath": "/models/shared/tooth-cross-section.glb",
+  "cameraAngle": 270,
+  "steps": [
+    {
+      "id": "rc-step-1",
+      "narration": "Review the periapical radiograph and clinical findings. The mandibular first molar (#19) has a large carious lesion approaching the pulp. The patient reports spontaneous, lingering pain to heat that wakes them at night, and prolonged pain to cold lasting over 30 seconds after stimulus removal. Pulpitis is the clinical term for inflammation of the dental pulp. A lingering response to thermal stimuli (> 10 seconds) with spontaneous pain indicates symptomatic irreversible pulpitis. Percussion sensitivity indicates PDL inflammation from extension of pulpal disease.",
+      "actionDescription": "Diagnose irreversible pulpitis and confirm RCT indication",
+      "isDecisionPoint": true,
+      "questionId": "rc-q1",
+      "modelState": {
+        "highlight": ["Enamel", "Dentin"]
+      },
+      "referenceContent": {
+        "anatomy": "The dental pulp contains nerves, blood vessels, odontoblasts, and connective tissue. Pulpitis is clinically described as reversible or irreversible, and histologically as acute, chronic, or hyperplastic. A positive percussion test indicates inflammation of the periodontal ligament. Tooth mobility increases with increasing PDL inflammation.",
+        "technique": "Pain characterization requires evaluating: localization, commencement/onset, intensity, provocation and attenuation, and duration. Reversible pulpitis = sharp, brief pain to stimulus that resolves within seconds. Irreversible pulpitis = spontaneous, lingering pain (> 10s) often worse at night. Necrotic pulp = no response to vitality testing. An isolated increased probing depth can indicate endodontic infection or vertical root fracture."
+      }
+    },
+    {
+      "id": "rc-step-2",
+      "narration": "Administer an inferior alveolar nerve block for the mandibular first molar. Inflamed pulps are difficult to anesthetize because inflammatory mediators lower tissue pH, reducing the proportion of local anesthetic in its active free-base form. If the standard IANB fails (lip numb but tooth still sensitive), supplement with buccal infiltration of 4% articaine, which has superior bone diffusion due to its thiophene ring.",
+      "instrumentId": "dental-syringe",
+      "actionDescription": "Administer local anesthesia (IANB + supplemental if needed)",
+      "isDecisionPoint": true,
+      "questionId": "rc-q2",
+      "referenceContent": {
+        "instrument": {
+          "name": "Dental Syringe",
+          "description": "Aspirating syringe. For hot teeth with irreversible pulpitis, supplemental anesthesia is often required. Options include articaine buccal infiltration, intraosseous injection, or intrapulpal injection.",
+          "imageId": "dental-syringe"
+        },
+        "anatomy": "Inflamed pulp tissue has lowered pH from inflammatory mediators (prostaglandins, bradykinin), which reduces the amount of free-base local anesthetic available to cross the nerve membrane. This is why 'hot teeth' are difficult to anesthetize even with a successful nerve block.",
+        "technique": "If IANB achieves lip numbness but the tooth remains sensitive, the block technique was correct but pulpal anesthesia is inadequate. Supplement with 4% articaine buccal infiltration — articaine's thiophene ring allows superior tissue and bone diffusion compared to lidocaine. Intrapulpal injection can be used as a last resort once access is achieved."
+      },
+      "instrumentTrayOptions": ["dental-syringe", "k-file", "gates-glidden", "dental-explorer"]
+    },
+    {
+      "id": "rc-step-3",
+      "narration": "Place rubber dam isolation. This is mandatory for endodontic treatment — it prevents aspiration of instruments and irrigants, maintains a dry field, and prevents contamination of the root canal system with oral bacteria. Failure to use a rubber dam increases the risk of sodium hypochlorite ingestion/aspiration and instrument aspiration. Clamp the tooth being treated.",
+      "instrumentId": "rubber-dam-clamp",
+      "actionDescription": "Place rubber dam isolation (mandatory for RCT)",
+      "referenceContent": {
+        "instrument": {
+          "name": "Rubber Dam Clamp",
+          "description": "Select a clamp that provides four-point contact. For severely broken-down teeth, a clamp may need to be placed on an adjacent tooth or a build-up performed first.",
+          "imageId": "rubber-dam-clamp"
+        },
+        "anatomy": "Rubber dam isolation is the standard of care for endodontic treatment. Sodium hypochlorite (NaOCl) is cytotoxic and must not contact oral soft tissues or be aspirated. Endodontic files are small enough to be aspirated or swallowed without a dam.",
+        "technique": "If the crown is too broken down to hold a clamp, build up the tooth with a temporary material before placing the clamp. Never perform endodontic treatment without rubber dam isolation."
+      }
+    },
+    {
+      "id": "rc-step-4",
+      "narration": "Create the endodontic access opening. Use a round bur at high speed to penetrate through enamel and dentin, then refine access at slow speed. The mandibular first molar typically has 2 roots and 3 canals: mesiobuccal (MB), mesiolingual (ML), and distal (D). A second distal canal may be present. The pulp chamber floor appears darker than the surrounding dentin walls. Locate all canal orifices — a missed canal is the most common cause of endodontic failure.",
+      "instrumentId": "dental-bur-round",
+      "actionDescription": "Create access opening and locate canal orifices",
+      "isDecisionPoint": true,
+      "questionId": "rc-q3",
+      "modelState": {
+        "highlight": ["Enamel", "Dentin"],
+        "colors": { "Enamel": "#E8E0D0" }
+      },
+      "referenceContent": {
+        "instrument": {
+          "name": "Round Bur (#2 / #4)",
+          "description": "Round burs are used for initial access through enamel (high speed) and deroofing the pulp chamber (slow speed). Round shape prevents ledging.",
+          "imageId": "dental-bur-round"
+        },
+        "anatomy": "The mandibular first molar most commonly has 3 canals: mesiobuccal (MB), mesiolingual (ML), and distal (D). The mesial root almost always contains 2 canals. A second distal canal is present in a significant minority of cases. Missing the second mesial canal is a leading cause of endodontic failure.",
+        "technique": "Remove the roof of the pulp chamber completely. All canal orifices should be visible without tilting the mirror. The pulp chamber floor is darker than the dentin walls — use this color difference to identify the floor. Use a DG16 endodontic explorer to locate calcified orifices."
+      },
+      "instrumentTrayOptions": ["dental-bur-round", "dental-bur-pear", "k-file", "spoon-excavator"]
+    },
+    {
+      "id": "rc-step-5",
+      "narration": "Establish working length for each canal. Insert a #10 or #15 K-file into each canal until the electronic apex locator reads the apical constriction — the narrowest point of the root canal, typically 0.5–1.0mm from the radiographic apex. Confirm with a periapical radiograph. The apical constriction is the ideal termination point for cleaning, shaping, and obturation. Working beyond this point damages periapical tissues.",
+      "instrumentId": "k-file",
+      "actionDescription": "Determine working length with apex locator and radiograph",
+      "isDecisionPoint": true,
+      "questionId": "rc-q4",
+      "modelState": {
+        "highlight": ["Dentin"]
+      },
+      "referenceContent": {
+        "instrument": {
+          "name": "K-File (#10, #15)",
+          "description": "Small stainless steel hand files used for initial canal negotiation and working length determination. Negotiate canals with a watch-winding motion.",
+          "imageId": "k-file"
+        },
+        "anatomy": "The apical constriction is the narrowest point of the root canal, 0.5–1.0mm from the radiographic apex. It is the ideal termination point for instrumentation and obturation. The radiographic apex is the anatomic tip of the root — a different landmark than the constriction.",
+        "technique": "Electronic apex locators have 90–96% accuracy in detecting the apical constriction. A radiograph showing the file tip 0.5–1mm short of the radiographic apex is normal and expected — the EAL measures the constriction, while the radiograph shows the root tip. These are two different anatomic landmarks."
+      },
+      "instrumentTrayOptions": ["k-file", "gates-glidden", "gutta-percha", "dental-explorer"]
+    },
+    {
+      "id": "rc-step-6",
+      "narration": "Begin coronal flaring with Gates-Glidden drills (#2 and #3) in the coronal third of each canal. This removes restrictive dentin, creates straight-line access to the apical third, and allows better penetration of irrigating solutions. Use a crown-down sequence and brush the drill laterally away from the furcation to avoid stripping perforation.",
+      "instrumentId": "gates-glidden",
+      "actionDescription": "Coronal flaring with Gates-Glidden drills",
+      "referenceContent": {
+        "instrument": {
+          "name": "Gates-Glidden Drill",
+          "description": "Flame-shaped rotary bur used at slow speed for coronal enlargement of root canals. The non-cutting tip reduces perforation risk. Available in sizes #1–6.",
+          "imageId": "gates-glidden"
+        },
+        "anatomy": "The coronal third of root canals often has restrictive dentin that limits instrument access and irrigant flow to the apical region. The furcation area between roots is a danger zone — excessive removal of dentin toward the furcation risks stripping perforation.",
+        "technique": "Use Gates-Glidden drills in a crown-down sequence (#3 then #2). Apply in a brushing motion, directing the drill laterally away from the furcation. Never force the drill apically. Coronal flaring before apical instrumentation reduces binding and allows better irrigant delivery."
+      }
+    },
+    {
+      "id": "rc-step-7",
+      "narration": "Clean and shape the canals using rotary NiTi files in a crown-down technique. NiTi files have superelastic properties that allow them to follow curved canals with less risk of transportation. Irrigate copiously with sodium hypochlorite (NaOCl) between each file — NaOCl dissolves organic tissue (necrotic pulp, collagen) and kills bacteria. Recapitulate with a #10 hand file between rotary files to maintain apical patency and prevent blockage.",
+      "instrumentId": "k-file",
+      "actionDescription": "Clean and shape canals with rotary NiTi files and NaOCl irrigation",
+      "isDecisionPoint": true,
+      "questionId": "rc-q5",
+      "modelState": {
+        "highlight": ["Dentin"],
+        "colors": { "Dentin": "#C4B59A" }
+      },
+      "referenceContent": {
+        "instrument": {
+          "name": "Rotary NiTi Files",
+          "description": "Engine-driven nickel-titanium files with superelastic properties. Follow curved canals with less transportation risk. Use with light pecking motion — let the file advance passively.",
+          "imageId": "k-file"
+        },
+        "anatomy": "Mesial canals of mandibular molars are typically narrow and curved. The distal canal is usually wider and straighter. Canal anatomy varies significantly — accessory canals, lateral canals, and isthmus connections may be present, especially between mesial canals.",
+        "technique": "NaOCl is the gold standard endodontic irrigant: it dissolves organic tissue and kills bacteria including biofilms. NaOCl removes only the organic component of the smear layer — EDTA is needed for the inorganic component. Use NaOCl and EDTA sequentially, never simultaneously (they neutralize each other). Recapitulate with a small file between rotary instruments to prevent apical blockage."
+      },
+      "instrumentTrayOptions": ["k-file", "gates-glidden", "irrigating-syringe", "gutta-percha"]
+    },
+    {
+      "id": "rc-step-8",
+      "narration": "Perform final irrigation protocol. Flush each canal with NaOCl to dissolve remaining organic tissue, then 17% EDTA for 1 minute to remove the smear layer's inorganic component by chelating calcium, then a final rinse with NaOCl. The smear layer is created during instrumentation and plugs dentinal tubules, potentially harboring bacteria. Use a side-vented needle positioned 2mm short of working length to prevent apical extrusion.",
+      "instrumentId": "irrigating-syringe",
+      "actionDescription": "Final irrigation protocol (NaOCl + EDTA + NaOCl)",
+      "referenceContent": {
+        "instrument": {
+          "name": "Irrigating Syringe",
+          "description": "Luer-lock syringe with side-vented needle (27 or 30 gauge). The side vent directs flow laterally, preventing apical extrusion of irrigant which can cause severe tissue damage.",
+          "imageId": "irrigating-syringe"
+        },
+        "anatomy": "The smear layer is produced during canal instrumentation and contains organic and inorganic debris. It plugs dentinal tubules and can harbor bacteria. NaOCl dissolves the organic component; EDTA chelates calcium to remove the inorganic component. Both irrigants are needed for complete smear layer removal.",
+        "technique": "Never bind the irrigation needle in the canal — keep it loose and 2mm short of working length. NaOCl is cytotoxic — extrusion beyond the apex causes severe pain, swelling, and tissue necrosis. EDTA and NaOCl neutralize each other — use them sequentially, not simultaneously. Ultrasonic agitation of irrigant improves debridement."
+      }
+    },
+    {
+      "id": "rc-step-9",
+      "narration": "Dry the canals with paper points. Select master gutta-percha cones matching the final apical file size. Gutta-percha is a thermoplastic filling material and the standard for root canal obturation. Verify fit radiographically — each cone should reach working length with tug-back resistance at the apical constriction. Tug-back indicates the cone fits snugly at the constriction.",
+      "instrumentId": "gutta-percha",
+      "actionDescription": "Fit and verify master gutta-percha cones",
+      "isDecisionPoint": true,
+      "questionId": "rc-q6",
+      "referenceContent": {
+        "instrument": {
+          "name": "Gutta-Percha Points",
+          "description": "Thermoplastic filling material, the standard for root canal obturation. Available in standardized sizes matching file diameters and non-standardized accessory points.",
+          "imageId": "gutta-percha"
+        },
+        "anatomy": "The apical constriction is the ideal termination point for obturation. Overfilling (extending beyond the apex) can cause persistent pain and delayed healing. Underfilling leaves dead space for bacterial regrowth. The apical seal is critical for long-term success.",
+        "technique": "Tug-back is the slight resistance felt when a properly sized gutta-percha cone is seated at the apical constriction and gently pulled back. It confirms: the cone reaches working length, the cone matches the apical preparation size, and the apical constriction is intact. No tug-back = cone too small or constriction destroyed (over-instrumented)."
+      },
+      "instrumentTrayOptions": ["gutta-percha", "k-file", "irrigating-syringe", "dental-explorer"]
+    },
+    {
+      "id": "rc-step-10",
+      "narration": "Obturate the canals using warm vertical compaction. Apply endodontic sealer to the canal walls, place the master gutta-percha cone, then use a heated plugger to soften and compact the gutta-percha apically. Back-fill the coronal portion with injectable warm gutta-percha. Warm techniques fill lateral canals, apical ramifications, and isthmus connections better than cold lateral compaction. Verify obturation quality with a radiograph.",
+      "actionDescription": "Obturate canals with warm vertical compaction",
+      "modelState": {
+        "colors": { "Dentin": "#F5E6CC" }
+      },
+      "referenceContent": {
+        "anatomy": "The root canal system includes main canals, lateral canals, apical ramifications, and isthmus connections (especially between mesial canals of mandibular molars). Warm gutta-percha techniques adapt to these irregularities better than cold techniques. Bacteria remaining in unfilled canal spaces cause treatment failure.",
+        "technique": "Apply a thin layer of sealer to canal walls. The heated plugger softens gutta-percha, which is then compacted apically with firm pressure. Back-fill in segments with injectable warm gutta-percha. The obturation should appear dense and homogeneous on radiograph, terminating at the working length."
+      }
+    },
+    {
+      "id": "rc-step-11",
+      "narration": "Place a coronal seal. After verifying the obturation radiographically, place a bonded composite or glass ionomer core build-up over the canal orifices. The coronal seal is critical — coronal leakage from bacterial contamination of saliva is a primary cause of endodontic failure, even with excellent obturation. The tooth will need a full-coverage crown to prevent fracture.",
+      "actionDescription": "Place coronal seal and core build-up",
+      "referenceContent": {
+        "anatomy": "The pulp chamber floor and canal orifices connect the oral environment to the obturated canal system. Without an adequate coronal seal, bacteria from saliva re-contaminate the canal system through microleakage, leading to treatment failure regardless of obturation quality.",
+        "technique": "Clean the pulp chamber of all sealer and gutta-percha debris above the orifices. Place a well-sealed composite or glass ionomer restoration. Endodontically treated teeth have reduced structural integrity from access preparation and are at higher risk of fracture — schedule the patient for a full-coverage crown."
+      }
+    }
+  ]
+}

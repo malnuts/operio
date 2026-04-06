@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 
 const stats = [
-  { value: "10,000+", label: "Simulated Procedures", sub: "completed in beta" },
-  { value: "47%", label: "Faster Skill Acquisition", sub: "vs. traditional training" },
-  { value: "99.7%", label: "Anatomical Accuracy", sub: "tissue-level fidelity" },
-  { value: "12", label: "Partner Institutions", sub: "across 6 countries" },
+  { value: "3", label: "Core Content Types", sub: "procedures, posts, assessments" },
+  { value: "11", label: "Mapped Product Routes", sub: "learner, creator, and pricing paths" },
+  { value: "5", label: "Shared Product Terms", sub: "creator, learner, and content vocabulary" },
+  { value: "1", label: "Launch Vertical", sub: "kept narrow without narrowing the platform" },
 ];
 
 const StatsSection = () => {

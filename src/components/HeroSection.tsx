@@ -35,9 +35,8 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight mb-6"
             >
-              The future of{" "}
-              <span className="gradient-text">dental training</span>{" "}
-              is simulated.
+              Clinical learning built around{" "}
+              <span className="gradient-text">procedures, posts, and review</span>
             </motion.h1>
 
             <motion.p
@@ -46,9 +45,9 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl"
             >
-              Dentsim replaces outdated mannequin training with hyper-realistic AI simulations, 
-              real-time haptic feedback, and adaptive skill assessment — making every student 
-              procedure-ready before touching a patient.
+              Operio helps learners study how clinical work is actually done in context, combining
+              expert-led procedures, educational posts, and assessments that reinforce decision
+              making without reducing the product to test prep.
             </motion.p>
 
             <motion.div
@@ -61,14 +60,14 @@ const HeroSection = () => {
                 href="#contact"
                 className="group flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition-all hover:shadow-[0_0_30px_hsl(175_80%_50%/0.4)]"
               >
-                Request Early Access
+                Explore learner routes
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </a>
               <a
-                href="#platform"
+                href="#route-map"
                 className="flex items-center gap-2 rounded-lg border border-border px-6 py-3 font-semibold text-foreground transition-all hover:border-primary/50 hover:bg-secondary"
               >
-                Explore Platform
+                View route map
               </a>
             </motion.div>
           </div>
@@ -83,7 +82,7 @@ const HeroSection = () => {
             <div className="relative rounded-2xl overflow-hidden glow-border">
               <img
                 src={heroImage}
-                alt="AI-powered dental simulation showing holographic tooth model"
+                alt="Clinical learning interface with visual anatomy reference"
                 width={1920}
                 height={1080}
                 className="w-full h-auto rounded-2xl"
@@ -96,8 +95,8 @@ const HeroSection = () => {
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               className="absolute -bottom-4 -left-4 rounded-xl border border-border bg-card/90 backdrop-blur-sm p-4 glow-box"
             >
-              <p className="font-mono text-xs text-muted-foreground">SIMULATION FIDELITY</p>
-              <p className="font-display text-2xl font-bold text-primary">99.7%</p>
+              <p className="font-mono text-xs text-muted-foreground">ACTIVE CONTENT PILLARS</p>
+              <p className="font-display text-2xl font-bold text-primary">3</p>
             </motion.div>
           </motion.div>
         </div>

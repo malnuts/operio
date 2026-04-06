@@ -1,0 +1,112 @@
+{
+  "id": "video-cavity-filling-demo",
+  "type": "video",
+  "title": "Cavity Filling: Cusp Build-Up",
+  "description": "Step-by-step composite restoration of a large cavity with cusp replacement, by Dr. Javier Tapia Guadix.",
+  "difficulty": "Intermediate",
+  "author": {
+    "name": "Dr. Javier Tapia Guadix",
+    "institution": "GC America"
+  },
+  "videoUrl": "/videos/procedures/cavity-filling-demo.mp4",
+  "thumbnailUrl": "/videos/thumbnails/cavity-filling-demo.jpg",
+  "duration": 90,
+  "category": "Restorative",
+  "tags": ["cavity-filling", "composite", "cusp-build-up", "layering"],
+  "decisionPoints": [
+    {
+      "timestamp": 8.0,
+      "questionId": "vcf-q1",
+      "stepDescription": "The cavity has been prepared and isolated. Etchant is about to be applied."
+    },
+    {
+      "timestamp": 38.0,
+      "questionId": "vcf-q2",
+      "stepDescription": "Matrix and wedge are in place. The doctor is about to begin composite placement."
+    },
+    {
+      "timestamp": 72.0,
+      "questionId": "vcf-q3",
+      "stepDescription": "Multiple composite layers have been placed. The doctor is sculpting occlusal anatomy."
+    }
+  ],
+  "chapters": [
+    {
+      "timestamp": 0,
+      "title": "Cavity Assessment",
+      "referenceContent": {
+        "instrument": {
+          "name": "Rubber Dam Clamp",
+          "description": "Provides moisture isolation critical for composite bonding. The Tofflemire matrix band maintains proximal wall contour."
+        },
+        "technique": "Large MO/MOD cavities with cusp involvement require incremental composite layering to minimize polymerization shrinkage and restore occlusal anatomy."
+      }
+    },
+    {
+      "timestamp": 8,
+      "title": "Acid Etching",
+      "referenceContent": {
+        "instrument": {
+          "name": "Phosphoric Acid Etchant",
+          "description": "37% phosphoric acid (blue gel) applied to enamel for 15-30 seconds, dentin for 10-15 seconds. Creates micro-porosities for mechanical bonding."
+        },
+        "technique": "Total-etch technique: etch enamel margins first, then dentin. Over-etching dentin collapses collagen fibrils and weakens the hybrid layer."
+      }
+    },
+    {
+      "timestamp": 18,
+      "title": "Bonding & Light Curing",
+      "referenceContent": {
+        "instrument": {
+          "name": "LED Curing Light",
+          "description": "Polymerizes the adhesive bonding agent. Minimum 800 mW/cm\u00b2 output. Hold 1-2mm from the surface for 10-20 seconds."
+        },
+        "technique": "Apply adhesive in thin layer, gently air-dry to evaporate solvent, then light cure. A well-polymerized adhesive layer is the foundation of the entire restoration."
+      }
+    },
+    {
+      "timestamp": 30,
+      "title": "Matrix & Wedge Placement",
+      "referenceContent": {
+        "instrument": {
+          "name": "Tofflemire Matrix Band",
+          "description": "Circumferential metal band held by a retainer. Creates a temporary proximal wall to contain composite during placement."
+        },
+        "technique": "Wedge firmly at the gingival margin to ensure tight proximal contact and prevent composite flash. The matrix must be contoured to recreate natural tooth anatomy."
+      }
+    },
+    {
+      "timestamp": 40,
+      "title": "Composite Layering",
+      "referenceContent": {
+        "instrument": {
+          "name": "Composite Instrument",
+          "description": "Used to place and pack composite resin into the cavity in increments of 2mm or less."
+        },
+        "technique": "Incremental layering technique: place 2mm layers obliquely to reduce C-factor stress. Each increment is light-cured before placing the next. Build from the deepest floor toward the occlusal surface."
+      }
+    },
+    {
+      "timestamp": 65,
+      "title": "Occlusal Anatomy Sculpting",
+      "referenceContent": {
+        "instrument": {
+          "name": "Dental Explorer / Carver",
+          "description": "Fine-tipped instruments used to sculpt cusps, ridges, and fissure patterns into the final composite layer before full polymerization."
+        },
+        "technique": "Recreate natural cusp anatomy: marginal ridges, triangular ridges, and central fossa. Final layer can be shaped before curing for better anatomical detail than post-cure finishing."
+      }
+    },
+    {
+      "timestamp": 85,
+      "title": "Final Shaping & Finishing",
+      "referenceContent": {
+        "instrument": {
+          "name": "Finishing Bur / Explorer",
+          "description": "Fine-grit diamond burs or carbide finishing burs remove excess and refine occlusal contacts."
+        },
+        "technique": "Check occlusion with articulating paper. Remove premature contacts. Polish with graded discs or polishing paste for smooth, plaque-resistant surface."
+      }
+    }
+  ]
+}

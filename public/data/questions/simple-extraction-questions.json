@@ -1,0 +1,125 @@
+{
+  "procedureId": "simple-extraction",
+  "questions": [
+    {
+      "id": "se-q1",
+      "stem": "A periapical radiograph of a maxillary first premolar shows extensive coronal destruction. Which radiographic finding would MOST likely indicate the need for a surgical rather than simple extraction?",
+      "options": [
+        { "label": "A", "text": "Straight, single root with normal length", "isCorrect": false },
+        { "label": "B", "text": "Dilacerated roots with hypercementosis and surrounding sclerotic bone", "isCorrect": true },
+        { "label": "C", "text": "Widened periodontal ligament space at the apex", "isCorrect": false },
+        { "label": "D", "text": "Two distinct roots of normal length and curvature", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Dilacerated (curved/hooked) roots combined with hypercementosis (excess cementum deposition that bulges the root) and sclerotic surrounding bone all increase resistance to extraction. These findings indicate the tooth will not come out with simple forceps technique and likely requires a surgical flap, bone removal, and/or tooth sectioning.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "A straight, single root of normal length is the ideal scenario for simple extraction — it offers the least resistance to withdrawal from the socket." },
+          { "label": "C", "reasoning": "A widened PDL space suggests chronic infection, mobility, or PDL inflammation, which actually makes extraction easier — the tooth is already loosened in the socket." },
+          { "label": "D", "reasoning": "Two distinct roots of normal morphology are typical for maxillary first premolars and do not complicate a simple extraction." }
+        ],
+        "clinicalPrinciple": "Pre-operative radiographic assessment of root morphology, bone density, and surrounding structures is essential to predict extraction difficulty. Dilaceration, hypercementosis, ankylosis, and sclerotic bone increase resistance and may require a surgical approach.",
+        "boardTip": "Dilaceration + hypercementosis + sclerotic bone = surgical extraction. Widened PDL = easier extraction (tooth already loosened)."
+      }
+    },
+    {
+      "id": "se-q2",
+      "stem": "Which nerve must be blocked to achieve palatal soft tissue anesthesia for extraction of a maxillary first premolar?",
+      "options": [
+        { "label": "A", "text": "Posterior superior alveolar nerve", "isCorrect": false },
+        { "label": "B", "text": "Nasopalatine nerve", "isCorrect": false },
+        { "label": "C", "text": "Greater palatine nerve", "isCorrect": true },
+        { "label": "D", "text": "Long buccal nerve", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "The greater palatine nerve exits the greater palatine foramen and innervates the hard palate mucosa and gingiva from the premolars to the posterior molars. For premolar extraction, this nerve must be blocked for palatal soft tissue anesthesia. Buccal infiltration handles the buccal side.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "The posterior superior alveolar (PSA) nerve innervates the maxillary molars (except the mesiobuccal root of the first molar). It provides pulpal and buccal anesthesia for molars, not palatal soft tissue anesthesia for premolars." },
+          { "label": "B", "reasoning": "The nasopalatine nerve exits the incisive foramen and innervates the palatal mucosa of the anterior teeth (canine to canine). It does not extend to the premolar region." },
+          { "label": "D", "reasoning": "The long buccal nerve is a branch of the mandibular division (V3), innervating the buccal mucosa of mandibular molars. It is not involved in maxillary anesthesia." }
+        ],
+        "clinicalPrinciple": "Maxillary extractions require dual anesthesia: buccal infiltration (MSA nerve) for pulpal and buccal tissue anesthesia, plus a palatal injection for the palatal soft tissue. Greater palatine nerve = premolars to molars (palatal). Nasopalatine nerve = incisors to canines (palatal).",
+        "boardTip": "Greater palatine = premolars to molars (palatal). Nasopalatine = incisors to canines (palatal). PSA = maxillary molars (buccal/pulpal). Long buccal = mandibular molars (buccal mucosa only, V3)."
+      }
+    },
+    {
+      "id": "se-q3",
+      "stem": "When using a straight elevator to luxate a tooth, which surface of the elevator should face the tooth being extracted?",
+      "options": [
+        { "label": "A", "text": "The convex surface — it cradles the root and directs force outward", "isCorrect": false },
+        { "label": "B", "text": "The concave surface — it engages the root while the convex surface acts as a fulcrum against bone", "isCorrect": true },
+        { "label": "C", "text": "The flat surface — both concave and convex surfaces face bone", "isCorrect": false },
+        { "label": "D", "text": "Either surface, depending on the quadrant and access", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "The concave surface of a straight elevator faces the tooth being extracted. This orientation allows the elevator to engage and cradle the root surface. The convex surface acts against the alveolar bone as a fulcrum, providing the lever mechanism (wheel-and-axle principle) for luxation.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "The convex surface faces the alveolar bone (fulcrum), not the tooth. Placing it against the tooth would direct force toward the adjacent tooth, risking damage or inadvertent luxation." },
+          { "label": "C", "reasoning": "Standard straight elevators have a concave and convex surface, not a flat working surface. The orientation is always concave toward the tooth." },
+          { "label": "D", "reasoning": "The orientation is consistent regardless of quadrant: concave surface always faces the tooth being extracted, convex surface always faces bone." }
+        ],
+        "clinicalPrinciple": "Proper elevator orientation is critical for effective and safe luxation. Concave surface = toward tooth (engages root). Convex surface = toward bone (fulcrum). The elevator works by the wheel-and-axle principle — the handle provides mechanical advantage for controlled force application.",
+        "boardTip": "Concave = toward tooth being extracted. Convex = toward bone (fulcrum). This is consistent regardless of quadrant."
+      }
+    },
+    {
+      "id": "se-q4",
+      "stem": "When extracting a maxillary premolar with forceps, the initial rocking movement should be directed toward which side, and why?",
+      "options": [
+        { "label": "A", "text": "Palatal — the palatal root is shorter and yields first", "isCorrect": false },
+        { "label": "B", "text": "Buccal — the buccal cortical plate is thinner and expands more easily", "isCorrect": true },
+        { "label": "C", "text": "Mesial — to protect the adjacent tooth from damage", "isCorrect": false },
+        { "label": "D", "text": "The direction does not matter as long as continuous apical pressure is maintained", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "The buccal cortical plate over maxillary premolars is significantly thinner than the palatal bone. In extraction biomechanics, the initial force should be directed toward the path of least resistance — the thinner cortical plate. The thinner buccal bone expands more easily, making the extraction more controlled and less traumatic.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Root length does not determine the direction of initial forceps movement. Bone thickness is the determining factor — force goes toward the thinner plate (path of least resistance)." },
+          { "label": "C", "reasoning": "Extraction movements are buccal-palatal (or buccal-lingual), not mesial-distal. Mesial-distal forces risk damaging adjacent teeth and do not effectively expand the socket." },
+          { "label": "D", "reasoning": "Direction matters significantly. Moving toward thicker bone (palatal) first increases the force required and the risk of root fracture. Always go toward the path of least resistance first." }
+        ],
+        "clinicalPrinciple": "In extraction biomechanics, the initial force should be directed toward the path of least resistance — the thinner cortical plate. In the maxilla, the buccal plate is generally thinner. Maintain continuous apical pressure during rocking to prevent beak slippage and crown fracture.",
+        "boardTip": "Maxillary extractions: buccal first (thinner buccal plate). Path of least resistance principle. Continuous apical pressure prevents beak slippage."
+      }
+    },
+    {
+      "id": "se-q5",
+      "stem": "After extracting a maxillary premolar, the operator notices the root apex appears irregular. A radiograph confirms a 2mm retained root tip with no associated pathology in healthy bone. What is the most appropriate management?",
+      "options": [
+        { "label": "A", "text": "Immediately re-enter the socket with a root tip pick to retrieve the fragment", "isCorrect": false },
+        { "label": "B", "text": "Raise a surgical flap and remove bone to access the retained tip", "isCorrect": false },
+        { "label": "C", "text": "Leave the fragment in place and monitor clinically and radiographically", "isCorrect": true },
+        { "label": "D", "text": "Pack the socket with antibiotics and schedule extraction in 6 weeks", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "A small (< 3mm) retained root tip in healthy bone with no associated pathology can be safely left and monitored. Attempting retrieval risks pushing the tip into the maxillary sinus, causing excessive bone loss, or damaging adjacent structures. Most small asymptomatic fragments become encapsulated by bone.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Blindly probing for a 2mm root tip risks pushing it further apically — for maxillary premolars, this means into the maxillary sinus. It also causes unnecessary bone loss and tissue trauma." },
+          { "label": "B", "reasoning": "Surgical flap and bone removal for a 2mm asymptomatic fragment in healthy bone is excessive. The surgical morbidity outweighs the minimal risk of leaving the fragment." },
+          { "label": "D", "reasoning": "There is no indication for antibiotics — there is no infection. Packing antibiotics into the socket is not standard practice. The fragment does not need delayed surgical removal if it remains asymptomatic." }
+        ],
+        "clinicalPrinciple": "The decision to retrieve a retained root tip depends on: size (< 3mm generally can be left), location (proximity to sinus or nerve), presence of pathology, and risk of retrieval. Small, asymptomatic fragments in healthy bone are best managed with observation.",
+        "boardTip": "Retained root tip < 3mm + no pathology + healthy bone = monitor. Larger tips, tips with pathology, or symptomatic fragments = retrieve. Never push fragments into the maxillary sinus."
+      }
+    },
+    {
+      "id": "se-q6",
+      "stem": "A patient calls 3 days after extraction of a mandibular molar reporting severe, radiating pain not relieved by over-the-counter analgesics. Examination reveals an empty socket with exposed bone and a foul odor. The patient is afebrile. What is the diagnosis and appropriate treatment?",
+      "options": [
+        { "label": "A", "text": "Acute osteomyelitis — prescribe systemic antibiotics and incision and drainage", "isCorrect": false },
+        { "label": "B", "text": "Alveolar osteitis (dry socket) — irrigate gently and place a medicated dressing", "isCorrect": true },
+        { "label": "C", "text": "Normal post-extraction healing — reassure the patient and prescribe stronger analgesics", "isCorrect": false },
+        { "label": "D", "text": "Socket infection — prescribe antibiotics and warm saline rinses", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "This is the classic presentation of alveolar osteitis (dry socket): severe pain 2–4 days post-extraction, empty socket with exposed bone (lost blood clot), foul odor, and radiating pain. It occurs in 2–5% of routine extractions, more commonly in the mandible. Treatment is gentle irrigation and placement of a medicated dressing (eugenol-based), not antibiotics.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Acute osteomyelitis presents with fever, malaise, lymphadenopathy, and purulent drainage. It develops over weeks, not days. This patient is afebrile with no signs of spreading infection." },
+          { "label": "C", "reasoning": "Normal healing shows a socket filling with granulation tissue and decreasing pain. Severe worsening pain at day 3, exposed bone, and foul odor are not normal." },
+          { "label": "D", "reasoning": "Dry socket is not primarily an infection — it results from premature loss of the blood clot exposing bone to the oral environment. Antibiotics are not indicated as primary treatment. The treatment is irrigation and a medicated dressing." }
+        ],
+        "clinicalPrinciple": "Alveolar osteitis occurs when the blood clot is dislodged or dissolved before healing is established, exposing bone to oral bacteria, food debris, and saliva. Risk factors: smoking, oral contraceptives, difficult extraction, mandibular site. Treatment is local (irrigation + medicated dressing), not systemic antibiotics.",
+        "boardTip": "Dry socket = severe pain day 2–4 + empty socket + exposed bone + foul odor + afebrile. Treat with irrigation + eugenol dressing, NOT antibiotics. Risk factors: smoking, OCP, mandible, difficult extraction."
+      }
+    }
+  ]
+}

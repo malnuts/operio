@@ -1,0 +1,112 @@
+{
+  "id": "video-cavity-filling-demo",
+  "type": "video",
+  "title": "Kariyes davolash: Bo\u2018rtma tiklash",
+  "description": "Dr. Javier Tapia Guadix tomonidan katta bo\u2018shliqni kompozit bilan bosqichma-bosqich tiklash.",
+  "difficulty": "O\u2018rta",
+  "author": {
+    "name": "Dr. Javier Tapia Guadix",
+    "institution": "GC America"
+  },
+  "videoUrl": "/videos/procedures/cavity-filling-demo.mp4",
+  "thumbnailUrl": "/videos/thumbnails/cavity-filling-demo.jpg",
+  "duration": 90,
+  "category": "Tiklash",
+  "tags": ["kariyes-davolash", "kompozit", "bo\u2018rtma-tiklash", "qatlam"],
+  "decisionPoints": [
+    {
+      "timestamp": 8.0,
+      "questionId": "vcf-q1",
+      "stepDescription": "Bo\u2018shliq tayyorlangan va izolyatsiya qilingan. Kislota qo\u2018yilmoqchi."
+    },
+    {
+      "timestamp": 38.0,
+      "questionId": "vcf-q2",
+      "stepDescription": "Matritsali lenta va pona o\u2018rnatilgan. Shifokor kompozit qo\u2018yishni boshlaydi."
+    },
+    {
+      "timestamp": 72.0,
+      "questionId": "vcf-q3",
+      "stepDescription": "Bir nechta kompozit qatlam qo\u2018yilgan. Shifokor okluzal anatomiyani shakllantirmoqda."
+    }
+  ],
+  "chapters": [
+    {
+      "timestamp": 0,
+      "title": "Bo\u2018shliqni baholash",
+      "referenceContent": {
+        "instrument": {
+          "name": "Kofferdam qisqichi",
+          "description": "Kompozit bog\u2018lash uchun muhim namlik izolyatsiyasini ta\u2019minlaydi. Tofflemire matritsali lenta proksimal devor konturini saqlaydi."
+        },
+        "technique": "Bo\u2018rtma ishtirokidagi katta MO/MOD bo\u2018shliqlari polimerizatsiya qisqarishini kamaytirish va okluzal anatomiyani tiklash uchun bosqichma-bosqich kompozit qatlam talab qiladi."
+      }
+    },
+    {
+      "timestamp": 8,
+      "title": "Kislota bilan ishlov berish",
+      "referenceContent": {
+        "instrument": {
+          "name": "Fosfor kislota",
+          "description": "37% fosfor kislotasi (ko\u2018k gel) emalga 15-30 soniya, dentinga 10-15 soniya qo\u2018llaniladi. Mexanik bog\u2018lash uchun mikro-g\u2018ovaklar hosil qiladi."
+        },
+        "technique": "To\u2018liq ishlov berish texnikasi: avval emal qirralarini, keyin dentinni ishlov bering. Dentinni ortiqcha ishlov berish kollagen tolalarini buzadi va gibrid qatlamni zaiflashtiradi."
+      }
+    },
+    {
+      "timestamp": 18,
+      "title": "Bog\u2018lash va nurlanish",
+      "referenceContent": {
+        "instrument": {
+          "name": "LED polimerlash chirog\u2018i",
+          "description": "Yopishuvchi bog\u2018lovchi agentni polimerlashtiradi. Kamida 800 mVt/sm\u00b2 quvvat. Sirtdan 1-2mm masofada 10-20 soniya ushlang."
+        },
+        "technique": "Yopishuvchini yupqa qatlam bilan qo\u2018llang, erituvchini bug\u2018latish uchun sekin havo bilan quriting, keyin nurga tuting. Yaxshi polimerlangan yopishuvchi qatlam butun tiklashning asosidir."
+      }
+    },
+    {
+      "timestamp": 30,
+      "title": "Matritsa va pona o\u2018rnatish",
+      "referenceContent": {
+        "instrument": {
+          "name": "Tofflemire matritsali lenta",
+          "description": "Ushlagich bilan mahkamlangan aylana metall lenta. Kompozit joylashtirish vaqtida uni ushlab turish uchun vaqtinchalik proksimal devor yaratadi."
+        },
+        "technique": "Ponani milkli chetida mahkam o\u2018rnating — siqiq proksimal aloqa va kompozit oqib chiqishining oldini olish uchun. Matritsa tabiiy tish anatomiyasini qayta yaratish uchun konturlangan bo\u2018lishi kerak."
+      }
+    },
+    {
+      "timestamp": 40,
+      "title": "Kompozit qatlam qo\u2018yish",
+      "referenceContent": {
+        "instrument": {
+          "name": "Kompozit asbob",
+          "description": "Kompozit qatroni bo\u2018shliqqa 2mm yoki undan kam qatlamlar bilan joylashtirish va zichlashtirish uchun ishlatiladi."
+        },
+        "technique": "Bosqichma-bosqich qatlam texnikasi: C-faktor stressini kamaytirish uchun 2mm qatlamlarni qiyshiq joylashtiring. Har bir qatlam keyingisini qo\u2018yishdan oldin nurlantiriladi. Eng chuqur tubdan okluzal sirtga qarab quriladi."
+      }
+    },
+    {
+      "timestamp": 65,
+      "title": "Okluzal anatomiyani shakllantirish",
+      "referenceContent": {
+        "instrument": {
+          "name": "Stomatologik zond / Oyma asbob",
+          "description": "To\u2018liq polimerizatsiyadan oldin oxirgi kompozit qatlamiga bo\u2018rtmalar, tizimlar va yoriqlar naqshini o\u2018yish uchun nozik uchli asboblar."
+        },
+        "technique": "Tabiiy bo\u2018rtma anatomiyasini qayta yarating: marginal tizimlar, uchburchak tizimlar va markaziy chuqurlik. Oxirgi qatlamni nurlantishdan oldin shakllantirish mumkin — bu nurlantishdan keyingi tugatishga qaraganda yaxshiroq anatomik tafsilotlarni beradi."
+      }
+    },
+    {
+      "timestamp": 85,
+      "title": "Yakuniy shakl berish va pardozlash",
+      "referenceContent": {
+        "instrument": {
+          "name": "Pardozlash bori / Zond",
+          "description": "Nozik donali olmos borlar yoki karbid pardozlash borlari ortiqchani olib tashlaydi va okluzal kontaktlarni takomillashtiradi."
+        },
+        "technique": "Okluziyani artikulyatsion qog\u2018oz bilan tekshiring. Muddatidan oldingi kontaktlarni olib tashlang. Silliq, plakka tashkil bo\u2018lishiga chidamli sirt uchun darajali disklar yoki pardozlash pastasi bilan jilolang."
+      }
+    }
+  ]
+}

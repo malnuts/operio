@@ -1,0 +1,125 @@
+{
+  "procedureId": "simple-extraction",
+  "questions": [
+    {
+      "id": "se-q1",
+      "stem": "Yuqori jag'ning birinchi kichik oziq tishining periapikal rentgenogrammasi keng koronal buzilishni ko'rsatadi. Qaysi rentgenografik topilma oddiy emas, balki jarrohlik yo'li bilan sug'urish zarurligini KO'PROQ ko'rsatadi?",
+      "options": [
+        { "label": "A", "text": "To'g'ri, bitta ildiz, normal uzunlikda", "isCorrect": false },
+        { "label": "B", "text": "Dilatserat ildizlar, gipertsementoz va atrofida sklerotik suyak", "isCorrect": true },
+        { "label": "C", "text": "Apeksda kengaygan parodont boylamasi bo'shlig'i", "isCorrect": false },
+        { "label": "D", "text": "Normal uzunlik va egrilikdagi ikki alohida ildiz", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Dilatserat (egri/ilmoqli) ildizlar gipertsementoz (ildiz bo'rtadigan ortiqcha tsement cho'kishi) va sklerotik atrofdagi suyak bilan birgalikda sug'urishga qarshilikni oshiradi. Bu topilmalar tish oddiy forseps texnikasi bilan chiqmasligini va jarrohlik loskuti, suyak olib tashlash va/yoki tishni bo'laklash talab etilishi mumkinligini ko'rsatadi.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Normal uzunlikdagi to'g'ri, bitta ildiz oddiy sug'urish uchun ideal holat — u soketdan chiqarishga eng kam qarshilik ko'rsatadi." },
+          { "label": "C", "reasoning": "Kengaygan PDL bo'shlig'i surunkali infektsiya, harakatchanlik yoki PDL yallig'lanishini ko'rsatadi, bu aslida sug'urishni osonlashtiradi — tish soketda allaqachon bo'shab qolgan." },
+          { "label": "D", "reasoning": "Normal morfologiyali ikki alohida ildiz yuqori birinchi kichik oziq tishlar uchun odatiy holat va oddiy sug'urishni murakkablashtirmaydi." }
+        ],
+        "clinicalPrinciple": "Ildiz morfologiyasi, suyak zichligi va atrofdagi tuzilmalarni operatsiyadan oldingi rentgenografik baholash sug'urish qiyinligini bashorat qilish uchun muhim. Dilaserasiya, gipertsementoz, ankiloz va sklerotik suyak qarshilikni oshiradi va jarrohlik usulini talab qilishi mumkin.",
+        "boardTip": "Dilaserasiya + gipertsementoz + sklerotik suyak = jarrohlik yo'li bilan sug'urish. Kengaygan PDL = osonroq sug'urish (tish allaqachon bo'shagan)."
+      }
+    },
+    {
+      "id": "se-q2",
+      "stem": "Yuqori jag'ning birinchi kichik oziq tishini sug'urish uchun tanglay yumshoq to'qima anesteziyasiga erishish uchun qaysi nervni blokirovka qilish kerak?",
+      "options": [
+        { "label": "A", "text": "Orqa yuqori alveolyar nerv (posterior superior alveolar nerve)", "isCorrect": false },
+        { "label": "B", "text": "Nazopalatin nerv (nasopalatine nerve)", "isCorrect": false },
+        { "label": "C", "text": "Katta tanglay nervi (greater palatine nerve)", "isCorrect": true },
+        { "label": "D", "text": "Uzun buccal nerv (long buccal nerve)", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Katta tanglay nervi katta tanglay teshigidan chiqadi va kichik oziq tishlardan orqa oziq tishlargacha qattiq tanglay shilliq qavatini va milkni innervatsiya qiladi. Kichik oziq tish sug'urishi uchun tanglay yumshoq to'qima anesteziyasiga erishish uchun ushbu nervni blokirovka qilish kerak. Buccal infiltratsiya buccal tomonni ta'minlaydi.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Orqa yuqori alveolyar (PSA) nerv yuqori jag' oziq tishlarini (birinchi oziq tishning meziobuccal ildizidan tashqari) innervatsiya qiladi. U oziq tishlar uchun pulpa va buccal anesteziyani ta'minlaydi, kichik oziq tishlar uchun tanglay yumshoq to'qima anesteziyasini emas." },
+          { "label": "B", "reasoning": "Nazopalatin nerv kesuvchi teshikdan chiqadi va oldingi tishlar (qoziq tishdan qoziq tishgacha) tanglay shilliq qavatini innervatsiya qiladi. U kichik oziq tish sohasiga cho'zilmaydi." },
+          { "label": "D", "reasoning": "Uzun buccal nerv pastki jag' bo'limi (V3) tarmog'i bo'lib, pastki jag' oziq tishlari buccal shilliq qavatini innervatsiya qiladi. U yuqori jag' anesteziyasida ishtirok etmaydi." }
+        ],
+        "clinicalPrinciple": "Yuqori jag'dan sug'urish ikkita anesteziyani talab qiladi: pulpa va buccal to'qima anesteziyasi uchun buccal infiltratsiya (MSA nerv), shuningdek tanglay yumshoq to'qimasi uchun tanglay in'ektsiyasi. Katta tanglay nervi = kichik oziq tishlardan oziq tishlargacha (tanglay). Nazopalatin nerv = kesuvchilardan qoziq tishlargacha (tanglay).",
+        "boardTip": "Katta tanglay nervi = kichik oziq tishlardan oziq tishlargacha (tanglay). Nazopalatin = kesuvchilardan qoziq tishlargacha (tanglay). Orqa yuqori alveolyar = yuqori jag' oziq tishlari (buccal/pulpa). Uzun buccal = pastki jag' oziq tishlari (faqat buccal shilliq qavat, V3)."
+      }
+    },
+    {
+      "id": "se-q3",
+      "stem": "Tishni luksatsiya qilish uchun to'g'ri elevator ishlatilganda, elevatorning qaysi yuzasi sug'urilayotgan tishga qaragan bo'lishi kerak?",
+      "options": [
+        { "label": "A", "text": "Qavariq yuza — u ildizni o'rab oladi va kuchni tashqariga yo'naltiradi", "isCorrect": false },
+        { "label": "B", "text": "Botiq yuza — u ildizni ushlaydi, qavariq yuza esa suyakka qarshi tayanch nuqtasi sifatida ishlaydi", "isCorrect": true },
+        { "label": "C", "text": "Tekis yuza — botiq va qavariq yuzalarning ikkalasi ham suyakka qaragan", "isCorrect": false },
+        { "label": "D", "text": "Har ikkala yuza ham, kvadrant va kirish imkoniyatiga qarab", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "To'g'ri elevatorning botiq yuzasi sug'urilayotgan tishga qaratiladi. Bu holat elevator ildiz yuzasini o'rab olishga va ushlashga imkon beradi. Qavariq yuza tayanch nuqtasi sifatida alveolyar suyakka qarshi ishlaydi, luksatsiya uchun richag mexanizmini (g'ildirak-o'q prinsipi) ta'minlaydi.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Qavariq yuza alveolyar suyakka (tayanch nuqtaga) qaragan bo'ladi, tishga emas. Uni tishga qaratib qo'yish kuchni qo'shni tishga yo'naltiradi va shikastlash yoki noto'g'ri tishning luksatsiyasi xavfini tug'diradi." },
+          { "label": "C", "reasoning": "Standart to'g'ri elevatorlarda tekis ish yuzasi emas, botiq va qavariq yuza bor. Yo'nalish doimo botiq yuza tishga qaratilgan." },
+          { "label": "D", "reasoning": "Yo'nalish kvadrantdan qat'i nazar bir xil: botiq yuza doimo sug'urilayotgan tishga qaragan bo'ladi, qavariq yuza doimo suyakka qaragan bo'ladi." }
+        ],
+        "clinicalPrinciple": "Elevatorning to'g'ri yo'nalishi samarali va xavfsiz luksatsiya uchun muhim. Botiq yuza = tishga qarab (ildizni ushlaydi). Qavariq yuza = suyakka qarab (tayanch nuqta). Elevator g'ildirak-o'q prinsipi asosida ishlaydi — dastasi nazorat ostidagi kuch qo'llash uchun mexanik ustunlik beradi.",
+        "boardTip": "Botiq = sug'urilayotgan tishga qarab. Qavariq = suyakka qarab (tayanch nuqta). Bu kvadrantdan qat'i nazar bir xil."
+      }
+    },
+    {
+      "id": "se-q4",
+      "stem": "Yuqori jag' kichik oziq tishini forseps bilan sug'urishda dastlabki tebranish harakati qaysi tomonga yo'naltirilishi kerak va nima uchun?",
+      "options": [
+        { "label": "A", "text": "Tanglay tomonga — tanglay ildizi qisqaroq va birinchi bo'lib bo'shaydi", "isCorrect": false },
+        { "label": "B", "text": "Buccal tomonga — buccal kortikal plastinka yupqaroq va osonroq kengayadi", "isCorrect": true },
+        { "label": "C", "text": "Mezial tomonga — qo'shni tishni shikastlanishdan himoya qilish uchun", "isCorrect": false },
+        { "label": "D", "text": "Yo'nalish muhim emas, uzluksiz apikal bosim saqlanishi yetarli", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Yuqori kichik oziq tishlar ustidagi buccal kortikal plastinka tanglay suyagidan sezilarli darajada yupqa. Sug'urish biomexanikasida dastlabki kuch eng kam qarshilik yo'li — yupqaroq kortikal plastinka tomonga yo'naltirilishi kerak. Yupqaroq buccal suyak osonroq kengayadi, bu sug'urishni boshqariladigan va kamroq travmatik qiladi.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Ildiz uzunligi dastlabki forseps harakati yo'nalishini belgilamaydi. Eng kam qarshilik yo'lini belgilaydigan suyak qalinligi muhim omil hisoblanadi." },
+          { "label": "C", "reasoning": "Sug'urish harakatlari buccal-tanglay (yoki buccal-lingual) bo'ladi, mezial-distal emas. Mezial-distal kuchlar qo'shni tishlarni shikastlash xavfini tug'diradi va soketni samarali kengaytirmaydi." },
+          { "label": "D", "reasoning": "Yo'nalish juda muhim. Avval qalinroq suyak (tanglay) tomonga harakat qilish kerakli kuchni oshiradi va ildiz sinishi xavfini ko'taradi. Har doim avval eng kam qarshilik yo'liga boring." }
+        ],
+        "clinicalPrinciple": "Sug'urish biomexanikasida dastlabki kuch eng kam qarshilik yo'li — yupqaroq kortikal plastinka tomonga yo'naltirilishi kerak. Yuqori jag'da buccal plastinka odatda yupqaroq. Tirshaklarning sirg'anishi va toj sinishini oldini olish uchun tebranish paytida uzluksiz apikal bosimni saqlang.",
+        "boardTip": "Yuqori jag'dan sug'urish: avval buccal (yupqaroq buccal plastinka). Eng kam qarshilik yo'li prinsipi. Uzluksiz apikal bosim tirshak sirg'anishini oldini oladi."
+      }
+    },
+    {
+      "id": "se-q5",
+      "stem": "Yuqori jag' kichik oziq tishini sug'urgandan so'ng, operator ildiz apeksi notekis ko'rinishini sezadi. Rentgenogramma sog'lom suyakda hech qanday patologiyasi yo'q 2 mm qolgan ildiz uchini tasdiqlaydi. Eng mos boshqaruv qanday?",
+      "options": [
+        { "label": "A", "text": "Parchani olish uchun darhol soketga ildiz uchi olgich bilan qayta kirish", "isCorrect": false },
+        { "label": "B", "text": "Jarrohlik loskutini ko'tarib, qolgan uchga kirish uchun suyak olib tashlash", "isCorrect": false },
+        { "label": "C", "text": "Parchani joyida qoldirib, klinik va rentgenografik nazorat qilish", "isCorrect": true },
+        { "label": "D", "text": "Soketni antibiotiklar bilan to'ldirish va 6 haftadan keyin sug'urishni rejalashtirish", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Sog'lom suyakdagi patologiyasiz kichik (< 3 mm) qolgan ildiz uchi xavfsiz ravishda joyida qoldirilishi va nazorat qilinishi mumkin. Uni olishga urinish uchni yuqori jag' sinusiga itarib yuborish, haddan tashqari suyak yo'qotilishi yoki qo'shni tuzilmalarni shikastlash xavfini tug'diradi. Ko'pchilik kichik asimptomatik parchalar suyak bilan o'rab olinadi.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "2 mm ildiz uchini ko'r-ko'rona qidirish uni apikal tomonga itarib yuborish xavfi bor — yuqori kichik oziq tishlar uchun bu yuqori jag' sinusiga tushishni anglatadi. Shuningdek, keraksiz suyak yo'qotilishi va to'qima travmasiga olib keladi." },
+          { "label": "B", "reasoning": "Sog'lom suyakdagi 2 mm asimptomatik parcha uchun jarrohlik loskuti va suyak olib tashlash haddan tashqari ko'p. Jarrohlik kasalligi parchani qoldirishning minimal xavfidan oshadi." },
+          { "label": "D", "reasoning": "Antibiotiklar uchun ko'rsatma yo'q — infektsiya yo'q. Soketga antibiotik to'ldirish standart amaliyot emas. Asimptomatik bo'lib qolsa, parcha kechiktirilgan jarrohlik olib tashlashni talab qilmaydi." }
+        ],
+        "clinicalPrinciple": "Qolgan ildiz uchini olish to'g'risidagi qaror quyidagilarga bog'liq: o'lcham (< 3 mm odatda qoldirilishi mumkin), joylashuv (sinus yoki nervga yaqinligi), patologiya mavjudligi va olish xavfi. Sog'lom suyakdagi kichik, asimptomatik parchalar kuzatish bilan boshqariladi.",
+        "boardTip": "Qolgan ildiz uchi < 3 mm + patologiya yo'q + sog'lom suyak = nazorat. Kattaroq uchlar, patologiyali uchlar yoki simptomatik parchalar = oling. Parchalarni hech qachon yuqori jag' sinusiga itarmang."
+      }
+    },
+    {
+      "id": "se-q6",
+      "stem": "Bemor pastki jag' oziq tishini sug'urgandan 3 kun o'tgach kuchli, tarqaluvchi og'riq shikoyati bilan qo'ng'iroq qiladi, og'riq oddiy og'riq qoldiruvchilar bilan bartaraf bo'lmaydi. Ko'rikda bo'sh soket, ochiq suyak va yoqimsiz hid aniqlanadi. Bemorda isitma yo'q. Tashxis va tegishli davolash qanday?",
+      "options": [
+        { "label": "A", "text": "O'tkir osteomielit — tizimli antibiotiklar tayinlash va kesilib oqizish", "isCorrect": false },
+        { "label": "B", "text": "Alveolyar osteit (quruq soket) — ehtiyotkorlik bilan yuvish va dorivor bog'lam joylashtirish", "isCorrect": true },
+        { "label": "C", "text": "Normal sug'urishdan keyingi tiklanish — bemorni tinchlantirish va kuchliroq og'riq qoldiruvchilar tayinlash", "isCorrect": false },
+        { "label": "D", "text": "Soket infektsiyasi — antibiotiklar tayinlash va iliq fiziologik eritmada chayish", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Bu alveolyar osteitning (quruq soket) klassik ko'rinishi: sug'urishdan 2–4 kun o'tgach kuchli og'riq, ochiq suyakli bo'sh soket (qon laxtasi yo'qolgan), yoqimsiz hid va tarqaluvchi og'riq. Bu oddiy sug'urishlarning 2–5% ida, ko'proq pastki jag'da kuzatiladi. Davolash ehtiyotkorlik bilan yuvish va dorivor bog'lam (evgenol asosidagi) joylashtirishni o'z ichiga oladi, antibiotiklar emas.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "O'tkir osteomielit isitma, holsizlik, limfadenopatiya va yiringli oqim bilan namoyon bo'ladi. U kunlarda emas, haftalarda rivojlanadi. Bu bemorda isitma yo'q va tarqalgan infektsiya belgilari kuzatilmaydi." },
+          { "label": "C", "reasoning": "Normal tiklanishda soket granulyatsion to'qima bilan to'ladi va og'riq kamayadi. 3-kunda og'riqning kuchayishi, ochiq suyak va yoqimsiz hid normal emas." },
+          { "label": "D", "reasoning": "Quruq soket asosan infektsiya emas — u qon laxtasining muddatidan oldin yo'qolishi natijasida suyakni og'iz muhitiga ochilishi. Asosiy davolash sifatida antibiotiklar ko'rsatilmagan. Davolash yuvish va dorivor bog'lamni o'z ichiga oladi." }
+        ],
+        "clinicalPrinciple": "Alveolyar osteit qon laxtasining bitish boshlanishidan oldin siljishi yoki erishi natijasida yuzaga keladi, suyakni og'iz bakteriyalari, ovqat qoldiqlari va so'lakka ochadi. Xavf omillari: chekish, oral kontratseptivlar, qiyin sug'urish, pastki jag'. Davolash mahalliy (yuvish + dorivor bog'lam), tizimli antibiotiklar emas.",
+        "boardTip": "Quruq soket = 2–4 kunda kuchli og'riq + bo'sh soket + ochiq suyak + yoqimsiz hid + isitma yo'q. Yuvish + evgenol bog'lam bilan davolang, antibiotiklar bilan EMAS. Xavf omillari: chekish, oral kontratseptivlar, pastki jag', qiyin sug'urish."
+      }
+    }
+  ]
+}

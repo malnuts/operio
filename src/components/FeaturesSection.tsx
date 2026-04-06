@@ -1,29 +1,29 @@
 import { motion } from "framer-motion";
-import { Brain, Hand, Eye, BarChart3 } from "lucide-react";
+import { BookOpenText, FileText, ClipboardCheck } from "lucide-react";
 import hapticImage from "@/assets/haptic-device.jpg";
 import xrImage from "@/assets/xr-training.jpg";
 import aiImage from "@/assets/ai-assessment.jpg";
 
 const features = [
   {
-    icon: Brain,
-    title: "AI-Driven Simulation Engine",
+    icon: BookOpenText,
+    title: "Procedure-Based Learning",
     description:
-      "Our neural engine generates patient cases with infinite variation — anatomical anomalies, tissue responses, and real-time complications that adapt to each learner.",
+      "Break down clinical work into chapters, explanations, visual references, and linked decision points so learners can revisit the full flow of a procedure.",
     image: aiImage,
   },
   {
-    icon: Hand,
-    title: "Haptic Feedback System",
+    icon: FileText,
+    title: "Clinical Posts And Cases",
     description:
-      "Feel the resistance of enamel, the give of dentin, the precision of canal navigation. Our haptic interface delivers sub-millimeter tactile accuracy.",
+      "Publish educational posts, case reflections, and practical writeups that extend learning beyond one procedure without losing clinical context.",
     image: hapticImage,
   },
   {
-    icon: Eye,
-    title: "Immersive XR Training",
+    icon: ClipboardCheck,
+    title: "Contextual Assessment",
     description:
-      "Step into a fully realized operatory. Our mixed-reality environment provides spatial awareness and depth perception identical to clinical settings.",
+      "Use assessments as reinforcement inside the learning flow, with review routes that help learners revisit weak spots across procedures and posts.",
     image: xrImage,
   },
 ];
@@ -48,15 +48,15 @@ const FeaturesSection = () => {
           className="text-center mb-20"
         >
           <span className="font-mono text-xs text-primary tracking-widest uppercase">
-            Core Technology
+            Product Pillars
           </span>
           <h2 className="font-display text-4xl md:text-5xl font-bold mt-4 mb-6">
             Three pillars of{" "}
-            <span className="gradient-text">next-gen training</span>
+            <span className="gradient-text">contextual clinical learning</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Each module works independently or in concert — creating the most advanced dental 
-            simulation platform ever built.
+            Operio starts with procedures, posts, and assessments so the platform can support one
+            launch vertical now without hardwiring the product to a single specialty forever.
           </p>
         </motion.div>
 

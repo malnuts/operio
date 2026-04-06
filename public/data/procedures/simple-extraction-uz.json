@@ -1,0 +1,137 @@
+{
+  "id": "simple-extraction",
+  "type": "simulation",
+  "title": "Oddiy tish sug'urish",
+  "description": "Yuqori jag'ning birinchi kichik oziq tishini (premolar) forseps va elevator yordamida jarrohliksiz usulda oddiy (yopiq) sug'urish.",
+  "difficulty": "O'rta",
+  "modelPath": "/models/shared/full-mouth.glb",
+  "steps": [
+    {
+      "id": "se-step-1",
+      "narration": "Periapikal rentgen suratini ko'rib chiqing. Yuqori birinchi kichik oziq tish (#5) toj qismining keng shikastlanishini ko'rsatmoqda, periapikal patologiya kuzatilmaydi. Ildiz morfologiyasini baholang: yuqori birinchi kichik oziq tish odatda ikkita ildizga (buccal va tanglay) yoki bitta bo'lingan ildizga ega. Sug'urishni qiyinlashtiradigan omillarni baholang: dilatserat ildizlar, gipertsementoz (hypercementosis — ildizni bo'rttiradigan ortiqcha tsement), ankiloz (ankylosis) va atrofdagi sklerotik suyak — bularning barchasi sug'urishga qarshilikni oshiradi va jarrohlik usuli zarurligini ko'rsatishi mumkin.",
+      "actionDescription": "Rentgen suratini ko'rib chiqish va sug'urish qiyinligini baholash",
+      "isDecisionPoint": true,
+      "questionId": "se-q1",
+      "referenceContent": {
+        "anatomy": "Yuqori birinchi kichik oziq tish odatda ikkita ildizga (buccal va tanglay) yoki bitta bo'lingan ildizga ega. Ildiz morfologiyasi sug'urish qiyinligining asosiy bashoratlagichi hisoblanadi. Kengaygan parodont boylamasi bo'shlig'i surunkali yallig'lanish yoki ortiqcha harakatchanlikni ko'rsatadi, bu aslida sug'urishni osonlashtiradi. Sklerotik suyak zich bo'lib, kengayishga qarshilik ko'rsatadi.",
+        "technique": "Operatsiyadan oldingi rentgenografik baholashda quyidagilar tekshirilishi kerak: ildiz soni, egriligi, uzunligi, dilaserasiya, gipertsementoz, ankiloz, atrofdagi suyak zichligi va hayotiy tuzilmalarga yaqinligi (yuqori jag' sinusi, pastki alveolyar nerv). Oddiy (yopiq) sug'urish forseps va elevator yordamida jarrohlik loskutisiz amalga oshiriladi. Jarrohlik yo'li bilan sug'urish mukoperiosteal loskut, suyak olib tashlash va/yoki tishni bo'laklashni talab qiladi."
+      }
+    },
+    {
+      "id": "se-step-2",
+      "narration": "Mahalliy og'riqsizlantirish o'tkazing. Yuqori birinchi kichik oziq tish uchun o'rta yuqori alveolyar (MSA) nervni nishonga olgan buccal infiltratsiyadan pulpa va buccal anesteziya uchun, shuningdek tanglay yumshoq to'qima anesteziyasi uchun katta tanglay nervi blokidan foydalaning. Katta tanglay nervi katta tanglay teshigidan chiqadi va kichik oziq tishlardan orqa oziq tishlargacha qattiq tanglayni innervatsiya qiladi. Har bir in'ektsiyadan oldin aspiratsiya qiling.",
+      "instrumentId": "dental-syringe",
+      "actionDescription": "Buccal infiltratsiya va katta tanglay nervi blokini o'tkazish",
+      "isDecisionPoint": true,
+      "questionId": "se-q2",
+      "referenceContent": {
+        "instrument": {
+          "name": "Stomatologik shprits",
+          "description": "Infiltratsion anesteziya uchun 27-o'lchamli qisqa ignali aspiratsion shprits. In'ektsiyadan oldin har doim aspiratsiya qiling.",
+          "imageId": "dental-syringe"
+        },
+        "anatomy": "O'rta yuqori alveolyar (MSA) nerv kichik oziq tishlar va birinchi oziq tishning meziobuccal ildizini innervatsiya qiladi. Katta tanglay nervi katta tanglay teshigidan chiqadi va kichik oziq tishlardan oziq tishlargacha tanglay shilliq qavatini innervatsiya qiladi. Nazopalatin nerv kesuvchi teshikdan chiqadi va oldingi tishlar (qoziq tishdan qoziq tishgacha) tanglay shilliq qavatini innervatsiya qiladi. Uzun buccal nerv V3 tarmog'i bo'lib, pastki jag' oziq tishlari buccal shilliq qavatini innervatsiya qiladi.",
+        "technique": "Yuqori jag'dan sug'urish ikkita anesteziyani talab qiladi: tish va buccal periodontium uchun buccal infiltratsiya va tanglay yumshoq to'qimasi uchun tanglay in'ektsiyasi. Kichik oziq tishlar uchun katta tanglay nervini blokirovka qilish kerak (nazopalatin nervni emas, u faqat oldingi tishlarni qamrab oladi). Tish cho'qqisi sohasiga buccal tomondan taxminan 1 kartridj yuboring."
+      },
+      "instrumentTrayOptions": ["dental-syringe", "forceps-150", "elevator-straight", "dental-explorer"]
+    },
+    {
+      "id": "se-step-3",
+      "narration": "Yetarli og'riqsizlantirish tasdiqlangandan so'ng, periosteal elevator (Molt #9) yordamida tish bo'yni atrofidagi yumshoq to'qima birikmasini ajrating. Periosteal elevatorning o'tkir uchi dastlabki to'qimaga kirish uchun, keng uchi esa ajratish uchun mo'ljallangan. Tish atrofida aylana bo'ylab ishlang, milk tolalarini sementdan ajrating. Bu forseps joylashtirilishi uchun kirish imkonini beradi va sug'urish paytida yumshoq to'qimaning yirtilishini kamaytiradi.",
+      "instrumentId": "periosteal-elevator",
+      "actionDescription": "Periosteal elevator bilan yumshoq to'qimani ajratish",
+      "referenceContent": {
+        "instrument": {
+          "name": "Periosteal elevator (Molt #9)",
+          "description": "Ikki uchli asbob: o'tkir uchi milk egati (sulcus) ichiga dastlabki to'qimaga kirish uchun, keng uchi esa mukoperiosteal to'qimani suyakdan ajratish uchun ishlatiladi.",
+          "imageId": "periosteal-elevator"
+        },
+        "anatomy": "Milk tolalari (dentogingival, alveologingival, aylana) milkni tish va alveolyar suyakka birlashtiradi. Birikma epiteliysi biologik kenglikni hosil qiladi. Periosteal elevator bu birikishlarni ajratib, forsepsning ildiz yuzasiga kirishini ta'minlaydi.",
+        "technique": "O'tkir uchini milk egati (sulcus) ichiga kiriting va ildiz yuzasi bo'ylab apikal yo'nalishda ishlang. Nazorat ostida kuchli bosim qo'llang. To'qimani faqat forseps joylashtirilishi uchun zarur bo'lgan darajada ajrating. Oddiy sug'urishda haddan tashqari to'qima ajratish keraksiz va operatsiyadan keyingi shishni oshiradi."
+      },
+      "instrumentTrayOptions": ["periosteal-elevator", "dental-explorer", "spoon-excavator", "elevator-straight"]
+    },
+    {
+      "id": "se-step-4",
+      "narration": "Tishning mezial tomoniga to'g'ri elevator (#301) qo'llang. Asbob uchini tish va alveolyar suyak orasidagi parodont boylamasi bo'shlig'iga kiriting. Elevatorning botiq yuzasi sug'urilayotgan tishga qaragan bo'ladi; qavariq yuzasi tayanch nuqtasi sifatida alveolyar suyakka qarshi ishlaydi. Tishni luksatsiya qilishni boshlash uchun nazorat ostidagi aylanma kuch qo'llang — bu soketni kengaytiradi va parodont boylamasi tolalarini uzadi.",
+      "instrumentId": "elevator-straight",
+      "actionDescription": "To'g'ri elevator bilan tishni luksatsiya qilish",
+      "isDecisionPoint": true,
+      "questionId": "se-q3",
+      "referenceContent": {
+        "instrument": {
+          "name": "To'g'ri elevator (#301)",
+          "description": "Alveolyar suyakni kengaytirish va parodont boylamasi tolalarini uzish orqali tishlarni luksatsiya qilish uchun richag sifatida ishlatiladi. Botiq yuza sug'urilayotgan tishga qaratiladi; qavariq yuza suyakka (tayanch nuqtaga) qaratiladi.",
+          "imageId": "elevator-straight"
+        },
+        "anatomy": "Parodont boylamasi (PDL) 0,15–0,38 mm kenglikda bo'lib, sement va alveolyar suyakka kirib borgan Sharpey tolalarini o'z ichiga oladi. Sug'urish uchun PDL aylana bo'ylab uzilishi kerak. Elevator g'ildirak-o'q prinsipi asosida ishlaydi — dastasi mexanik ustunlik beradi.",
+        "technique": "Elevator uchini botiq tomoni tishga qaratib PDL bo'shlig'iga joylashtiring. Avval apikal bosim qo'llang, keyin nazorat ostida aylantiring. Qavariq yuza qo'shni suyakni tayanch nuqtasi sifatida ishlatadi. Qo'shni tishni tayanch sifatida ehtiyotkorlik bilan ishlating — noto'g'ri tishning luksatsiyasini oldini olish uchun barmoq bilan himoya qiling."
+      },
+      "instrumentTrayOptions": ["elevator-straight", "forceps-150", "periosteal-elevator", "dental-syringe"]
+    },
+    {
+      "id": "se-step-5",
+      "narration": "Tish dastlabki harakatchanlikni ko'rsatgandan so'ng, tojni #150 universal sug'urish forsepsi bilan ushlang. Forseps tirshaklarini iloji boricha apikal tomonga joylashtiring, eng keng qismdan pastda ildiz yuzasini ushlang. Ikkala tirshak simmetrik o'tirganiga ishonch hosil qiling. Sekin, nazorat ostidagi buccal-tanglay tebranish harakatlarini boshlang. Yuqori kichik oziq tishlar ustidagi buccal kortikal plastinka tanglay suyagidan yupqaroq — dastlabki harakatni buccal tomonga (eng kam qarshilik yo'li) yo'naltiring.",
+      "instrumentId": "forceps-150",
+      "actionDescription": "#150 forsepsni qo'llash va buccal-tanglay tebranishni boshlash",
+      "isDecisionPoint": true,
+      "questionId": "se-q4",
+      "referenceContent": {
+        "instrument": {
+          "name": "Forseps #150 (universal yuqori)",
+          "description": "Yuqori tishlar uchun universal sug'urish forsepsi. Ikkala tirshak bir xil bo'lib, kichik oziq tish ildizlariga moslashadigan silliq, botiq yuzalarga ega. Tirshaklarni iloji boricha apikal tomonga o'rnating.",
+          "imageId": "forceps-150"
+        },
+        "anatomy": "Yuqori tishlar ustidagi buccal kortikal plastinka tanglay suyagidan sezilarli darajada yupqaroq. Bu buccal plastinkani sug'urish paytida elastik kengayishga moslashuvchanroq qiladi. Sug'urish biomexanikasida dastlabki kuch eng kam qarshilik yo'li — yupqaroq kortikal plastinka tomonga yo'naltirilishi kerak.",
+        "technique": "Forseps tirshaklarini kuchli apikal bosim bilan iloji boricha apikal tomonga o'rnating. Sekin, barqaror buccal-tanglay tebranishdan foydalaning — avval buccal tomonga (suyak yupqaroq). Tez yoki keskin harakatlardan saqlaning. Tirshaklarning koronalga sirg'anishi va tojning sinishini oldini olish uchun tebranish paytida uzluksiz apikal bosimni saqlang."
+      },
+      "instrumentTrayOptions": ["forceps-150", "elevator-straight", "periosteal-elevator", "rubber-dam-clamp"]
+    },
+    {
+      "id": "se-step-6",
+      "narration": "Tishni kuchli apikal bosim bilan bosqichma-bosqich kengayuvchi buccal-tanglay tebranish harakatlari yordamida chiqaring. Har bir siklda alveolyar suyak elastik ravishda kengayishi bilan soket kengroq bo'ladi. Buccal plastinka osonroq kengayadi (yupqaroq), tanglay suyagi esa tayanch vazifasini bajaradi. Tish yetarli darajada harakatchan bo'lganda, aylanma kuch qo'llang va buccal yo'nalishda chiqaring. Haddan tashqari kuch ishlatmang — agar tish harakatlanmasa, qayta baholang va qo'shimcha luksatsiyani ko'rib chiqing.",
+      "instrumentId": "forceps-150",
+      "actionDescription": "Tebranish va aylanma harakatlar bilan tishni chiqarish",
+      "referenceContent": {
+        "instrument": {
+          "name": "Forseps #150",
+          "description": "Chiqarish paytida uzluksiz apikal bosimni saqlang — bu tirshaklarning sirg'anishi va tojning sinishini oldini oladi.",
+          "imageId": "forceps-150"
+        },
+        "anatomy": "Tish tebralganda alveolyar suyak elastik ravishda kengayadi. Buccal kortikal plastinka yupqaroq va osonroq kengayadi. Har bir tebranish siklida PDL tolalari bosqichma-bosqich uziladi va soket o'lchamlari kengayadi.",
+        "technique": "Sekin, ongli harakatlardan foydalaning. Har bir tebranish sikli soketni avvalgisidan biroz ko'proq kengaytirishi kerak. Yakuniy chiqarish buccal yo'nalishda amalga oshiriladi. Agar tish bir necha sikldan keyin harakatlanmasa, kuch ishlatmang — ankiloz, gipertsementoz, tarqoq ildizlarni qayta baholang yoki jarrohlik usulini ko'rib chiqing."
+      }
+    },
+    {
+      "id": "se-step-7",
+      "narration": "Sug'urilgan tishni butunligini tasdiqlash uchun tekshiring — ikkala ildiz (yoki bitta bo'lingan ildiz) singan cho'qqilarsiz to'liq bo'lishi kerak. Operatsiyadan oldingi rentgen surati bilan solishtiring. Qolgan ildiz uchini baholash kerak: sog'lom suyakdagi patologiyasiz kichik parchalar (< 3 mm) nazorat qilinishi mumkin; kattaroq parchalar yoki patologiyali bo'lganlar olib tashlanishi kerak.",
+      "actionDescription": "Sug'urilgan tishning butunligini tekshirish",
+      "isDecisionPoint": true,
+      "questionId": "se-q5",
+      "referenceContent": {
+        "anatomy": "Qolgan ildiz uchlari infektsiya, og'riq yoki kelajakda protez davolashga xalaqit berishiga olib kelishi mumkin. Sog'lom suyakdagi juda kichik apikal parchalar (< 3 mm) — agar olib tashlash haddan tashqari suyak yo'qotilishiga olib kelsa yoki parchani yuqori jag' sinusiga itarib yuborish xavfi bo'lsa — joyida qoldirilishi va nazorat qilinishi mumkin.",
+        "technique": "Ildiz cho'qqisini yaxshi yoritish ostida tekshiring. Operatsiyadan oldingi rentgen surati bilan solishtiring. Sinish gumon qilinsa, tasdiqlash uchun operatsiyadan keyingi rentgen suratini oling. Kichik 2 mm ildiz uchini ko'r-ko'rona olishga urinish uni yuqori jag' sinusiga (yuqori kichik oziq tishlar uchun) itarib yuborish xavfini tug'diradi va keraksiz suyak yo'qotilishiga olib keladi."
+      }
+    },
+    {
+      "id": "se-step-8",
+      "narration": "Har qanday granulyatsion to'qimani olib tashlash uchun soketni ehtiyotkorlik bilan kuretaj qiling. Soket devorlarini suyak nuqsonlari uchun tekshiring. Kengaygan suyakni qayta yaqinlashtirish va soket hajmini kamaytirish uchun buccal va lingual plastinkalarni barmoq bosimi bilan siqing. Soket ustiga buklangan doka tampon qo'ying va bemorga qon laxtasi hosil bo'lishini rag'batlantirish uchun 30 daqiqa davomida mahkam tishlab turishni ayting.",
+      "actionDescription": "Soketni tozalash, suyakni siqish, gemostazga erishish",
+      "referenceContent": {
+        "anatomy": "Sug'urish soketi ikkilamchi yopilish orqali bitadi. Soket ichida qon laxta hosil bo'ladi, u asta-sekin granulyatsion to'qima, keyin to'qilgan suyak, so'ngra 4–6 oy davomida yetuk lamellar suyak bilan almashtiriladi. Qon laxtasi normal bitish uchun muhim asos hisoblanadi.",
+        "technique": "Suyak devorlarini shikastlaydigan tajovuzkor kuretajdan saqlaning — ehtiyotkorlik bilan tozalash granulyatsion to'qimani olib tashlaydi. Soket hajmini kamaytirish uchun soket devorlarini barmoq bosimi bilan siqing. Dokaga kuchli bosim laxta hosil bo'lishini rag'batlantiradi. Normal bitish uchun laxta buzilmasdan qolishi kerak."
+      }
+    },
+    {
+      "id": "se-step-9",
+      "narration": "Operatsiyadan keyingi ko'rsatmalar bering. Bemorga 30 daqiqa davomida dokaga bosim saqlashni, 24 soat davomida tupurmaslikni, nay orqali ichmaslikni va chekmaslikni (salbiy bosim laxtani siljitadi), yumshoq ovqat yeyishni va tayinlangan og'riq qoldiruvchilarni qabul qilishni maslahat bering. NSAID (nosteroid yallig'lanishga qarshi dorilar) birinchi qator og'riq qoldiruvchisi hisoblanadi. Alveolyar osteit (quruq soket) haqida ogohlantiring: sug'urishdan 2–4 kun keyin boshlanadigan kuchli, tarqaluvchi og'riq, bo'sh soket va ochiq suyak.",
+      "actionDescription": "Operatsiyadan keyingi ko'rsatmalar berish",
+      "isDecisionPoint": true,
+      "questionId": "se-q6",
+      "referenceContent": {
+        "anatomy": "Alveolyar osteit (quruq soket) — qon laxtasi bitish boshlanishidan oldin siljigan yoki eriganda yuzaga keladi, tagdagi suyakni bakteriyalar, ovqat qoldiqlari va so'lakka ochadi. Bu oddiy sug'urishlarning 2–5% ida, ko'proq pastki jag'da kuzatiladi. Xavf omillari: chekish, oral kontratseptivlar, qiyin sug'urish va og'iz bo'shlig'i gigiyenasining yomonligi.",
+        "technique": "Operatsiyadan keyingi ko'rsatmalar yozma va og'zaki bo'lishi kerak. NSAID birinchi qator og'riq qoldiruvchisi hisoblanadi. Quruq soketni davolash ehtiyotkorlik bilan yuvish va dorivor bog'lam (evgenol asosidagi) joylashtirishni o'z ichiga oladi — antibiotiklar emas, chunki quruq soket asosan infektsiya emas. 1 hafta ichida yoki asoratlar yuzaga kelsa tezroq nazorat ko'rigini belgilang."
+      }
+    }
+  ]
+}

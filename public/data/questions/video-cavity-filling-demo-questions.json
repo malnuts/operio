@@ -1,0 +1,88 @@
+{
+  "questions": [
+    {
+      "id": "vcf-q1",
+      "stem": "The cavity has been prepared and rubber dam isolation is in place. The doctor is about to apply a blue gel to the tooth surface. What is this material and what is its purpose?",
+      "options": [
+        {
+          "id": "a",
+          "text": "37% phosphoric acid \u2014 etches enamel and dentin to create micro-porosities for bonding"
+        },
+        {
+          "id": "b",
+          "text": "Desensitizing agent \u2014 reduces post-operative sensitivity before restoration"
+        },
+        {
+          "id": "c",
+          "text": "Cavity liner (calcium hydroxide) \u2014 protects the pulp from chemical irritation"
+        },
+        {
+          "id": "d",
+          "text": "Hemostatic agent \u2014 controls bleeding from the gingival margin"
+        }
+      ],
+      "correctOptionId": "a",
+      "category": "clinical-reasoning",
+      "explanation": {
+        "correctReasoning": "The blue gel is 37% phosphoric acid etchant. In the total-etch technique, it is applied to enamel (15-30s) and dentin (10-15s) to demineralize the surface and create micro-porosities. This allows the adhesive resin to penetrate and form a mechanical bond (hybrid layer on dentin, resin tags on enamel).",
+        "distractorAnalysis": {
+          "b": "Desensitizing agents are sometimes used but are typically clear solutions applied before etching, not blue gels applied after cavity preparation.",
+          "c": "Calcium hydroxide liners are white paste applied only over near-exposures, not over the entire preparation. They are placed before etching, not at this stage.",
+          "d": "Hemostatic agents are used when there is gingival bleeding, but they are typically applied to soft tissue, not the cavity preparation surface."
+        },
+        "clinicalPrinciple": "The total-etch (etch-and-rinse) technique provides the highest bond strengths to enamel. For deep dentin, be careful not to over-etch \u2014 dentin should only be etched for 10-15 seconds to preserve collagen architecture."
+      }
+    },
+    {
+      "id": "vcf-q2",
+      "stem": "The doctor has placed a matrix band and wedge and is beginning composite placement. Why is the composite placed in multiple thin layers rather than as a single bulk fill?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To allow each layer to be a different shade for better esthetics"
+        },
+        {
+          "id": "b",
+          "text": "To minimize polymerization shrinkage stress and ensure complete light cure through each increment"
+        },
+        {
+          "id": "c",
+          "text": "To allow the dentist to check the bite between each layer"
+        },
+        {
+          "id": "d",
+          "text": "Because composite resin cannot bond to itself once cured"
+        }
+      ],
+      "correctOptionId": "b",
+      "category": "technique",
+      "explanation": {
+        "correctReasoning": "Incremental layering (2mm or less per layer) serves two purposes: (1) it reduces the C-factor (ratio of bonded to unbonded surfaces), which minimizes polymerization shrinkage stress that can cause gap formation, post-op sensitivity, or cusp deflection; (2) light can only penetrate ~2mm of composite effectively, so thicker layers may be inadequately cured at depth.",
+        "clinicalPrinciple": "The C-factor is critical in large restorations. Oblique layering (placing wedge-shaped increments) reduces the number of bonded walls per increment, lowering shrinkage stress at the tooth-composite interface."
+      }
+    },
+    {
+      "id": "vcf-q3",
+      "stem": "The doctor is carefully sculpting cusps and fissures into the final composite layer. What is the most important reason for recreating accurate occlusal anatomy?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Purely esthetic \u2014 patients prefer natural-looking restorations"
+        },
+        {
+          "id": "b",
+          "text": "Proper occlusal contacts distribute masticatory forces and prevent TMJ dysfunction, opposing tooth super-eruption, and premature wear"
+        },
+        {
+          "id": "c",
+          "text": "Insurance requires anatomically correct restorations for reimbursement"
+        }
+      ],
+      "correctOptionId": "b",
+      "category": "clinical-reasoning",
+      "explanation": {
+        "correctReasoning": "Accurate occlusal anatomy ensures proper distribution of biting forces across the restoration and surrounding tooth structure. Premature or incorrect contacts can cause pain, accelerated wear of the composite or opposing tooth, and contribute to TMJ issues. Cusp tips, marginal ridges, and fossa depth must match the natural occlusion."
+      }
+    }
+  ]
+}

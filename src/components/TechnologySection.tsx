@@ -4,23 +4,23 @@ import { Cpu, Database, Shield, Layers } from "lucide-react";
 const techItems = [
   {
     icon: Cpu,
-    title: "Neural Simulation Core",
-    description: "Proprietary AI models trained on 500K+ dental procedures with real-time physics simulation.",
+    title: "Procedure Playback Infrastructure",
+    description: "Support chapter-based procedure lessons with media, explanations, and decision points that can evolve without rewriting the platform.",
   },
   {
     icon: Database,
     title: "Adaptive Learning Engine",
-    description: "ML-driven curriculum that identifies skill gaps and dynamically adjusts difficulty and case complexity.",
+    description: "Track learner progress across procedures, posts, and assessments so the review experience can respond to weak areas over time.",
   },
   {
     icon: Shield,
     title: "Clinical Validation",
-    description: "Peer-reviewed accuracy metrics validated against outcomes from 12 leading dental schools.",
+    description: "Keep launch content grounded in real clinical workflows while preserving room for expansion beyond the first specialty vertical.",
   },
   {
     icon: Layers,
-    title: "Multi-Modal Feedback",
-    description: "Synchronized visual, haptic, and auditory feedback loops for complete procedural immersion.",
+    title: "Optional Visual Reference",
+    description: "Treat anatomy and 3D reference modules as supporting layers that can attach to procedures or posts when the content needs them.",
   },
 ];
 
@@ -39,12 +39,12 @@ const TechnologySection = () => {
               Under the Hood
             </span>
             <h2 className="font-display text-4xl md:text-5xl font-bold mt-4 mb-6">
-              Built on <span className="gradient-text">breakthrough</span> infrastructure
+              Built on <span className="gradient-text">reusable</span> learning infrastructure
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              Dentsim's architecture is purpose-built for medical-grade simulation — 
-              combining real-time ray tracing, physics-based tissue modeling, and 
-              reinforcement learning into a unified training OS.
+              Operio's architecture is organized around reusable content and role models: learners
+              move through procedures, posts, review, and anatomy reference while creators publish
+              the educational material behind those experiences.
             </p>
           </motion.div>
 

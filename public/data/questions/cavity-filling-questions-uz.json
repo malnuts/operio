@@ -1,0 +1,125 @@
+{
+  "procedureId": "cavity-filling",
+  "questions": [
+    {
+      "id": "cf-q1",
+      "stem": "Bemor pastki birinchi oziq tishida sovuqqa sezuvchanlik shikoyati bilan murojaat qildi. Bitewing rentgenogrammasida mezial yuzada dentinning o'rta uchdan bir qismigacha cho'zilgan radiolucent soha aniqlandi. Eng mos davolash usuli qanday?",
+      "options": [
+        { "label": "A", "text": "Ftorid lak surish va nazorat qilish — shikastlanish boshlang'ich bo'lib, remineralizatsiya qilinishi mumkin", "isCorrect": false },
+        { "label": "B", "text": "Tishni tayyorlash va to'g'ridan-to'g'ri kompozit restavratsiya bilan tiklash", "isCorrect": true },
+        { "label": "C", "text": "Shikastlangan sohaga chuqurcha va tirqish germetigi (sealant) qo'yish", "isCorrect": false },
+        { "label": "D", "text": "Bilvosita pulpani qoplash va vaqtinchalik restavratsiya qo'yish", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Dentinning o'rta uchdan bir qismigacha cho'zilgan radiolucent soha kavitatsiyalangan kariyes borligini ko'rsatadi va operativ aralashuv talab etiladi. Kavitatsiya yuz bergandan so'ng, shikastlanish qaytarilmas bo'ladi. Silliq yuzali boshlang'ich shikastlanishlar (ICDAS 1) remineralizatsiya bilan davolanishi kerak, lekin bu shikastlanish o'sha bosqichdan ancha o'tib ketgan. To'g'ridan-to'g'ri kompozit II sinf shikastlanishi uchun standart davolash usuli hisoblanadi.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Ftorid bilan remineralizatsiya faqat yuzasi butun boshlang'ich shikastlanishlar uchun mos. Remineralizatsiyaga ruxsat berish uchun yuza butun bo'lishi kerak. Bu shikastlanish dentinga o'tgan va kavitatsiyalangan." },
+          { "label": "C", "reasoning": "Germetiklar kariyesga moyil chuqurchalar va tirqishlar uchun ko'rsatiladi, dentinga cho'zilgan mavjud proksimal kariyes uchun emas." },
+          { "label": "D", "reasoning": "Bilvosita pulpani qoplash pulpaga yaqinlashgan chuqur kariyes shikastlanishlari uchun mo'ljallangan, dentinning o'rta uchdan bir qismidagi kariyes uchun emas." }
+        ],
+        "clinicalPrinciple": "Kariyes rentgenogrammada har doim klinik ko'rinishidan kichikroq bo'ladi va rentgenogrammada aniqlanishi uchun 30-40% mineral yo'qotilishi kerak. Rentgenogrammada dentinga cho'zilgan ko'rinadigan shikastlanish operativ davolashni talab qiladigan sezilarli klinik shikastlanishni ko'rsatadi.",
+        "boardTip": "ICDAS 1 (boshlang'ich) = remineralizatsiya. ICDAS 3+ (dentinga kavitatsiyalangan) = tiklash. Kavitatsiya yuz bergandan so'ng, shikastlanish qaytarilmas."
+      }
+    },
+    {
+      "id": "cf-q2",
+      "stem": "Pastki alveolyar nerv blokadasi paytida stomatolog aspiratsiya qiladi va ijobiy aspiratsiya (kartrijda qon) oladi. Eng to'g'ri keyingi qadam qanday?",
+      "options": [
+        { "label": "A", "text": "Ignani to'liq chiqarish va in'ektsiya joyiga bosim o'tkazish", "isCorrect": false },
+        { "label": "B", "text": "Ignani biroz joyini o'zgartirish va qayta aspiratsiya qilish; agar manfiy bo'lsa, sekin yuborish", "isCorrect": true },
+        { "label": "C", "text": "Toksiklik xavfini kamaytirish uchun in'ektsiyani sekinroq tezlikda davom ettirish", "isCorrect": false },
+        { "label": "D", "text": "Pastki oziq tish uchun infiltratsion anesteziyaga o'tish", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Ijobiy aspiratsiya igna uchi qon tomiri ichida ekanligini ko'rsatadi. Ignani biroz joyini o'zgartirib qayta aspiratsiya qilish anestetik to'qimaga yuborilishini ta'minlaydi, qon tomir ichiga emas. Agar ikkinchi aspiratsiya manfiy bo'lsa, sekin in'ektsiya qilish mumkin.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Ignani to'liq chiqarib in'ektsiyani to'xtatish bemorni yetarli anesteziyasiz qoldiradi. Ignani qayta joylashtirish yetarli." },
+          { "label": "C", "reasoning": "Qon tomiriga, hatto sekin bo'lsa ham, in'ektsiya qilish markaziy nerv tizimi qo'zg'alishi, so'ngra depressiya va yurak-qon tomir buzilishlari kabi tizimli toksiklik xavfini tug'diradi." },
+          { "label": "D", "reasoning": "Buccal kortikal plastinkaning qalinligi sababli kattalar uchun faqat infiltratsiya pastki oziq tish anesteziyasi uchun odatda yetarli emas." }
+        ],
+        "clinicalPrinciple": "In'ektsiyadan oldin aspiratsiya mahalliy anestetikni qon tomir ichiga yuborilishining oldini oladi, bu markaziy nerv tizimi qo'zg'alishi, so'ngra depressiya va yurak-qon tomir buzilishlarini keltirib chiqarishi mumkin.",
+        "boardTip": "Ijobiy aspiratsiya → ignani qayta joylashtirish → qayta aspiratsiya → manfiy bo'lsa yuborish. Hech qachon qon tomiriga in'ektsiya qilmang."
+      }
+    },
+    {
+      "id": "cf-q3",
+      "stem": "Kompozit restavratsiya uchun II sinf bo'shliqni tayyorlashda dastlabki kontur shaklini yaratish uchun qaysi bor eng mos keladi va nima uchun?",
+      "options": [
+        { "label": "A", "text": "#1/4 dumaloq bor — kichik o'lchami kariyesni aniq aniqlashni ta'minlaydi", "isCorrect": false },
+        { "label": "B", "text": "#245 nok shaklidagi karbid bor — adgeziv retentsiya uchun biroz divergent devorlarni yaratadi", "isCorrect": true },
+        { "label": "C", "text": "#57 to'g'ri fissura bor — mexanik retentsiya uchun konvergent devorlarni yaratadi", "isCorrect": false },
+        { "label": "D", "text": "#330 dumaloq karbid bor — kariyes dentinni samarali olib tashlaydi", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "#245 nok shaklidagi bor kompozit uchun zarur bo'lgan biroz divergent bo'shliq devorlarini yaratadi. Kompozit restavratsiyalar mexanik retentsiya emas, adgeziv bog'lanish orqali mikromexanik retentsiyaga tayanadi. Karbid borlar uchli kesish uchun yaxshiroq bo'lib, kontur shaklini yaratish uchun ideal. Birlamchi qarshilik shakli yumaloq ichki chiziq burchaklarni talab qiladi, nok shakli tabiiy ravishda buni hosil qiladi.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "#1/4 dumaloq bor kontur shaklini yaratish uchun juda kichik. U dastlabki emal teshish yoki kariyes aniqlash uchun ishlatilishi mumkin." },
+          { "label": "C", "reasoning": "Konvergent devorlar amalgam retentsiyasi uchun ishlatiladi (retentsiyasiz materiallar konvergent devorlar bilan okkluzal siljishning oldini oladi). Kompozit yorug'lik kirishi va mikromexanik bog'lanish uchun divergent devorlarni talab qiladi." },
+          { "label": "D", "reasoning": "#330 dumaloq bor va qoshiq ekskavatorlar kariyes kavitatsiyasi (infektsiyalangan dentinni olib tashlash) uchun ishlatiladi, kontur shaklini yaratish uchun emas." }
+        ],
+        "clinicalPrinciple": "GV Blackning boshlang'ich tish tayyorlashning 4 bosqichi: 1) Kontur shakli, 2) Birlamchi qarshilik shakli, 3) Birlamchi retentsiya shakli, 4) Qulaylik shakli. Kompozit uchun retentsiya adgeziv (mikromexanik), mexanik emas. Tayyorlov dentinga 0,2 mm chuqurlikda bo'lishi va milkli tubi kariyes atrofida 0,5 mm uzayishi kerak.",
+        "boardTip": "Nok shaklidagi bor = kompozit tayyorlash (divergent devorlar, mikromexanik retentsiya). To'g'ri fissura = amalgam tayyorlash (konvergent devorlar, mexanik retentsiya). Karbid = uchli kesish; Olmos = yonli kesish."
+      }
+    },
+    {
+      "id": "cf-q4",
+      "stem": "Pulpa yaqinida kariyes kavitatsiyasi paytida operator qoshiq ekskavator bilan olib tashlashga qarshilik ko'rsatadigan qattiq, charm holatidagi, rangi o'zgargan dentinga duch keladi. Soha yumshoq yoki bo'tqa holatida emas. Eng to'g'ri harakat qanday?",
+      "options": [
+        { "label": "A", "text": "Dentin bir xil och sariq rangga kelguncha kavitatsiyani davom ettirish", "isCorrect": false },
+        { "label": "B", "text": "Qattiq, rangi o'zgargan dentinni joyida qoldirish — u remineralizatsiya qilinishi mumkin bo'lgan ta'sirlangan dentin", "isCorrect": true },
+        { "label": "C", "text": "Kariyes aniqlash bo'yog'ini surish va barcha bo'yalgan dentinni olib tashlash", "isCorrect": false },
+        { "label": "D", "text": "Kaltsiy gidroksid bilan to'g'ridan-to'g'ri pulpa qoplash va vaqtinchalik plomba qo'yish", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Bu ta'sirlangan dentinni tasvirlaydi — quruq, charm holatida, demineralizatsiyalangan, lekin bakteriyalar kirib bormagan. Pulpaga yaqin joylarda ta'sirlangan dentinni qoldirish mumkin, chunki u remineralizatsiya qilinishi mumkin. Faqat infektsiyalangan dentin (ho'l, yumshoq, bo'tqa holatida, nekrotik) olib tashlanishi shart. Infektsiyalangan dentin demineralizatsiyalangan, bakteriyalar mavjud va bog'lanish qobiliyati yo'q.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Barcha rangi o'zgargan dentinni olib tashlash pulpaning keraksiz ochilishi xavfini tug'diradi. Dentin demineralizatsiyasi emal kavitatsiyasidan oldin sodir bo'ladi — barcha rangi o'zgargan dentin infektsiyalangan emas." },
+          { "label": "C", "reasoning": "Kariyes aniqlash bo'yoqlari infektsiyalangan va ta'sirlangan dentinning ikkalasini ham bo'yaydi va haddan tashqari kavitatsiya hamda pulpa ochilishiga olib kelishi mumkin." },
+          { "label": "D", "reasoning": "To'g'ridan-to'g'ri pulpa qoplash operatsiyadan oldin asimptomatik bemorda < 1 mm pulpa ochilishi uchun ko'rsatiladi. Bu yerda ochilish yo'q — dentin qattiq." }
+        ],
+        "clinicalPrinciple": "Infektsiyalangan dentin = ho'l, yumshoq, bo'tqa holatida, nekrotik, bakteriyalar mavjud, bog'lanish qobiliyati yo'q → olib tashlash shart. Ta'sirlangan dentin = quruq, charm holatida, demineralizatsiyalangan, bakteriyalar yo'q → qoldirish mumkin. Chuqur kariyes kavitatsiyasi pulpaga yaqin bo'lsa, bilvosita pulpa qoplash ko'rsatilishi mumkin. Simptomatik bemorda > 1 mm pulpa ochilishi → ildiz kanali davolash.",
+        "boardTip": "Infektsiyalangan = ho'l/yumshoq/bo'tqa → olib tashlang. Ta'sirlangan = quruq/charm holatida/qattiq → qoldiring. To'g'ridan-to'g'ri pulpa qoplash = < 1 mm ochilish + asimptomatik. > 1 mm ochilish + simptomatik = ildiz kanali davolash."
+      }
+    },
+    {
+      "id": "cf-q5",
+      "stem": "To'liq kislotalash (etch-and-rinse) adgeziv tizimidan foydalanganda, fosfor kislotani yuvgandan so'ng dentin nima uchun ko'zga ko'rinadigan darajada nam saqlanishi kerakligini quyidagilardan qaysi biri eng yaxshi tushuntiradi?",
+      "options": [
+        { "label": "A", "text": "Namlik ochiq naychalarning bakterial ifloslanishining oldini oladi", "isCorrect": false },
+        { "label": "B", "text": "Suv kollagen tolalari tarmog'ini smola infiltratsiyasi va gibrid qatlam hosil bo'lishi uchun kengaygan holatda saqlaydi", "isCorrect": true },
+        { "label": "C", "text": "Ho'l dentin bog'lovchi agent ichidagi self-etch kislota komponentini boshlash uchun kerak", "isCorrect": false },
+        { "label": "D", "text": "Namlik erituvchi bug'lanishini sekinlashtirish orqali bog'lovchi agentning ish vaqtini oshiradi", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Kislotali emallash smear qatlamini olib tashlaydi va dentin naychalarini ochadi, kollagen tolalar tarmog'ini fosh qiladi. Agar bu tarmog' qurib qolsa, kollagen yiqiladi va smola monomer infiltratsiyasiga to'sqinlik qiladi. Gibrid qatlam — kollagen matritsadagi adgeziv smola va praymer aralashmasi — dentin bog'lanishining asosini tashkil etadi. Naychalarga cho'zilgan smola yorliqlari mikromexanik retentsiyani ta'minlaydi.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Namlik nazorati muhim bo'lsa-da, ifloslanishning oldini olishni kofferdam ta'minlaydi. Nam bog'lash texnikasi maxsus kollagen arxitekturasini saqlaydi." },
+          { "label": "C", "reasoning": "To'liq kislotalash va self-etch ikkita alohida bog'lash oilalaridir. To'liq kislotalashda kislota alohida qo'llaniladi va yuvib tashlanadi — bog'lovchi agentda self-etch komponenti yo'q." },
+          { "label": "D", "reasoning": "Yuzadagi namlik bog'lovchi agentning ish vaqtiga sezilarli ta'sir qilmaydi. Kamforxinon fotoinitsiator va yorug'lik aktivatsiyasi polimerizatsiyani boshqaradi, namlik emas." }
+        ],
+        "clinicalPrinciple": "Bog'lash tizimlarining ikkita asosiy oilasi — etch-and-rinse va self-etch. To'liq kislotalashda yiqilgan kollagen = smola infiltratsiyasi yo'q = kuchsiz bog'lanish. Gibrid qatlam (kollagen matritsadagi smola + praymer) smola yorliqlari bilan dentin adgeziyasi uchun mikromexanik retentsiya orqali asosni ta'minlaydi.",
+        "boardTip": "To'liq kislotalash = dentinni nam saqlang (nam bog'lash). Self-etch = alohida kislota bosqichi yo'q. Gibrid qatlam = kollagen matritsadagi adgeziv smola + praymer = dentin bog'lanishining asosi."
+      }
+    },
+    {
+      "id": "cf-q6",
+      "stem": "Orqa kompozit smolani joylashtirishda stomatolog 2 mm qavatlar bilan bosqichma-bosqich qatlama texnikasini qo'llaydi. Quyidagilardan qaysi biri ushbu yondashuvning asosiy sababini eng yaxshi tushuntiradi?",
+      "options": [
+        { "label": "A", "text": "Ingichka qavatlar kompozit va tabiiy tish tuzilmasi o'rtasida rangni yaxshiroq moslashtirish imkonini beradi", "isCorrect": false },
+        { "label": "B", "text": "Bosqichma-bosqich joylashtirish C-faktor va polimerizatsiya qisqarish stressini kamaytiradi, mikrosizish xavfini pasaytiradi", "isCorrect": true },
+        { "label": "C", "text": "To'ldiruvchi zarrachalarning shaffofligi tufayli yorug'lik 2 mm dan chuqurroq kompozitga yetarli darajada kira olmaydi", "isCorrect": false },
+        { "label": "D", "text": "Ingichka qavatlar yorug'lik bilan qotirishni to'xtatadigan benzoil peroksidning kirishini oldini oladi", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Kompozitlar taxminan 2-3% polimerizatsiya qisqarishiga uchraydi. C-faktor (bog'langan va bog'lanmagan yuzalar nisbati) qisqarish stressini belgilaydi — yuqori C-faktorlar kattaroq mikrosizishga olib keladi. Kompozit polimerizatsiya qilganda tayyorlov tomonlariga tortiladi; agar polimerizatsiya kuchi bog'lanish kuchidan oshsa, mikrosizish sodir bo'ladi. Qisqarish hajmi va C-faktorni cheklash uchun har bir qatlam 2 mm dan oshmasligi kerak.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Qatlamlash estetikaga hissa qo'shishi mumkin bo'lsa-da, orqa kompozitlarda asosiy sabab C-faktor va polimerizatsiya qisqarish stressini boshqarish, rang moslashi emas." },
+          { "label": "C", "reasoning": "To'ldiruvchi zarrachalar rentgenokontrastlik beradi, qotirish yorug'igiga shaffoflik emas. Qotish chuqurligi rangga qarab farq qiladi va bosqichma-bosqich joylashtirishning asosiy sababi emas." },
+          { "label": "D", "reasoning": "Benzoil peroksid o'z-o'zidan qotiriladigan kompozitlarda initsiator; kamforxinon yorug'lik bilan qotiriladigan kompozitlarda fotoinitsiator. Bular turli qotirish tizimlari — benzoil peroksid yorug'lik bilan qotirishni to'xtatmaydi." }
+        ],
+        "clinicalPrinciple": "C-faktor bog'langan va bog'lanmagan yuzalar nisbatidir. Yuqori C-faktor = polimerizatsiya qisqarish stressidan kattaroq mikrosizish. Qiya qatlamlash har bir qatlam ikkitadan ortiq devorga tegmasligini ta'minlab C-faktorni kamaytiradi. Ko'pchilik kompozitlar kvarts/silika to'ldiruvchi zarrachalari bilan silan orqali bog'langan Bis-GMA smola matritsasidan iborat.",
+        "boardTip": "C-faktor = bog'langan / bog'lanmagan yuzalar. Yuqori C-faktor = ko'proq qisqarish stressi = ko'proq mikrosizish. 2 mm qatlamlar + qiya qatlamlash = pastroq C-faktor. Kompozitlar 2-3% qisqaradi."
+      }
+    }
+  ]
+}
