@@ -3,6 +3,10 @@
 .env.local
 assets/r2.config
 
+# Oversized models (use R2 for large assets)
+public/models/shared/chemicals__element_exposure_pattern.glb
+public/models/shared/illicit__recreational_drugs_exposure_pattern.glb
+
 # Logs
 logs
 *.log
