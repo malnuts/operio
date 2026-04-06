@@ -91,8 +91,11 @@ type VideoQuestionSet = {
   }>;
 };
 
+const withBase = (path: string) =>
+  `${import.meta.env.BASE_URL.replace(/\/$/, "")}${path}`;
+
 const fetchJson = async <T>(path: string): Promise<T> => {
-  const response = await fetch(path);
+  const response = await fetch(withBase(path));
 
   if (!response.ok) {
     throw new Error(`Failed to load ${path}`);
