@@ -7,6 +7,8 @@ import { productRoutes } from "@/lib/product-language";
 import Index from "./pages/Index.tsx";
 import LearnerHome from "./pages/LearnerHome.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import PostDetail from "./pages/PostDetail.tsx";
+import PostLibrary from "./pages/PostLibrary.tsx";
 import ProcedureDetail from "./pages/ProcedureDetail.tsx";
 import ProcedureLibrary from "./pages/ProcedureLibrary.tsx";
 import ReviewMode from "./pages/ReviewMode.tsx";
@@ -25,8 +27,10 @@ const App = () => (
           <Route path="/app" element={<LearnerHome />} />
           <Route path="/app/procedures" element={<ProcedureLibrary />} />
           <Route path="/app/procedure/:id" element={<ProcedureDetail />} />
+          <Route path="/app/posts" element={<PostLibrary />} />
+          <Route path="/app/post/:id" element={<PostDetail />} />
           <Route path="/app/review" element={<ReviewMode />} />
-          {productRoutes.filter((route) => !["/app", "/app/procedures", "/app/procedure/:id", "/app/review"].includes(route.path)).map((route) => (
+          {productRoutes.filter((route) => !["/app", "/app/procedures", "/app/procedure/:id", "/app/posts", "/app/post/:id", "/app/review"].includes(route.path)).map((route) => (
             <Route
               key={route.path}
               path={route.path}

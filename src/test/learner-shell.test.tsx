@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import App from "@/App";
 import {
@@ -16,6 +16,23 @@ describe("learner shell", () => {
   beforeEach(() => {
     window.localStorage.clear();
     window.history.pushState({}, "", "/");
+
+    vi.stubGlobal(
+      "fetch",
+      vi.fn((input: RequestInfo | URL) => {
+        const path = String(input);
+
+        if (path.includes("/data/post-manifest.json")) {
+          return Promise.resolve({ ok: true, json: async () => ({ posts: [] }) });
+        }
+
+        if (path.includes("/data/procedure-manifest.json")) {
+          return Promise.resolve({ ok: true, json: async () => ({ procedures: [] }) });
+        }
+
+        return Promise.resolve({ ok: false, json: async () => ({}) });
+      }),
+    );
   });
 
   it("renders the learner home route and navigates to learner entry points", async () => {
@@ -27,7 +44,7 @@ describe("learner shell", () => {
     fireEvent.click(screen.getByRole("link", { name: /posts/i }));
 
     expect(
-      await screen.findByRole("heading", { name: "Clinical Posts" }),
+      await screen.findByRole("heading", { name: /read clinical posts/i }),
     ).toBeInTheDocument();
   });
 

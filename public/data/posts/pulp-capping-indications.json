@@ -1,0 +1,25 @@
+{
+  "id": "pulp-capping-indications",
+  "title": "Direct Pulp Capping: When to Attempt Vital Pulp Therapy",
+  "excerpt": "Understanding the clinical indicators that determine whether a pulp exposure can be managed conservatively.",
+  "body": "When a pulp exposure occurs during caries excavation, the decision to attempt direct pulp capping versus proceeding to pulpotomy or root canal therapy depends on several clinical and patient factors.\n\n## Favorable indicators\n\nDirect pulp capping has the highest success rate when the exposure is small (less than 1 mm), occurs in a field with good hemorrhage control, and involves a tooth with no prior symptoms of irreversible pulpitis. The patient's age matters: younger teeth with open apices and robust blood supply respond more favorably.\n\n## Material selection\n\nCalcium silicate cements such as MTA or Biodentine have largely replaced traditional calcium hydroxide for direct pulp capping. These materials offer better sealing ability, biocompatibility, and long-term bridge formation. Place the material directly over the exposure site without excessive pressure.\n\n## Unfavorable scenarios\n\n- Spontaneous or lingering pain before the procedure\n- Exposure larger than 2 mm with uncontrollable hemorrhage\n- Radiographic signs of periapical pathology\n- Carious pulp exposure in a mature tooth with a long history of deep caries\n\n## Follow-up protocol\n\nPulp vitality testing at 1 week, 3 months, 6 months, and 1 year post-treatment helps detect early failure. A tooth that develops spontaneous pain, sensitivity to heat, or periapical radiolucency should be scheduled for root canal therapy.\n\n## Clinical takeaway\n\nNot every pulp exposure requires endodontic treatment. Careful case selection and proper material choice give clinicians a predictable conservative option that preserves tooth vitality.",
+  "author": {
+    "name": "Dr. Marcus Rivera",
+    "institution": "Columbia University College of Dental Medicine",
+    "specialty": "Endodontics"
+  },
+  "field": "Endodontics",
+  "topic": "Vital Pulp Therapy",
+  "tags": ["pulp capping", "MTA", "vital pulp therapy", "endodontics", "case selection"],
+  "publishDate": "2026-03-22",
+  "platformMetadata": {
+    "contentType": "post",
+    "status": "published",
+    "visibility": "free"
+  },
+  "domainMetadata": {
+    "domain": "dentistry",
+    "specialty": "endodontics",
+    "launchDataset": true
+  }
+}

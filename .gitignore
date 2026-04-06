@@ -1,3 +1,8 @@
+# Secrets
+.env
+.env.local
+assets/r2.config
+
 # Logs
 logs
 *.log

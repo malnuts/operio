@@ -1,0 +1,26 @@
+{
+  "id": "rubber-dam-isolation",
+  "title": "Rubber Dam Isolation: Why It Still Matters",
+  "excerpt": "A practical overview of rubber dam placement for restorative and endodontic procedures.",
+  "body": "Rubber dam isolation remains one of the most underused yet impactful techniques in clinical dentistry. Despite strong evidence supporting its role in moisture control, contamination prevention, and improved treatment outcomes, many practitioners skip it due to perceived time constraints.\n\n## Why isolate?\n\nMoisture control is critical for adhesive restorations. Contamination from saliva during composite bonding can reduce bond strength by up to 50%. In endodontic procedures, rubber dam isolation is considered the standard of care to prevent aspiration of instruments and ingestion of irrigants.\n\n## Placement fundamentals\n\nStart with proper clamp selection. The clamp should engage the tooth securely at the cementoenamel junction without impinging on soft tissue. Wingless clamps are generally easier to stabilize, while winged clamps allow simultaneous placement with the dam.\n\nPunch the hole slightly lingual to the center of the expected tooth position. Stretch the dam over the clamp and use a flat plastic instrument to tuck the edges into the gingival sulcus.\n\n## Common pitfalls\n\n- Using a clamp that is too small, leading to instability and tissue trauma\n- Failing to check for latex allergies before placement\n- Not inverting the dam edges, which allows fluid leakage around the tooth\n- Rushing clamp placement, which can fracture weakened cusps\n\n## Clinical takeaway\n\nRubber dam isolation adds a few minutes to chair time but substantially improves the predictability of adhesive and endodontic procedures. Building the habit early reduces long-term frustration and treatment failures.",
+  "author": {
+    "name": "Dr. Sarah Chen",
+    "institution": "Pacific Dental Institute",
+    "specialty": "Restorative Dentistry"
+  },
+  "field": "Restorative Dentistry",
+  "topic": "Isolation Techniques",
+  "tags": ["rubber dam", "isolation", "adhesive dentistry", "endodontics", "clinical technique"],
+  "publishDate": "2026-03-15",
+  "linkedAssessmentId": "rubber-dam-isolation-questions",
+  "platformMetadata": {
+    "contentType": "post",
+    "status": "published",
+    "visibility": "free"
+  },
+  "domainMetadata": {
+    "domain": "dentistry",
+    "specialty": "restorative",
+    "launchDataset": true
+  }
+}

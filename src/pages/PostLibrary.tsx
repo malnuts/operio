@@ -1,0 +1,131 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { BookOpen, Calendar, FileText, RefreshCw } from "lucide-react";
+
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { buildPostLibraryItems, formatPublishDate, getPostMeta, type PostLibraryItem } from "@/lib/post-data";
+
+const PostLibrary = () => {
+  const [items, setItems] = useState<PostLibraryItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    buildPostLibraryItems()
+      .then((data) => {
+        setItems(data);
+        setError(null);
+      })
+      .catch(() => {
+        setError("Unable to load clinical posts right now.");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  return (
+    <main className="min-h-screen bg-background px-6 py-16 text-foreground">
+      <div className="mx-auto flex max-w-6xl flex-col gap-8">
+        <section className="space-y-4">
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.24em] text-primary">
+            <BookOpen className="h-3.5 w-3.5" />
+            Clinical Posts
+          </div>
+          <div className="space-y-3">
+            <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">
+              Read clinical posts, case reflections, and practical writeups.
+            </h1>
+            <p className="max-w-3xl text-base leading-7 text-muted-foreground md:text-lg">
+              Posts extend learning beyond procedures with focused articles, technique discussions,
+              and educational case content.
+            </p>
+          </div>
+        </section>
+
+        {loading ? (
+          <div className="rounded-3xl border border-border bg-card/50 p-8 text-sm text-muted-foreground">
+            Loading posts...
+          </div>
+        ) : null}
+
+        {error ? (
+          <div className="rounded-3xl border border-destructive/30 bg-destructive/5 p-8 text-sm text-destructive">
+            {error}
+          </div>
+        ) : null}
+
+        {!loading && !error ? (
+          <section className="grid gap-4 md:grid-cols-2">
+            {items.map((item) => {
+              const meta = getPostMeta(item);
+
+              return (
+                <Link key={item.id} to={`/app/post/${item.id}`} className="group">
+                  <Card className="h-full border-border/70 transition-colors hover:border-primary/40">
+                    <CardHeader className="space-y-4">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="space-y-2">
+                          <CardTitle className="text-2xl">{item.title}</CardTitle>
+                          <CardDescription className="text-sm leading-6">
+                            {item.excerpt}
+                          </CardDescription>
+                        </div>
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                          {item.hasLinkedAssessment ? (
+                            <FileText className="h-5 w-5" />
+                          ) : (
+                            <BookOpen className="h-5 w-5" />
+                          )}
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="space-y-5">
+                      <div className="flex flex-wrap gap-2">
+                        {meta.map((label) => (
+                          <Badge key={label} variant="secondary">
+                            {label}
+                          </Badge>
+                        ))}
+                      </div>
+
+                      <div className="rounded-2xl bg-muted/60 p-4 text-sm text-muted-foreground">
+                        <p className="font-medium text-foreground">{item.authorName}</p>
+                        <p>{item.authorInstitution ?? "Independent clinical educator"}</p>
+                      </div>
+
+                      {item.publishDate ? (
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <Calendar className="h-3.5 w-3.5" />
+                          {formatPublishDate(item.publishDate)}
+                        </div>
+                      ) : null}
+
+                      {item.tags.length ? (
+                        <div className="flex flex-wrap gap-2">
+                          {item.tags.slice(0, 4).map((tag) => (
+                            <span key={tag} className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      ) : null}
+
+                      <div className="flex items-center gap-2 text-sm font-medium text-primary">
+                        <RefreshCw className="h-4 w-4" />
+                        Read post
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              );
+            })}
+          </section>
+        ) : null}
+      </div>
+    </main>
+  );
+};
+
+export default PostLibrary;

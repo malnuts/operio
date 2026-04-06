@@ -1,0 +1,43 @@
+{
+  "postId": "rubber-dam-isolation",
+  "questions": [
+    {
+      "id": "rdi-q1",
+      "stem": "Which of the following is the primary reason rubber dam isolation is considered the standard of care during endodontic procedures?",
+      "options": [
+        { "label": "A", "text": "It improves patient comfort during long appointments.", "isCorrect": false },
+        { "label": "B", "text": "It prevents aspiration of endodontic instruments and ingestion of irrigants.", "isCorrect": true },
+        { "label": "C", "text": "It reduces the total number of radiographs needed during treatment.", "isCorrect": false },
+        { "label": "D", "text": "It eliminates the need for local anesthesia supplementation.", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Rubber dam isolation is the standard of care in endodontics primarily because it prevents aspiration or ingestion of small instruments (files, posts) and caustic irrigants (sodium hypochlorite). This is a patient safety requirement, not merely a convenience.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "While rubber dam can improve some aspects of the clinical experience, patient comfort is not the primary rationale for its standard-of-care status." },
+          { "label": "C", "reasoning": "Rubber dam does not directly affect the number of radiographs required during endodontic treatment." },
+          { "label": "D", "reasoning": "Rubber dam isolation does not influence the pharmacology or effectiveness of local anesthesia." }
+        ],
+        "clinicalPrinciple": "Rubber dam isolation during endodontics is a medicolegal and patient-safety standard, not just a clinical preference."
+      }
+    },
+    {
+      "id": "rdi-q2",
+      "stem": "A clinician notices fluid leaking around the tooth despite rubber dam placement. Which of the following is the most likely cause?",
+      "options": [
+        { "label": "A", "text": "The clamp was placed too far apically on the root surface.", "isCorrect": false },
+        { "label": "B", "text": "The dam edges were not inverted into the gingival sulcus.", "isCorrect": true },
+        { "label": "C", "text": "The punch hole was positioned too far to the buccal.", "isCorrect": false },
+        { "label": "D", "text": "A winged clamp was used instead of a wingless clamp.", "isCorrect": false }
+      ],
+      "explanation": {
+        "correctReasoning": "Failing to invert the rubber dam edges into the gingival sulcus is the most common cause of fluid leakage. A flat plastic instrument should be used to tuck the dam margin below the free gingiva to create a seal.",
+        "distractorBreakdowns": [
+          { "label": "A", "reasoning": "Placing the clamp too far apically would cause tissue trauma but is not the typical cause of fluid leakage around the dam." },
+          { "label": "C", "reasoning": "Punch hole positioning affects dam fit but does not directly cause sulcular leakage if the edges are properly inverted." },
+          { "label": "D", "reasoning": "Clamp wing style affects the placement sequence but does not inherently cause leakage." }
+        ],
+        "clinicalPrinciple": "Dam inversion is a simple step that is frequently skipped and directly leads to contamination of the operative field."
+      }
+    }
+  ]
+}
