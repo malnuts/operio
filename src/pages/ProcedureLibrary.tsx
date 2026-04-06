@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FileVideo, Microscope, RefreshCw, Stethoscope } from "lucide-react";
+import { ArrowLeft, FileVideo, Microscope, RefreshCw, Stethoscope } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -28,6 +28,11 @@ const ProcedureLibrary = () => {
   return (
     <main className="min-h-screen bg-background px-6 py-16 text-foreground">
       <div className="mx-auto flex max-w-6xl flex-col gap-8">
+        <Link to="/app" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+          <ArrowLeft className="h-4 w-4" />
+          Back to learner home
+        </Link>
+
         <section className="space-y-4">
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.24em] text-primary">
             <Microscope className="h-3.5 w-3.5" />
