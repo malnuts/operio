@@ -71,8 +71,6 @@ const ProcedureDetail = () => {
             .catch(() => {});
         }
         if (nextProcedure.videoUrl) {
-          const syncUrl = resolveAssetUrl(nextProcedure.videoUrl);
-          if (active) setResolvedVideoUrl(syncUrl);
           resolveAssetUrlAsync(nextProcedure.videoUrl)
             .then((url) => { if (active) setResolvedVideoUrl(url); })
             .catch(() => {});
