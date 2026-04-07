@@ -1,0 +1,44 @@
+{
+  "references": [
+    {
+      "id": "sample",
+      "label": "Tooth Cross Section",
+      "description": "Cross-sectional reference showing internal tooth anatomy layers.",
+      "modelPath": "/models/shared/tooth-cross-section.glb",
+      "field": "Dental Anatomy",
+      "tags": ["enamel", "dentin", "pulp", "cementum"]
+    },
+    {
+      "id": "tooth-cross-section",
+      "label": "Tooth Cross Section",
+      "description": "Cross-sectional reference showing internal tooth anatomy layers.",
+      "modelPath": "/models/shared/tooth-cross-section.glb",
+      "field": "Dental Anatomy",
+      "tags": ["enamel", "dentin", "pulp", "cementum"]
+    },
+    {
+      "id": "full-mouth",
+      "label": "Full Mouth",
+      "description": "Complete maxillary and mandibular arch reference for full mouth assessment.",
+      "modelPath": "/models/shared/full-mouth.glb",
+      "field": "Oral Anatomy",
+      "tags": ["arches", "dentition", "occlusion"]
+    },
+    {
+      "id": "human-mouth",
+      "label": "Detailed Oral Anatomy",
+      "description": "Detailed anatomical reference of oral structures.",
+      "modelPath": "/models/shared/human_mouth_detailed.glb",
+      "field": "Oral Anatomy",
+      "tags": ["oral anatomy", "soft tissue", "hard tissue"]
+    },
+    {
+      "id": "inside-tooth",
+      "label": "Internal Tooth Structure",
+      "description": "Internal view of tooth structure including pulp chamber and root canals.",
+      "modelPath": "/models/shared/inside_my_tooth.glb",
+      "field": "Endodontics",
+      "tags": ["pulp chamber", "root canal", "apex"]
+    }
+  ]
+}
