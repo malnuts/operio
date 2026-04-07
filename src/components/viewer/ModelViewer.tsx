@@ -6,6 +6,24 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 import { useWebGL } from "@/hooks/useWebGL";
 
+// Three.js r170 sets crossOrigin on all non-data: URLs including blob: URLs.
+// Firefox enforces CORS on blob: URLs when crossOrigin is set, causing texture
+// load failures. Patch ImageLoader to skip crossOrigin for same-origin blob: URLs.
+{
+  const _orig = THREE.ImageLoader.prototype.load;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (THREE.ImageLoader.prototype as any).load = function (url: string, ...rest: unknown[]) {
+    if (url.startsWith("blob:") || url.startsWith("data:")) {
+      const saved = this.crossOrigin;
+      this.crossOrigin = undefined as unknown as string;
+      const result = _orig.call(this, url, ...rest);
+      this.crossOrigin = saved;
+      return result;
+    }
+    return _orig.call(this, url, ...rest);
+  };
+}
+
 export type ModelViewerProps = {
   modelPath: string;
   label?: string;
