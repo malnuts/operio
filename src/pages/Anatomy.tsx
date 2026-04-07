@@ -5,6 +5,7 @@ import { ArrowLeft, ScanSearch } from "lucide-react";
 import ModelViewer from "@/components/viewer/ModelViewer";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { resolveAssetUrlAsync } from "@/lib/asset-config";
 
 type VisualReference = {
   id: string;
@@ -25,27 +26,40 @@ const withBase = (path: string) =>
 const Anatomy = () => {
   const { id = "" } = useParams();
   const [reference, setReference] = useState<VisualReference | null>(null);
+  const [resolvedModelUrl, setResolvedModelUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    let active = true;
+
     fetch(withBase("/data/visual-manifest.json"))
       .then((r) => {
         if (!r.ok) throw new Error("Failed to load visual manifest");
         return r.json() as Promise<VisualManifest>;
       })
-      .then((manifest) => {
+      .then(async (manifest) => {
         const found = manifest.references.find((ref) => ref.id === id);
+        if (!active) return;
+
         if (found) {
-          setReference(found);
+          const url = await resolveAssetUrlAsync(found.modelPath);
+          if (active) {
+            setReference(found);
+            setResolvedModelUrl(url);
+          }
         } else {
-          setError(`No visual reference found for "${id}".`);
+          if (active) setError(`No visual reference found for "${id}".`);
         }
       })
       .catch(() => {
-        setError("Unable to load the visual reference right now.");
+        if (active) setError("Unable to load the visual reference right now.");
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        if (active) setLoading(false);
+      });
+
+    return () => { active = false; };
   }, [id]);
 
   return (
@@ -99,11 +113,17 @@ const Anatomy = () => {
           </div>
         ) : reference ? (
           <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
-            <ModelViewer
-              modelPath={reference.modelPath}
-              label={reference.label}
-              description={reference.description}
-            />
+            {resolvedModelUrl ? (
+              <ModelViewer
+                modelPath={resolvedModelUrl}
+                label={reference.label}
+                description={reference.description}
+              />
+            ) : (
+              <div className="flex min-h-[360px] items-center justify-center rounded-2xl border border-border bg-muted/40 text-sm text-muted-foreground">
+                Preparing model…
+              </div>
+            )}
 
             <Card className="h-fit border-border/70">
               <CardHeader>
