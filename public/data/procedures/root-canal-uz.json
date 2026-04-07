@@ -4,7 +4,7 @@
   "title": "Ildiz kanali davolash",
   "description": "Pastki birinchi oziq tishda simptomatik qaytmas pulpitni tashxislang va to'liq endodontik davolashni bajaring: kirish, instrumentatsiya, irrigatsiya va obturatsiya.",
   "difficulty": "Murakkab",
-  "modelPath": "/models/shared/tooth-cross-section.glb",
+  "modelPath": "/models/shared/inside_my_tooth.glb",
   "cameraAngle": 270,
   "steps": [
     {

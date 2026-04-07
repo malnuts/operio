@@ -66,14 +66,14 @@ const ProcedureDetail = () => {
         trackProcedureVisit(id, alreadyCompleted);
 
         if (nextProcedure.modelPath) {
-          resolveAssetUrlAsync(nextProcedure.modelPath).then((url) => {
-            if (active) setResolvedModelUrl(url);
-          });
+          if (active) setResolvedModelUrl(resolveAssetUrl(nextProcedure.modelPath));
         }
         if (nextProcedure.videoUrl) {
-          resolveAssetUrlAsync(nextProcedure.videoUrl).then((url) => {
-            if (active) setResolvedVideoUrl(url);
-          });
+          const syncUrl = resolveAssetUrl(nextProcedure.videoUrl);
+          if (active) setResolvedVideoUrl(syncUrl);
+          resolveAssetUrlAsync(nextProcedure.videoUrl)
+            .then((url) => { if (active) setResolvedVideoUrl(url); })
+            .catch(() => {});
         }
       })
       .catch(() => {

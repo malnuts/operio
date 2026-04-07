@@ -4,7 +4,6 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
-import { resolveAssetUrl } from "@/lib/asset-config";
 import { useWebGL } from "@/hooks/useWebGL";
 
 export type ModelViewerProps = {
@@ -113,10 +112,8 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
     const loader = new GLTFLoader();
     loader.setDRACOLoader(dracoLoader);
 
-    const url = resolveAssetUrl(modelPath);
-
     loader.load(
-      url,
+      modelPath,
       (gltf) => {
         const model = gltf.scene;
 

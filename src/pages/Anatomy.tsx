@@ -5,7 +5,7 @@ import { ArrowLeft, ScanSearch } from "lucide-react";
 import ModelViewer from "@/components/viewer/ModelViewer";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { resolveAssetUrlAsync } from "@/lib/asset-config";
+import { resolveAssetUrl } from "@/lib/asset-config";
 
 type VisualReference = {
   id: string;
@@ -38,15 +38,14 @@ const Anatomy = () => {
         if (!r.ok) throw new Error("Failed to load visual manifest");
         return r.json() as Promise<VisualManifest>;
       })
-      .then(async (manifest) => {
+      .then((manifest) => {
         const found = manifest.references.find((ref) => ref.id === id);
         if (!active) return;
 
         if (found) {
-          const url = await resolveAssetUrlAsync(found.modelPath);
           if (active) {
             setReference(found);
-            setResolvedModelUrl(url);
+            setResolvedModelUrl(resolveAssetUrl(found.modelPath));
           }
         } else {
           if (active) setError(`No visual reference found for "${id}".`);

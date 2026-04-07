@@ -4,7 +4,7 @@
   "title": "Cavity Filling",
   "description": "Diagnose and restore a Class II carious lesion on a mandibular first molar using composite resin with total-etch adhesive bonding.",
   "difficulty": "Beginner",
-  "modelPath": "/models/shared/tooth-cross-section.glb",
+  "modelPath": "/models/shared/inside_my_tooth.glb",
   "cameraAngle": 270,
   "steps": [
     {

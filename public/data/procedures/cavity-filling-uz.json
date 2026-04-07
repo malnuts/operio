@@ -4,7 +4,7 @@
   "title": "Kariyes plombalash",
   "description": "Pastki birinchi oziq tishda (molar) II sinf kariyes shikastlanishini tashxislash va kompozit qatron bilan to'liq kislotalash adgeziv bog'lash usulida tiklash.",
   "difficulty": "Boshlang'ich",
-  "modelPath": "/models/shared/tooth-cross-section.glb",
+  "modelPath": "/models/shared/inside_my_tooth.glb",
   "cameraAngle": 270,
   "steps": [
     {
