@@ -3,11 +3,13 @@ import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight, CheckCircle2, Microscope, ScrollText } from "lucide-react";
 
 import AssessmentPromptCard from "@/components/AssessmentPromptCard";
+import ModelViewer from "@/components/viewer/ModelViewer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useLearnerProgress } from "@/hooks/useLearnerProgress";
+import { resolveAssetUrlAsync } from "@/lib/asset-config";
 import {
   buildProcedurePlayback,
   getProcedureMeta,
@@ -34,6 +36,8 @@ const ProcedureDetail = () => {
   const [completed, setCompleted] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [resolvedModelUrl, setResolvedModelUrl] = useState<string | null>(null);
+  const [resolvedVideoUrl, setResolvedVideoUrl] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -42,7 +46,7 @@ const ProcedureDetail = () => {
     setError(null);
 
     Promise.all([loadProcedureById(id), loadQuestionsByProcedureId(id)])
-      .then(([nextProcedure, nextQuestions]) => {
+      .then(async ([nextProcedure, nextQuestions]) => {
         if (!active) {
           return;
         }
@@ -60,6 +64,17 @@ const ProcedureDetail = () => {
         setSelectedOptionId(null);
         setAnsweredQuestionIds({});
         trackProcedureVisit(id, alreadyCompleted);
+
+        if (nextProcedure.modelPath) {
+          resolveAssetUrlAsync(nextProcedure.modelPath).then((url) => {
+            if (active) setResolvedModelUrl(url);
+          });
+        }
+        if (nextProcedure.videoUrl) {
+          resolveAssetUrlAsync(nextProcedure.videoUrl).then((url) => {
+            if (active) setResolvedVideoUrl(url);
+          });
+        }
       })
       .catch(() => {
         if (!active) {
@@ -290,6 +305,15 @@ const ProcedureDetail = () => {
                 <Microscope className="h-3.5 w-3.5" />
                 {currentUnit.title}
               </div>
+              {resolvedVideoUrl ? (
+                <video
+                  src={resolvedVideoUrl}
+                  controls
+                  className="w-full rounded-2xl bg-black"
+                  style={{ maxHeight: 360 }}
+                  aria-label={`Video: ${typeof procedure?.title === "string" ? procedure.title : ""}`}
+                />
+              ) : null}
               <div className="space-y-3">
                 <CardTitle className="text-3xl">{currentUnit.supportingText ?? currentUnit.title}</CardTitle>
                 <CardDescription className="text-base leading-7 text-muted-foreground">
@@ -341,6 +365,13 @@ const ProcedureDetail = () => {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
+              {resolvedModelUrl ? (
+                <ModelViewer
+                  modelPath={resolvedModelUrl}
+                  label={typeof procedure?.title === "string" ? procedure.title : "Reference model"}
+                />
+              ) : null}
+
               {currentUnit.referenceContent?.instrument ? (
                 <div className="space-y-2 rounded-2xl bg-muted/60 p-4">
                   <p className="text-sm font-medium text-foreground">{currentUnit.referenceContent.instrument.name}</p>

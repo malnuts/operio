@@ -49,10 +49,10 @@ const getR2Client = (): S3Client | null => {
 };
 
 /**
- * Converts a content path like `/models/shared/tooth.glb` to an R2 object key
- * by stripping the leading slash.
+ * Converts a content path like `/models/shared/tooth.glb` to an R2 object key.
+ * Media files are stored under the `assets/` prefix in the R2 bucket.
  */
-const pathToR2Key = (path: string): string => path.replace(/^\//, "");
+const pathToR2Key = (path: string): string => `assets/${path.replace(/^\//, "")}`;
 
 /**
  * Resolves a model/media path to a URL synchronously.
