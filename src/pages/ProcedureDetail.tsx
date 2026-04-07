@@ -66,7 +66,9 @@ const ProcedureDetail = () => {
         trackProcedureVisit(id, alreadyCompleted);
 
         if (nextProcedure.modelPath) {
-          if (active) setResolvedModelUrl(resolveAssetUrl(nextProcedure.modelPath));
+          resolveAssetUrlAsync(nextProcedure.modelPath)
+            .then((url) => { if (active) setResolvedModelUrl(url); })
+            .catch(() => {});
         }
         if (nextProcedure.videoUrl) {
           const syncUrl = resolveAssetUrl(nextProcedure.videoUrl);
