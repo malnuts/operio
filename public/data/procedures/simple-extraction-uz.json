@@ -4,7 +4,7 @@
   "title": "Oddiy tish sug'urish",
   "description": "Yuqori jag'ning birinchi kichik oziq tishini (premolar) forseps va elevator yordamida jarrohliksiz usulda oddiy (yopiq) sug'urish.",
   "difficulty": "O'rta",
-  "modelPath": "/models/shared/human_mouth_detailed.glb",
+  "modelPath": "/models/shared/full-mouth.glb",
   "steps": [
     {
       "id": "se-step-1",
