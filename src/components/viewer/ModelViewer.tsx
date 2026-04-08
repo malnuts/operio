@@ -76,6 +76,7 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
       return;
     }
 
+    let active = true;
     const container = containerRef.current;
     const width = container.clientWidth || 400;
     const height = container.clientHeight || 400;
@@ -185,6 +186,7 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
     animate();
 
     return () => {
+      active = false;
       if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
       resizeObserver.disconnect();
       controls.dispose();
