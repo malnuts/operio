@@ -16,7 +16,10 @@ const _origCreateObjectURL = URL.createObjectURL.bind(URL);
 const _origRevokeObjectURL = URL.revokeObjectURL.bind(URL);
 URL.createObjectURL = (obj: Blob | MediaSource) => {
   const url = _origCreateObjectURL(obj);
-  if (obj instanceof Blob) _blobCache.set(url, obj);
+  if (obj instanceof Blob) {
+    _blobCache.set(url, obj);
+    console.debug("[ModelViewer] cached blob for", url, "size:", obj.size, "type:", obj.type);
+  }
   return url;
 };
 URL.revokeObjectURL = (url: string) => {
@@ -30,6 +33,7 @@ const _origFetch = window.fetch.bind(window);
 ) => {
   if (typeof input === "string" && input.startsWith("blob:")) {
     const blob = _blobCache.get(input);
+    console.debug("[ModelViewer] fetch intercepted blob:", input, "cached:", !!blob, "cacheSize:", _blobCache.size);
     if (blob) return Promise.resolve(new Response(blob));
   }
   return _origFetch(input, init);
