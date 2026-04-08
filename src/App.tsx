@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { I18nProvider } from "@/lib/i18n";
 import { productRoutes } from "@/lib/product-language";
 
 const Index = lazy(() => import("./pages/Index.tsx"));
@@ -20,6 +21,7 @@ const RoutePlaceholderPage = lazy(() => import("./pages/RoutePlaceholderPage.tsx
 const queryClient = new QueryClient();
 
 const App = () => (
+  <I18nProvider>
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
@@ -57,6 +59,7 @@ const App = () => (
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
+  </I18nProvider>
 );
 
 export default App;

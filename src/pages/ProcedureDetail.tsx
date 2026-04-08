@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, CheckCircle2, Microscope, ScrollText } from "luc
 
 import AssessmentPromptCard from "@/components/AssessmentPromptCard";
 import ModelViewer from "@/components/viewer/ModelViewer";
+import StepNavigator from "@/components/StepNavigator";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -38,7 +39,6 @@ const ProcedureDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [resolvedModelUrl, setResolvedModelUrl] = useState<string | null>(null);
-  const [resolvedVideoUrl, setResolvedVideoUrl] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -49,7 +49,6 @@ const ProcedureDetail = () => {
     setQuestions({});
     setPlayback([]);
     setResolvedModelUrl(null);
-    setResolvedVideoUrl(null);
 
     Promise.all([loadProcedureById(id), loadQuestionsByProcedureId(id)])
       .then(async ([nextProcedure, nextQuestions]) => {
@@ -74,11 +73,6 @@ const ProcedureDetail = () => {
         if (nextProcedure.modelPath) {
           resolveAssetUrlAsync(nextProcedure.modelPath)
             .then((url) => { if (active) setResolvedModelUrl(url); })
-            .catch(() => {});
-        }
-        if (nextProcedure.videoUrl) {
-          resolveAssetUrlAsync(nextProcedure.videoUrl)
-            .then((url) => { if (active) setResolvedVideoUrl(url); })
             .catch(() => {});
         }
       })
@@ -278,32 +272,17 @@ const ProcedureDetail = () => {
         </div>
 
         <section className="grid gap-6 lg:grid-cols-[0.9fr_1.6fr_1fr]">
-          <Card className="h-fit">
-            <CardHeader>
-              <CardTitle className="text-xl">Structured flow</CardTitle>
-              <CardDescription>Use the chapter list to keep the explanation flow anchored.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {playback.map((item, index) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => {
-                    setCurrentIndex(index);
-                    setSelectedOptionId(null);
-                  }}
-                  className={`w-full rounded-2xl border px-4 py-3 text-left transition-colors ${
-                    index === currentIndex
-                      ? "border-primary bg-primary/5"
-                      : "border-border bg-background hover:border-primary/30"
-                  }`}
-                >
-                  <p className="text-sm font-medium text-foreground">{item.title}</p>
-                  <p className="mt-1 text-xs text-muted-foreground">{item.supportingText ?? item.cue ?? "Procedure section"}</p>
-                </button>
-              ))}
-            </CardContent>
-          </Card>
+          <StepNavigator
+            playback={playback}
+            currentIndex={currentIndex}
+            locked={currentQuestionLocked}
+            onNext={goToNext}
+            onPrevious={goToPrevious}
+            onSelect={(index) => {
+              setCurrentIndex(index);
+              setSelectedOptionId(null);
+            }}
+          />
 
           <Card>
             <CardHeader className="space-y-4">
@@ -311,9 +290,10 @@ const ProcedureDetail = () => {
                 <Microscope className="h-3.5 w-3.5" />
                 {currentUnit.title}
               </div>
-              {resolvedVideoUrl ? (
+              {procedure.videoUrl ? (
                 <video
-                  src={resolvedVideoUrl}
+                  src={procedure.videoUrl}
+                  poster={procedure.thumbnailUrl}
                   controls
                   className="w-full rounded-2xl bg-black"
                   style={{ maxHeight: 360 }}
