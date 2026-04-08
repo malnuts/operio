@@ -6,38 +6,27 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 import { useWebGL } from "@/hooks/useWebGL";
 
-// Firefox fails to fetch() blob: URLs created from cross-origin data.
-// Three.js ImageBitmapLoader calls fetch() on blob: URLs that GLTFLoader
-// creates for embedded textures. Fix: cache every blob created via
-// URL.createObjectURL, then intercept fetch() for blob: URLs and return
-// the cached blob directly — no network request needed.
-const _blobCache = new Map<string, Blob>();
-const _origCreateObjectURL = URL.createObjectURL.bind(URL);
-const _origRevokeObjectURL = URL.revokeObjectURL.bind(URL);
-URL.createObjectURL = (obj: Blob | MediaSource) => {
-  const url = _origCreateObjectURL(obj);
-  if (obj instanceof Blob) {
-    _blobCache.set(url, obj);
-    console.debug("[ModelViewer] cached blob for", url, "size:", obj.size, "type:", obj.type);
+// Force GLTFLoader to use TextureLoader (<img> elements) instead of
+// ImageBitmapLoader (fetch + createImageBitmap). Firefox fails when
+// ImageBitmapLoader calls fetch() on blob: URLs created from cross-origin
+// GLB data, and createImageBitmap on re-constructed blobs is unreliable.
+// Hiding createImageBitmap during parse() makes GLTFParser fall back to
+// TextureLoader, which loads textures via <img> elements without fetch().
+function parseGLTFWithTextureLoader(
+  loader: GLTFLoader,
+  buffer: ArrayBuffer,
+  onLoad: (gltf: { scene: THREE.Object3D }) => void,
+  onError: () => void,
+) {
+  const saved = window.createImageBitmap;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (window as any).createImageBitmap = undefined;
+  try {
+    loader.parse(buffer, "", onLoad, onError);
+  } finally {
+    window.createImageBitmap = saved;
   }
-  return url;
-};
-URL.revokeObjectURL = (url: string) => {
-  _blobCache.delete(url);
-  _origRevokeObjectURL(url);
-};
-const _origFetch = window.fetch.bind(window);
-(window as unknown as { fetch: typeof fetch }).fetch = (
-  input: RequestInfo | URL,
-  init?: RequestInit,
-) => {
-  if (typeof input === "string" && input.startsWith("blob:")) {
-    const blob = _blobCache.get(input);
-    console.debug("[ModelViewer] fetch intercepted blob:", input, "cached:", !!blob, "cacheSize:", _blobCache.size);
-    if (blob) return Promise.resolve(new Response(blob));
-  }
-  return _origFetch(input, init);
-};
+}
 
 export type ModelViewerProps = {
   modelPath: string;
@@ -166,13 +155,11 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
     };
 
     // Pre-fetch the binary so Three.js parses clean (non-tainted) data.
-    // This avoids Firefox's restriction on fetch()ing blob: URLs created
-    // from cross-origin ArrayBuffer data (R2 presigned URLs).
     fetch(modelPath, { credentials: "omit" })
       .then((r) => r.arrayBuffer())
       .then((buffer) => {
         if (!active) return;
-        loader.parse(buffer, "", onModelLoad, () => {
+        parseGLTFWithTextureLoader(loader, buffer, onModelLoad, () => {
           if (active) setLoadState("error");
         });
       })
