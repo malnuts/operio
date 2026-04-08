@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import { ImageBitmapLoader } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
@@ -22,28 +23,24 @@ URL.revokeObjectURL = (url: string) => {
   _blobCache.delete(url);
   _origRevokeObjectURL(url);
 };
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const _origImageBitmapLoad = (THREE as any).ImageBitmapLoader?.prototype?.load;
-if (_origImageBitmapLoad) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (THREE as any).ImageBitmapLoader.prototype.load = function (
-    url: string,
-    onLoad: ((b: ImageBitmap) => void) | undefined,
-    _onProgress: unknown,
-    onError: ((e: unknown) => void) | undefined,
-  ) {
-    if (url.startsWith("blob:")) {
-      const blob = _blobCache.get(url);
-      if (blob) {
-        createImageBitmap(blob, { colorSpaceConversion: "none" })
-          .then((bmp) => { if (onLoad) onLoad(bmp); })
-          .catch((e) => { if (onError) onError(e); });
-        return undefined;
-      }
+const _origImageBitmapLoad = ImageBitmapLoader.prototype.load;
+ImageBitmapLoader.prototype.load = function (
+  url: string,
+  onLoad: ((b: ImageBitmap) => void) | undefined,
+  _onProgress: unknown,
+  onError: ((e: unknown) => void) | undefined,
+) {
+  if (url.startsWith("blob:")) {
+    const blob = _blobCache.get(url);
+    if (blob) {
+      createImageBitmap(blob, { colorSpaceConversion: "none" })
+        .then((bmp) => { if (onLoad) onLoad(bmp); })
+        .catch((e) => { if (onError) onError(e); });
+      return undefined;
     }
-    return _origImageBitmapLoad.call(this, url, onLoad, _onProgress, onError);
-  };
-}
+  }
+  return _origImageBitmapLoad.call(this, url, onLoad, _onProgress, onError);
+};
 
 export type ModelViewerProps = {
   modelPath: string;
