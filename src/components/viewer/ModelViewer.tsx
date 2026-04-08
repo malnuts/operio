@@ -130,30 +130,39 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
     const loader = new GLTFLoader();
     loader.setDRACOLoader(dracoLoader);
 
-    loader.load(
-      modelPath,
-      (gltf) => {
-        const model = gltf.scene;
+    const onModelLoad = (gltf: { scene: THREE.Object3D }) => {
+      if (!active) return;
+      const model = gltf.scene;
 
-        // Fit model to view
-        const box = new THREE.Box3().setFromObject(model);
-        const size = box.getSize(new THREE.Vector3());
-        const center = box.getCenter(new THREE.Vector3());
-        const maxDim = Math.max(size.x, size.y, size.z);
-        const scale = 2 / (maxDim || 1);
-        model.scale.setScalar(scale);
-        model.position.sub(center.multiplyScalar(scale));
+      // Fit model to view
+      const box = new THREE.Box3().setFromObject(model);
+      const size = box.getSize(new THREE.Vector3());
+      const center = box.getCenter(new THREE.Vector3());
+      const maxDim = Math.max(size.x, size.y, size.z);
+      const scale = 2 / (maxDim || 1);
+      model.scale.setScalar(scale);
+      model.position.sub(center.multiplyScalar(scale));
 
-        scene.add(model);
-        controls.target.set(0, 0, 0);
-        controls.update();
-        setLoadState("ready");
-      },
-      undefined,
-      () => {
-        setLoadState("error");
-      },
-    );
+      scene.add(model);
+      controls.target.set(0, 0, 0);
+      controls.update();
+      setLoadState("ready");
+    };
+
+    // Pre-fetch the binary so Three.js parses clean (non-tainted) data.
+    // This avoids Firefox's restriction on fetch()ing blob: URLs created
+    // from cross-origin ArrayBuffer data (R2 presigned URLs).
+    fetch(modelPath, { credentials: "omit" })
+      .then((r) => r.arrayBuffer())
+      .then((buffer) => {
+        if (!active) return;
+        loader.parse(buffer, "", onModelLoad, () => {
+          if (active) setLoadState("error");
+        });
+      })
+      .catch(() => {
+        if (active) setLoadState("error");
+      });
 
     // Resize observer
     const resizeObserver = new ResizeObserver(() => {
