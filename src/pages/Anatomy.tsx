@@ -5,7 +5,7 @@ import { ArrowLeft, ScanSearch } from "lucide-react";
 import ModelViewer from "@/components/viewer/ModelViewer";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { resolveAssetUrlAsync } from "@/lib/asset-config";
+import { resolveAssetUrl, resolveAssetUrlAsync } from "@/lib/asset-config";
 
 type VisualReference = {
   id: string;
@@ -29,6 +29,7 @@ const Anatomy = () => {
   const [resolvedModelUrl, setResolvedModelUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const fallbackModelUrl = resolveAssetUrl("/models/shared/full-mouth.glb");
 
   useEffect(() => {
     let active = true;
@@ -121,6 +122,7 @@ const Anatomy = () => {
             {resolvedModelUrl ? (
               <ModelViewer
                 modelPath={resolvedModelUrl}
+                fallbackModelPath={fallbackModelUrl}
                 label={reference.label}
                 description={reference.description}
               />

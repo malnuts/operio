@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useLearnerProgress } from "@/hooks/useLearnerProgress";
-import { resolveAssetUrlAsync } from "@/lib/asset-config";
+import { resolveAssetUrl, resolveAssetUrlAsync } from "@/lib/asset-config";
 import {
   buildProcedurePlayback,
   getProcedureMeta,
@@ -26,6 +26,7 @@ const ProcedureDetail = () => {
   const { id = "" } = useParams();
   const { progress, trackProcedureVisit, trackAssessmentAttempt } = useLearnerProgress();
   const alreadyCompleted = Boolean(progress.procedures[id]?.completed);
+  const fallbackModelUrl = resolveAssetUrl("/models/shared/full-mouth.glb");
 
   const [procedure, setProcedure] = useState<Procedure | null>(null);
   const [questions, setQuestions] = useState<Record<string, NormalizedQuestion>>({});
@@ -373,6 +374,7 @@ const ProcedureDetail = () => {
               {resolvedModelUrl ? (
                 <ModelViewer
                   modelPath={resolvedModelUrl}
+                  fallbackModelPath={fallbackModelUrl}
                   label={typeof procedure?.title === "string" ? procedure.title : "Reference model"}
                 />
               ) : null}

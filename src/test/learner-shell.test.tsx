@@ -39,7 +39,9 @@ describe("learner shell", () => {
     window.history.pushState({}, "", "/app");
     render(<App />);
 
-    expect(screen.getByRole("heading", { name: /study procedures first/i })).toBeInTheDocument();
+    expect(
+      await screen.findByRole("heading", { name: /study procedures first/i }),
+    ).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("link", { name: /posts/i }));
 

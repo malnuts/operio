@@ -59,13 +59,13 @@ if (_isFirefox) {
 
 export type ModelViewerProps = {
   modelPath: string;
+  fallbackModelPath?: string;
   label?: string;
   description?: string;
 };
 
 type LoadState = "loading" | "ready" | "error";
-const MODEL_LOAD_STALL_TIMEOUT_MS = 20000;
-const MODEL_LOAD_MAX_TIMEOUT_MS = 180000;
+const MODEL_LOAD_MAX_TIMEOUT_MS = 300000;
 
 const ModelViewerFallback = ({
   label,
@@ -99,12 +99,24 @@ const ModelViewerFallback = ({
   </div>
 );
 
-const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
+const ModelViewer = ({
+  modelPath,
+  fallbackModelPath,
+  label,
+  description,
+}: ModelViewerProps) => {
   const { supported } = useWebGL();
   const containerRef = useRef<HTMLDivElement>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const frameRef = useRef<number | null>(null);
   const [loadState, setLoadState] = useState<LoadState>("loading");
+  const [activeModelPath, setActiveModelPath] = useState(modelPath);
+  const [usingFallbackPath, setUsingFallbackPath] = useState(false);
+
+  useEffect(() => {
+    setActiveModelPath(modelPath);
+    setUsingFallbackPath(false);
+  }, [modelPath]);
 
   useEffect(() => {
     if (!supported || !containerRef.current) {
@@ -117,29 +129,27 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
     const container = containerRef.current;
     const width = container.clientWidth || 400;
     const height = container.clientHeight || 400;
-    let stallTimeoutId: number | null = null;
     let maxTimeoutId: number | null = null;
-
     const clearLoadTimers = () => {
-      if (stallTimeoutId !== null) {
-        window.clearTimeout(stallTimeoutId);
-        stallTimeoutId = null;
-      }
       if (maxTimeoutId !== null) {
         window.clearTimeout(maxTimeoutId);
         maxTimeoutId = null;
       }
     };
-
-    const armStallTimeout = () => {
-      if (stallTimeoutId !== null) {
-        window.clearTimeout(stallTimeoutId);
+    const failLoad = () => {
+      if (
+        active &&
+        fallbackModelPath &&
+        !usingFallbackPath &&
+        activeModelPath !== fallbackModelPath
+      ) {
+        setUsingFallbackPath(true);
+        setActiveModelPath(fallbackModelPath);
+        return;
       }
-      stallTimeoutId = window.setTimeout(() => {
-        if (active) {
-          setLoadState("error");
-        }
-      }, MODEL_LOAD_STALL_TIMEOUT_MS);
+      if (active) {
+        setLoadState("error");
+      }
     };
 
     // Scene
@@ -159,8 +169,7 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
         logarithmicDepthBuffer: true,
       });
     } catch {
-      clearLoadTimers();
-      setLoadState("error");
+      failLoad();
       return;
     }
     renderer.setSize(width, height);
@@ -230,25 +239,17 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
       setLoadState("ready");
     };
 
-    armStallTimeout();
     maxTimeoutId = window.setTimeout(() => {
-      if (active) {
-        setLoadState("error");
-      }
+      failLoad();
     }, MODEL_LOAD_MAX_TIMEOUT_MS);
 
     loader.load(
-      modelPath,
+      activeModelPath,
       onModelLoad,
-      () => {
-        if (!active) return;
-        armStallTimeout();
-      },
+      undefined,
       () => {
         clearLoadTimers();
-        if (active) {
-          setLoadState("error");
-        }
+        failLoad();
       },
     );
 
@@ -285,7 +286,7 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
       }
       scene.clear();
     };
-  }, [supported, modelPath]);
+  }, [supported, activeModelPath, fallbackModelPath, usingFallbackPath]);
 
   if (!supported) {
     return (
@@ -314,7 +315,9 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
           className="absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-muted/40"
           data-testid="model-viewer-loading"
         >
-          <p className="text-sm text-muted-foreground">Loading reference model…</p>
+          <p className="text-sm text-muted-foreground">
+            {usingFallbackPath ? "Loading fallback model…" : "Loading reference model…"}
+          </p>
         </div>
       ) : null}
       <div

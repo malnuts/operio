@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import App from "@/App";
@@ -90,9 +90,11 @@ describe("review mode", () => {
     render(<App />);
 
     expect(await screen.findByRole("heading", { name: "Review" })).toBeInTheDocument();
-    expect(within(screen.getByText("Answered prompts").closest("div") as HTMLElement).getByText("2")).toBeInTheDocument();
-    expect(within(screen.getByText("Needs repetition").closest("div") as HTMLElement).getByText("1")).toBeInTheDocument();
-    expect(within(screen.getByText("Latest accuracy").closest("div") as HTMLElement).getByText("50%")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(within(screen.getByText("Answered prompts").closest("div") as HTMLElement).getByText("2")).toBeInTheDocument();
+      expect(within(screen.getByText("Needs repetition").closest("div") as HTMLElement).getByText("1")).toBeInTheDocument();
+      expect(within(screen.getByText("Latest accuracy").closest("div") as HTMLElement).getByText("50%")).toBeInTheDocument();
+    });
 
     fireEvent.click(screen.getAllByRole("button", { name: /start set/i })[0]);
 
