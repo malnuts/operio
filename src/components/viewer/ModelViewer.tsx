@@ -96,7 +96,11 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
     // Renderer
     let renderer: THREE.WebGLRenderer;
     try {
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+        logarithmicDepthBuffer: true,
+      });
     } catch {
       setLoadState("error");
       return;
@@ -147,6 +151,19 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
       const scale = 2 / (maxDim || 1);
       model.scale.setScalar(scale);
       model.position.sub(center.multiplyScalar(scale));
+
+      // Fix GLTF materials: BLEND mode sets depthWrite=false which causes
+      // see-through artifacts. Re-enable depthWrite on all materials.
+      model.traverse((child) => {
+        if ((child as THREE.Mesh).isMesh) {
+          const materials = Array.isArray((child as THREE.Mesh).material)
+            ? (child as THREE.Mesh).material as THREE.Material[]
+            : [(child as THREE.Mesh).material as THREE.Material];
+          for (const mat of materials) {
+            mat.depthWrite = true;
+          }
+        }
+      });
 
       scene.add(model);
       controls.target.set(0, 0, 0);
