@@ -1,68 +1,53 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import { ImageBitmapLoader } from "three/src/loaders/ImageBitmapLoader.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 import { useWebGL } from "@/hooks/useWebGL";
 
-// Firefox has issues loading blob: URLs in both ImageBitmapLoader (fetch
-// fails) and ImageLoader (<img> with crossOrigin taints the data). Fix:
-// rewrite the GLB binary to embed images as data: URIs in the JSON chunk
-// so Three.js never creates blob: URLs at all.
-function glbWithDataURIs(buffer: ArrayBuffer): ArrayBuffer {
-  const view = new DataView(buffer);
-  // GLB header: magic(4) + version(4) + length(4)
-  const jsonLen = view.getUint32(12, true);
-  const jsonBytes = new Uint8Array(buffer, 20, jsonLen);
-  const json = JSON.parse(new TextDecoder().decode(jsonBytes));
+// Firefox cannot fetch() blob: or data: URLs reliably in ImageBitmapLoader.
+// Patch to convert these URLs to Blobs directly, then use createImageBitmap.
+const _origLoad = ImageBitmapLoader.prototype.load;
+ImageBitmapLoader.prototype.load = function (
+  url: string,
+  onLoad?: (bmp: ImageBitmap) => void,
+  _onProgress?: unknown,
+  onError?: (e: unknown) => void,
+) {
+  if (url && (url.startsWith("blob:") || url.startsWith("data:"))) {
+    const scope = this as InstanceType<typeof ImageBitmapLoader>;
+    const resolved = (scope as { manager: THREE.LoadingManager }).manager.resolveURL(url);
+    (scope as { manager: THREE.LoadingManager }).manager.itemStart(resolved);
 
-  const binOffset = 20 + jsonLen + 8; // skip JSON chunk + binary chunk header
-  const bin = new Uint8Array(buffer, binOffset);
-
-  if (json.images) {
-    for (const img of json.images) {
-      if (img.bufferView === undefined) continue;
-      const bv = json.bufferViews[img.bufferView];
-      const start = bv.byteOffset ?? 0;
-      const slice = bin.slice(start, start + bv.byteLength);
-      // Build data URI from raw bytes
-      let b64 = "";
-      for (let i = 0; i < slice.length; i += 8192) {
-        b64 += String.fromCharCode(...slice.subarray(i, i + 8192));
-      }
-      img.uri = `data:${img.mimeType || "application/octet-stream"};base64,${btoa(b64)}`;
-      delete img.bufferView;
-    }
+    // Convert to blob without fetch: use XMLHttpRequest which handles
+    // both blob: and data: URLs reliably in Firefox.
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", resolved, true);
+    xhr.responseType = "blob";
+    xhr.onload = () => {
+      createImageBitmap(xhr.response, { ...((scope as unknown as { options: ImageBitmapOptions }).options || {}), colorSpaceConversion: "none" })
+        .then((imageBitmap) => {
+          if (onLoad) onLoad(imageBitmap);
+          (scope as { manager: THREE.LoadingManager }).manager.itemEnd(resolved);
+        })
+        .catch((e) => {
+          if (onError) onError(e);
+          (scope as { manager: THREE.LoadingManager }).manager.itemError(resolved);
+          (scope as { manager: THREE.LoadingManager }).manager.itemEnd(resolved);
+        });
+    };
+    xhr.onerror = () => {
+      if (onError) onError(new Error(`Failed to load ${resolved}`));
+      (scope as { manager: THREE.LoadingManager }).manager.itemError(resolved);
+      (scope as { manager: THREE.LoadingManager }).manager.itemEnd(resolved);
+    };
+    xhr.send();
+    return;
   }
-
-  // Rebuild GLB with modified JSON
-  const newJsonStr = JSON.stringify(json);
-  const newJsonBytes = new TextEncoder().encode(newJsonStr);
-  // Pad JSON chunk to 4-byte alignment
-  const padded = newJsonBytes.length + ((4 - (newJsonBytes.length % 4)) % 4);
-  const binChunkLen = buffer.byteLength - binOffset;
-  const totalLen = 12 + 8 + padded + 8 + binChunkLen;
-  const out = new ArrayBuffer(totalLen);
-  const dv = new DataView(out);
-  // GLB header
-  dv.setUint32(0, 0x46546C67, true); // magic
-  dv.setUint32(4, 2, true); // version
-  dv.setUint32(8, totalLen, true);
-  // JSON chunk
-  dv.setUint32(12, padded, true);
-  dv.setUint32(16, 0x4E4F534A, true); // JSON type
-  new Uint8Array(out, 20, padded).fill(0x20); // pad with spaces
-  new Uint8Array(out, 20, newJsonBytes.length).set(newJsonBytes);
-  // Binary chunk
-  const binStart = 20 + padded;
-  dv.setUint32(binStart, binChunkLen, true);
-  dv.setUint32(binStart + 4, 0x004E4942, true); // BIN type
-  new Uint8Array(out, binStart + 8, binChunkLen).set(
-    new Uint8Array(buffer, binOffset, binChunkLen),
-  );
-  return out;
-}
+  return _origLoad.call(this, url, onLoad, _onProgress, onError);
+};
 
 export type ModelViewerProps = {
   modelPath: string;
@@ -207,20 +192,12 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
       setLoadState("ready");
     };
 
-    // Pre-fetch the binary, then rewrite embedded images as data: URIs
-    // to avoid Firefox blob: URL issues in both fetch() and <img> paths.
-    fetch(modelPath, { credentials: "omit" })
-      .then((r) => r.arrayBuffer())
-      .then((buffer) => {
-        if (!active) return;
-        const patched = glbWithDataURIs(buffer);
-        loader.parse(patched, "", onModelLoad, () => {
-          if (active) setLoadState("error");
-        });
-      })
-      .catch(() => {
-        if (active) setLoadState("error");
-      });
+    loader.load(
+      modelPath,
+      onModelLoad,
+      undefined,
+      () => { if (active) setLoadState("error"); },
+    );
 
     // Resize observer
     const resizeObserver = new ResizeObserver(() => {
