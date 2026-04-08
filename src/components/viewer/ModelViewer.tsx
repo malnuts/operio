@@ -21,10 +21,15 @@ function parseGLTFWithTextureLoader(
   const saved = window.createImageBitmap;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (window as any).createImageBitmap = undefined;
+  // Skip crossOrigin on <img> elements for blob: URLs — Firefox taints them
+  // and WebGL can't read the pixel data, resulting in null textures.
+  const savedCrossOrigin = loader.crossOrigin;
+  loader.crossOrigin = undefined as unknown as string;
   try {
     loader.parse(buffer, "", onLoad, onError);
   } finally {
     window.createImageBitmap = saved;
+    loader.crossOrigin = savedCrossOrigin;
   }
 }
 
