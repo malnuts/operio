@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import { ImageBitmapLoader } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
@@ -8,9 +7,10 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { useWebGL } from "@/hooks/useWebGL";
 
 // Firefox fails to fetch() blob: URLs created from cross-origin data.
-// Fix: intercept URL.createObjectURL to cache blobs by URL, then patch
-// ImageBitmapLoader (used by Three.js on Firefox 98+) to call
-// createImageBitmap(blob) directly — no fetch() needed for blob: URLs.
+// Three.js ImageBitmapLoader calls fetch() on blob: URLs that GLTFLoader
+// creates for embedded textures. Fix: cache every blob created via
+// URL.createObjectURL, then intercept fetch() for blob: URLs and return
+// the cached blob directly — no network request needed.
 const _blobCache = new Map<string, Blob>();
 const _origCreateObjectURL = URL.createObjectURL.bind(URL);
 const _origRevokeObjectURL = URL.revokeObjectURL.bind(URL);
@@ -23,33 +23,16 @@ URL.revokeObjectURL = (url: string) => {
   _blobCache.delete(url);
   _origRevokeObjectURL(url);
 };
-const _origImageBitmapLoad = ImageBitmapLoader.prototype.load;
-ImageBitmapLoader.prototype.load = function (
-  url: string,
-  onLoad: ((b: ImageBitmap) => void) | undefined,
-  _onProgress: unknown,
-  onError: ((e: unknown) => void) | undefined,
-) {
-  if (url.startsWith("blob:")) {
-    const blob = _blobCache.get(url);
-    if (blob) {
-      createImageBitmap(blob, { colorSpaceConversion: "none" })
-        .then((bmp) => { if (onLoad) onLoad(bmp); })
-        .catch((e) => { if (onError) onError(e); });
-      return undefined;
-    }
-    // Blob not in cache — use <img> element which loads blob: URLs without fetch()
-    const img = new Image();
-    img.onload = () => {
-      createImageBitmap(img, { colorSpaceConversion: "none" })
-        .then((bmp) => { if (onLoad) onLoad(bmp); })
-        .catch((e) => { if (onError) onError(e); });
-    };
-    img.onerror = (e) => { if (onError) onError(e); };
-    img.src = url;
-    return undefined;
+const _origFetch = window.fetch.bind(window);
+(window as unknown as { fetch: typeof fetch }).fetch = (
+  input: RequestInfo | URL,
+  init?: RequestInit,
+) => {
+  if (typeof input === "string" && input.startsWith("blob:")) {
+    const blob = _blobCache.get(input);
+    if (blob) return Promise.resolve(new Response(blob));
   }
-  return _origImageBitmapLoad.call(this, url, onLoad, _onProgress, onError);
+  return _origFetch(input, init);
 };
 
 export type ModelViewerProps = {
