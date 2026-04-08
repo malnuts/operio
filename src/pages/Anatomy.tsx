@@ -33,6 +33,11 @@ const Anatomy = () => {
   useEffect(() => {
     let active = true;
 
+    setReference(null);
+    setResolvedModelUrl(null);
+    setError(null);
+    setLoading(true);
+
     fetch(withBase("/data/visual-manifest.json"))
       .then((r) => {
         if (!r.ok) throw new Error("Failed to load visual manifest");

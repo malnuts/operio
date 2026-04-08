@@ -64,6 +64,7 @@ export type ModelViewerProps = {
 };
 
 type LoadState = "loading" | "ready" | "error";
+const MODEL_LOAD_TIMEOUT_MS = 15000;
 
 const ModelViewerFallback = ({
   label,
@@ -109,10 +110,17 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
       return;
     }
 
+    setLoadState("loading");
+
     let active = true;
     const container = containerRef.current;
     const width = container.clientWidth || 400;
     const height = container.clientHeight || 400;
+    let loadTimeoutId: number | null = window.setTimeout(() => {
+      if (active) {
+        setLoadState("error");
+      }
+    }, MODEL_LOAD_TIMEOUT_MS);
 
     // Scene
     const scene = new THREE.Scene();
@@ -170,6 +178,10 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
 
     const onModelLoad = (gltf: { scene: THREE.Object3D }) => {
       if (!active) return;
+      if (loadTimeoutId !== null) {
+        window.clearTimeout(loadTimeoutId);
+        loadTimeoutId = null;
+      }
       const model = gltf.scene;
 
       // Fit model to view
@@ -204,7 +216,15 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
       modelPath,
       onModelLoad,
       undefined,
-      () => { if (active) setLoadState("error"); },
+      () => {
+        if (loadTimeoutId !== null) {
+          window.clearTimeout(loadTimeoutId);
+          loadTimeoutId = null;
+        }
+        if (active) {
+          setLoadState("error");
+        }
+      },
     );
 
     // Resize observer
@@ -229,6 +249,9 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
 
     return () => {
       active = false;
+      if (loadTimeoutId !== null) {
+        window.clearTimeout(loadTimeoutId);
+      }
       if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
       resizeObserver.disconnect();
       controls.dispose();

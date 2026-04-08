@@ -44,6 +44,11 @@ const ProcedureDetail = () => {
 
     setLoading(true);
     setError(null);
+    setProcedure(null);
+    setQuestions({});
+    setPlayback([]);
+    setResolvedModelUrl(null);
+    setResolvedVideoUrl(null);
 
     Promise.all([loadProcedureById(id), loadQuestionsByProcedureId(id)])
       .then(async ([nextProcedure, nextQuestions]) => {
