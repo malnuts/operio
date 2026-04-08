@@ -1,3 +1,4 @@
+import { resolveAssetUrl } from "@/lib/asset-config";
 import type { Procedure } from "@/types/content";
 
 export type ProcedureManifestEntry = {
@@ -134,11 +135,28 @@ const toText = (value: unknown, fallback: string) => {
   return fallback;
 };
 
+const resolveProcedureChapterMedia = (chapter: NonNullable<Procedure["chapters"]>[number]) => ({
+  ...chapter,
+  media: chapter.media?.map((asset) => ({
+    ...asset,
+    url: resolveAssetUrl(asset.url),
+    thumbnailUrl: asset.thumbnailUrl ? resolveAssetUrl(asset.thumbnailUrl) : undefined,
+  })),
+});
+
+export const resolveProcedureMedia = (procedure: Procedure): Procedure => ({
+  ...procedure,
+  videoUrl: procedure.videoUrl ? resolveAssetUrl(procedure.videoUrl) : undefined,
+  thumbnailUrl: procedure.thumbnailUrl ? resolveAssetUrl(procedure.thumbnailUrl) : undefined,
+  chapters: procedure.chapters?.map(resolveProcedureChapterMedia),
+  steps: procedure.steps?.map(resolveProcedureChapterMedia),
+});
+
 export const loadProcedureManifest = async () =>
   fetchJson<{ procedures: ProcedureManifestEntry[] }>("/data/procedure-manifest.json");
 
 export const loadProcedureById = async (id: string) =>
-  fetchJson<Procedure>(`/data/procedures/${id}.json`);
+  resolveProcedureMedia(await fetchJson<Procedure>(`/data/procedures/${id}.json`));
 
 export const loadQuestionsByProcedureId = async (id: string) =>
   fetchJson<LegacyQuestionSet | VideoQuestionSet>(`/data/questions/${id}-questions.json`);
@@ -217,7 +235,9 @@ export const buildProcedurePlayback = (procedure: Procedure): ProcedurePlaybackU
           : undefined,
         questionId: decisionPoint?.questionId,
         referenceContent: chapter.referenceContent,
-        cue: chapter.timestamp !== undefined ? `Video cue: ${chapter.timestamp}s` : undefined,
+        cue: chapter.timestamp !== undefined && chapter.timestamp > 0
+          ? `Video cue: ${chapter.timestamp}s`
+          : undefined,
       };
     });
   }
