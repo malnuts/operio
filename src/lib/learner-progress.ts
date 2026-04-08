@@ -1,27 +1,31 @@
-import type { ReviewRecord } from "@/types/content";
+import { z } from "zod";
 
 export const LEARNER_PROGRESS_STORAGE_KEY = "operio.learner-progress";
 
-export type ProcedureProgressRecord = {
-  procedureId: string;
-  completed: boolean;
-  completedAt?: string;
-  lastVisitedAt: string;
-};
+const procedureProgressRecordSchema = z.object({
+  procedureId: z.string(),
+  completed: z.boolean(),
+  completedAt: z.string().optional(),
+  lastVisitedAt: z.string(),
+});
 
-export type AssessmentHistoryRecord = {
-  questionId: string;
-  contentId: string;
-  contentType: ReviewRecord["contentType"];
-  selectedOption: string;
-  isCorrect: boolean;
-  answeredAt: string;
-};
+const assessmentHistoryRecordSchema = z.object({
+  questionId: z.string(),
+  contentId: z.string(),
+  contentType: z.enum(["procedure", "post", "assessment"]),
+  selectedOption: z.string(),
+  isCorrect: z.boolean(),
+  answeredAt: z.string(),
+});
 
-export type LearnerProgressState = {
-  procedures: Record<string, ProcedureProgressRecord>;
-  assessmentHistory: AssessmentHistoryRecord[];
-};
+const learnerProgressStateSchema = z.object({
+  procedures: z.record(z.string(), procedureProgressRecordSchema),
+  assessmentHistory: z.array(assessmentHistoryRecordSchema),
+});
+
+export type ProcedureProgressRecord = z.infer<typeof procedureProgressRecordSchema>;
+export type AssessmentHistoryRecord = z.infer<typeof assessmentHistoryRecordSchema>;
+export type LearnerProgressState = z.infer<typeof learnerProgressStateSchema>;
 
 export const createEmptyLearnerProgress = (): LearnerProgressState => ({
   procedures: {},
@@ -34,12 +38,8 @@ export const parseLearnerProgress = (value: string | null): LearnerProgressState
   }
 
   try {
-    const parsed = JSON.parse(value) as Partial<LearnerProgressState>;
-
-    return {
-      procedures: parsed.procedures ?? {},
-      assessmentHistory: parsed.assessmentHistory ?? [],
-    };
+    const result = learnerProgressStateSchema.safeParse(JSON.parse(value));
+    return result.success ? result.data : createEmptyLearnerProgress();
   } catch {
     return createEmptyLearnerProgress();
   }

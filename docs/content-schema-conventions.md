@@ -46,6 +46,19 @@ Video procedures:
 - May include `thumbnailUrl`, `duration`, and `decisionPoints`.
 - Chapters use the same `ProcedureChapter` shape with `timestamp` instead of simulation-only context.
 
+### Cloudflare-Backed Procedure Media
+
+- Store procedure media in JSON using the same repo-style paths used for local `public/` assets, for example:
+  - `videoUrl: "/videos/procedures/demo.mp4"`
+  - `thumbnailUrl: "/videos/thumbnails/demo.jpg"`
+  - `media[].url: "/images/procedures/demo-still.jpg"`
+- The app fetches Cloudflare-backed media by default through the configured public R2 development URL. Set `VITE_R2_PUBLIC_BASE_URL` only if you need to override that base.
+- Set `VITE_USE_LOCAL_ASSETS=true` only when you explicitly want local `public/` assets during development.
+- The client derives remote media URLs from those paths without storing signed URLs or credentials in content JSON.
+- `VITE_R2_FLATTEN_KEYS` and `VITE_R2_KEY_PREFIX` control how local-style paths map to R2 object keys.
+- Keep absolute `https://...` URLs only for assets that already live on a third-party public host.
+- Do not place Cloudflare credentials in browser-exposed config. Credentials stay server-side for upload or maintenance workflows only.
+
 ## ProcedureChapter Schema
 
 - `id?: string`

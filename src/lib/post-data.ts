@@ -1,4 +1,6 @@
 import type { ClinicalPost } from "@/types/content";
+import { clinicalPostSchema } from "@/types/content";
+import { FetchError } from "@/lib/errors";
 import type { NormalizedQuestion } from "@/lib/procedure-data";
 
 export type PostManifestEntry = {
@@ -42,7 +44,7 @@ const fetchJson = async <T>(path: string): Promise<T> => {
   const response = await fetch(withBase(path));
 
   if (!response.ok) {
-    throw new Error(`Failed to load ${path}`);
+    throw new FetchError(path, response.status);
   }
 
   return response.json() as Promise<T>;
@@ -63,8 +65,10 @@ const toText = (value: unknown, fallback: string) => {
 export const loadPostManifest = async () =>
   fetchJson<{ posts: PostManifestEntry[] }>("/data/post-manifest.json");
 
-export const loadPostById = async (id: string) =>
-  fetchJson<ClinicalPost>(`/data/posts/${id}.json`);
+export const loadPostById = async (id: string) => {
+  const raw = await fetchJson<unknown>(`/data/posts/${id}.json`);
+  return clinicalPostSchema.parse(raw);
+};
 
 export const loadQuestionsByAssessmentId = async (assessmentId: string) =>
   fetchJson<PostQuestionSet>(`/data/questions/${assessmentId}.json`);

@@ -5,6 +5,7 @@ import { ArrowLeft, ScanSearch } from "lucide-react";
 import ModelViewer from "@/components/viewer/ModelViewer";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { FetchError } from "@/lib/errors";
 import { resolveAssetUrl, resolveAssetUrlAsync } from "@/lib/asset-config";
 
 type VisualReference = {
@@ -41,7 +42,7 @@ const Anatomy = () => {
 
     fetch(withBase("/data/visual-manifest.json"))
       .then((r) => {
-        if (!r.ok) throw new Error("Failed to load visual manifest");
+        if (!r.ok) throw new FetchError("/data/visual-manifest.json", r.status);
         return r.json() as Promise<VisualManifest>;
       })
       .then(async (manifest) => {

@@ -4,7 +4,6 @@ import { ArrowLeft, ArrowRight, CheckCircle2, Microscope, ScrollText } from "luc
 
 import AssessmentPromptCard from "@/components/AssessmentPromptCard";
 import ModelViewer from "@/components/viewer/ModelViewer";
-import { StepCarousel, StepList } from "@/components/StepNavigator";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -271,36 +270,7 @@ const ProcedureDetail = () => {
           <Progress value={completionPercent} aria-label="Procedure playback progress" />
         </div>
 
-        {/* Mobile: compact carousel above the content grid */}
-        <div className="lg:hidden">
-          <StepCarousel
-            playback={playback}
-            currentIndex={currentIndex}
-            locked={currentQuestionLocked}
-            onNext={goToNext}
-            onPrevious={goToPrevious}
-            onSelect={(index) => {
-              setCurrentIndex(index);
-              setSelectedOptionId(null);
-            }}
-          />
-        </div>
-
-        <section className="grid gap-6 lg:grid-cols-[0.9fr_1.6fr_1fr]">
-          {/* Desktop: full step list in left column */}
-          <div className="hidden lg:block">
-            <StepList
-              playback={playback}
-              currentIndex={currentIndex}
-              locked={currentQuestionLocked}
-              onNext={goToNext}
-              onPrevious={goToPrevious}
-              onSelect={(index) => {
-                setCurrentIndex(index);
-                setSelectedOptionId(null);
-              }}
-            />
-          </div>
+        <section className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
 
           <Card>
             <CardHeader className="space-y-4">

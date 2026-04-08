@@ -17,6 +17,9 @@ const ProcedureDetail = lazy(() => import("./pages/ProcedureDetail.tsx"));
 const ProcedureLibrary = lazy(() => import("./pages/ProcedureLibrary.tsx"));
 const ReviewMode = lazy(() => import("./pages/ReviewMode.tsx"));
 const RoutePlaceholderPage = lazy(() => import("./pages/RoutePlaceholderPage.tsx"));
+const CreatorWorkspacePage = lazy(() => import("./features/creator/CreatorWorkspacePage.tsx"));
+const CreatorEditorPage = lazy(() => import("./features/creator/CreatorEditorPage.tsx"));
+const CreatorLibraryPage = lazy(() => import("./features/creator/CreatorLibraryPage.tsx"));
 
 const queryClient = new QueryClient();
 
@@ -45,7 +48,10 @@ const App = () => (
             <Route path="/app/posts" element={<PostLibrary />} />
             <Route path="/app/post/:id" element={<PostDetail />} />
             <Route path="/app/review" element={<ReviewMode />} />
-            {productRoutes.filter((route) => !["/app", "/app/procedures", "/app/procedure/:id", "/app/anatomy/:id", "/app/posts", "/app/post/:id", "/app/review"].includes(route.path)).map((route) => (
+            <Route path="/creator" element={<CreatorWorkspacePage />} />
+            <Route path="/creator/new" element={<CreatorEditorPage />} />
+            <Route path="/creator/library" element={<CreatorLibraryPage />} />
+            {productRoutes.filter((route) => !["/app", "/app/procedures", "/app/procedure/:id", "/app/anatomy/:id", "/app/posts", "/app/post/:id", "/app/review", "/creator", "/creator/new", "/creator/library"].includes(route.path)).map((route) => (
               <Route
                 key={route.path}
                 path={route.path}

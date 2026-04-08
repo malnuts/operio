@@ -70,6 +70,17 @@ const ProcedureLibrary = () => {
                 <Link key={item.id} to={`/app/procedure/${item.id}`} className="group">
                   <Card className="h-full border-border/70 transition-colors hover:border-primary/40">
                     <CardHeader className="space-y-4">
+                      {item.thumbnailUrl ? (
+                        <div className="overflow-hidden rounded-2xl border border-border/60 bg-muted/40">
+                          <img
+                            src={item.thumbnailUrl}
+                            alt={item.title}
+                            loading="lazy"
+                            className="aspect-[16/9] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                          />
+                        </div>
+                      ) : null}
+
                       <div className="flex items-start justify-between gap-4">
                         <div className="space-y-2">
                           <CardTitle className="text-2xl">{item.title}</CardTitle>

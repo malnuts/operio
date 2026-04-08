@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import App from "@/App";
 import { resolveAssetUrl } from "@/lib/asset-config";
@@ -96,6 +96,10 @@ describe("anatomy viewer", () => {
   });
 });
 
+afterEach(() => {
+  vi.unstubAllEnvs();
+});
+
 describe("asset URL resolution", () => {
   it("returns absolute URLs unchanged", () => {
     expect(resolveAssetUrl("https://pub-abc.r2.dev/models/tooth.glb")).toBe(
@@ -103,8 +107,16 @@ describe("asset URL resolution", () => {
     );
   });
 
-  it("prepends base URL for relative paths in local dev", () => {
+  it("uses the default Cloudflare base for relative asset paths", () => {
     const resolved = resolveAssetUrl("/models/shared/tooth-cross-section.glb");
+    expect(resolved).toBe("https://pub-8e3c30b5230f4f26bef002809026aaa8.r2.dev/assets/tooth-cross-section.glb");
+  });
+
+  it("only uses local public assets when the explicit flag is enabled", () => {
+    vi.stubEnv("VITE_USE_LOCAL_ASSETS", "true");
+
+    const resolved = resolveAssetUrl("/models/shared/tooth-cross-section.glb");
+
     expect(resolved).toMatch(/models\/shared\/tooth-cross-section\.glb$/);
   });
 });

@@ -1,5 +1,7 @@
 import { resolveAssetUrl } from "@/lib/asset-config";
+import { FetchError } from "@/lib/errors";
 import type { Procedure } from "@/types/content";
+import { procedureSchema } from "@/types/content";
 
 export type ProcedureManifestEntry = {
   id: string;
@@ -99,7 +101,7 @@ const fetchJson = async <T>(path: string): Promise<T> => {
   const response = await fetch(withBase(path));
 
   if (!response.ok) {
-    throw new Error(`Failed to load ${path}`);
+    throw new FetchError(path, response.status);
   }
 
   return response.json() as Promise<T>;
@@ -155,8 +157,10 @@ export const resolveProcedureMedia = (procedure: Procedure): Procedure => ({
 export const loadProcedureManifest = async () =>
   fetchJson<{ procedures: ProcedureManifestEntry[] }>("/data/procedure-manifest.json");
 
-export const loadProcedureById = async (id: string) =>
-  resolveProcedureMedia(await fetchJson<Procedure>(`/data/procedures/${id}.json`));
+export const loadProcedureById = async (id: string) => {
+  const raw = await fetchJson<unknown>(`/data/procedures/${id}.json`);
+  return resolveProcedureMedia(procedureSchema.parse(raw));
+};
 
 export const loadQuestionsByProcedureId = async (id: string) =>
   fetchJson<LegacyQuestionSet | VideoQuestionSet>(`/data/questions/${id}-questions.json`);

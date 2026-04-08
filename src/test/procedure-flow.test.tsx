@@ -20,6 +20,7 @@ const procedurePayload = {
   description: "Restore a posterior tooth with composite resin.",
   difficulty: "Beginner",
   duration: 20,
+  thumbnailUrl: "/images/procedures/cavity-filling-card.jpg",
   author: {
     name: "Dr. Ada Patel",
     institution: "Operio Lab",
@@ -117,6 +118,10 @@ describe("procedure experience", () => {
 
     expect(await screen.findByRole("heading", { name: /browse procedure-based learning/i })).toBeInTheDocument();
     expect(await screen.findByText("Cavity Filling")).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "Cavity Filling" })).toHaveAttribute(
+      "src",
+      "https://pub-8e3c30b5230f4f26bef002809026aaa8.r2.dev/assets/cavity-filling-card.jpg",
+    );
     expect(screen.getByText("Beginner")).toBeInTheDocument();
     expect(screen.getByText("20 min")).toBeInTheDocument();
     expect(screen.getByText("Dr. Ada Patel")).toBeInTheDocument();
