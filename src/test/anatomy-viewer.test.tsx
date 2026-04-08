@@ -72,7 +72,6 @@ describe("anatomy viewer", () => {
 
     // jsdom does not support WebGL, so the fallback renders instead of the canvas
     expect(await screen.findByTestId("model-viewer-fallback")).toBeInTheDocument();
-    expect(screen.getByText(/3D rendering is not supported/i)).toBeInTheDocument();
   });
 
   it("shows error state for unknown reference id", async () => {

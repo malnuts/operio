@@ -1,0 +1,8 @@
+{
+  "modelViewer.fallback.label": "Visual reference",
+  "modelViewer.fallback.noWebgl": "3D rendering is not supported in this environment.",
+  "modelViewer.fallback.loadError": "The reference model could not be loaded.",
+  "modelViewer.loading": "Loading reference model\u2026",
+  "modelViewer.ariaLabel": "3D reference model",
+  "modelViewer.ariaLabelNamed": "3D reference model: {{label}}"
+}

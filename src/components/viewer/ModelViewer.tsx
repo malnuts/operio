@@ -5,6 +5,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
+import { useI18n } from "@/hooks/useI18n";
 import { useWebGL } from "@/hooks/useWebGL";
 
 // Firefox has two issues with GLB texture loading:
@@ -75,29 +76,32 @@ const ModelViewerFallback = ({
   label?: string;
   description?: string;
   reason: "no-webgl" | "load-error";
-}) => (
-  <div
-    className="flex h-full min-h-[320px] flex-col items-center justify-center gap-4 rounded-2xl border border-border bg-muted/40 p-8 text-center"
-    data-testid="model-viewer-fallback"
-  >
-    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-muted text-muted-foreground text-2xl">
-      {reason === "no-webgl" ? "⬡" : "△"}
+}) => {
+  const { t } = useI18n();
+  return (
+    <div
+      className="flex h-full min-h-[320px] flex-col items-center justify-center gap-4 rounded-2xl border border-border bg-muted/40 p-8 text-center"
+      data-testid="model-viewer-fallback"
+    >
+      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-muted text-muted-foreground text-2xl">
+        {reason === "no-webgl" ? "⬡" : "△"}
+      </div>
+      <div className="space-y-1">
+        <p className="text-sm font-medium text-foreground">
+          {label ?? t("modelViewer.fallback.label")}
+        </p>
+        <p className="text-sm text-muted-foreground">
+          {reason === "no-webgl"
+            ? t("modelViewer.fallback.noWebgl")
+            : t("modelViewer.fallback.loadError")}
+        </p>
+        {description ? (
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">{description}</p>
+        ) : null}
+      </div>
     </div>
-    <div className="space-y-1">
-      <p className="text-sm font-medium text-foreground">
-        {label ?? "Visual reference"}
-      </p>
-      <p className="text-sm text-muted-foreground">
-        {reason === "no-webgl"
-          ? "3D rendering is not supported in this environment."
-          : "The reference model could not be loaded."}
-      </p>
-      {description ? (
-        <p className="mt-2 text-sm leading-6 text-muted-foreground">{description}</p>
-      ) : null}
-    </div>
-  </div>
-);
+  );
+};
 
 const ModelViewer = ({
   modelPath,
@@ -105,9 +109,9 @@ const ModelViewer = ({
   label,
   description,
 }: ModelViewerProps) => {
+  const { t } = useI18n();
   const { supported } = useWebGL();
   const containerRef = useRef<HTMLDivElement>(null);
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const frameRef = useRef<number | null>(null);
   const [loadState, setLoadState] = useState<LoadState>("loading");
   const [activeModelPath, setActiveModelPath] = useState(modelPath);
@@ -130,12 +134,14 @@ const ModelViewer = ({
     const width = container.clientWidth || 400;
     const height = container.clientHeight || 400;
     let maxTimeoutId: number | null = null;
+
     const clearLoadTimers = () => {
       if (maxTimeoutId !== null) {
         window.clearTimeout(maxTimeoutId);
         maxTimeoutId = null;
       }
     };
+
     const failLoad = () => {
       if (
         active &&
@@ -176,7 +182,6 @@ const ModelViewer = ({
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     container.appendChild(renderer.domElement);
-    rendererRef.current = renderer;
 
     // Lights
     const ambient = new THREE.AmbientLight(0xffffff, 0.8);
@@ -315,9 +320,7 @@ const ModelViewer = ({
           className="absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-muted/40"
           data-testid="model-viewer-loading"
         >
-          <p className="text-sm text-muted-foreground">
-            {usingFallbackPath ? "Loading fallback model…" : "Loading reference model…"}
-          </p>
+          <p className="text-sm text-muted-foreground">{t("modelViewer.loading")}</p>
         </div>
       ) : null}
       <div
@@ -325,7 +328,7 @@ const ModelViewer = ({
         className="w-full rounded-2xl overflow-hidden"
         style={{ height: 360 }}
         data-testid="model-viewer-canvas"
-        aria-label={label ? `3D reference model: ${label}` : "3D reference model"}
+        aria-label={label ? t("modelViewer.ariaLabelNamed", { label }) : t("modelViewer.ariaLabel")}
       />
     </div>
   );
