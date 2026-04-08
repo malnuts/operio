@@ -38,6 +38,16 @@ ImageBitmapLoader.prototype.load = function (
         .catch((e) => { if (onError) onError(e); });
       return undefined;
     }
+    // Blob not in cache — use <img> element which loads blob: URLs without fetch()
+    const img = new Image();
+    img.onload = () => {
+      createImageBitmap(img, { colorSpaceConversion: "none" })
+        .then((bmp) => { if (onLoad) onLoad(bmp); })
+        .catch((e) => { if (onError) onError(e); });
+    };
+    img.onerror = (e) => { if (onError) onError(e); };
+    img.src = url;
+    return undefined;
   }
   return _origImageBitmapLoad.call(this, url, onLoad, _onProgress, onError);
 };
