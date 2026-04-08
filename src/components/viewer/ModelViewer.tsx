@@ -90,7 +90,7 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
     scene.background = null;
 
     // Camera
-    const camera = new THREE.PerspectiveCamera(45, width / height, 0.01, 1000);
+    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 50);
     camera.position.set(0, 0, 3);
 
     // Renderer
