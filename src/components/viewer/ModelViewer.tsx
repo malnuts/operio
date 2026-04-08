@@ -64,7 +64,8 @@ export type ModelViewerProps = {
 };
 
 type LoadState = "loading" | "ready" | "error";
-const MODEL_LOAD_TIMEOUT_MS = 15000;
+const MODEL_LOAD_STALL_TIMEOUT_MS = 20000;
+const MODEL_LOAD_MAX_TIMEOUT_MS = 180000;
 
 const ModelViewerFallback = ({
   label,
@@ -116,11 +117,30 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
     const container = containerRef.current;
     const width = container.clientWidth || 400;
     const height = container.clientHeight || 400;
-    let loadTimeoutId: number | null = window.setTimeout(() => {
-      if (active) {
-        setLoadState("error");
+    let stallTimeoutId: number | null = null;
+    let maxTimeoutId: number | null = null;
+
+    const clearLoadTimers = () => {
+      if (stallTimeoutId !== null) {
+        window.clearTimeout(stallTimeoutId);
+        stallTimeoutId = null;
       }
-    }, MODEL_LOAD_TIMEOUT_MS);
+      if (maxTimeoutId !== null) {
+        window.clearTimeout(maxTimeoutId);
+        maxTimeoutId = null;
+      }
+    };
+
+    const armStallTimeout = () => {
+      if (stallTimeoutId !== null) {
+        window.clearTimeout(stallTimeoutId);
+      }
+      stallTimeoutId = window.setTimeout(() => {
+        if (active) {
+          setLoadState("error");
+        }
+      }, MODEL_LOAD_STALL_TIMEOUT_MS);
+    };
 
     // Scene
     const scene = new THREE.Scene();
@@ -139,6 +159,7 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
         logarithmicDepthBuffer: true,
       });
     } catch {
+      clearLoadTimers();
       setLoadState("error");
       return;
     }
@@ -178,10 +199,7 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
 
     const onModelLoad = (gltf: { scene: THREE.Object3D }) => {
       if (!active) return;
-      if (loadTimeoutId !== null) {
-        window.clearTimeout(loadTimeoutId);
-        loadTimeoutId = null;
-      }
+      clearLoadTimers();
       const model = gltf.scene;
 
       // Fit model to view
@@ -212,15 +230,22 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
       setLoadState("ready");
     };
 
+    armStallTimeout();
+    maxTimeoutId = window.setTimeout(() => {
+      if (active) {
+        setLoadState("error");
+      }
+    }, MODEL_LOAD_MAX_TIMEOUT_MS);
+
     loader.load(
       modelPath,
       onModelLoad,
-      undefined,
       () => {
-        if (loadTimeoutId !== null) {
-          window.clearTimeout(loadTimeoutId);
-          loadTimeoutId = null;
-        }
+        if (!active) return;
+        armStallTimeout();
+      },
+      () => {
+        clearLoadTimers();
         if (active) {
           setLoadState("error");
         }
@@ -249,9 +274,7 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
 
     return () => {
       active = false;
-      if (loadTimeoutId !== null) {
-        window.clearTimeout(loadTimeoutId);
-      }
+      clearLoadTimers();
       if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
       resizeObserver.disconnect();
       controls.dispose();
