@@ -1,53 +1,54 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import { ImageBitmapLoader } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 import { useWebGL } from "@/hooks/useWebGL";
 
-// Firefox cannot fetch() blob: or data: URLs reliably in ImageBitmapLoader.
-// Patch to convert these URLs to Blobs directly, then use createImageBitmap.
-const _origLoad = ImageBitmapLoader.prototype.load;
-ImageBitmapLoader.prototype.load = function (
-  url: string,
-  onLoad?: (bmp: ImageBitmap) => void,
-  _onProgress?: unknown,
-  onError?: (e: unknown) => void,
-) {
-  if (url && (url.startsWith("blob:") || url.startsWith("data:"))) {
-    const scope = this as InstanceType<typeof ImageBitmapLoader>;
-    const resolved = (scope as { manager: THREE.LoadingManager }).manager.resolveURL(url);
-    (scope as { manager: THREE.LoadingManager }).manager.itemStart(resolved);
+// Firefox cannot fetch() or XHR blob: URLs created by GLTFLoader for
+// embedded textures. ImageBitmapLoader (the default on modern Firefox)
+// uses fetch() internally which fails on these URLs.
+// Fix: patch GLTFLoader.parse to replace ImageBitmapLoader with
+// TextureLoader on the internal parser. TextureLoader uses <img> elements
+// which handle blob: URLs correctly in all browsers.
+const _isFirefox =
+  typeof navigator !== "undefined" && /Firefox/i.test(navigator.userAgent);
 
-    // Convert to blob without fetch: use XMLHttpRequest which handles
-    // both blob: and data: URLs reliably in Firefox.
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", resolved, true);
-    xhr.responseType = "blob";
-    xhr.onload = () => {
-      createImageBitmap(xhr.response, { ...((scope as unknown as { options: ImageBitmapOptions }).options || {}), colorSpaceConversion: "none" })
-        .then((imageBitmap) => {
-          if (onLoad) onLoad(imageBitmap);
-          (scope as { manager: THREE.LoadingManager }).manager.itemEnd(resolved);
-        })
-        .catch((e) => {
-          if (onError) onError(e);
-          (scope as { manager: THREE.LoadingManager }).manager.itemError(resolved);
-          (scope as { manager: THREE.LoadingManager }).manager.itemEnd(resolved);
-        });
-    };
-    xhr.onerror = () => {
-      if (onError) onError(new Error(`Failed to load ${resolved}`));
-      (scope as { manager: THREE.LoadingManager }).manager.itemError(resolved);
-      (scope as { manager: THREE.LoadingManager }).manager.itemEnd(resolved);
-    };
-    xhr.send();
-    return;
-  }
-  return _origLoad.call(this, url, onLoad, _onProgress, onError);
-};
+if (_isFirefox) {
+  const _origParse = GLTFLoader.prototype.parse;
+  GLTFLoader.prototype.parse = function (
+    data: ArrayBuffer | string,
+    path: string,
+    onLoad: (gltf: unknown) => void,
+    onError?: (error: unknown) => void,
+  ) {
+    // Temporarily override the internal parser creation by wrapping
+    // onLoad to never actually run on its own — instead we hook into
+    // the parse call. But GLTFLoader doesn't expose the parser directly.
+    // The simplest reliable approach: after calling original parse,
+    // the parser is synchronously created and assigned textureLoader.
+    // We can intercept by patching the manager's itemStart to detect
+    // when texture loading begins and swap the loader.
+
+    // Actually, the cleanest way: since GLTFLoader calls
+    // `new GLTFParser(json, { manager: this.manager, ... })` which sets
+    // `this.textureLoader` based on browser detection, we can override
+    // by providing a manager with a URL modifier that doesn't change URLs
+    // but whose reference we control, then the parser uses TextureLoader
+    // if we make createImageBitmap unavailable temporarily.
+
+    // Simplest approach: temporarily hide createImageBitmap so the parser
+    // constructor falls back to TextureLoader.
+    const saved = globalThis.createImageBitmap;
+    globalThis.createImageBitmap = undefined as unknown as typeof createImageBitmap;
+    try {
+      _origParse.call(this, data, path, onLoad, onError);
+    } finally {
+      globalThis.createImageBitmap = saved;
+    }
+  };
+}
 
 export type ModelViewerProps = {
   modelPath: string;
