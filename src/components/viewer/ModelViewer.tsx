@@ -6,31 +6,62 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 import { useWebGL } from "@/hooks/useWebGL";
 
-// Force GLTFLoader to use TextureLoader (<img> elements) instead of
-// ImageBitmapLoader (fetch + createImageBitmap). Firefox fails when
-// ImageBitmapLoader calls fetch() on blob: URLs created from cross-origin
-// GLB data, and createImageBitmap on re-constructed blobs is unreliable.
-// Hiding createImageBitmap during parse() makes GLTFParser fall back to
-// TextureLoader, which loads textures via <img> elements without fetch().
-function parseGLTFWithTextureLoader(
-  loader: GLTFLoader,
-  buffer: ArrayBuffer,
-  onLoad: (gltf: { scene: THREE.Object3D }) => void,
-  onError: () => void,
-) {
-  const saved = window.createImageBitmap;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (window as any).createImageBitmap = undefined;
-  // Skip crossOrigin on <img> elements for blob: URLs — Firefox taints them
-  // and WebGL can't read the pixel data, resulting in null textures.
-  const savedCrossOrigin = loader.crossOrigin;
-  loader.crossOrigin = undefined as unknown as string;
-  try {
-    loader.parse(buffer, "", onLoad, onError);
-  } finally {
-    window.createImageBitmap = saved;
-    loader.crossOrigin = savedCrossOrigin;
+// Firefox has issues loading blob: URLs in both ImageBitmapLoader (fetch
+// fails) and ImageLoader (<img> with crossOrigin taints the data). Fix:
+// rewrite the GLB binary to embed images as data: URIs in the JSON chunk
+// so Three.js never creates blob: URLs at all.
+function glbWithDataURIs(buffer: ArrayBuffer): ArrayBuffer {
+  const view = new DataView(buffer);
+  // GLB header: magic(4) + version(4) + length(4)
+  const jsonLen = view.getUint32(12, true);
+  const jsonBytes = new Uint8Array(buffer, 20, jsonLen);
+  const json = JSON.parse(new TextDecoder().decode(jsonBytes));
+
+  const binOffset = 20 + jsonLen + 8; // skip JSON chunk + binary chunk header
+  const bin = new Uint8Array(buffer, binOffset);
+
+  if (json.images) {
+    for (const img of json.images) {
+      if (img.bufferView === undefined) continue;
+      const bv = json.bufferViews[img.bufferView];
+      const start = bv.byteOffset ?? 0;
+      const slice = bin.slice(start, start + bv.byteLength);
+      // Build data URI from raw bytes
+      let b64 = "";
+      for (let i = 0; i < slice.length; i += 8192) {
+        b64 += String.fromCharCode(...slice.subarray(i, i + 8192));
+      }
+      img.uri = `data:${img.mimeType || "application/octet-stream"};base64,${btoa(b64)}`;
+      delete img.bufferView;
+    }
   }
+
+  // Rebuild GLB with modified JSON
+  const newJsonStr = JSON.stringify(json);
+  const newJsonBytes = new TextEncoder().encode(newJsonStr);
+  // Pad JSON chunk to 4-byte alignment
+  const padded = newJsonBytes.length + ((4 - (newJsonBytes.length % 4)) % 4);
+  const binChunkLen = buffer.byteLength - binOffset;
+  const totalLen = 12 + 8 + padded + 8 + binChunkLen;
+  const out = new ArrayBuffer(totalLen);
+  const dv = new DataView(out);
+  // GLB header
+  dv.setUint32(0, 0x46546C67, true); // magic
+  dv.setUint32(4, 2, true); // version
+  dv.setUint32(8, totalLen, true);
+  // JSON chunk
+  dv.setUint32(12, padded, true);
+  dv.setUint32(16, 0x4E4F534A, true); // JSON type
+  new Uint8Array(out, 20, padded).fill(0x20); // pad with spaces
+  new Uint8Array(out, 20, newJsonBytes.length).set(newJsonBytes);
+  // Binary chunk
+  const binStart = 20 + padded;
+  dv.setUint32(binStart, binChunkLen, true);
+  dv.setUint32(binStart + 4, 0x004E4942, true); // BIN type
+  new Uint8Array(out, binStart + 8, binChunkLen).set(
+    new Uint8Array(buffer, binOffset, binChunkLen),
+  );
+  return out;
 }
 
 export type ModelViewerProps = {
@@ -176,12 +207,14 @@ const ModelViewer = ({ modelPath, label, description }: ModelViewerProps) => {
       setLoadState("ready");
     };
 
-    // Pre-fetch the binary so Three.js parses clean (non-tainted) data.
+    // Pre-fetch the binary, then rewrite embedded images as data: URIs
+    // to avoid Firefox blob: URL issues in both fetch() and <img> paths.
     fetch(modelPath, { credentials: "omit" })
       .then((r) => r.arrayBuffer())
       .then((buffer) => {
         if (!active) return;
-        parseGLTFWithTextureLoader(loader, buffer, onModelLoad, () => {
+        const patched = glbWithDataURIs(buffer);
+        loader.parse(patched, "", onModelLoad, () => {
           if (active) setLoadState("error");
         });
       })
