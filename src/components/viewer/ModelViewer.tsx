@@ -1,21 +1,26 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import { ImageLoader } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 import { useWebGL } from "@/hooks/useWebGL";
 
-// Firefox cannot fetch() or XHR blob: URLs created by GLTFLoader for
-// embedded textures. ImageBitmapLoader (the default on modern Firefox)
-// uses fetch() internally which fails on these URLs.
-// Fix: patch GLTFLoader.parse to replace ImageBitmapLoader with
-// TextureLoader on the internal parser. TextureLoader uses <img> elements
-// which handle blob: URLs correctly in all browsers.
+// Firefox has two issues with GLB texture loading:
+//
+// 1. ImageBitmapLoader uses fetch() which fails on blob: URLs in Firefox.
+//    Fix: temporarily hide createImageBitmap during GLTFParser construction
+//    so it falls back to TextureLoader (uses <img> elements).
+//
+// 2. ImageLoader sets crossOrigin on <img> elements for blob: URLs, which
+//    Firefox treats as a CORS violation, tainting the image for WebGL use.
+//    Fix: patch ImageLoader.load to skip crossOrigin for blob: URLs.
 const _isFirefox =
   typeof navigator !== "undefined" && /Firefox/i.test(navigator.userAgent);
 
 if (_isFirefox) {
+  // Patch 1: Force TextureLoader instead of ImageBitmapLoader
   const _origParse = GLTFLoader.prototype.parse;
   GLTFLoader.prototype.parse = function (
     data: ArrayBuffer | string,
@@ -23,23 +28,6 @@ if (_isFirefox) {
     onLoad: (gltf: unknown) => void,
     onError?: (error: unknown) => void,
   ) {
-    // Temporarily override the internal parser creation by wrapping
-    // onLoad to never actually run on its own — instead we hook into
-    // the parse call. But GLTFLoader doesn't expose the parser directly.
-    // The simplest reliable approach: after calling original parse,
-    // the parser is synchronously created and assigned textureLoader.
-    // We can intercept by patching the manager's itemStart to detect
-    // when texture loading begins and swap the loader.
-
-    // Actually, the cleanest way: since GLTFLoader calls
-    // `new GLTFParser(json, { manager: this.manager, ... })` which sets
-    // `this.textureLoader` based on browser detection, we can override
-    // by providing a manager with a URL modifier that doesn't change URLs
-    // but whose reference we control, then the parser uses TextureLoader
-    // if we make createImageBitmap unavailable temporarily.
-
-    // Simplest approach: temporarily hide createImageBitmap so the parser
-    // constructor falls back to TextureLoader.
     const saved = globalThis.createImageBitmap;
     globalThis.createImageBitmap = undefined as unknown as typeof createImageBitmap;
     try {
@@ -47,6 +35,25 @@ if (_isFirefox) {
     } finally {
       globalThis.createImageBitmap = saved;
     }
+  };
+
+  // Patch 2: Skip crossOrigin for blob: URLs in ImageLoader
+  // (ImageLoader already skips it for data: URLs)
+  const _origILLoad = ImageLoader.prototype.load;
+  ImageLoader.prototype.load = function (
+    url: string,
+    onLoad?: ((image: HTMLImageElement) => void),
+    onProgress?: ((event: ProgressEvent) => void),
+    onError?: ((event: ErrorEvent) => void),
+  ) {
+    if (typeof url === "string" && url.startsWith("blob:")) {
+      const savedCO = this.crossOrigin;
+      this.crossOrigin = undefined as unknown as string;
+      const result = _origILLoad.call(this, url, onLoad, onProgress, onError);
+      this.crossOrigin = savedCO;
+      return result;
+    }
+    return _origILLoad.call(this, url, onLoad, onProgress, onError);
   };
 }
 
