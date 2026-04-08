@@ -6,21 +6,42 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 import { useWebGL } from "@/hooks/useWebGL";
 
-// Three.js r170 sets crossOrigin on all non-data: URLs including blob: URLs.
-// Firefox enforces CORS on blob: URLs when crossOrigin is set, causing texture
-// load failures. Patch ImageLoader to skip crossOrigin for same-origin blob: URLs.
-{
-  const _orig = THREE.ImageLoader.prototype.load;
+// Firefox fails to fetch() blob: URLs created from cross-origin data.
+// Fix: intercept URL.createObjectURL to cache blobs by URL, then patch
+// ImageBitmapLoader (used by Three.js on Firefox 98+) to call
+// createImageBitmap(blob) directly — no fetch() needed for blob: URLs.
+const _blobCache = new Map<string, Blob>();
+const _origCreateObjectURL = URL.createObjectURL.bind(URL);
+const _origRevokeObjectURL = URL.revokeObjectURL.bind(URL);
+URL.createObjectURL = (obj: Blob | MediaSource) => {
+  const url = _origCreateObjectURL(obj);
+  if (obj instanceof Blob) _blobCache.set(url, obj);
+  return url;
+};
+URL.revokeObjectURL = (url: string) => {
+  _blobCache.delete(url);
+  _origRevokeObjectURL(url);
+};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const _origImageBitmapLoad = (THREE as any).ImageBitmapLoader?.prototype?.load;
+if (_origImageBitmapLoad) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (THREE.ImageLoader.prototype as any).load = function (url: string, ...rest: unknown[]) {
-    if (url.startsWith("blob:") || url.startsWith("data:")) {
-      const saved = this.crossOrigin;
-      this.crossOrigin = undefined as unknown as string;
-      const result = _orig.call(this, url, ...rest);
-      this.crossOrigin = saved;
-      return result;
+  (THREE as any).ImageBitmapLoader.prototype.load = function (
+    url: string,
+    onLoad: ((b: ImageBitmap) => void) | undefined,
+    _onProgress: unknown,
+    onError: ((e: unknown) => void) | undefined,
+  ) {
+    if (url.startsWith("blob:")) {
+      const blob = _blobCache.get(url);
+      if (blob) {
+        createImageBitmap(blob, { colorSpaceConversion: "none" })
+          .then((bmp) => { if (onLoad) onLoad(bmp); })
+          .catch((e) => { if (onError) onError(e); });
+        return undefined;
+      }
     }
-    return _orig.call(this, url, ...rest);
+    return _origImageBitmapLoad.call(this, url, onLoad, _onProgress, onError);
   };
 }
 
