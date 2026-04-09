@@ -1,29 +1,25 @@
 import { motion } from "framer-motion";
 import { BookOpenText, FileText, ClipboardCheck } from "lucide-react";
+
 import hapticImage from "@/assets/haptic-device.jpg";
 import xrImage from "@/assets/xr-training.jpg";
 import aiImage from "@/assets/ai-assessment.jpg";
+import { useI18n } from "@/hooks/useI18n";
 
 const features = [
   {
     icon: BookOpenText,
-    title: "Procedure-Based Learning",
-    description:
-      "Break down clinical work into chapters, explanations, visual references, and linked decision points so learners can revisit the full flow of a procedure.",
+    key: "procedure",
     image: aiImage,
   },
   {
     icon: FileText,
-    title: "Clinical Posts And Cases",
-    description:
-      "Publish educational posts, case reflections, and practical writeups that extend learning beyond one procedure without losing clinical context.",
+    key: "post",
     image: hapticImage,
   },
   {
     icon: ClipboardCheck,
-    title: "Contextual Assessment",
-    description:
-      "Use assessments as reinforcement inside the learning flow, with review routes that help learners revisit weak spots across procedures and posts.",
+    key: "assessment",
     image: xrImage,
   },
 ];
@@ -38,6 +34,8 @@ const cardVariants = {
 };
 
 const FeaturesSection = () => {
+  const { t } = useI18n();
+
   return (
     <section id="platform" className="relative py-32">
       <div className="container mx-auto px-6">
@@ -48,22 +46,21 @@ const FeaturesSection = () => {
           className="text-center mb-20"
         >
           <span className="font-mono text-xs text-primary tracking-widest uppercase">
-            Product Pillars
+            {t("landing.features.badge")}
           </span>
           <h2 className="font-display text-4xl md:text-5xl font-bold mt-4 mb-6">
-            Three pillars of{" "}
-            <span className="gradient-text">contextual clinical learning</span>
+            {t("landing.features.titlePrefix")}{" "}
+            <span className="gradient-text">{t("landing.features.titleHighlight")}</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Operio starts with procedures, posts, and assessments so the platform can support one
-            launch vertical now without hardwiring the product to a single specialty forever.
+            {t("landing.features.description")}
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6">
           {features.map((feature, i) => (
             <motion.div
-              key={feature.title}
+              key={feature.key}
               custom={i}
               initial="hidden"
               whileInView="visible"
@@ -74,7 +71,7 @@ const FeaturesSection = () => {
               <div className="aspect-[4/3] overflow-hidden">
                 <img
                   src={feature.image}
-                  alt={feature.title}
+                  alt={t(`landing.features.item.${feature.key}.title`)}
                   loading="lazy"
                   width={800}
                   height={800}
@@ -86,10 +83,10 @@ const FeaturesSection = () => {
                   <feature.icon size={20} />
                 </div>
                 <h3 className="font-display text-xl font-semibold mb-2 text-foreground">
-                  {feature.title}
+                  {t(`landing.features.item.${feature.key}.title`)}
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  {feature.description}
+                  {t(`landing.features.item.${feature.key}.description`)}
                 </p>
               </div>
             </motion.div>

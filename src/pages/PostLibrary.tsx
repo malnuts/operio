@@ -2,23 +2,27 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, BookOpen, Calendar, FileText, RefreshCw } from "lucide-react";
 
+import AccessStateBadge from "@/components/AccessStateBadge";
+import AccessStatePanel from "@/components/AccessStatePanel";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { buildPostLibraryItems, formatPublishDate, getPostMeta, type PostLibraryItem } from "@/lib/post-data";
+import { useI18n } from "@/hooks/useI18n";
+import { buildPostLibraryItems, formatPublishDate, type PostLibraryItem } from "@/lib/post-data";
 
 const PostLibrary = () => {
+  const { t, lang } = useI18n();
   const [items, setItems] = useState<PostLibraryItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [errorKey, setErrorKey] = useState<string | null>(null);
 
   useEffect(() => {
     buildPostLibraryItems()
       .then((data) => {
         setItems(data);
-        setError(null);
+        setErrorKey(null);
       })
       .catch(() => {
-        setError("Unable to load clinical posts right now.");
+        setErrorKey("postLibrary.error");
       })
       .finally(() => {
         setLoading(false);
@@ -30,41 +34,47 @@ const PostLibrary = () => {
       <div className="mx-auto flex max-w-6xl flex-col gap-8">
         <Link to="/app" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
           <ArrowLeft className="h-4 w-4" />
-          Back to learner home
+          {t("postLibrary.back")}
         </Link>
 
         <section className="space-y-4">
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.24em] text-primary">
             <BookOpen className="h-3.5 w-3.5" />
-            Clinical Posts
+            {t("postLibrary.badge")}
           </div>
           <div className="space-y-3">
             <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">
-              Read clinical posts, case reflections, and practical writeups.
+              {t("postLibrary.title")}
             </h1>
             <p className="max-w-3xl text-base leading-7 text-muted-foreground md:text-lg">
-              Posts extend learning beyond procedures with focused articles, technique discussions,
-              and educational case content.
+              {t("postLibrary.description")}
             </p>
+            <Link to="/pricing" className="inline-flex text-sm font-medium text-primary hover:underline">
+              {t("pricing.link.label")}
+            </Link>
           </div>
         </section>
 
         {loading ? (
           <div className="rounded-3xl border border-border bg-card/50 p-8 text-sm text-muted-foreground">
-            Loading posts...
+            {t("postLibrary.loading")}
           </div>
         ) : null}
 
-        {error ? (
+        {errorKey ? (
           <div className="rounded-3xl border border-destructive/30 bg-destructive/5 p-8 text-sm text-destructive">
-            {error}
+            {t(errorKey)}
           </div>
         ) : null}
 
-        {!loading && !error ? (
+        {!loading && !errorKey ? (
           <section className="grid gap-4 md:grid-cols-2">
             {items.map((item) => {
-              const meta = getPostMeta(item);
+              const meta = [
+                item.field,
+                item.topic,
+                item.hasLinkedAssessment ? t("post.meta.linkedAssessment") : undefined,
+              ].filter(Boolean) as string[];
 
               return (
                 <Link key={item.id} to={`/app/post/${item.id}`} className="group">
@@ -88,6 +98,7 @@ const PostLibrary = () => {
                     </CardHeader>
                     <CardContent className="space-y-5">
                       <div className="flex flex-wrap gap-2">
+                        <AccessStateBadge visibility={item.visibility} />
                         {meta.map((label) => (
                           <Badge key={label} variant="secondary">
                             {label}
@@ -95,15 +106,17 @@ const PostLibrary = () => {
                         ))}
                       </div>
 
+                      <AccessStatePanel visibility={item.visibility} />
+
                       <div className="rounded-2xl bg-muted/60 p-4 text-sm text-muted-foreground">
                         <p className="font-medium text-foreground">{item.authorName}</p>
-                        <p>{item.authorInstitution ?? "Independent clinical educator"}</p>
+                        <p>{item.authorInstitution ?? t("postLibrary.authorFallback")}</p>
                       </div>
 
                       {item.publishDate ? (
                         <div className="flex items-center gap-2 text-xs text-muted-foreground">
                           <Calendar className="h-3.5 w-3.5" />
-                          {formatPublishDate(item.publishDate)}
+                          {formatPublishDate(item.publishDate, lang)}
                         </div>
                       ) : null}
 
@@ -119,7 +132,7 @@ const PostLibrary = () => {
 
                       <div className="flex items-center gap-2 text-sm font-medium text-primary">
                         <RefreshCw className="h-4 w-4" />
-                        Read post
+                        {t("postLibrary.open")}
                       </div>
                     </CardContent>
                   </Card>

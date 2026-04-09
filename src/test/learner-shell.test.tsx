@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import enLocale from "../../public/locales/en.json";
 
 import App from "@/App";
 import {
@@ -21,6 +22,20 @@ describe("learner shell", () => {
       "fetch",
       vi.fn((input: RequestInfo | URL) => {
         const path = String(input);
+
+        if (path.includes("/locales/manifest.json")) {
+          return Promise.resolve({
+            ok: true,
+            json: async () => ({ languages: [{ code: "en", label: "English" }] }),
+          });
+        }
+
+        if (path.includes("/locales/en.json")) {
+          return Promise.resolve({
+            ok: true,
+            json: async () => enLocale,
+          });
+        }
 
         if (path.includes("/data/post-manifest.json")) {
           return Promise.resolve({ ok: true, json: async () => ({ posts: [] }) });
@@ -48,6 +63,17 @@ describe("learner shell", () => {
     expect(
       await screen.findByRole("heading", { name: /read clinical posts/i }),
     ).toBeInTheDocument();
+  });
+
+  it("renders the pricing route with learner and creator economics", async () => {
+    window.history.pushState({}, "", "/pricing");
+    render(<App />);
+
+    expect(
+      await screen.findByRole("heading", { name: /choose learner access and creator economics/i }),
+    ).toBeInTheDocument();
+    expect(screen.getAllByText("$5/mo").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("30%").length).toBeGreaterThan(0);
   });
 
   it("persists learner progress for procedures and assessments", () => {

@@ -1,18 +1,28 @@
-import type { ClinicalPost } from "@/types/content";
-import { clinicalPostSchema } from "@/types/content";
-import { FetchError } from "@/lib/errors";
-import type { NormalizedQuestion } from "@/lib/procedure-data";
+import { z } from "zod";
 
-export type PostManifestEntry = {
-  id: string;
-  field?: string;
-  topic?: string;
-};
+import { normalizeContentVisibility } from "@/lib/content-access";
+import { loadValidatedJson, resolveLocalizedText } from "@/lib/content-runtime";
+import type { NormalizedQuestion } from "@/lib/procedure-data";
+import type { ClinicalPost, ContentVisibility } from "@/types/content";
+import { assessmentQuestionSetSchema, clinicalPostSchema } from "@/types/content";
+
+const postManifestEntrySchema = z.object({
+  id: z.string(),
+  field: z.string().optional(),
+  topic: z.string().optional(),
+});
+
+const postManifestSchema = z.object({
+  posts: z.array(postManifestEntrySchema),
+});
+
+export type PostManifestEntry = z.infer<typeof postManifestEntrySchema>;
 
 export type PostLibraryItem = {
   id: string;
   title: string;
   excerpt: string;
+  visibility: ContentVisibility;
   authorName: string;
   authorInstitution?: string;
   field?: string;
@@ -22,68 +32,45 @@ export type PostLibraryItem = {
   hasLinkedAssessment: boolean;
 };
 
-type PostQuestionSet = {
-  postId?: string;
-  questions: Array<{
-    id: string;
-    stem: string;
-    options: Array<{ label: string; text: string; isCorrect: boolean }>;
-    explanation?: {
-      correctReasoning?: string;
-      distractorBreakdowns?: Array<{ label: string; reasoning: string }>;
-      clinicalPrinciple?: string;
-      boardTip?: string;
-    };
-  }>;
-};
-
-const withBase = (path: string) =>
-  `${import.meta.env.BASE_URL.replace(/\/$/, "")}${path}`;
-
-const fetchJson = async <T>(path: string): Promise<T> => {
-  const response = await fetch(withBase(path));
-
-  if (!response.ok) {
-    throw new FetchError(path, response.status);
-  }
-
-  return response.json() as Promise<T>;
-};
-
-const toText = (value: unknown, fallback: string) => {
-  if (typeof value === "string") {
-    return value;
-  }
-
-  if (value && typeof value === "object" && "en" in value && typeof value.en === "string") {
-    return value.en;
-  }
-
-  return fallback;
-};
+type PostQuestionSet = z.infer<typeof assessmentQuestionSetSchema>;
 
 export const loadPostManifest = async () =>
-  fetchJson<{ posts: PostManifestEntry[] }>("/data/post-manifest.json");
+  loadValidatedJson("/data/post-manifest.json", postManifestSchema);
 
 export const loadPostById = async (id: string) => {
-  const raw = await fetchJson<unknown>(`/data/posts/${id}.json`);
-  return clinicalPostSchema.parse(raw);
+  return loadValidatedJson(`/data/posts/${id}.json`, clinicalPostSchema);
 };
 
 export const loadQuestionsByAssessmentId = async (assessmentId: string) =>
-  fetchJson<PostQuestionSet>(`/data/questions/${assessmentId}.json`);
+  loadValidatedJson(`/data/questions/${assessmentId}.json`, assessmentQuestionSetSchema);
 
 export const normalizePostQuestionSet = (payload: PostQuestionSet): NormalizedQuestion[] =>
   payload.questions.map((question) => ({
     id: question.id,
-    stem: question.stem,
+    stem: resolveLocalizedText(question.stem, question.id),
     options: question.options.map((option) => ({
       id: option.label.toLowerCase(),
       label: option.label,
-      text: option.text,
+      text: resolveLocalizedText(option.text, option.label),
       isCorrect: option.isCorrect,
     })),
-    explanation: question.explanation,
+    explanation: question.explanation
+      ? {
+          correctReasoning: question.explanation.correctReasoning
+            ? resolveLocalizedText(question.explanation.correctReasoning, "")
+            : undefined,
+          distractorBreakdowns: question.explanation.distractorBreakdowns?.map((item) => ({
+            label: item.label,
+            reasoning: resolveLocalizedText(item.reasoning, ""),
+          })),
+          clinicalPrinciple: question.explanation.clinicalPrinciple
+            ? resolveLocalizedText(question.explanation.clinicalPrinciple, "")
+            : undefined,
+          boardTip: question.explanation.boardTip
+            ? resolveLocalizedText(question.explanation.boardTip, "")
+            : undefined,
+        }
+      : undefined,
   }));
 
 export const buildPostLibraryItems = async (): Promise<PostLibraryItem[]> => {
@@ -92,8 +79,9 @@ export const buildPostLibraryItems = async (): Promise<PostLibraryItem[]> => {
 
   return posts.map((post) => ({
     id: post.id,
-    title: toText(post.title, post.id),
-    excerpt: toText(post.excerpt, toText(post.body, "").slice(0, 160)),
+    title: resolveLocalizedText(post.title, post.id),
+    excerpt: resolveLocalizedText(post.excerpt, resolveLocalizedText(post.body, "").slice(0, 160)),
+    visibility: normalizeContentVisibility(post.platformMetadata?.visibility),
     authorName: post.author.name,
     authorInstitution: post.author.institution,
     field: post.field,
@@ -104,11 +92,11 @@ export const buildPostLibraryItems = async (): Promise<PostLibraryItem[]> => {
   }));
 };
 
-export const formatPublishDate = (dateString?: string) => {
+export const formatPublishDate = (dateString?: string, locale = "en-US") => {
   if (!dateString) return undefined;
 
   try {
-    return new Date(dateString).toLocaleDateString("en-US", {
+    return new Date(dateString).toLocaleDateString(locale, {
       year: "numeric",
       month: "short",
       day: "numeric",
@@ -117,8 +105,3 @@ export const formatPublishDate = (dateString?: string) => {
     return dateString;
   }
 };
-
-export const getPostMeta = (item: PostLibraryItem) =>
-  [item.field, item.topic, item.hasLinkedAssessment ? "Linked assessment" : undefined].filter(
-    Boolean,
-  ) as string[];

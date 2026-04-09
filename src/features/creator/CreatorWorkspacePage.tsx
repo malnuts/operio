@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
-import { Folders, FilePlus2, NotebookPen, Rows3, ShieldCheck } from "lucide-react";
+import { Bot, ClipboardCheck, Folders, FilePlus2, NotebookPen, Rows3, ShieldCheck } from "lucide-react";
 
+import CreatorShell from "@/components/CreatorShell";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import CreatorShell from "@/features/creator/CreatorShell";
 import { useCreatorLibrary } from "@/features/creator/useCreatorLibrary";
 import { useI18n } from "@/hooks/useI18n";
+import { contentVisibilityOrder } from "@/lib/content-access";
 
 const formatTimestamp = (value: string) =>
   new Intl.DateTimeFormat(undefined, {
@@ -56,6 +57,41 @@ const CreatorWorkspacePage = () => {
         ))}
       </section>
 
+      <section>
+        <Card>
+          <CardHeader>
+            <CardTitle>{t("creator.workspace.agent.title")}</CardTitle>
+            <CardDescription>{t("creator.workspace.agent.description")}</CardDescription>
+          </CardHeader>
+          <CardContent className="grid gap-4 md:grid-cols-2">
+            <Link
+              to="/creator/agent?type=procedure_draft"
+              className="rounded-2xl border border-border bg-muted/30 p-5 transition-colors hover:border-primary/40"
+            >
+              <div className="flex items-center gap-2">
+                <Bot className="h-5 w-5 text-primary" />
+                <p className="text-lg font-semibold">{t("creator.workspace.agent.draft")}</p>
+              </div>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                {t("creator.workspace.agent.draftDescription")}
+              </p>
+            </Link>
+            <Link
+              to="/creator/agent/review"
+              className="rounded-2xl border border-border bg-muted/30 p-5 transition-colors hover:border-primary/40"
+            >
+              <div className="flex items-center gap-2">
+                <ClipboardCheck className="h-5 w-5 text-primary" />
+                <p className="text-lg font-semibold">{t("creator.workspace.agent.review")}</p>
+              </div>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                {t("creator.workspace.agent.reviewDescription")}
+              </p>
+            </Link>
+          </CardContent>
+        </Card>
+      </section>
+
       <section className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
         <Card>
           <CardHeader>
@@ -90,7 +126,7 @@ const CreatorWorkspacePage = () => {
             <CardDescription>{t("creator.workspace.access.description")}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
-            {["free", "paid", "premium"].map((visibility) => (
+            {contentVisibilityOrder.map((visibility) => (
               <div key={visibility} className="rounded-2xl bg-muted/50 p-4">
                 <Badge variant="secondary">{t(`creator.visibility.${visibility}`)}</Badge>
                 <p className="mt-2 text-sm leading-6 text-muted-foreground">

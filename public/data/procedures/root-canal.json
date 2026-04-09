@@ -4,6 +4,11 @@
   "title": "Root Canal",
   "description": "Diagnose symptomatic irreversible pulpitis and perform complete endodontic treatment on a mandibular first molar: access, instrumentation, irrigation, and obturation.",
   "difficulty": "Advanced",
+  "platformMetadata": {
+    "contentType": "procedure",
+    "status": "published",
+    "visibility": "paid"
+  },
   "modelPath": "/models/shared/inside_my_tooth.glb",
   "cameraAngle": 270,
   "steps": [

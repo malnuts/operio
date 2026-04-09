@@ -119,6 +119,7 @@ describe("procedure media resolution", () => {
     const items = await buildProcedureLibraryItems();
 
     expect(items[0]?.thumbnailUrl).toBe("https://pub-abc.r2.dev/videos/thumbnails/video-demo.jpg");
+    expect(items[0]?.visibility).toBe("free");
   });
 
   it("supports flattened R2 key mapping for procedure media assets", () => {

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight, CheckCircle2, Microscope, ScrollText } from "lucide-react";
 
@@ -8,25 +8,27 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { useI18n } from "@/hooks/useI18n";
 import { useLearnerProgress } from "@/hooks/useLearnerProgress";
+import { usePageContext } from "@/features/agent/usePageContext";
 import { resolveAssetUrl, resolveAssetUrlAsync } from "@/lib/asset-config";
+import { resolveLocalizedText } from "@/lib/content-runtime";
 import {
   buildProcedurePlayback,
-  getProcedureMeta,
   loadProcedureById,
   loadQuestionsByProcedureId,
   normalizeQuestionSet,
   type NormalizedQuestion,
-  type ProcedureLibraryItem,
   type ProcedurePlaybackUnit,
 } from "@/lib/procedure-data";
 import type { Procedure } from "@/types/content";
 
 const ProcedureDetail = () => {
+  const { t } = useI18n();
   const { id = "" } = useParams();
   const { progress, trackProcedureVisit, trackAssessmentAttempt } = useLearnerProgress();
-  const alreadyCompleted = Boolean(progress.procedures[id]?.completed);
   const fallbackModelUrl = resolveAssetUrl("/models/shared/full-mouth.glb");
+  const alreadyCompletedRef = useRef(false);
 
   const [procedure, setProcedure] = useState<Procedure | null>(null);
   const [questions, setQuestions] = useState<Record<string, NormalizedQuestion>>({});
@@ -36,14 +38,18 @@ const ProcedureDetail = () => {
   const [answeredQuestionIds, setAnsweredQuestionIds] = useState<Record<string, string>>({});
   const [completed, setCompleted] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [errorKey, setErrorKey] = useState<string | null>(null);
   const [resolvedModelUrl, setResolvedModelUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    alreadyCompletedRef.current = Boolean(progress.procedures[id]?.completed);
+  }, [id, progress.procedures]);
 
   useEffect(() => {
     let active = true;
 
     setLoading(true);
-    setError(null);
+    setErrorKey(null);
     setProcedure(null);
     setQuestions({});
     setPlayback([]);
@@ -67,7 +73,7 @@ const ProcedureDetail = () => {
         setCurrentIndex(0);
         setSelectedOptionId(null);
         setAnsweredQuestionIds({});
-        trackProcedureVisit(id, alreadyCompleted);
+        trackProcedureVisit(id, alreadyCompletedRef.current);
 
         if (nextProcedure.modelPath) {
           resolveAssetUrlAsync(nextProcedure.modelPath)
@@ -80,7 +86,7 @@ const ProcedureDetail = () => {
           return;
         }
 
-        setError("Unable to load this procedure right now.");
+        setErrorKey("procedureDetail.error");
       })
       .finally(() => {
         if (active) {
@@ -98,26 +104,89 @@ const ProcedureDetail = () => {
   const currentAnswerId = currentQuestion ? answeredQuestionIds[currentQuestion.id] : undefined;
   const currentQuestionLocked = Boolean(currentQuestion && !currentAnswerId);
 
-  const meta = useMemo(() => {
-    if (!procedure) {
-      return [];
+  const completionPercent = playback.length ? Math.round(((currentIndex + Number(completed)) / playback.length) * 100) : 0;
+
+  usePageContext({
+    role: "learner",
+    page: "procedure",
+    contentId: id,
+    contentType: "procedure",
+    contentTitle: procedure ? resolveLocalizedText(procedure.title, "") : undefined,
+    procedureType: procedure?.type,
+    currentStep: currentUnit ? {
+      id: currentUnit.id,
+      narration: currentUnit.narration ?? "",
+      actionDescription: currentUnit.actionDescription ? resolveLocalizedText(currentUnit.actionDescription, "") : undefined,
+      index: currentIndex,
+      total: playback.length,
+    } : undefined,
+    currentQuestion: currentQuestion ? {
+      id: currentQuestion.id,
+      stem: resolveLocalizedText(currentQuestion.stem, ""),
+      answeredCorrectly: currentAnswerId ? currentQuestion.correctOptionId === currentAnswerId : undefined,
+    } : undefined,
+    referenceContent: currentUnit?.referenceContent ? {
+      anatomy: currentUnit.referenceContent.anatomy ?? undefined,
+      technique: currentUnit.referenceContent.technique ?? undefined,
+      instrument: currentUnit.referenceContent.instrument?.name ?? undefined,
+    } : undefined,
+  }, [id, procedure, currentIndex, currentUnit, currentQuestion, currentAnswerId]);
+
+  const formatDurationLabel = (value?: number) => {
+    if (!value) {
+      return undefined;
     }
 
-    return getProcedureMeta({
-      id: procedure.id,
-      type: procedure.type,
-      title: typeof procedure.title === "string" ? procedure.title : procedure.id,
-      description: typeof procedure.description === "string" ? procedure.description : "",
-      difficulty: procedure.difficulty,
-      duration: procedure.duration,
-      thumbnailUrl: procedure.thumbnailUrl,
-      authorName: procedure.author?.name,
-      authorInstitution: procedure.author?.institution,
-      tags: procedure.tags ?? [],
-    } satisfies ProcedureLibraryItem);
-  }, [procedure]);
+    if (value < 60) {
+      return t("procedure.meta.duration.minutes", { count: value });
+    }
 
-  const completionPercent = playback.length ? Math.round(((currentIndex + Number(completed)) / playback.length) * 100) : 0;
+    const hours = Math.floor(value / 60);
+    const minutes = value % 60;
+
+    if (!minutes) {
+      return t("procedure.meta.duration.hoursOnly", { hours });
+    }
+
+    return t("procedure.meta.duration.hoursMinutes", { hours, minutes });
+  };
+
+  const getProcedureMetaLabels = (value: Procedure) =>
+    [
+      t(value.type === "video" ? "procedure.meta.video" : "procedure.meta.simulation"),
+      value.difficulty,
+      formatDurationLabel(value.duration),
+    ].filter(Boolean) as string[];
+
+  const getPlaybackTitle = (unit: ProcedurePlaybackUnit) =>
+    unit.title
+    || t(
+      unit.titleFallback.kind === "chapter"
+        ? "procedure.playback.chapter"
+        : "procedure.playback.step",
+      { index: unit.titleFallback.index },
+    );
+
+  const getPlaybackBody = (unit: ProcedurePlaybackUnit) =>
+    unit.body
+    || t(
+      unit.bodyFallback === "video"
+        ? "procedure.playback.videoBodyFallback"
+        : "procedure.playback.simulationBodyFallback",
+    );
+
+  const getPlaybackCue = (unit: ProcedurePlaybackUnit) => {
+    if (!unit.cue) {
+      return undefined;
+    }
+
+    switch (unit.cue.kind) {
+      case "videoTimestamp":
+        return t("procedure.playback.cue.video", { seconds: unit.cue.seconds });
+      case "instrument":
+        return t("procedure.playback.cue.instrument", { instrumentId: unit.cue.instrumentId });
+    }
+  };
 
   const submitAnswer = () => {
     if (!currentQuestion || !selectedOptionId) {
@@ -168,21 +237,28 @@ const ProcedureDetail = () => {
     return (
       <main className="min-h-screen bg-background px-6 py-16 text-foreground">
         <div className="mx-auto max-w-5xl rounded-3xl border border-border bg-card/50 p-8 text-sm text-muted-foreground">
-          Loading procedure...
+          {t("procedureDetail.loading")}
         </div>
       </main>
     );
   }
 
-  if (error || !procedure || !currentUnit) {
+  if (errorKey || !procedure || !currentUnit) {
     return (
       <main className="min-h-screen bg-background px-6 py-16 text-foreground">
         <div className="mx-auto max-w-5xl rounded-3xl border border-destructive/30 bg-destructive/5 p-8 text-sm text-destructive">
-          {error ?? "Procedure not found."}
+          {t(errorKey ?? "procedureDetail.notFound")}
         </div>
       </main>
     );
   }
+
+  const procedureTitle = resolveLocalizedText(procedure.title, procedure.id);
+  const procedureDescription = resolveLocalizedText(procedure.description, "");
+  const meta = getProcedureMetaLabels(procedure);
+  const playbackTitle = getPlaybackTitle(currentUnit);
+  const playbackBody = getPlaybackBody(currentUnit);
+  const playbackCue = getPlaybackCue(currentUnit);
 
   if (completed) {
     return (
@@ -194,35 +270,36 @@ const ProcedureDetail = () => {
                 <CheckCircle2 className="h-7 w-7" />
               </div>
               <div className="space-y-2">
-                <CardTitle className="text-3xl">Procedure complete</CardTitle>
-                <CardDescription className="text-base leading-7">
-                  You finished {typeof procedure.title === "string" ? procedure.title : procedure.id} and
-                  the session has been recorded in local learner progress.
+                <CardTitle className="text-3xl">{t("procedureDetail.complete.title")}</CardTitle>
+                  <CardDescription className="text-base leading-7">
+                  {t("procedureDetail.complete.description", { title: procedureTitle })}
                 </CardDescription>
               </div>
             </CardHeader>
             <CardContent className="space-y-5">
               <div className="grid gap-4 sm:grid-cols-3">
                 <div className="rounded-2xl bg-muted/60 p-4">
-                  <p className="text-sm text-muted-foreground">Sections completed</p>
+                  <p className="text-sm text-muted-foreground">{t("procedureDetail.complete.stats.sections")}</p>
                   <p className="mt-2 text-3xl font-semibold">{playback.length}</p>
                 </div>
                 <div className="rounded-2xl bg-muted/60 p-4">
-                  <p className="text-sm text-muted-foreground">Decision points answered</p>
+                  <p className="text-sm text-muted-foreground">{t("procedureDetail.complete.stats.decisionPoints")}</p>
                   <p className="mt-2 text-3xl font-semibold">{Object.keys(answeredQuestionIds).length}</p>
                 </div>
                 <div className="rounded-2xl bg-muted/60 p-4">
-                  <p className="text-sm text-muted-foreground">Content format</p>
-                  <p className="mt-2 text-3xl font-semibold">{procedure.type === "video" ? "Video" : "Sim"}</p>
+                  <p className="text-sm text-muted-foreground">{t("procedureDetail.complete.stats.contentFormat")}</p>
+                  <p className="mt-2 text-3xl font-semibold">
+                    {t(procedure.type === "video" ? "procedureDetail.format.video" : "procedureDetail.format.simulation")}
+                  </p>
                 </div>
               </div>
 
               <div className="flex flex-wrap gap-3">
                 <Button asChild>
-                  <Link to="/app/review">Go to review</Link>
+                  <Link to="/app/review">{t("procedureDetail.complete.action.review")}</Link>
                 </Button>
                 <Button variant="outline" asChild>
-                  <Link to="/app/procedures">Back to procedure library</Link>
+                  <Link to="/app/procedures">{t("procedureDetail.complete.action.back")}</Link>
                 </Button>
               </div>
             </CardContent>
@@ -239,14 +316,14 @@ const ProcedureDetail = () => {
           <div className="space-y-3">
             <Link to="/app/procedures" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
               <ArrowLeft className="h-4 w-4" />
-              Back to procedure library
+              {t("procedureDetail.back")}
             </Link>
             <div className="space-y-2">
               <h1 className="text-4xl font-semibold tracking-tight">
-                {typeof procedure.title === "string" ? procedure.title : procedure.id}
+                {procedureTitle}
               </h1>
               <p className="max-w-3xl text-base leading-7 text-muted-foreground">
-                {typeof procedure.description === "string" ? procedure.description : ""}
+                {procedureDescription}
               </p>
             </div>
           </div>
@@ -262,12 +339,12 @@ const ProcedureDetail = () => {
 
         <div className="space-y-2">
           <div className="flex items-center justify-between text-sm">
-            <span className="text-muted-foreground">Playback progress</span>
+            <span className="text-muted-foreground">{t("procedureDetail.progress.label")}</span>
             <span className="font-medium">
               {currentIndex + 1} / {playback.length}
             </span>
           </div>
-          <Progress value={completionPercent} aria-label="Procedure playback progress" />
+          <Progress value={completionPercent} aria-label={t("procedureDetail.progress.aria")} />
         </div>
 
         <section className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
@@ -276,7 +353,7 @@ const ProcedureDetail = () => {
             <CardHeader className="space-y-4">
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.24em] text-primary">
                 <Microscope className="h-3.5 w-3.5" />
-                {currentUnit.title}
+                {playbackTitle}
               </div>
               {procedure.videoUrl ? (
                 <video
@@ -285,18 +362,20 @@ const ProcedureDetail = () => {
                   controls
                   className="w-full rounded-2xl bg-black"
                   style={{ maxHeight: 360 }}
-                  aria-label={`Video: ${typeof procedure?.title === "string" ? procedure.title : ""}`}
+                  aria-label={t("procedureDetail.videoAria", {
+                    title: procedureTitle,
+                  })}
                 />
               ) : null}
               <div className="space-y-3">
-                <CardTitle className="text-3xl">{currentUnit.supportingText ?? currentUnit.title}</CardTitle>
+                <CardTitle className="text-3xl">{currentUnit.supportingText || playbackTitle}</CardTitle>
                 <CardDescription className="text-base leading-7 text-muted-foreground">
-                  {currentUnit.body}
+                  {playbackBody}
                 </CardDescription>
               </div>
-              {currentUnit.cue ? (
+              {playbackCue ? (
                 <div className="rounded-2xl bg-muted/60 px-4 py-3 text-sm text-muted-foreground">
-                  {currentUnit.cue}
+                  {playbackCue}
                 </div>
               ) : null}
             </CardHeader>
@@ -306,8 +385,8 @@ const ProcedureDetail = () => {
                   question={currentQuestion}
                   selectedOptionId={selectedOptionId}
                   answeredOptionId={currentAnswerId}
-                  title="Decision point"
-                  continueHint="Answer the decision point to continue."
+                  title={t("procedureDetail.assessment.title")}
+                  continueHint={t("procedureDetail.assessment.continueHint")}
                   onSelect={setSelectedOptionId}
                   onSubmit={submitAnswer}
                 />
@@ -315,14 +394,16 @@ const ProcedureDetail = () => {
 
               <div className="flex flex-wrap items-center gap-3">
                 <Button variant="outline" onClick={goToPrevious} disabled={currentIndex === 0}>
-                  Previous
+                  {t("procedureDetail.action.previous")}
                 </Button>
                 <Button onClick={goToNext} disabled={currentQuestionLocked}>
-                  {currentIndex === playback.length - 1 ? "Complete procedure" : "Next section"}
+                  {currentIndex === playback.length - 1
+                    ? t("procedureDetail.action.complete")
+                    : t("procedureDetail.action.next")}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
                 {currentQuestionLocked ? (
-                  <span className="text-sm text-muted-foreground">Answer the decision point to continue.</span>
+                  <span className="text-sm text-muted-foreground">{t("procedureDetail.assessment.continueHint")}</span>
                 ) : null}
               </div>
             </CardContent>
@@ -332,10 +413,10 @@ const ProcedureDetail = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-xl">
                 <ScrollText className="h-5 w-5" />
-                Reference panel
+                {t("procedureDetail.reference.title")}
               </CardTitle>
               <CardDescription>
-                Supporting anatomy, tools, and technique notes travel with the current section.
+                {t("procedureDetail.reference.description")}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -343,7 +424,7 @@ const ProcedureDetail = () => {
                 <ModelViewer
                   modelPath={resolvedModelUrl}
                   fallbackModelPath={fallbackModelUrl}
-                  label={typeof procedure?.title === "string" ? procedure.title : "Reference model"}
+                  label={procedureTitle || t("procedureDetail.reference.modelLabel")}
                 />
               ) : null}
 
@@ -358,21 +439,21 @@ const ProcedureDetail = () => {
 
               {currentUnit.referenceContent?.anatomy ? (
                 <div className="space-y-2">
-                  <p className="text-sm font-medium text-foreground">Anatomy</p>
+                  <p className="text-sm font-medium text-foreground">{t("procedureDetail.reference.anatomy")}</p>
                   <p className="text-sm leading-6 text-muted-foreground">{currentUnit.referenceContent.anatomy}</p>
                 </div>
               ) : null}
 
               {currentUnit.referenceContent?.technique ? (
                 <div className="space-y-2">
-                  <p className="text-sm font-medium text-foreground">Technique notes</p>
+                  <p className="text-sm font-medium text-foreground">{t("procedureDetail.reference.technique")}</p>
                   <p className="text-sm leading-6 text-muted-foreground">{currentUnit.referenceContent.technique}</p>
                 </div>
               ) : null}
 
               {!currentUnit.referenceContent ? (
                 <p className="text-sm text-muted-foreground">
-                  No supporting reference content is attached to this section yet.
+                  {t("procedureDetail.reference.empty")}
                 </p>
               ) : null}
             </CardContent>

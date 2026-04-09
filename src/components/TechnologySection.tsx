@@ -1,30 +1,29 @@
 import { motion } from "framer-motion";
 import { Cpu, Database, Shield, Layers } from "lucide-react";
+import { useI18n } from "@/hooks/useI18n";
 
 const techItems = [
   {
     icon: Cpu,
-    title: "Procedure Playback Infrastructure",
-    description: "Support chapter-based procedure lessons with media, explanations, and decision points that can evolve without rewriting the platform.",
+    key: "playback",
   },
   {
     icon: Database,
-    title: "Adaptive Learning Engine",
-    description: "Track learner progress across procedures, posts, and assessments so the review experience can respond to weak areas over time.",
+    key: "progress",
   },
   {
     icon: Shield,
-    title: "Clinical Validation",
-    description: "Keep launch content grounded in real clinical workflows while preserving room for expansion beyond the first specialty vertical.",
+    key: "validation",
   },
   {
     icon: Layers,
-    title: "Optional Visual Reference",
-    description: "Treat anatomy and 3D reference modules as supporting layers that can attach to procedures or posts when the content needs them.",
+    key: "reference",
   },
 ];
 
 const TechnologySection = () => {
+  const { t } = useI18n();
+
   return (
     <section id="technology" className="relative py-32">
       <div className="container mx-auto px-6">
@@ -36,22 +35,20 @@ const TechnologySection = () => {
             transition={{ duration: 0.6 }}
           >
             <span className="font-mono text-xs text-primary tracking-widest uppercase">
-              Under the Hood
+              {t("landing.technology.badge")}
             </span>
             <h2 className="font-display text-4xl md:text-5xl font-bold mt-4 mb-6">
-              Built on <span className="gradient-text">reusable</span> learning infrastructure
+              {t("landing.technology.titlePrefix")} <span className="gradient-text">{t("landing.technology.titleHighlight")}</span> {t("landing.technology.titleSuffix")}
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              Operio's architecture is organized around reusable content and role models: learners
-              move through procedures, posts, review, and anatomy reference while creators publish
-              the educational material behind those experiences.
+              {t("landing.technology.description")}
             </p>
           </motion.div>
 
           <div className="grid sm:grid-cols-2 gap-4">
             {techItems.map((item, i) => (
               <motion.div
-                key={item.title}
+                key={item.key}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -61,8 +58,8 @@ const TechnologySection = () => {
                 <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
                   <item.icon size={18} />
                 </div>
-                <h3 className="font-display font-semibold text-foreground mb-1.5">{item.title}</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">{item.description}</p>
+                <h3 className="font-display font-semibold text-foreground mb-1.5">{t(`landing.technology.item.${item.key}.title`)}</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">{t(`landing.technology.item.${item.key}.description`)}</p>
               </motion.div>
             ))}
           </div>

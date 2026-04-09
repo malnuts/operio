@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { ZodError } from "zod";
 
+import AccessStatePanel from "@/components/AccessStatePanel";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { useI18n } from "@/hooks/useI18n";
+import { contentVisibilityOrder } from "@/lib/content-access";
 import {
   creatorPostInputSchema,
   creatorProcedureInputSchema,
@@ -145,7 +147,7 @@ const CreatorContentForm = ({
     setProcedureForm(createProcedureFormState(entry));
     setPostForm(createPostFormState(entry));
     setErrors({});
-  }, [entry?.id]);
+  }, [entry]);
 
   const submitProcedure = (status: CreatorPublicationStatus) => {
     const parsed = creatorProcedureInputSchema.safeParse({
@@ -306,12 +308,20 @@ const CreatorContentForm = ({
                   className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
                   aria-invalid={Boolean(errors.visibility)}
                 >
-                  <option value="free">{t("creator.visibility.free")}</option>
-                  <option value="paid">{t("creator.visibility.paid")}</option>
-                  <option value="premium">{t("creator.visibility.premium")}</option>
+                  {contentVisibilityOrder.map((visibility) => (
+                    <option key={visibility} value={visibility}>
+                      {t(`creator.visibility.${visibility}`)}
+                    </option>
+                  ))}
                 </select>
                 {errors.visibility ? <p className="text-sm text-destructive">{t(errors.visibility)}</p> : null}
               </div>
+
+              <AccessStatePanel
+                visibility={procedureForm.visibility}
+                variant="detail"
+                showPricingLink
+              />
 
               <div className="rounded-2xl bg-muted/60 p-4 text-sm text-muted-foreground">
                 <p className="font-medium text-foreground">{t("creator.editor.procedure.checklistTitle")}</p>
@@ -417,12 +427,20 @@ const CreatorContentForm = ({
                   className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
                   aria-invalid={Boolean(errors.visibility)}
                 >
-                  <option value="free">{t("creator.visibility.free")}</option>
-                  <option value="paid">{t("creator.visibility.paid")}</option>
-                  <option value="premium">{t("creator.visibility.premium")}</option>
+                  {contentVisibilityOrder.map((visibility) => (
+                    <option key={visibility} value={visibility}>
+                      {t(`creator.visibility.${visibility}`)}
+                    </option>
+                  ))}
                 </select>
                 {errors.visibility ? <p className="text-sm text-destructive">{t(errors.visibility)}</p> : null}
               </div>
+
+              <AccessStatePanel
+                visibility={postForm.visibility}
+                variant="detail"
+                showPricingLink
+              />
 
               <div className="rounded-2xl bg-muted/60 p-4 text-sm text-muted-foreground">
                 <p className="font-medium text-foreground">{t("creator.editor.post.checklistTitle")}</p>

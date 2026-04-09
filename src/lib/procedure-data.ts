@@ -1,24 +1,87 @@
+import { z } from "zod";
+
+import { normalizeContentVisibility } from "@/lib/content-access";
 import { resolveAssetUrl } from "@/lib/asset-config";
-import { FetchError } from "@/lib/errors";
-import type { Procedure } from "@/types/content";
+import { loadValidatedJson, resolveLocalizedText } from "@/lib/content-runtime";
+import type { ContentVisibility, Procedure } from "@/types/content";
 import { procedureSchema } from "@/types/content";
 
-export type ProcedureManifestEntry = {
-  id: string;
-  type: "simulation" | "video";
-  duration?: number;
-  thumbnailUrl?: string;
-  author?: {
-    name: string;
-    institution?: string;
-  };
-};
+const procedureManifestEntrySchema = z.object({
+  id: z.string(),
+  type: z.enum(["simulation", "video"]),
+  duration: z.number().optional(),
+  thumbnailUrl: z.string().optional(),
+  author: z.object({
+    name: z.string(),
+    institution: z.string().optional(),
+  }).optional(),
+});
+
+const procedureManifestSchema = z.object({
+  procedures: z.array(procedureManifestEntrySchema),
+});
+
+const legacyQuestionSetSchema = z.object({
+  procedureId: z.string().optional(),
+  questions: z.array(
+    z.object({
+      id: z.string(),
+      stem: z.string(),
+      options: z.array(
+        z.object({
+          label: z.string(),
+          text: z.string(),
+          isCorrect: z.boolean(),
+        }),
+      ),
+      explanation: z.object({
+        correctReasoning: z.string().optional(),
+        distractorBreakdowns: z.array(
+          z.object({
+            label: z.string(),
+            reasoning: z.string(),
+          }),
+        ).optional(),
+        clinicalPrinciple: z.string().optional(),
+        boardTip: z.string().optional(),
+      }).optional(),
+    }),
+  ),
+});
+
+const videoQuestionSetSchema = z.object({
+  procedureId: z.string().optional(),
+  questions: z.array(
+    z.object({
+      id: z.string(),
+      stem: z.string(),
+      options: z.array(
+        z.object({
+          id: z.string(),
+          text: z.string(),
+        }),
+      ),
+      correctOptionId: z.string(),
+      explanation: z.object({
+        correctReasoning: z.string().optional(),
+        distractorAnalysis: z.record(z.string(), z.string()).optional(),
+        clinicalPrinciple: z.string().optional(),
+        boardTip: z.string().optional(),
+      }).optional(),
+    }),
+  ),
+});
+
+const procedureQuestionSetSchema = z.union([legacyQuestionSetSchema, videoQuestionSetSchema]);
+
+export type ProcedureManifestEntry = z.infer<typeof procedureManifestEntrySchema>;
 
 export type ProcedureLibraryItem = {
   id: string;
   type: "simulation" | "video";
   title: string;
   description: string;
+  visibility: ContentVisibility;
   difficulty?: string;
   duration?: number;
   thumbnailUrl?: string;
@@ -48,8 +111,13 @@ export type NormalizedQuestion = {
 
 export type ProcedurePlaybackUnit = {
   id: string;
-  title: string;
-  body: string;
+  title?: string;
+  titleFallback: {
+    kind: "chapter" | "step";
+    index: number;
+  };
+  body?: string;
+  bodyFallback: "video" | "simulation";
   supportingText?: string;
   questionId?: string;
   referenceContent?: {
@@ -60,82 +128,16 @@ export type ProcedurePlaybackUnit = {
       description: string;
     };
   };
-  cue?: string;
+  cue?:
+    | { kind: "videoTimestamp"; seconds: number }
+    | { kind: "instrument"; instrumentId: string };
 };
 
-type LegacyQuestionSet = {
-  procedureId?: string;
-  questions: Array<{
-    id: string;
-    stem: string;
-    options: Array<{ label: string; text: string; isCorrect: boolean }>;
-    explanation?: {
-      correctReasoning?: string;
-      distractorBreakdowns?: Array<{ label: string; reasoning: string }>;
-      clinicalPrinciple?: string;
-      boardTip?: string;
-    };
-  }>;
-};
-
-type VideoQuestionSet = {
-  procedureId?: string;
-  questions: Array<{
-    id: string;
-    stem: string;
-    options: Array<{ id: string; text: string }>;
-    correctOptionId: string;
-    explanation?: {
-      correctReasoning?: string;
-      distractorAnalysis?: Record<string, string>;
-      clinicalPrinciple?: string;
-      boardTip?: string;
-    };
-  }>;
-};
-
-const withBase = (path: string) =>
-  `${import.meta.env.BASE_URL.replace(/\/$/, "")}${path}`;
-
-const fetchJson = async <T>(path: string): Promise<T> => {
-  const response = await fetch(withBase(path));
-
-  if (!response.ok) {
-    throw new FetchError(path, response.status);
-  }
-
-  return response.json() as Promise<T>;
-};
-
-const formatDuration = (value?: number) => {
-  if (!value) {
-    return undefined;
-  }
-
-  if (value < 60) {
-    return `${value} min`;
-  }
-
-  const hours = Math.floor(value / 60);
-  const minutes = value % 60;
-
-  return minutes ? `${hours}h ${minutes}m` : `${hours}h`;
-};
+type LegacyQuestionSet = z.infer<typeof legacyQuestionSetSchema>;
+type VideoQuestionSet = z.infer<typeof videoQuestionSetSchema>;
 
 const isVideoQuestionSet = (payload: LegacyQuestionSet | VideoQuestionSet): payload is VideoQuestionSet =>
   Boolean(payload.questions[0] && "correctOptionId" in payload.questions[0]);
-
-const toText = (value: unknown, fallback: string) => {
-  if (typeof value === "string") {
-    return value;
-  }
-
-  if (value && typeof value === "object" && "en" in value && typeof value.en === "string") {
-    return value.en;
-  }
-
-  return fallback;
-};
 
 const resolveProcedureChapterMedia = (chapter: NonNullable<Procedure["chapters"]>[number]) => ({
   ...chapter,
@@ -155,15 +157,14 @@ export const resolveProcedureMedia = (procedure: Procedure): Procedure => ({
 });
 
 export const loadProcedureManifest = async () =>
-  fetchJson<{ procedures: ProcedureManifestEntry[] }>("/data/procedure-manifest.json");
+  loadValidatedJson("/data/procedure-manifest.json", procedureManifestSchema);
 
 export const loadProcedureById = async (id: string) => {
-  const raw = await fetchJson<unknown>(`/data/procedures/${id}.json`);
-  return resolveProcedureMedia(procedureSchema.parse(raw));
+  return resolveProcedureMedia(await loadValidatedJson(`/data/procedures/${id}.json`, procedureSchema));
 };
 
 export const loadQuestionsByProcedureId = async (id: string) =>
-  fetchJson<LegacyQuestionSet | VideoQuestionSet>(`/data/questions/${id}-questions.json`);
+  loadValidatedJson(`/data/questions/${id}-questions.json`, procedureQuestionSetSchema);
 
 export const buildProcedureLibraryItems = async (): Promise<ProcedureLibraryItem[]> => {
   const manifest = await loadProcedureManifest();
@@ -172,8 +173,9 @@ export const buildProcedureLibraryItems = async (): Promise<ProcedureLibraryItem
   return procedures.map((procedure) => ({
     id: procedure.id,
     type: procedure.type,
-    title: toText(procedure.title, procedure.id),
-    description: toText(procedure.description, ""),
+    title: resolveLocalizedText(procedure.title, procedure.id),
+    description: resolveLocalizedText(procedure.description, ""),
+    visibility: normalizeContentVisibility(procedure.platformMetadata?.visibility),
     difficulty: procedure.difficulty,
     duration: procedure.duration,
     thumbnailUrl: procedure.thumbnailUrl,
@@ -232,15 +234,23 @@ export const buildProcedurePlayback = (procedure: Procedure): ProcedurePlaybackU
 
       return {
         id: chapter.id ?? `chapter-${index + 1}`,
-        title: toText(chapter.title, `Chapter ${index + 1}`),
-        body: chapter.referenceContent?.technique ?? "Follow the demonstrated procedure flow.",
+        title: chapter.title ? resolveLocalizedText(chapter.title, "") : undefined,
+        titleFallback: {
+          kind: "chapter",
+          index: index + 1,
+        },
+        body: chapter.referenceContent?.technique,
+        bodyFallback: "video",
         supportingText: decisionPoint?.stepDescription
-          ? toText(decisionPoint.stepDescription, "")
+          ? resolveLocalizedText(decisionPoint.stepDescription, "")
           : undefined,
         questionId: decisionPoint?.questionId,
         referenceContent: chapter.referenceContent,
         cue: chapter.timestamp !== undefined && chapter.timestamp > 0
-          ? `Video cue: ${chapter.timestamp}s`
+          ? {
+              kind: "videoTimestamp",
+              seconds: chapter.timestamp,
+            }
           : undefined,
       };
     });
@@ -248,17 +258,21 @@ export const buildProcedurePlayback = (procedure: Procedure): ProcedurePlaybackU
 
   return (procedure.steps ?? []).map((step, index) => ({
     id: step.id ?? `step-${index + 1}`,
-    title: `Step ${index + 1}`,
-    body: step.narration ?? "Continue through the procedure.",
-    supportingText: step.actionDescription ? toText(step.actionDescription, "") : undefined,
+    title: undefined,
+    titleFallback: {
+      kind: "step",
+      index: index + 1,
+    },
+    body: step.narration,
+    bodyFallback: "simulation",
+    supportingText: step.actionDescription ? resolveLocalizedText(step.actionDescription, "") : undefined,
     questionId: step.questionId,
     referenceContent: step.referenceContent,
-    cue: step.instrumentId ? `Primary instrument: ${step.instrumentId}` : undefined,
+    cue: step.instrumentId
+      ? {
+          kind: "instrument",
+          instrumentId: step.instrumentId,
+        }
+      : undefined,
   }));
 };
-
-export const getProcedureMeta = (item: ProcedureLibraryItem) => [
-  item.type === "video" ? "Video procedure" : "Simulation",
-  item.difficulty,
-  formatDuration(item.duration),
-].filter(Boolean) as string[];

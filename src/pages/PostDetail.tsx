@@ -5,7 +5,10 @@ import { ArrowLeft, BookOpen, Calendar, FileText, Tag } from "lucide-react";
 import AssessmentPromptCard from "@/components/AssessmentPromptCard";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useI18n } from "@/hooks/useI18n";
 import { useLearnerProgress } from "@/hooks/useLearnerProgress";
+import { usePageContext } from "@/features/agent/usePageContext";
+import { resolveLocalizedText } from "@/lib/content-runtime";
 import {
   formatPublishDate,
   loadPostById,
@@ -15,14 +18,8 @@ import {
 import type { NormalizedQuestion } from "@/lib/procedure-data";
 import type { ClinicalPost } from "@/types/content";
 
-const toText = (value: unknown, fallback: string) => {
-  if (typeof value === "string") return value;
-  if (value && typeof value === "object" && "en" in value && typeof value.en === "string")
-    return value.en;
-  return fallback;
-};
-
 const PostDetail = () => {
+  const { t, lang } = useI18n();
   const { id = "" } = useParams();
   const { trackAssessmentAttempt } = useLearnerProgress();
 
@@ -32,13 +29,13 @@ const PostDetail = () => {
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
   const [answeredQuestionIds, setAnsweredQuestionIds] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [errorKey, setErrorKey] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
 
     setLoading(true);
-    setError(null);
+    setErrorKey(null);
 
     loadPostById(id)
       .then(async (nextPost) => {
@@ -55,7 +52,7 @@ const PostDetail = () => {
         }
       })
       .catch(() => {
-        if (active) setError("Unable to load this post right now.");
+        if (active) setErrorKey("postDetail.error");
       })
       .finally(() => {
         if (active) setLoading(false);
@@ -68,6 +65,19 @@ const PostDetail = () => {
 
   const currentQuestion = questions[currentQuestionIndex];
   const currentAnswerId = currentQuestion ? answeredQuestionIds[currentQuestion.id] : undefined;
+
+  usePageContext({
+    role: "learner",
+    page: "post",
+    contentId: id,
+    contentType: "post",
+    contentTitle: post ? resolveLocalizedText(post.title, "") : undefined,
+    currentQuestion: currentQuestion ? {
+      id: currentQuestion.id,
+      stem: resolveLocalizedText(currentQuestion.stem, ""),
+      answeredCorrectly: currentAnswerId ? currentQuestion.correctOptionId === currentAnswerId : undefined,
+    } : undefined,
+  }, [id, post, currentQuestion, currentAnswerId]);
 
   const submitAnswer = () => {
     if (!currentQuestion || !selectedOptionId) return;
@@ -99,25 +109,25 @@ const PostDetail = () => {
     return (
       <main className="min-h-screen bg-background px-6 py-16 text-foreground">
         <div className="mx-auto max-w-3xl rounded-3xl border border-border bg-card/50 p-8 text-sm text-muted-foreground">
-          Loading post...
+          {t("postDetail.loading")}
         </div>
       </main>
     );
   }
 
-  if (error || !post) {
+  if (errorKey || !post) {
     return (
       <main className="min-h-screen bg-background px-6 py-16 text-foreground">
         <div className="mx-auto max-w-3xl rounded-3xl border border-destructive/30 bg-destructive/5 p-8 text-sm text-destructive">
-          {error ?? "Post not found."}
+          {t(errorKey ?? "postDetail.notFound")}
         </div>
       </main>
     );
   }
 
-  const title = toText(post.title, post.id);
-  const body = toText(post.body, "");
-  const excerpt = post.excerpt ? toText(post.excerpt, "") : undefined;
+  const title = resolveLocalizedText(post.title, post.id);
+  const body = resolveLocalizedText(post.body, "");
+  const excerpt = post.excerpt ? resolveLocalizedText(post.excerpt, "") : undefined;
   const tags = post.tags ?? [];
   const meta = [post.field, post.topic].filter(Boolean) as string[];
 
@@ -130,12 +140,12 @@ const PostDetail = () => {
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to clinical posts
+            {t("postDetail.back")}
           </Link>
 
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.24em] text-primary">
             <BookOpen className="h-3.5 w-3.5" />
-            Clinical Post
+            {t("postDetail.badge")}
           </div>
 
           <h1 className="text-4xl font-semibold tracking-tight">{title}</h1>
@@ -174,12 +184,12 @@ const PostDetail = () => {
               <CardTitle className="text-base">{post.author.name}</CardTitle>
               <CardDescription className="text-sm">
                 {[post.author.specialty, post.author.institution].filter(Boolean).join(" — ") ||
-                  "Clinical educator"}
+                  t("postDetail.authorFallback")}
               </CardDescription>
               {post.publishDate ? (
                 <div className="flex items-center gap-1.5 pt-1 text-xs text-muted-foreground">
                   <Calendar className="h-3 w-3" />
-                  {formatPublishDate(post.publishDate)}
+                  {formatPublishDate(post.publishDate, lang)}
                 </div>
               ) : null}
             </div>
@@ -226,7 +236,7 @@ const PostDetail = () => {
           <div className="space-y-3">
             <div className="flex items-center gap-2 text-sm font-medium text-foreground">
               <Tag className="h-4 w-4" />
-              Tags
+              {t("postDetail.tags")}
             </div>
             <div className="flex flex-wrap gap-2">
               {tags.map((tag) => (
@@ -245,15 +255,18 @@ const PostDetail = () => {
           <section className="space-y-4">
             <div className="flex items-center gap-2 text-sm font-medium text-foreground">
               <FileText className="h-4 w-4" />
-              Linked assessment ({currentQuestionIndex + 1} of {questions.length})
+              {t("postDetail.assessment.heading", {
+                current: String(currentQuestionIndex + 1),
+                total: String(questions.length),
+              })}
             </div>
 
             <AssessmentPromptCard
               question={currentQuestion}
               selectedOptionId={selectedOptionId}
               answeredOptionId={currentAnswerId}
-              title="Post assessment"
-              continueHint="Answer to reinforce what you just read."
+              title={t("postDetail.assessment.title")}
+              continueHint={t("postDetail.assessment.continueHint")}
               onSelect={setSelectedOptionId}
               onSubmit={submitAnswer}
             />
@@ -264,7 +277,7 @@ const PostDetail = () => {
                 onClick={goToNextQuestion}
                 className="text-sm font-medium text-primary hover:underline"
               >
-                Next question
+                {t("postDetail.assessment.next")}
               </button>
             ) : null}
           </section>
@@ -276,7 +289,7 @@ const PostDetail = () => {
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to clinical posts
+            {t("postDetail.back")}
           </Link>
         </div>
       </div>

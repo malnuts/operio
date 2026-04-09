@@ -7,6 +7,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { usePageContext } from "@/features/agent/usePageContext";
+import { useI18n } from "@/hooks/useI18n";
 import { useLearnerProgress } from "@/hooks/useLearnerProgress";
 import { loadQuestionsByProcedureId, normalizeQuestionSet, type NormalizedQuestion } from "@/lib/procedure-data";
 
@@ -21,10 +23,11 @@ type ReviewSet = {
 };
 
 const ReviewMode = () => {
+  const { t } = useI18n();
   const { progress, trackAssessmentAttempt } = useLearnerProgress();
   const [questionMap, setQuestionMap] = useState<Record<string, ReviewQuestion>>({});
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [errorKey, setErrorKey] = useState<string | null>(null);
   const [activeSet, setActiveSet] = useState<ReviewSet | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
@@ -44,14 +47,14 @@ const ReviewMode = () => {
     if (!contentIds.length) {
       setQuestionMap({});
       setLoading(false);
-      setError(null);
+      setErrorKey(null);
       return () => {
         active = false;
       };
     }
 
     setLoading(true);
-    setError(null);
+    setErrorKey(null);
 
     Promise.all(
       contentIds.map(async (contentId) => {
@@ -79,7 +82,7 @@ const ReviewMode = () => {
           return;
         }
 
-        setError("Unable to load review questions right now.");
+        setErrorKey("review.error");
       })
       .finally(() => {
         if (active) {
@@ -91,6 +94,12 @@ const ReviewMode = () => {
       active = false;
     };
   }, [progress.assessmentHistory]);
+
+  usePageContext({
+    role: "learner",
+    page: "review",
+    contentType: "assessment",
+  }, []);
 
   useEffect(() => {
     setCurrentIndex(0);
@@ -203,24 +212,24 @@ const ReviewMode = () => {
             <Card className="border-primary/20 bg-card/70">
               <CardHeader className="space-y-4">
                 <div className="space-y-2">
-                  <CardTitle className="text-3xl">Review session complete</CardTitle>
+                  <CardTitle className="text-3xl">{t("review.complete.title")}</CardTitle>
                   <CardDescription className="text-base leading-7">
-                    Your standalone assessment run has been added to local learner progress.
+                    {t("review.complete.description")}
                   </CardDescription>
                 </div>
               </CardHeader>
               <CardContent className="space-y-5">
                 <div className="grid gap-4 sm:grid-cols-3">
                   <div className="rounded-2xl bg-muted/60 p-4">
-                    <p className="text-sm text-muted-foreground">Questions answered</p>
+                    <p className="text-sm text-muted-foreground">{t("review.complete.stats.answered")}</p>
                     <p className="mt-2 text-3xl font-semibold">{activeSet.questions.length}</p>
                   </div>
                   <div className="rounded-2xl bg-muted/60 p-4">
-                    <p className="text-sm text-muted-foreground">Correct answers</p>
+                    <p className="text-sm text-muted-foreground">{t("review.complete.stats.correct")}</p>
                     <p className="mt-2 text-3xl font-semibold">{correctAnswers}</p>
                   </div>
                   <div className="rounded-2xl bg-muted/60 p-4">
-                    <p className="text-sm text-muted-foreground">Accuracy</p>
+                    <p className="text-sm text-muted-foreground">{t("review.complete.stats.accuracy")}</p>
                     <p className="mt-2 text-3xl font-semibold">
                       {activeSet.questions.length ? Math.round((correctAnswers / activeSet.questions.length) * 100) : 0}%
                     </p>
@@ -228,7 +237,7 @@ const ReviewMode = () => {
                 </div>
 
                 <Button variant="outline" onClick={resetActiveSet}>
-                  Back to review
+                  {t("review.back")}
                 </Button>
               </CardContent>
             </Card>
@@ -243,7 +252,7 @@ const ReviewMode = () => {
           <div className="space-y-3">
             <Button variant="outline" className="w-fit" onClick={resetActiveSet}>
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to review
+              {t("review.back")}
             </Button>
             <div className="space-y-2">
               <h1 className="text-4xl font-semibold tracking-tight">{activeSet.title}</h1>
@@ -253,22 +262,22 @@ const ReviewMode = () => {
 
           <div className="space-y-2">
             <div className="flex items-center justify-between text-sm">
-              <span className="text-muted-foreground">Assessment progress</span>
+              <span className="text-muted-foreground">{t("review.progress.label")}</span>
               <span className="font-medium">
                 {currentIndex + 1} / {activeSet.questions.length}
               </span>
             </div>
-            <Progress value={reviewProgress} aria-label="Standalone review assessment progress" />
+            <Progress value={reviewProgress} aria-label={t("review.progress.aria")} />
           </div>
 
           <Card>
             <CardHeader className="space-y-3">
               <div className="flex flex-wrap gap-2">
-                <Badge variant="secondary">Standalone review</Badge>
+                <Badge variant="secondary">{t("review.standalone.badge")}</Badge>
                 <Badge variant="outline">{currentQuestion.contentId}</Badge>
               </div>
               <CardDescription>
-                Review mode reuses the same question engine as procedure playback, but without reopening the full procedure flow.
+                {t("review.standalone.description")}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-5">
@@ -276,18 +285,20 @@ const ReviewMode = () => {
                 question={currentQuestion}
                 selectedOptionId={selectedOptionId}
                 answeredOptionId={answeredOptionId}
-                title="Review question"
-                continueHint="Answer this prompt to continue through the standalone review set."
+                title={t("review.standalone.assessmentTitle")}
+                continueHint={t("review.standalone.continueHint")}
                 onSelect={setSelectedOptionId}
                 onSubmit={submitActiveAnswer}
               />
 
               <div className="flex flex-wrap items-center gap-3">
                 <Button onClick={goToNextQuestion} disabled={!answeredOptionId}>
-                  {currentIndex === activeSet.questions.length - 1 ? "Finish assessment" : "Next question"}
+                  {currentIndex === activeSet.questions.length - 1
+                    ? t("review.standalone.finish")
+                    : t("review.standalone.next")}
                 </Button>
                 {!answeredOptionId ? (
-                  <span className="text-sm text-muted-foreground">Answer the current question to continue.</span>
+                  <span className="text-sm text-muted-foreground">{t("review.standalone.continueHint")}</span>
                 ) : null}
               </div>
             </CardContent>
@@ -303,12 +314,12 @@ const ReviewMode = () => {
         <div className="space-y-3">
           <Link to="/app" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
             <ArrowLeft className="h-4 w-4" />
-            Back to learner home
+            {t("review.homeBack")}
           </Link>
           <div className="space-y-2">
-            <h1 className="text-4xl font-semibold tracking-tight">Review</h1>
+            <h1 className="text-4xl font-semibold tracking-tight">{t("review.title")}</h1>
             <p className="max-w-3xl text-base leading-7 text-muted-foreground">
-              Revisit answered questions, repeat missed prompts, and run standalone assessments outside the full procedure experience.
+              {t("review.description")}
             </p>
           </div>
         </div>
@@ -316,19 +327,19 @@ const ReviewMode = () => {
         <div className="grid gap-4 md:grid-cols-3">
           <Card>
             <CardHeader className="pb-3">
-              <CardDescription>Answered prompts</CardDescription>
+              <CardDescription>{t("review.metrics.answered")}</CardDescription>
               <CardTitle className="text-3xl">{latestAttempts.length}</CardTitle>
             </CardHeader>
           </Card>
           <Card>
             <CardHeader className="pb-3">
-              <CardDescription>Needs repetition</CardDescription>
+              <CardDescription>{t("review.metrics.repetition")}</CardDescription>
               <CardTitle className="text-3xl">{incorrectQuestions.length}</CardTitle>
             </CardHeader>
           </Card>
           <Card>
             <CardHeader className="pb-3">
-              <CardDescription>Latest accuracy</CardDescription>
+              <CardDescription>{t("review.metrics.accuracy")}</CardDescription>
               <CardTitle className="text-3xl">{accuracy}%</CardTitle>
             </CardHeader>
           </Card>
@@ -339,32 +350,32 @@ const ReviewMode = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-2xl">
                 <RotateCcw className="h-5 w-5" />
-                Standalone review assessments
+                {t("review.sets.title")}
               </CardTitle>
               <CardDescription>
-                Launch a focused review set without reopening a full procedure walkthrough.
+                {t("review.sets.description")}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="rounded-2xl border border-border bg-muted/30 p-4">
                 <div className="flex items-center justify-between gap-4">
                   <div className="space-y-1">
-                    <p className="font-medium">Retry missed questions</p>
+                    <p className="font-medium">{t("review.set.retry.title")}</p>
                     <p className="text-sm text-muted-foreground">
-                      Repeat the latest prompts you missed and review the teaching explanation again.
+                      {t("review.set.retry.description")}
                     </p>
                   </div>
                   <Button
                     onClick={() =>
                       startSet({
-                        title: "Retry missed questions",
-                        description: "Focus on the prompts that still need repetition from your latest learner history.",
+                        title: t("review.set.retry.title"),
+                        description: t("review.set.retry.sessionDescription"),
                         questions: incorrectQuestions,
                       })
                     }
-                    disabled={!incorrectQuestions.length || loading || Boolean(error)}
+                    disabled={!incorrectQuestions.length || loading || Boolean(errorKey)}
                   >
-                    Start set
+                    {t("review.set.start")}
                   </Button>
                 </div>
               </div>
@@ -372,29 +383,29 @@ const ReviewMode = () => {
               <div className="rounded-2xl border border-border bg-muted/30 p-4">
                 <div className="flex items-center justify-between gap-4">
                   <div className="space-y-1">
-                    <p className="font-medium">Review all answered questions</p>
+                    <p className="font-medium">{t("review.set.all.title")}</p>
                     <p className="text-sm text-muted-foreground">
-                      Run a broader standalone assessment across the questions you have already seen.
+                      {t("review.set.all.description")}
                     </p>
                   </div>
                   <Button
                     variant="outline"
                     onClick={() =>
                       startSet({
-                        title: "Review all answered questions",
-                        description: "Use a broader review set to rehearse answered prompts across procedure-linked assessments.",
+                        title: t("review.set.all.title"),
+                        description: t("review.set.all.sessionDescription"),
                         questions: allAnsweredQuestions,
                       })
                     }
-                    disabled={!allAnsweredQuestions.length || loading || Boolean(error)}
+                    disabled={!allAnsweredQuestions.length || loading || Boolean(errorKey)}
                   >
-                    Start set
+                    {t("review.set.start")}
                   </Button>
                 </div>
               </div>
 
-              {loading ? <p className="text-sm text-muted-foreground">Loading review history...</p> : null}
-              {error ? <p className="text-sm text-destructive">{error}</p> : null}
+              {loading ? <p className="text-sm text-muted-foreground">{t("review.loading")}</p> : null}
+              {errorKey ? <p className="text-sm text-destructive">{t(errorKey)}</p> : null}
             </CardContent>
           </Card>
 
@@ -402,10 +413,10 @@ const ReviewMode = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-2xl">
                 <BookOpenCheck className="h-5 w-5" />
-                Recent prompts
+                {t("review.recent.title")}
               </CardTitle>
               <CardDescription>
-                The latest attempt for each question becomes the signal that drives review mode.
+                {t("review.recent.description")}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
@@ -414,17 +425,21 @@ const ReviewMode = () => {
                   <div key={`${attempt.contentId}:${attempt.questionId}`} className="rounded-2xl border border-border p-4">
                     <div className="flex flex-wrap items-center gap-2">
                       <Badge variant={attempt.isCorrect ? "secondary" : "destructive"}>
-                        {attempt.isCorrect ? "Correct" : "Needs review"}
+                        {attempt.isCorrect ? t("review.recent.correct") : t("review.recent.needsReview")}
                       </Badge>
                       <Badge variant="outline">{attempt.contentId}</Badge>
                     </div>
-                    <p className="mt-3 text-sm text-muted-foreground">Question ID: {attempt.questionId}</p>
-                    <p className="mt-1 text-sm text-muted-foreground">Selected option: {attempt.selectedOption}</p>
+                    <p className="mt-3 text-sm text-muted-foreground">
+                      {t("review.recent.questionId", { id: attempt.questionId ?? "" })}
+                    </p>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {t("review.recent.selectedOption", { option: attempt.selectedOption })}
+                    </p>
                   </div>
                 ))
               ) : (
                 <div className="rounded-2xl border border-dashed border-border p-5 text-sm text-muted-foreground">
-                  Answer procedure-linked questions first. They will appear here as soon as learner progress exists.
+                  {t("review.recent.empty")}
                 </div>
               )}
             </CardContent>
@@ -435,11 +450,11 @@ const ReviewMode = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-xl">
               <Trophy className="h-5 w-5" />
-              Shared assessment layer
+              {t("review.shared.title")}
             </CardTitle>
           </CardHeader>
           <CardContent className="text-sm leading-6 text-muted-foreground">
-            Procedure-linked prompts and standalone review sets now use the same answer and explanation behavior, keeping the assessment experience consistent across the learner flow.
+            {t("review.shared.description")}
           </CardContent>
         </Card>
       </div>

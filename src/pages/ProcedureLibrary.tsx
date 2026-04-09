@@ -2,23 +2,53 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, FileVideo, Microscope, RefreshCw, Stethoscope } from "lucide-react";
 
+import AccessStateBadge from "@/components/AccessStateBadge";
+import AccessStatePanel from "@/components/AccessStatePanel";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { buildProcedureLibraryItems, getProcedureMeta, type ProcedureLibraryItem } from "@/lib/procedure-data";
+import { useI18n } from "@/hooks/useI18n";
+import { buildProcedureLibraryItems, type ProcedureLibraryItem } from "@/lib/procedure-data";
 
 const ProcedureLibrary = () => {
+  const { t } = useI18n();
   const [items, setItems] = useState<ProcedureLibraryItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [errorKey, setErrorKey] = useState<string | null>(null);
+
+  const formatDurationLabel = (value?: number) => {
+    if (!value) {
+      return undefined;
+    }
+
+    if (value < 60) {
+      return t("procedure.meta.duration.minutes", { count: value });
+    }
+
+    const hours = Math.floor(value / 60);
+    const minutes = value % 60;
+
+    if (!minutes) {
+      return t("procedure.meta.duration.hoursOnly", { hours });
+    }
+
+    return t("procedure.meta.duration.hoursMinutes", { hours, minutes });
+  };
+
+  const getProcedureMetaLabels = (item: ProcedureLibraryItem) =>
+    [
+      t(item.type === "video" ? "procedure.meta.video" : "procedure.meta.simulation"),
+      item.difficulty,
+      formatDurationLabel(item.duration),
+    ].filter(Boolean) as string[];
 
   useEffect(() => {
     buildProcedureLibraryItems()
       .then((data) => {
         setItems(data);
-        setError(null);
+        setErrorKey(null);
       })
       .catch(() => {
-        setError("Unable to load the procedure library right now.");
+        setErrorKey("procedureLibrary.error");
       })
       .finally(() => {
         setLoading(false);
@@ -30,41 +60,43 @@ const ProcedureLibrary = () => {
       <div className="mx-auto flex max-w-6xl flex-col gap-8">
         <Link to="/app" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
           <ArrowLeft className="h-4 w-4" />
-          Back to learner home
+          {t("procedureLibrary.back")}
         </Link>
 
         <section className="space-y-4">
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.24em] text-primary">
             <Microscope className="h-3.5 w-3.5" />
-            Procedure Library
+            {t("procedureLibrary.badge")}
           </div>
           <div className="space-y-3">
             <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">
-              Browse procedure-based learning with structured playback.
+              {t("procedureLibrary.title")}
             </h1>
             <p className="max-w-3xl text-base leading-7 text-muted-foreground md:text-lg">
-              Each procedure exposes its format, duration, author context, and clinical difficulty
-              before the learner opens the detail flow.
+              {t("procedureLibrary.description")}
             </p>
+            <Link to="/pricing" className="inline-flex text-sm font-medium text-primary hover:underline">
+              {t("pricing.link.label")}
+            </Link>
           </div>
         </section>
 
         {loading ? (
           <div className="rounded-3xl border border-border bg-card/50 p-8 text-sm text-muted-foreground">
-            Loading procedures...
+            {t("procedureLibrary.loading")}
           </div>
         ) : null}
 
-        {error ? (
+        {errorKey ? (
           <div className="rounded-3xl border border-destructive/30 bg-destructive/5 p-8 text-sm text-destructive">
-            {error}
+            {t(errorKey)}
           </div>
         ) : null}
 
-        {!loading && !error ? (
+        {!loading && !errorKey ? (
           <section className="grid gap-4 md:grid-cols-2">
             {items.map((item) => {
-              const meta = getProcedureMeta(item);
+              const meta = getProcedureMetaLabels(item);
 
               return (
                 <Link key={item.id} to={`/app/procedure/${item.id}`} className="group">
@@ -99,6 +131,7 @@ const ProcedureLibrary = () => {
                     </CardHeader>
                     <CardContent className="space-y-5">
                       <div className="flex flex-wrap gap-2">
+                        <AccessStateBadge visibility={item.visibility} />
                         {meta.map((label) => (
                           <Badge key={label} variant="secondary">
                             {label}
@@ -106,10 +139,12 @@ const ProcedureLibrary = () => {
                         ))}
                       </div>
 
+                      <AccessStatePanel visibility={item.visibility} />
+
                       {item.authorName ? (
                         <div className="rounded-2xl bg-muted/60 p-4 text-sm text-muted-foreground">
                           <p className="font-medium text-foreground">{item.authorName}</p>
-                          <p>{item.authorInstitution ?? "Independent clinical educator"}</p>
+                          <p>{item.authorInstitution ?? t("procedureLibrary.authorFallback")}</p>
                         </div>
                       ) : null}
 
@@ -125,7 +160,7 @@ const ProcedureLibrary = () => {
 
                       <div className="flex items-center gap-2 text-sm font-medium text-primary">
                         <RefreshCw className="h-4 w-4" />
-                        Open procedure
+                        {t("procedureLibrary.open")}
                       </div>
                     </CardContent>
                   </Card>

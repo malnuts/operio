@@ -230,6 +230,7 @@ export const reviewRecordSchema = z.object({
 });
 
 export type LocalizedText = z.infer<typeof localizedTextSchema>;
+export type ContentVisibility = z.infer<typeof contentVisibilitySchema>;
 export type DecisionPoint = z.infer<typeof decisionPointSchema>;
 export type ProcedureChapter = z.infer<typeof procedureChapterSchema>;
 export type Procedure = z.infer<typeof procedureSchema>;

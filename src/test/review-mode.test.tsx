@@ -1,5 +1,6 @@
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import enLocale from "../../public/locales/en.json";
 
 import App from "@/App";
 import {
@@ -69,6 +70,20 @@ describe("review mode", () => {
       "fetch",
       vi.fn((input: RequestInfo | URL) => {
         const path = String(input);
+
+        if (path.includes("/locales/manifest.json")) {
+          return Promise.resolve({
+            ok: true,
+            json: async () => ({ languages: [{ code: "en", label: "English" }] }),
+          });
+        }
+
+        if (path.includes("/locales/en.json")) {
+          return Promise.resolve({
+            ok: true,
+            json: async () => enLocale,
+          });
+        }
 
         if (path.includes("/data/questions/cavity-filling-questions.json")) {
           return Promise.resolve({

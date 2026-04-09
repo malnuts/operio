@@ -38,6 +38,7 @@ describe("creator workflow", () => {
     fireEvent.change(screen.getByLabelText("Decision points"), { target: { value: "When should the wedge be placed?" } });
     fireEvent.change(screen.getByLabelText("References"), { target: { value: "Occlusal anatomy checklist" } });
     fireEvent.change(screen.getByLabelText("Access state"), { target: { value: "paid" } });
+    expect(screen.getByText(/starting at \$5\/month/i)).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: /save draft/i }));
 
     expect(await screen.findByRole("heading", { name: /manage drafts and published creator content/i })).toBeInTheDocument();
@@ -68,6 +69,7 @@ describe("creator workflow", () => {
     fireEvent.change(screen.getByLabelText("Tags"), { target: { value: "isolation, restorative" } });
     fireEvent.change(screen.getByLabelText("Linked assessment ID"), { target: { value: "rubber-dam-check" } });
     fireEvent.change(screen.getByLabelText("Access state"), { target: { value: "premium" } });
+    expect(screen.getByText(/30% operio platform fee/i)).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: /^publish$/i }));
 
     expect(await screen.findByText("Rubber dam isolation notes")).toBeInTheDocument();

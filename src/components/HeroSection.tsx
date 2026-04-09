@@ -1,9 +1,13 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
+
 import heroImage from "@/assets/hero-dental-ai.jpg";
+import { useI18n } from "@/hooks/useI18n";
 
 const HeroSection = () => {
+  const { t } = useI18n();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
       {/* Background */}
@@ -26,7 +30,7 @@ const HeroSection = () => {
             >
               <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-mono text-primary">
                 <Zap size={12} className="animate-pulse-glow" />
-                NOW IN BETA — ACCEPTING PARTNERS
+                {t("landing.hero.badge")}
               </span>
             </motion.div>
 
@@ -36,8 +40,8 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight mb-6"
             >
-              Clinical learning built around{" "}
-              <span className="gradient-text">procedures, posts, and review</span>
+              {t("landing.hero.titlePrefix")}{" "}
+              <span className="gradient-text">{t("landing.hero.titleHighlight")}</span>
             </motion.h1>
 
             <motion.p
@@ -46,9 +50,7 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl"
             >
-              Operio helps learners study how clinical work is actually done in context, combining
-              expert-led procedures, educational posts, and assessments that reinforce decision
-              making without reducing the product to test prep.
+              {t("landing.hero.description")}
             </motion.p>
 
             <motion.div
@@ -61,14 +63,14 @@ const HeroSection = () => {
                 to="/app"
                 className="group flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition-all hover:shadow-[0_0_30px_hsl(175_80%_50%/0.4)]"
               >
-                Open the app
+                {t("landing.hero.primaryAction")}
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </Link>
               <a
                 href="#route-map"
                 className="flex items-center gap-2 rounded-lg border border-border px-6 py-3 font-semibold text-foreground transition-all hover:border-primary/50 hover:bg-secondary"
               >
-                View route map
+                {t("landing.hero.secondaryAction")}
               </a>
             </motion.div>
           </div>
@@ -83,7 +85,7 @@ const HeroSection = () => {
             <div className="relative rounded-2xl overflow-hidden glow-border">
               <img
                 src={heroImage}
-                alt="Clinical learning interface with visual anatomy reference"
+                alt={t("landing.hero.imageAlt")}
                 width={1920}
                 height={1080}
                 className="w-full h-auto rounded-2xl"
@@ -96,7 +98,7 @@ const HeroSection = () => {
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               className="absolute -bottom-4 -left-4 rounded-xl border border-border bg-card/90 backdrop-blur-sm p-4 glow-box"
             >
-              <p className="font-mono text-xs text-muted-foreground">ACTIVE CONTENT PILLARS</p>
+              <p className="font-mono text-xs text-muted-foreground">{t("landing.hero.statLabel")}</p>
               <p className="font-display text-2xl font-bold text-primary">3</p>
             </motion.div>
           </motion.div>

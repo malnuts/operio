@@ -1,6 +1,7 @@
 import { FileText } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { useI18n } from "@/hooks/useI18n";
 import type { NormalizedQuestion } from "@/lib/procedure-data";
 
 type AssessmentPromptCardProps = {
@@ -18,19 +19,23 @@ const AssessmentPromptCard = ({
   question,
   selectedOptionId,
   answeredOptionId,
-  title = "Assessment prompt",
-  submitLabel = "Submit answer",
-  continueHint = "Answer the current question to continue.",
+  title,
+  submitLabel,
+  continueHint,
   onSelect,
   onSubmit,
 }: AssessmentPromptCardProps) => {
+  const { t } = useI18n();
   const answeredOption = question.options.find((option) => option.id === answeredOptionId);
+  const resolvedTitle = title ?? t("assessment.prompt.title");
+  const resolvedSubmitLabel = submitLabel ?? t("assessment.prompt.submit");
+  const resolvedContinueHint = continueHint ?? t("assessment.prompt.continueHint");
 
   return (
     <div className="rounded-3xl border border-primary/20 bg-primary/5 p-5" data-testid="assessment-prompt-card">
       <div className="flex items-center gap-2 text-sm font-medium text-primary">
         <FileText className="h-4 w-4" />
-        {title}
+        {resolvedTitle}
       </div>
       <h2 className="mt-3 text-xl font-semibold">{question.stem}</h2>
       <div className="mt-4 space-y-3">
@@ -46,7 +51,7 @@ const AssessmentPromptCard = ({
               type="button"
               disabled={answered}
               onClick={() => onSelect(option.id)}
-              className={`w-full rounded-2xl border px-4 py-3 text-left transition-colors ${
+              className={`w-full rounded-2xl border px-5 py-4 text-left transition-colors ${
                 isCorrect
                   ? "border-emerald-400 bg-emerald-50"
                   : isIncorrectSelection
@@ -56,8 +61,12 @@ const AssessmentPromptCard = ({
                       : "border-border bg-background"
               }`}
             >
-              <p className="text-sm font-medium">{option.label}</p>
-              <p className="mt-1 text-sm text-muted-foreground">{option.text}</p>
+              <div className="grid grid-cols-[1.5rem_1fr] items-start gap-x-4">
+                <p className="pt-0.5 text-xs tracking-[0.18em] text-muted-foreground">
+                  {option.label}
+                </p>
+                <p className="text-base font-medium leading-6 text-foreground">{option.text}</p>
+              </div>
             </button>
           );
         })}
@@ -66,42 +75,44 @@ const AssessmentPromptCard = ({
       {!answeredOptionId ? (
         <>
           <Button className="mt-4" disabled={!selectedOptionId} onClick={onSubmit}>
-            {submitLabel}
+            {resolvedSubmitLabel}
           </Button>
-          <p className="mt-3 text-sm text-muted-foreground">{continueHint}</p>
+          <p className="mt-3 text-sm text-muted-foreground">{resolvedContinueHint}</p>
         </>
       ) : null}
 
       {answeredOption ? (
         <div className="mt-4 space-y-4 rounded-2xl border border-border bg-background p-4">
           <p className="text-sm font-medium">
-            {answeredOption.isCorrect ? "Correct answer recorded." : "Answer recorded. Review the explanation below."}
+            {answeredOption.isCorrect
+              ? t("assessment.prompt.result.correct")
+              : t("assessment.prompt.result.incorrect")}
           </p>
 
           {question.explanation?.correctReasoning ? (
             <div className="space-y-1">
-              <p className="text-sm font-medium">Teaching note</p>
+              <p className="text-sm font-medium">{t("assessment.prompt.note.teaching")}</p>
               <p className="text-sm leading-6 text-muted-foreground">{question.explanation.correctReasoning}</p>
             </div>
           ) : null}
 
           {question.explanation?.clinicalPrinciple ? (
             <div className="space-y-1">
-              <p className="text-sm font-medium">Clinical principle</p>
+              <p className="text-sm font-medium">{t("assessment.prompt.note.clinicalPrinciple")}</p>
               <p className="text-sm leading-6 text-muted-foreground">{question.explanation.clinicalPrinciple}</p>
             </div>
           ) : null}
 
           {question.explanation?.boardTip ? (
             <div className="space-y-1">
-              <p className="text-sm font-medium">Exam strategy</p>
+              <p className="text-sm font-medium">{t("assessment.prompt.note.examStrategy")}</p>
               <p className="text-sm leading-6 text-muted-foreground">{question.explanation.boardTip}</p>
             </div>
           ) : null}
 
           {question.explanation?.distractorBreakdowns?.length ? (
             <div className="space-y-2">
-              <p className="text-sm font-medium">Option breakdowns</p>
+              <p className="text-sm font-medium">{t("assessment.prompt.note.optionBreakdowns")}</p>
               <div className="space-y-2">
                 {question.explanation.distractorBreakdowns.map((item) => (
                   <div key={`${question.id}-${item.label}`} className="rounded-2xl bg-muted/60 p-3 text-sm">

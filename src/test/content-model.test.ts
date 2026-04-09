@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
+import { visualManifestSchema } from "@/features/anatomy/visual-reference";
 import {
   assessmentQuestionSetSchema,
   clinicalPostSchema,
@@ -29,6 +30,12 @@ describe("shared content model schemas", () => {
     const payload = readJson("../../public/data/questions/cavity-filling-questions.json");
 
     expect(() => assessmentQuestionSetSchema.parse(payload)).not.toThrow();
+  });
+
+  it("validates the current visual reference manifest", () => {
+    const payload = readJson("../../public/data/visual-manifest.json");
+
+    expect(() => visualManifestSchema.parse(payload)).not.toThrow();
   });
 
   it("supports future posts, creators, and review records", () => {

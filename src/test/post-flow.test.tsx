@@ -1,5 +1,6 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import enLocale from "../../public/locales/en.json";
 
 import App from "@/App";
 import { LEARNER_PROGRESS_STORAGE_KEY, parseLearnerProgress } from "@/lib/learner-progress";
@@ -25,6 +26,11 @@ const postPayload = {
   tags: ["rubber dam", "isolation", "adhesive dentistry"],
   publishDate: "2026-03-15",
   linkedAssessmentId: "rubber-dam-isolation-questions",
+  platformMetadata: {
+    contentType: "post",
+    status: "published",
+    visibility: "premium",
+  },
 };
 
 const questionPayload = {
@@ -66,6 +72,20 @@ const stubFetch = () =>
     vi.fn((input: RequestInfo | URL) => {
       const path = String(input);
 
+      if (path.includes("/locales/manifest.json")) {
+        return Promise.resolve({
+          ok: true,
+          json: async () => ({ languages: [{ code: "en", label: "English" }] }),
+        });
+      }
+
+      if (path.includes("/locales/en.json")) {
+        return Promise.resolve({
+          ok: true,
+          json: async () => enLocale,
+        });
+      }
+
       if (path.includes("/data/post-manifest.json")) {
         return Promise.resolve({ ok: true, json: async () => postManifestPayload });
       }
@@ -102,6 +122,8 @@ describe("clinical posts", () => {
     expect(screen.getByText("Dr. Sarah Chen")).toBeInTheDocument();
     expect(screen.getByText("Restorative Dentistry")).toBeInTheDocument();
     expect(screen.getByText("Isolation Techniques")).toBeInTheDocument();
+    expect(await screen.findByText("Premium")).toBeInTheDocument();
+    expect(await screen.findByText(/30% operio platform fee/i)).toBeInTheDocument();
     expect(screen.getByText("rubber dam")).toBeInTheDocument();
   });
 

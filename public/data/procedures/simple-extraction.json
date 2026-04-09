@@ -4,6 +4,11 @@
   "title": "Simple Extraction",
   "description": "Perform a simple (closed) extraction of a maxillary first premolar using non-surgical technique with forceps and elevator.",
   "difficulty": "Intermediate",
+  "platformMetadata": {
+    "contentType": "procedure",
+    "status": "published",
+    "visibility": "paid"
+  },
   "modelPath": "/models/shared/full-mouth.glb",
   "steps": [
     {

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+import CreatorShell from "@/components/CreatorShell";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import CreatorShell from "@/features/creator/CreatorShell";
 import type { CreatorEntry } from "@/features/creator/schema";
 import { useCreatorLibrary } from "@/features/creator/useCreatorLibrary";
 import { useI18n } from "@/hooks/useI18n";

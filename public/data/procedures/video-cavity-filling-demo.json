@@ -4,6 +4,11 @@
   "title": "Cavity Filling: Cusp Build-Up",
   "description": "Step-by-step composite restoration of a large cavity with cusp replacement, by Dr. Javier Tapia Guadix.",
   "difficulty": "Intermediate",
+  "platformMetadata": {
+    "contentType": "procedure",
+    "status": "published",
+    "visibility": "premium"
+  },
   "author": {
     "name": "Dr. Javier Tapia Guadix",
     "institution": "GC America"

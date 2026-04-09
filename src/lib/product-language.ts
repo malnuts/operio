@@ -1,144 +1,182 @@
 export type ProductTerm = {
-  term: "procedure" | "post" | "assessment" | "creator" | "learner";
-  definition: string;
+  id: "procedure" | "post" | "assessment" | "creator" | "learner";
+  termKey: string;
+  definitionKey: string;
 };
 
 export type ProductRoute = {
+  id:
+    | "learnerHome"
+    | "procedureLibrary"
+    | "procedureDetail"
+    | "postLibrary"
+    | "postDetail"
+    | "review"
+    | "anatomy"
+    | "creatorWorkspace"
+    | "creatorNew"
+    | "creatorLibrary"
+    | "pricing";
   path: string;
-  label: string;
-  title: string;
-  summary: string;
+  labelKey: string;
+  titleKey: string;
+  summaryKey: string;
   audience: "learner" | "creator" | "shared";
 };
 
 export type DomainAssumption = {
-  assumption: string;
+  id:
+    | "launchDataset"
+    | "optionalReference"
+    | "assessmentReinforcement"
+    | "creatorRoles";
+  assumptionKey: string;
   classification: "launch-specific" | "architecture-level";
-  note: string;
+  noteKey: string;
 };
 
 export const productTerminology: ProductTerm[] = [
   {
-    term: "procedure",
-    definition: "A structured, expert-led clinical learning experience with chapters, media, and embedded decision points.",
+    id: "procedure",
+    termKey: "product.term.procedure.label",
+    definitionKey: "product.term.procedure.definition",
   },
   {
-    term: "post",
-    definition: "A text-and-photo educational article, case reflection, or practical write-up that extends learning beyond procedures.",
+    id: "post",
+    termKey: "product.term.post.label",
+    definitionKey: "product.term.post.definition",
   },
   {
-    term: "assessment",
-    definition: "A question flow that reinforces learning in context instead of defining the product on its own.",
+    id: "assessment",
+    termKey: "product.term.assessment.label",
+    definitionKey: "product.term.assessment.definition",
   },
   {
-    term: "creator",
-    definition: "An educator or clinical expert who publishes procedures, posts, and linked assessments.",
+    id: "creator",
+    termKey: "product.term.creator.label",
+    definitionKey: "product.term.creator.definition",
   },
   {
-    term: "learner",
-    definition: "A student or clinician using Operio to study procedures, review posts, and track progress.",
+    id: "learner",
+    termKey: "product.term.learner.label",
+    definitionKey: "product.term.learner.definition",
   },
 ];
 
 export const productRoutes: ProductRoute[] = [
   {
+    id: "learnerHome",
     path: "/app",
-    label: "Learner Home",
-    title: "Learner Home",
-    summary: "The main learner dashboard with entry points into procedures, posts, review, and reference content.",
+    labelKey: "product.route.learnerHome.label",
+    titleKey: "product.route.learnerHome.title",
+    summaryKey: "product.route.learnerHome.summary",
     audience: "learner",
   },
   {
+    id: "procedureLibrary",
     path: "/app/procedures",
-    label: "Procedures",
-    title: "Procedure Library",
-    summary: "Browse procedure-based learning content organized for clinical study and repetition.",
+    labelKey: "product.route.procedureLibrary.label",
+    titleKey: "product.route.procedureLibrary.title",
+    summaryKey: "product.route.procedureLibrary.summary",
     audience: "learner",
   },
   {
+    id: "procedureDetail",
     path: "/app/procedure/:id",
-    label: "Procedure Detail",
-    title: "Procedure Detail",
-    summary: "Open a specific procedure with chapters, media, and embedded assessment moments.",
+    labelKey: "product.route.procedureDetail.label",
+    titleKey: "product.route.procedureDetail.title",
+    summaryKey: "product.route.procedureDetail.summary",
     audience: "learner",
   },
   {
+    id: "postLibrary",
     path: "/app/posts",
-    label: "Posts",
-    title: "Clinical Posts",
-    summary: "Read clinical posts, case reflections, and educational articles connected to the learning journey.",
+    labelKey: "product.route.postLibrary.label",
+    titleKey: "product.route.postLibrary.title",
+    summaryKey: "product.route.postLibrary.summary",
     audience: "learner",
   },
   {
+    id: "postDetail",
     path: "/app/post/:id",
-    label: "Post Detail",
-    title: "Post Detail",
-    summary: "Open a specific post with author context, media, and optional linked assessment.",
+    labelKey: "product.route.postDetail.label",
+    titleKey: "product.route.postDetail.title",
+    summaryKey: "product.route.postDetail.summary",
     audience: "learner",
   },
   {
+    id: "review",
     path: "/app/review",
-    label: "Review",
-    title: "Review",
-    summary: "Return to completed questions and revisit weak areas across procedures and posts.",
+    labelKey: "product.route.review.label",
+    titleKey: "product.route.review.title",
+    summaryKey: "product.route.review.summary",
     audience: "learner",
   },
   {
+    id: "anatomy",
     path: "/app/anatomy/:id",
-    label: "Anatomy",
-    title: "Anatomy Reference",
-    summary: "View optional anatomy or visual reference content that supports the surrounding lesson.",
+    labelKey: "product.route.anatomy.label",
+    titleKey: "product.route.anatomy.title",
+    summaryKey: "product.route.anatomy.summary",
     audience: "learner",
   },
   {
+    id: "creatorWorkspace",
     path: "/creator",
-    label: "Creator Workspace",
-    title: "Creator Workspace",
-    summary: "Enter the publishing workspace for building procedures and clinical posts.",
+    labelKey: "product.route.creatorWorkspace.label",
+    titleKey: "product.route.creatorWorkspace.title",
+    summaryKey: "product.route.creatorWorkspace.summary",
     audience: "creator",
   },
   {
+    id: "creatorNew",
     path: "/creator/new",
-    label: "New Content",
-    title: "Create New Content",
-    summary: "Start a new procedure or clinical post flow from the creator workspace.",
+    labelKey: "product.route.creatorNew.label",
+    titleKey: "product.route.creatorNew.title",
+    summaryKey: "product.route.creatorNew.summary",
     audience: "creator",
   },
   {
+    id: "creatorLibrary",
     path: "/creator/library",
-    label: "Creator Library",
-    title: "Creator Library",
-    summary: "Manage drafts, published items, and reusable creator assets.",
+    labelKey: "product.route.creatorLibrary.label",
+    titleKey: "product.route.creatorLibrary.title",
+    summaryKey: "product.route.creatorLibrary.summary",
     audience: "creator",
   },
   {
+    id: "pricing",
     path: "/pricing",
-    label: "Pricing",
-    title: "Pricing",
-    summary: "Explain learner access tiers and creator economics.",
+    labelKey: "product.route.pricing.label",
+    titleKey: "product.route.pricing.title",
+    summaryKey: "product.route.pricing.summary",
     audience: "shared",
   },
 ];
 
 export const domainAssumptions: DomainAssumption[] = [
   {
-    assumption: "Dental procedures, models, and question sets are the initial dataset in this repo.",
+    id: "launchDataset",
+    assumptionKey: "product.assumption.launchDataset.assumption",
     classification: "launch-specific",
-    note: "Keep the content source narrow for launch, but do not hardcode dental-only language into shared product concepts.",
+    noteKey: "product.assumption.launchDataset.note",
   },
   {
-    assumption: "Anatomy and 3D reference modules may be attached to some learning experiences.",
+    id: "optionalReference",
+    assumptionKey: "product.assumption.optionalReference.assumption",
     classification: "architecture-level",
-    note: "Treat visual reference as optional support content rather than the core definition of the product.",
+    noteKey: "product.assumption.optionalReference.note",
   },
   {
-    assumption: "Assessments reinforce content comprehension within procedures and posts.",
+    id: "assessmentReinforcement",
+    assumptionKey: "product.assumption.assessmentReinforcement.assumption",
     classification: "architecture-level",
-    note: "Do not let exam-style practice become the entire product identity.",
+    noteKey: "product.assumption.assessmentReinforcement.note",
   },
   {
-    assumption: "Clinical creators publish structured educational content for learners.",
+    id: "creatorRoles",
+    assumptionKey: "product.assumption.creatorRoles.assumption",
     classification: "architecture-level",
-    note: "Creator and learner roles should remain reusable outside the first domain vertical.",
+    noteKey: "product.assumption.creatorRoles.note",
   },
 ];

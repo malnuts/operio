@@ -3,7 +3,7 @@
   "questions": [
     {
       "id": "vq-1",
-      "stem": "INBDE-style question: What is the most appropriate next step?",
+      "stem": "What is the most appropriate next step?",
       "options": [
         { "label": "A", "text": "First option text", "isCorrect": false },
         { "label": "B", "text": "Second option (correct answer)", "isCorrect": true },
@@ -18,7 +18,7 @@
           { "label": "D", "reasoning": "Why D is wrong." }
         ],
         "clinicalPrinciple": "The underlying clinical principle being tested.",
-        "boardTip": "INBDE tip for students."
+        "boardTip": "Exam tip for students."
       }
     },
     {

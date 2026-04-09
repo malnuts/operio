@@ -18,11 +18,11 @@ const DEFAULT_R2_PUBLIC_BASE_URL = "https://pub-8e3c30b5230f4f26bef002809026aaa8
 
 const getBaseUrl = (): string => import.meta.env.BASE_URL ?? "/";
 
-const useLocalAssets = (): boolean =>
+const shouldUseLocalAssets = (): boolean =>
   import.meta.env.VITE_USE_LOCAL_ASSETS === "true";
 
 const getR2PublicBaseUrl = (): string | undefined => {
-  if (useLocalAssets()) {
+  if (shouldUseLocalAssets()) {
     return undefined;
   }
 

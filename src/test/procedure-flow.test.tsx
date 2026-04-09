@@ -1,5 +1,6 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import enLocale from "../../public/locales/en.json";
 
 import App from "@/App";
 import { LEARNER_PROGRESS_STORAGE_KEY, parseLearnerProgress } from "@/lib/learner-progress";
@@ -18,6 +19,11 @@ const procedurePayload = {
   type: "simulation",
   title: "Cavity Filling",
   description: "Restore a posterior tooth with composite resin.",
+  platformMetadata: {
+    contentType: "procedure",
+    status: "published",
+    visibility: "paid",
+  },
   difficulty: "Beginner",
   duration: 20,
   thumbnailUrl: "/images/procedures/cavity-filling-card.jpg",
@@ -83,6 +89,20 @@ describe("procedure experience", () => {
       vi.fn((input: RequestInfo | URL) => {
         const path = String(input);
 
+        if (path.includes("/locales/manifest.json")) {
+          return Promise.resolve({
+            ok: true,
+            json: async () => ({ languages: [{ code: "en", label: "English" }] }),
+          });
+        }
+
+        if (path.includes("/locales/en.json")) {
+          return Promise.resolve({
+            ok: true,
+            json: async () => enLocale,
+          });
+        }
+
         if (path.includes("/data/procedure-manifest.json")) {
           return Promise.resolve({
             ok: true,
@@ -125,6 +145,8 @@ describe("procedure experience", () => {
     expect(screen.getByText("Beginner")).toBeInTheDocument();
     expect(screen.getByText("20 min")).toBeInTheDocument();
     expect(screen.getByText("Dr. Ada Patel")).toBeInTheDocument();
+    expect(await screen.findByText("Paid")).toBeInTheDocument();
+    expect(await screen.findByText(/starting at \$5\/month/i)).toBeInTheDocument();
   });
 
   it("interrupts playback for decision points and records completion", async () => {

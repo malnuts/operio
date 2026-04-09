@@ -1,7 +1,11 @@
 import { motion } from "framer-motion";
+
+import { useI18n } from "@/hooks/useI18n";
 import { domainAssumptions, productTerminology } from "@/lib/product-language";
 
 const TerminologySection = () => {
+  const { t } = useI18n();
+
   return (
     <section id="terminology" className="relative py-28">
       <div className="container mx-auto px-6">
@@ -14,21 +18,21 @@ const TerminologySection = () => {
           >
             <div>
               <span className="font-mono text-xs uppercase tracking-[0.3em] text-primary">
-                Shared Terminology
+                {t("landing.terminology.badge")}
               </span>
               <h2 className="mt-4 font-display text-4xl font-bold tracking-tight md:text-5xl">
-                Name the product around reusable learning concepts
+                {t("landing.terminology.title")}
               </h2>
             </div>
 
             <div className="grid gap-4">
               {productTerminology.map((item) => (
-                <div key={item.term} className="rounded-2xl border border-border bg-card p-5">
+                <div key={item.id} className="rounded-2xl border border-border bg-card p-5">
                   <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
-                    {item.term}
+                    {t(item.termKey)}
                   </p>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {item.definition}
+                    {t(item.definitionKey)}
                   </p>
                 </div>
               ))}
@@ -44,27 +48,26 @@ const TerminologySection = () => {
           >
             <div>
               <span className="font-mono text-xs uppercase tracking-[0.3em] text-primary">
-                Assumption Audit
+                {t("landing.terminology.assumptionsBadge")}
               </span>
               <h2 className="mt-4 font-display text-3xl font-bold tracking-tight">
-                Separate launch content from platform architecture
+                {t("landing.terminology.assumptionsTitle")}
               </h2>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                The current launch content is intentionally narrow. That first dataset can stay
-                specific while the shared product language remains broader than one specialty.
+                {t("landing.terminology.assumptionsDescription")}
               </p>
             </div>
 
             <div className="grid gap-4">
               {domainAssumptions.map((item) => (
-                <div key={item.assumption} className="rounded-2xl border border-border bg-card p-5">
+                <div key={item.id} className="rounded-2xl border border-border bg-card p-5">
                   <div className="flex items-center justify-between gap-4">
-                    <p className="text-sm font-semibold text-foreground">{item.assumption}</p>
+                    <p className="text-sm font-semibold text-foreground">{t(item.assumptionKey)}</p>
                     <span className="rounded-full border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                      {item.classification}
+                      {t(`product.assumption.classification.${item.classification}`)}
                     </span>
                   </div>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.note}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{t(item.noteKey)}</p>
                 </div>
               ))}
             </div>

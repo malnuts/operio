@@ -3,48 +3,44 @@ import { Link } from "react-router-dom";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { usePageContext } from "@/features/agent/usePageContext";
+import { useI18n } from "@/hooks/useI18n";
 import { useLearnerProgress } from "@/hooks/useLearnerProgress";
 
 const learnerEntryPoints = [
   {
-    title: "Procedures",
-    description: "Open structured procedure walkthroughs with explanations and decision moments.",
+    key: "procedures",
     href: "/app/procedures",
     icon: Stethoscope,
   },
   {
-    title: "Posts",
-    description: "Read clinical posts and practical writeups that extend beyond procedure playback.",
+    key: "posts",
     href: "/app/posts",
     icon: BookOpen,
   },
   {
-    title: "Review",
-    description: "Return to answered questions and revisit content that still needs repetition.",
+    key: "review",
     href: "/app/review",
     icon: BrainCircuit,
   },
   {
-    title: "Anatomy Reference",
-    description: "Jump into visual reference content that supports surrounding clinical lessons.",
+    key: "anatomy",
     href: "/app/anatomy/sample",
     icon: ScanSearch,
   },
 ];
 
-const formatRecentAssessment = (questionId: string | undefined) => {
-  if (!questionId) {
-    return "No assessments answered yet.";
-  }
-
-  return `Most recent assessment: ${questionId}`;
-};
-
 const LearnerHome = () => {
+  const { t } = useI18n();
   const { summary } = useLearnerProgress();
   const completionPercent = summary.trackedProcedures
     ? Math.round((summary.completedProcedures / summary.trackedProcedures) * 100)
     : 0;
+  const recentAssessmentLabel = summary.recentAssessment?.questionId
+    ? t("learnerHome.recentAssessment.value", { id: summary.recentAssessment.questionId })
+    : t("learnerHome.recentAssessment.empty");
+
+  usePageContext({ role: "learner", page: "home" }, []);
 
   return (
     <main className="min-h-screen bg-background px-6 py-16 text-foreground">
@@ -53,48 +49,47 @@ const LearnerHome = () => {
           <div className="space-y-4">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.24em] text-primary">
               <Microscope className="h-3.5 w-3.5" />
-              Learner Shell
+              {t("learnerHome.badge")}
             </div>
             <div className="space-y-3">
               <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">
-                Study procedures first, then reinforce with review and reference.
+                {t("learnerHome.title")}
               </h1>
               <p className="max-w-3xl text-base leading-7 text-muted-foreground md:text-lg">
-                Operio keeps the learner flow centered on structured clinical content while still
-                making room for posts, assessment review, and optional visual anatomy support.
+                {t("learnerHome.description")}
               </p>
             </div>
           </div>
 
           <Card className="border-primary/15 bg-background/80">
             <CardHeader>
-              <CardTitle className="text-xl">Learning progress</CardTitle>
+              <CardTitle className="text-xl">{t("learnerHome.progress.title")}</CardTitle>
               <CardDescription>
-                Stored locally so learner progress persists across procedures and assessments.
+                {t("learnerHome.progress.description")}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-5">
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="rounded-2xl bg-muted/60 p-4">
-                  <p className="text-sm text-muted-foreground">Completed procedures</p>
+                  <p className="text-sm text-muted-foreground">{t("learnerHome.stats.completedProcedures")}</p>
                   <p className="mt-2 text-3xl font-semibold">{summary.completedProcedures}</p>
                 </div>
                 <div className="rounded-2xl bg-muted/60 p-4">
-                  <p className="text-sm text-muted-foreground">Answered assessments</p>
+                  <p className="text-sm text-muted-foreground">{t("learnerHome.stats.answeredAssessments")}</p>
                   <p className="mt-2 text-3xl font-semibold">{summary.assessmentCount}</p>
                 </div>
               </div>
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">Procedure completion</span>
+                  <span className="text-muted-foreground">{t("learnerHome.progress.label")}</span>
                   <span className="font-medium">{completionPercent}%</span>
                 </div>
-                <Progress value={completionPercent} aria-label="Procedure completion progress" />
+                <Progress value={completionPercent} aria-label={t("learnerHome.progress.aria")} />
               </div>
 
               <div className="rounded-2xl border border-dashed border-border px-4 py-3 text-sm text-muted-foreground">
-                {formatRecentAssessment(summary.recentAssessment?.questionId)}
+                {recentAssessmentLabel}
               </div>
             </CardContent>
           </Card>
@@ -102,10 +97,9 @@ const LearnerHome = () => {
 
         <section className="space-y-4">
           <div className="space-y-2">
-            <h2 className="text-2xl font-semibold tracking-tight">Start from the right surface</h2>
+            <h2 className="text-2xl font-semibold tracking-tight">{t("learnerHome.entryTitle")}</h2>
             <p className="max-w-3xl text-sm leading-6 text-muted-foreground md:text-base">
-              Each entry point is explicit so the learner shell can grow into dedicated route
-              experiences without losing a clear navigation model.
+              {t("learnerHome.entryDescription")}
             </p>
           </div>
 
@@ -121,15 +115,15 @@ const LearnerHome = () => {
                         <Icon className="h-5 w-5" />
                       </div>
                       <div className="space-y-2">
-                        <CardTitle className="text-xl">{item.title}</CardTitle>
+                        <CardTitle className="text-xl">{t(`learnerHome.entry.${item.key}.title`)}</CardTitle>
                         <CardDescription className="text-sm leading-6">
-                          {item.description}
+                          {t(`learnerHome.entry.${item.key}.description`)}
                         </CardDescription>
                       </div>
                     </CardHeader>
                     <CardContent>
                       <span className="text-sm font-medium text-primary transition-transform group-hover:translate-x-0.5">
-                        Open route
+                        {t("learnerHome.openRoute")}
                       </span>
                     </CardContent>
                   </Card>

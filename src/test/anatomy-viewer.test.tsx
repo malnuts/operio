@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import enLocale from "../../public/locales/en.json";
 
 import App from "@/App";
 import { resolveAssetUrl } from "@/lib/asset-config";
@@ -25,6 +26,20 @@ const stubFetch = () =>
     "fetch",
     vi.fn((input: RequestInfo | URL) => {
       const path = String(input);
+
+      if (path.includes("/locales/manifest.json")) {
+        return Promise.resolve({
+          ok: true,
+          json: async () => ({ languages: [{ code: "en", label: "English" }] }),
+        });
+      }
+
+      if (path.includes("/locales/en.json")) {
+        return Promise.resolve({
+          ok: true,
+          json: async () => enLocale,
+        });
+      }
 
       if (path.includes("/data/visual-manifest.json")) {
         return Promise.resolve({ ok: true, json: async () => visualManifestPayload });
@@ -85,7 +100,25 @@ describe("anatomy viewer", () => {
   it("shows error state when manifest fails to load", async () => {
     vi.stubGlobal(
       "fetch",
-      vi.fn(() => Promise.resolve({ ok: false, json: async () => ({}) })),
+      vi.fn((input: RequestInfo | URL) => {
+        const path = String(input);
+
+        if (path.includes("/locales/manifest.json")) {
+          return Promise.resolve({
+            ok: true,
+            json: async () => ({ languages: [{ code: "en", label: "English" }] }),
+          });
+        }
+
+        if (path.includes("/locales/en.json")) {
+          return Promise.resolve({
+            ok: true,
+            json: async () => enLocale,
+          });
+        }
+
+        return Promise.resolve({ ok: false, json: async () => ({}) });
+      }),
     );
 
     window.history.pushState({}, "", "/app/anatomy/sample");
