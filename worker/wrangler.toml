@@ -3,4 +3,4 @@ main = "src/index.ts"
 compatibility_date = "2024-12-01"
 
 [vars]
-ALLOWED_ORIGIN = "*"
+ALLOWED_ORIGIN = "https://operio.pages.dev"
