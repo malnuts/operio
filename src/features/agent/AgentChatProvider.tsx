@@ -91,19 +91,11 @@ export const AgentChatProvider = ({ children }: { children: ReactNode }) => {
       const provider = getProvider();
       const systemPrompt = buildSystemPrompt(pageContextRef.current);
 
-      // Build conversation for provider
-      const conversationPrompt = [
-        systemPrompt,
-        "",
-        "## Conversation",
-        ...withUser.messages.map((m) => `${m.role}: ${m.content}`),
-      ].join("\n");
-
       const response = await provider.generate({
         type: "chat" as never, // chat is a new type — stub handles it via default
-        prompt: conversationPrompt,
+        prompt: systemPrompt,
         input: {
-          messages: withUser.messages,
+          messages: withUser.messages.map((m) => ({ role: m.role, content: m.content })),
           context: pageContextRef.current,
         },
       });

@@ -170,12 +170,15 @@ export class StubProvider implements AgentProvider {
 const providers = new Map<AgentProviderId, AgentProvider>();
 providers.set("stub", new StubProvider());
 
+let activeProviderId: AgentProviderId = "stub";
+
 export const registerProvider = (provider: AgentProvider): void => {
   providers.set(provider.id, provider);
+  activeProviderId = provider.id;
 };
 
 export const getProvider = (id?: AgentProviderId): AgentProvider => {
-  const provider = providers.get(id ?? "stub");
+  const provider = providers.get(id ?? activeProviderId);
   if (!provider) {
     throw new Error(`Agent provider "${id}" is not registered.`);
   }
@@ -183,8 +186,8 @@ export const getProvider = (id?: AgentProviderId): AgentProvider => {
 };
 
 export const getActiveProviderConfig = (): AgentProviderConfig => ({
-  id: "stub",
-  model: "stub-v1",
+  id: activeProviderId,
+  model: providers.get(activeProviderId)?.modelId ?? "stub-v1",
   async: true,
   maxLatencyMs: 30_000,
 });
