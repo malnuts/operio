@@ -5,12 +5,13 @@
  *   GEMINI_API_KEY — Google AI Studio API key
  *
  * Environment variables (set in wrangler.toml):
- *   ALLOWED_ORIGIN — CORS origin for the frontend
+ *   ALLOWED_ORIGIN — comma-separated CORS origin allowlist for the frontend
  */
 
 interface Env {
   GEMINI_API_KEY: string;
   ALLOWED_ORIGIN: string;
+  GEMINI_MODEL?: string;
 }
 
 interface ChatRequest {
@@ -27,16 +28,65 @@ interface GenerateRequest {
 
 type RequestBody = ChatRequest | GenerateRequest;
 
-const GEMINI_MODEL = "gemini-2.5-pro-preview-06-05";
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
+const DEFAULT_GEMINI_MODEL = "gemini-2.5-pro";
+
+const getGeminiUrl = (model: string) =>
+  `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+
+const parseAllowedOrigins = (allowed: string) =>
+  allowed
+    .split(",")
+    .map((entry) => entry.trim())
+    .filter(Boolean);
+
+const matchesAllowedOrigin = (origin: string, allowedOrigin: string) => {
+  if (!origin) {
+    return false;
+  }
+
+  if (allowedOrigin === "*") {
+    return true;
+  }
+
+  if (allowedOrigin.includes("*")) {
+    const escaped = allowedOrigin
+      .replace(/[.+?^${}()|[\]\\]/g, "\\$&")
+      .replace(/\*/g, ".*");
+    return new RegExp(`^${escaped}$`).test(origin);
+  }
+
+  return origin === allowedOrigin;
+};
+
+const resolveAllowedOrigin = (origin: string, allowed: string) => {
+  const configuredOrigins = parseAllowedOrigins(allowed);
+
+  if (configuredOrigins.some((allowedOrigin) => matchesAllowedOrigin(origin, allowedOrigin))) {
+    return origin;
+  }
+
+  if (
+    origin === "https://operio.pages.dev"
+    || origin.endsWith(".operio.pages.dev")
+    || origin.startsWith("http://localhost:")
+    || origin.startsWith("https://localhost:")
+    || origin.startsWith("http://127.0.0.1:")
+    || origin.startsWith("https://127.0.0.1:")
+  ) {
+    return origin;
+  }
+
+  return "";
+};
 
 const corsHeaders = (origin: string, allowed: string): HeadersInit => {
-  const isAllowed = origin === allowed || allowed === "*" || origin.endsWith(".operio.pages.dev");
+  const allowedOrigin = resolveAllowedOrigin(origin, allowed);
   return {
-    "Access-Control-Allow-Origin": isAllowed ? origin : "",
+    ...(allowedOrigin ? { "Access-Control-Allow-Origin": allowedOrigin } : {}),
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Max-Age": "86400",
+    Vary: "Origin",
   };
 };
 
@@ -50,7 +100,7 @@ const buildGeminiChatPayload = (body: ChatRequest) => {
   }));
 
   return {
-    system_instruction: { parts: [{ text: body.systemPrompt }] },
+    systemInstruction: { parts: [{ text: body.systemPrompt }] },
     contents,
     generationConfig: {
       temperature: 0.7,
@@ -73,7 +123,7 @@ const buildGeminiGeneratePayload = (body: GenerateRequest) => {
   ].join("\n");
 
   return {
-    system_instruction: { parts: [{ text: systemInstruction }] },
+    systemInstruction: { parts: [{ text: systemInstruction }] },
     contents: [{ role: "user", parts: [{ text: body.prompt }] }],
     generationConfig: {
       temperature: 0.4,
@@ -93,6 +143,7 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const origin = request.headers.get("Origin") ?? "";
     const cors = corsHeaders(origin, env.ALLOWED_ORIGIN);
+    const geminiModel = env.GEMINI_MODEL || DEFAULT_GEMINI_MODEL;
 
     // CORS preflight
     if (request.method === "OPTIONS") {
@@ -123,9 +174,12 @@ export default {
         ? buildGeminiChatPayload(body)
         : buildGeminiGeneratePayload(body as GenerateRequest);
 
-      const geminiResponse = await fetch(`${GEMINI_URL}?key=${env.GEMINI_API_KEY}`, {
+      const geminiResponse = await fetch(getGeminiUrl(geminiModel), {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-goog-api-key": env.GEMINI_API_KEY,
+        },
         body: JSON.stringify(geminiPayload),
       });
 
@@ -147,13 +201,13 @@ export default {
       // For generate: return the parsed JSON output
       let result: Record<string, unknown>;
       if (isChat(body)) {
-        result = { reply: text, modelId: GEMINI_MODEL, providerId: "gemini" };
+        result = { reply: text, modelId: geminiModel, providerId: "gemini" };
       } else {
         try {
           const parsed = JSON.parse(text) as Record<string, unknown>;
-          result = { output: parsed, modelId: GEMINI_MODEL, providerId: "gemini" };
+          result = { output: parsed, modelId: geminiModel, providerId: "gemini" };
         } catch {
-          result = { output: { raw: text }, modelId: GEMINI_MODEL, providerId: "gemini" };
+          result = { output: { raw: text }, modelId: geminiModel, providerId: "gemini" };
         }
       }
 

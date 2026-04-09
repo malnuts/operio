@@ -15,6 +15,7 @@ const navLinks = [
 const Navbar = () => {
   const { t } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
+  const brandIconSrc = `${import.meta.env.BASE_URL}favicon.svg`;
 
   return (
     <motion.nav
@@ -26,7 +27,7 @@ const Navbar = () => {
       <div className="container mx-auto flex h-16 items-center justify-between px-6">
         <a href="#" className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg bg-primary/10 ring-1 ring-primary/20">
-            <img src="/favicon.svg" alt={t("landing.brandAlt")} className="h-6 w-6" />
+            <img src={brandIconSrc} alt={t("landing.brandAlt")} className="h-6 w-6" />
           </div>
           <span className="font-display text-xl font-bold tracking-tight text-foreground">
             Operio

@@ -2,6 +2,7 @@ import { useI18n } from "@/hooks/useI18n";
 
 const Footer = () => {
   const { t } = useI18n();
+  const brandIconSrc = `${import.meta.env.BASE_URL}favicon.svg`;
 
   return (
     <footer className="border-t border-border py-12">
@@ -9,7 +10,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
             <div className="flex h-7 w-7 items-center justify-center overflow-hidden rounded-md bg-primary/10 ring-1 ring-primary/20">
-              <img src="/favicon.svg" alt={t("landing.brandAlt")} className="h-5 w-5" />
+              <img src={brandIconSrc} alt={t("landing.brandAlt")} className="h-5 w-5" />
             </div>
             <span className="font-display font-bold text-foreground">Operio</span>
           </div>
